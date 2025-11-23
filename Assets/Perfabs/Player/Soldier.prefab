@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 4428856050426560842}
   - component: {fileID: 7674241969549309064}
   - component: {fileID: 4033685715839169065}
+  - component: {fileID: 7611423625862904517}
+  - component: {fileID: 3371789029723131495}
+  - component: {fileID: 7988919862105985925}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -85,7 +88,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.19, y: 0.23}
+  m_Size: {x: 3.125, y: 3.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -179,7 +182,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 3.125, y: 3.125}
-    newSize: {x: 0.19, y: 0.23}
+    newSize: {x: 3.125, y: 3.125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -199,6 +202,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputController: {fileID: 0}
-  animationController: {fileID: 0}
+  animationController: {fileID: 7988919862105985925}
   spriteRenderer: {fileID: 5234137535686122503}
   moveSpeed: 5
+--- !u!114 &7611423625862904517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097362956862803510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd57945de868ea44800686e3dfdae2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
+  attackRange: 1.34
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &3371789029723131495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097362956862803510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19cc9f4517dee704fb39f4531d1d0107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 516c9e9b155a456448ca164776e9030c, type: 2}
+--- !u!114 &7988919862105985925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097362956862803510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201dea6249dfa894199dd615868e7d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1219997378612840564}

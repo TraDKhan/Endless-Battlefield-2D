@@ -14,7 +14,23 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetBool("IsMoving", false);
     }
 
-    public void PlayAttack() { /* ... */ }
-    public void PlayHit() { /* ... */ }
-    public void PlayDeath() { /* ... */ }
+    public void PlayAttack()
+    {
+        animator.SetBool("IsMoving", false);
+
+        animator.SetTrigger("Attack");
+    }
+
+    public void PlayHit()
+    {
+        animator.SetTrigger("Hit");
+    }
+
+    public void PlayDeath()
+    {
+        animator.SetTrigger("Death");
+
+        // Nếu bạn muốn khoá điều khiển animation sau khi chết:
+        // animator.SetBool("IsMoving", false);
+    }
 }

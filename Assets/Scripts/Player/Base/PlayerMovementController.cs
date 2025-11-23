@@ -6,7 +6,7 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private PlayerInputController inputController;
     [SerializeField] private PlayerAnimationController animationController;
-    [SerializeField] private SpriteRenderer spriteRenderer;   // Để flip trái/phải
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     [Header("Stats")]
     [SerializeField] private float moveSpeed = 5f;
