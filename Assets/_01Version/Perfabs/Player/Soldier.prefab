@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 3521474670935749885}
   - component: {fileID: 3371789029723131495}
   - component: {fileID: 7988919862105985925}
+  - component: {fileID: 8423151147987771576}
+  - component: {fileID: 8293811364327471905}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -237,6 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 516c9e9b155a456448ca164776e9030c, type: 2}
+  level: {fileID: 8293811364327471905}
 --- !u!114 &7988919862105985925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,3 +253,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1219997378612840564}
+--- !u!114 &8423151147987771576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097362956862803510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff0492f3e9f3314a810abdb985718c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8293811364327471905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6097362956862803510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c56578acaa2b54c8f90f33499a0ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
