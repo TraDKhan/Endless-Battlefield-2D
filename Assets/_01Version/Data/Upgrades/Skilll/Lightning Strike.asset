@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b5cbb3d0cf964b88bbdc849b2bd7b, type: 3}
+  m_Name: Lightning Strike
+  m_EditorClassIdentifier: 
+  upgradeName: Lightning strikes
+  description: Generates electrical sparks, randomly striking monsters within a 10-meter
+    radius.
+  icon: {fileID: 8793915729297761979, guid: f105d0d694c4c474f9a827718a70e4ee, type: 3}
+  upgradeType: 1
+  statType: 0
+  statValue: 0
+  skillPrefab: {fileID: 5860331954411119134, guid: b924dd7cc6cdbc0439ea4cde38910068, type: 3}

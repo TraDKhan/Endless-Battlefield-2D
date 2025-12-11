@@ -1,20 +1,24 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class UIUpgradeOption : MonoBehaviour
 {
-    public Image icon;       // Image minh họa
-    public Button button;    // Nút bấm
-    public TMP_Text label;   // Title + mô tả
+    public Image icon;
+    public TMP_Text title;
+    public TMP_Text description;
+    public Button button;
 
-    // Gắn dữ liệu vào UI Item
-    public void SetData(UpgradeOption option)
+    public void SetData(UpgradeData data)
     {
-        // Gắn text
-        label.text = $"{option.title}\n<size=70%>{option.desc}</size>";
+        //if (icon != null)
+        //    icon.sprite = data.icon;
 
-        // Nếu sau này có icon thì gán vào:
-        // icon.sprite = option.icon;
+        if (title != null)
+            title.text = data.upgradeName;
+
+        if (description != null)
+            description.text = data.description;
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class UIUpgradePanel : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class UIUpgradePanel : MonoBehaviour
     [Header("Upgrade option slots (3 item UI)")]
     public UIUpgradeOption[] optionSlots;
 
-    private List<UpgradeOption> currentOptions;
+    private List<UpgradeData> currentOptions;
 
     void Start()
     {
@@ -21,8 +19,8 @@ public class UIUpgradePanel : MonoBehaviour
         Hide();
     }
 
-    // Hiện UI mỗi khi lên level
-    void Show(List<UpgradeOption> options)
+    // show 3 UpgradeData option
+    void Show(List<UpgradeData> options)
     {
         currentOptions = options;
         panelRoot.SetActive(true);
@@ -30,8 +28,12 @@ public class UIUpgradePanel : MonoBehaviour
         for (int i = 0; i < optionSlots.Length; i++)
         {
             int index = i;
-            optionSlots[i].SetData(options[i]);
+            var upgrade = options[i];
 
+            // Cập nhật UI
+            optionSlots[i].SetData(upgrade);
+
+            // Gán hành động khi click
             optionSlots[i].button.onClick.RemoveAllListeners();
             optionSlots[i].button.onClick.AddListener(() =>
             {
@@ -40,7 +42,7 @@ public class UIUpgradePanel : MonoBehaviour
             });
         }
 
-        Time.timeScale = 0f; // Pause game khi chọn upgrade
+        Time.timeScale = 0f;
     }
 
     public void Hide()
