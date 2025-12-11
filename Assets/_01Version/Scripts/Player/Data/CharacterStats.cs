@@ -17,7 +17,7 @@ public class CharacterStats
     private PlayerEquipmentController equipmentController;
     private PlayerBuffController buffController;
     private PlayerUpgradeSystem upgradeController;
-
+    
     //event thay doi
     public event Action OnStatsChanged;
 
