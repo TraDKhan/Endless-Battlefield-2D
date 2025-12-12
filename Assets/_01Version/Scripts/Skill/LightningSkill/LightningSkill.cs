@@ -1,8 +1,54 @@
-﻿[System.Serializable]
-public class LightningSkill
+﻿using UnityEngine;
+public class LightningSkill : MonoBehaviour
 {
-    public float Cooldown = 2f;
-    public float Radius = 4.5f;
-    public int Damage = 20;
-    public int StrikesPerCast = 1;
+    [SerializeField] private LightningSkillData data;
+    private float timer;
+    public GameObject lightningEffectPrefab;
+
+    void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (timer <= 0f)
+        {
+            CastLightning();
+            timer = data.Cooldown;
+        }
+    }
+
+    void CastLightning()
+    {
+        // Tìm enemy trong vùng
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, data.Radius, LayerMask.GetMask("Enemy"));
+
+        if (enemies.Length == 0) return;
+
+        for (int i = 0; i < data.StrikesPerCast; i++)
+        {
+            // Lấy enemy random
+            var target = enemies[Random.Range(0, enemies.Length)];
+
+            // Tạo hiệu ứng sét
+            SpawnLightningEffect(target.transform.position);
+            Debug.Log("Set: tan cpng" + target.name);
+
+            // Gây damage
+            target.GetComponent<EnemyHealthController>().TakeDamage(data.Damage);
+        }
+    }
+
+    void SpawnLightningEffect(Vector3 targetPos)
+    {
+        // vị trí bắt đầu tia (trên trời)
+        Vector3 start = targetPos + new Vector3(0, 4, 0);
+
+        GameObject obj = Instantiate(lightningEffectPrefab);
+        obj.GetComponent<LightningEffect>().Init(start, targetPos);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, data.Radius);
+    }
 }

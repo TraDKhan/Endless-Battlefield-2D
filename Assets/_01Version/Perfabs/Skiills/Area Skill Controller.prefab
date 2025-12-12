@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 198385146098803223}
   - component: {fileID: 3464435941632540917}
   m_Layer: 0
-  m_Name: Area Skill
+  m_Name: Area Skill Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
