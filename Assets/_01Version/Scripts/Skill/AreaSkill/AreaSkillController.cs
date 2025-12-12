@@ -2,10 +2,13 @@
 
 public class AreaSkillController : MonoBehaviour
 {
-    [SerializeField] private GameObject _areaSkill;
+    [SerializeField] private GameObject _areaSkillPrefab; // prefab gốc
+    private GameObject _areaSkillInstance;                // instance trong scene
+
     public Transform playerTransform;
-    public float duration = 5f;         // tồn tại 5s
-    public float cooldown = 2f;
+    public float duration = 5f;   // tồn tại 5s
+    public float cooldown = 2f;   // hồi chiêu 2s
+
     private float cooldownTimer;
     private float lifeTimer;
 
@@ -14,34 +17,54 @@ public class AreaSkillController : MonoBehaviour
         if (playerTransform == null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            playerTransform = player.transform;
+            if (player != null)
+                playerTransform = player.transform;
+            else
+                Debug.LogError("Không tìm thấy Player trong scene!");
         }
-        CastDamageArea();
 
+        CastDamageArea(); // tạo skill lần đầu
         lifeTimer = duration;
         cooldownTimer = cooldown;
     }
 
     void Update()
     {
-        lifeTimer -= Time.deltaTime;
-        if (lifeTimer <= 0f)
+        if (_areaSkillInstance != null && _areaSkillInstance.activeSelf)
         {
-            _areaSkill.SetActive(false);
+            // skill đang hoạt động
+            lifeTimer -= Time.deltaTime;
+            if (lifeTimer <= 0f)
+            {
+                _areaSkillInstance.SetActive(false);
+                cooldownTimer = cooldown;
+                Debug.Log("Skill Area đang hồi");
+            }
+        }
+        else
+        {
+            // skill đang hồi
             cooldownTimer -= Time.deltaTime;
-            Debug.Log("Skill Area dang hoi");
             if (cooldownTimer <= 0f)
             {
-                _areaSkill.SetActive(true);
+                CastDamageArea();
                 lifeTimer = duration;
-                cooldownTimer = cooldown;
-                Debug.Log("Skil Area dang dc trien khai");
+                Debug.Log("Skill Area được triển khai lại");
             }
         }
     }
+
     void CastDamageArea()
     {
-        Instantiate(_areaSkill, transform.position, Quaternion.identity);
+        if (_areaSkillInstance != null)
+        {
+            Destroy(_areaSkillInstance); // xoá instance cũ nếu còn
+        }
+        _areaSkillInstance = Instantiate(_areaSkillPrefab, playerTransform.position, Quaternion.identity);
+
+        // Gắn skill làm con của player
+        _areaSkillInstance.transform.SetParent(playerTransform);
+
+        _areaSkillInstance.SetActive(true);
     }
 }
-
