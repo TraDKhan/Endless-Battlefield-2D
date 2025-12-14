@@ -23,13 +23,19 @@ MonoBehaviour:
     duration: 2
     radius: 5
     projectileCount: 1
+    lightningCount: 1
+    range: 5
   - damage: 200
     cooldown: 2
     duration: 2
     radius: 6
     projectileCount: 2
+    lightningCount: 2
+    range: 6
   - damage: 300
     cooldown: 2
     duration: 2
     radius: 7
     projectileCount: 3
+    lightningCount: 3
+    range: 7

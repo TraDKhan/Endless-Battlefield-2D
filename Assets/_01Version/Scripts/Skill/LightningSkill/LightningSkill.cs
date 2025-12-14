@@ -2,7 +2,10 @@
 
 public class LightningSkill : BaseSkill
 {
+    [Header("Effect")]
     [SerializeField] private GameObject lightningEffectPrefab;
+
+    private Transform player;
 
     private float cooldownTimer;
 
@@ -13,25 +16,23 @@ public class LightningSkill : BaseSkill
     private float cooldown;
 
     // =========================
-    // BASESKILL OVERRIDE
+    // UNITY
     // =========================
-    protected override void ApplyLevelData()
+    private void Awake()
     {
-        var data = upgradeData.GetLevelData(level);
+        // tìm player và gắn làm con
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player == null)
+        {
+            Debug.LogError("LightningSkill: Player not found");
+            enabled = false;
+            return;
+        }
 
-        damage = data.damage;
-        strikes = data.lightningCount;
-        radius = data.radius;
-        cooldown = data.cooldown;
-
-        cooldownTimer = cooldown;
-
-        Debug.Log($"Lightning Lv{level} | Strikes:{strikes} Damage:{damage}");
+        transform.SetParent(player);
+        transform.localPosition = Vector3.zero;
     }
 
-    // =========================
-    // UPDATE
-    // =========================
     private void Update()
     {
         if (level <= 0) return; // chưa unlock
@@ -45,12 +46,30 @@ public class LightningSkill : BaseSkill
     }
 
     // =========================
+    // BASESKILL
+    // =========================
+    protected override void ApplyLevelData()
+    {
+        var data = upgradeData.GetLevelData(level);
+
+        damage = data.damage;
+        strikes = data.lightningCount;
+        radius = data.radius;
+        cooldown = data.cooldown;
+
+        // reset cooldown khi lên level
+        cooldownTimer = cooldown;
+
+        Debug.Log($"Lightning Lv{level} | Strikes:{strikes} Damage:{damage}");
+    }
+
+    // =========================
     // CORE LOGIC
     // =========================
     private void CastLightning()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
-            transform.position,
+            player.position,
             radius,
             LayerMask.GetMask("Enemy")
         );

@@ -5,6 +5,7 @@ public class AreaSkill : BaseSkill
     [SerializeField] private GameObject areaEffectPrefab;
     [SerializeField] private float tickInterval = 0.3f;
 
+    private Transform player;
     private GameObject areaInstance;
 
     // cached level data
@@ -18,6 +19,24 @@ public class AreaSkill : BaseSkill
     private float tickTimer;
 
     // =========================
+    // UNITY
+    // =========================
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player == null)
+        {
+            Debug.LogError("AreaSkill: Player not found");
+            enabled = false;
+            return;
+        }
+
+        // AreaSkill luôn là con của Player
+        transform.SetParent(player);
+        transform.localPosition = Vector3.zero;
+    }
+
+    // =========================
     // BASESKILL
     // =========================
     protected override void ApplyLevelData()
@@ -29,6 +48,8 @@ public class AreaSkill : BaseSkill
         duration = data.duration;
         cooldown = data.cooldown;
 
+        cooldownTimer = cooldown;
+
         Debug.Log($"Area Skill Lv{level} | dmg:{damage} radius:{radius}");
     }
 
@@ -39,7 +60,6 @@ public class AreaSkill : BaseSkill
     {
         if (level <= 0) return;
 
-        // cooldown
         if (areaInstance == null)
         {
             cooldownTimer -= Time.deltaTime;
@@ -48,7 +68,6 @@ public class AreaSkill : BaseSkill
         }
         else
         {
-            // lifetime
             lifeTimer -= Time.deltaTime;
             tickTimer -= Time.deltaTime;
 
@@ -68,7 +87,7 @@ public class AreaSkill : BaseSkill
     // =========================
     private void SpawnArea()
     {
-        areaInstance = Instantiate(areaEffectPrefab, transform);
+        areaInstance = Instantiate(areaEffectPrefab, player);
         areaInstance.transform.localPosition = Vector3.zero;
 
         var col = areaInstance.GetComponent<CircleCollider2D>();
@@ -88,8 +107,9 @@ public class AreaSkill : BaseSkill
 
     private void DealDamage()
     {
+        // 🔥 VỊ TRÍ LẤY TỪ PLAYER
         var hits = Physics2D.OverlapCircleAll(
-            transform.position,
+            player.position,
             radius,
             LayerMask.GetMask("Enemy")
         );
@@ -103,7 +123,9 @@ public class AreaSkill : BaseSkill
     // =========================
     private void OnDrawGizmosSelected()
     {
+        if (player == null) return;
+
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(player.position, radius);
     }
 }
