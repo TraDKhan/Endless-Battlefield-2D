@@ -1,0 +1,345 @@
+fileFormatVersion: 2
+guid: 5a4b23ec1fb125c489a3574847955a9c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7304539795444023462
+    second: stat level up_0
+  - first:
+      213: 3152299871001687699
+    second: stat level up_1
+  - first:
+      213: 8570722382706232160
+    second: stat level up_2
+  - first:
+      213: -5853896980232148114
+    second: stat level up_3
+  - first:
+      213: -6764126527346989523
+    second: stat level up_4
+  - first:
+      213: 4199666310455233367
+    second: stat level up_5
+  - first:
+      213: -8592697209072394840
+    second: stat level up_6
+  - first:
+      213: 4205853680010759855
+    second: stat level up_7
+  - first:
+      213: 7815025922301325379
+    second: stat level up_8
+  - first:
+      213: -4289238287798681830
+    second: stat level up_9
+  - first:
+      213: 6499304983105126085
+    second: stat level up_10
+  - first:
+      213: 7292157459723887598
+    second: stat level up_11
+  - first:
+      213: 2296319651604729696
+    second: stat level up_12
+  - first:
+      213: 5802075895895544311
+    second: stat level up_13
+  - first:
+      213: -4043458655402708226
+    second: stat level up_14
+  - first:
+      213: 2636983628046355683
+    second: stat level up_15
+  - first:
+      213: 2733236636925665890
+    second: stat level up_16
+  - first:
+      213: -1551614500508158164
+    second: stat level up_17
+  - first:
+      213: 3088333067688516995
+    second: stat level up_18
+  - first:
+      213: 1958253326979094461
+    second: stat level up_19
+  - first:
+      213: 1085798140452795995
+    second: stat level up_20
+  - first:
+      213: -2343014210737907705
+    second: stat level up_21
+  - first:
+      213: -8420875181070743455
+    second: stat level up_22
+  - first:
+      213: -6434200165635419271
+    second: stat level up_23
+  - first:
+      213: 8578154461003199141
+    second: stat level up_24
+  - first:
+      213: -5731975453346147013
+    second: stat level up_25
+  - first:
+      213: -1140766403853855842
+    second: stat level up_26
+  - first:
+      213: -3569213646261203421
+    second: stat level up_27
+  - first:
+      213: 5807944877823514125
+    second: stat level up_28
+  - first:
+      213: 4832178812869669574
+    second: stat level up_29
+  - first:
+      213: -2858054964748891420
+    second: stat level up_30
+  - first:
+      213: -490921591790045806
+    second: stat level up_31
+  - first:
+      213: 8921498844162381452
+    second: stat level up_32
+  - first:
+      213: -3020014027817545850
+    second: stat level up_33
+  - first:
+      213: -342781228597090721
+    second: stat level up_34
+  - first:
+      213: -3035929202930419852
+    second: stat level up_35
+  - first:
+      213: 1930412474218524832
+    second: stat level up_36
+  - first:
+      213: -3843836661360141117
+    second: stat level up_37
+  - first:
+      213: 8597905122559465804
+    second: stat level up_38
+  - first:
+      213: 3723091382685425953
+    second: stat level up_39
+  - first:
+      213: -1245482214040642749
+    second: stat level up_40
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: stat level up_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 512
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5fbad4d1cf01aa90800000000000000
+      internalID: -7304539795444023462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stat level up_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 512
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 396b094f7083fbb20800000000000000
+      internalID: 3152299871001687699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stat level up_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06bc1b1f89251f670800000000000000
+      internalID: 8570722382706232160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: stat level up_3
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6be78536b7c2cea0800000000000000
+      internalID: -5853896980232148114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: caa70c14dc6c35c4382dd56298395361
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      stat level up_0: -7304539795444023462
+      stat level up_1: 3152299871001687699
+      stat level up_2: 8570722382706232160
+      stat level up_3: -5853896980232148114
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1469,6 +1469,7 @@ MonoBehaviour:
   icon: {fileID: 1373658027}
   title: {fileID: 1895135442}
   description: {fileID: 522489737}
+  levelText: {fileID: 0}
   button: {fileID: 1778629083}
 --- !u!1 &191616857
 GameObject:
@@ -1682,6 +1683,7 @@ MonoBehaviour:
   icon: {fileID: 2037203652}
   title: {fileID: 1377760756}
   description: {fileID: 708283828}
+  levelText: {fileID: 0}
   button: {fileID: 383140}
 --- !u!1 &263637356
 GameObject:
@@ -1957,10 +1959,10 @@ MonoBehaviour:
   upgradePool:
   - {fileID: 11400000, guid: b53e7d33b79d97642b12224c3bd12716, type: 2}
   - {fileID: 11400000, guid: 1c4dc438196a0564c83517d480c3c360, type: 2}
-  - {fileID: 11400000, guid: 744a12a21ec0979448a0b5e4addd4281, type: 2}
-  - {fileID: 11400000, guid: 23d231712a1487f4bad5b76c8e9c2708, type: 2}
-  - {fileID: 11400000, guid: a7872bcc0f41e5c4093fa2e161196703, type: 2}
-  - {fileID: 11400000, guid: 3ab3f264ef2833d4683f4456c1a92815, type: 2}
+  - {fileID: 11400000, guid: 2f81018faea48d643bd76bc305f69636, type: 2}
+  - {fileID: 11400000, guid: f62658ce0c06cbc4aa8554cc0202f25a, type: 2}
+  - {fileID: 11400000, guid: d8287726de3bf404e92cb84edb0419ee, type: 2}
+  - {fileID: 11400000, guid: cb832417fa798d54190e55bf381e3c55, type: 2}
 --- !u!4 &334674390
 Transform:
   m_ObjectHideFlags: 0
@@ -3320,6 +3322,7 @@ MonoBehaviour:
   icon: {fileID: 508644249}
   title: {fileID: 1876637466}
   description: {fileID: 887202825}
+  levelText: {fileID: 0}
   button: {fileID: 657003243}
 --- !u!1 &704508378
 GameObject:

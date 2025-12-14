@@ -6,28 +6,14 @@ public enum UpgradeType
     Skill
 }
 
-public enum StatType
-{
-    MaxHealth,
-    Damage,
-    MoveSpeed,
-    AttackSpeed,
-    Defense
-}
-
-[CreateAssetMenu(fileName = "Upgrade", menuName = "Game/Upgrade")]
+[CreateAssetMenu(menuName = "Upgrade/Upgrade Data")]
 public class UpgradeData : ScriptableObject
 {
-    public string upgradeName;
-    [TextArea] public string description;
-    public Sprite icon;
-
     public UpgradeType upgradeType;
-    public bool unique = true;
-    // Nếu là Stat
-    public StatType statType;
-    public float statValue;
 
-    // Nếu là Skill
-    public GameObject skillPrefab;
+    // Stat
+    public StatUpgradeData statUpgradeData;
+
+    // Skill
+    public SkillUpgradeData skillUpgradeData;
 }

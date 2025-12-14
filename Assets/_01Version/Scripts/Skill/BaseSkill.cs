@@ -4,9 +4,11 @@ public abstract class BaseSkill : MonoBehaviour, ISkill
 {
     protected CharacterStats ownerStats;
 
-    [Header("Skill Level")]
-    [SerializeField] protected int level = 1;
-    [SerializeField] protected int maxLevel = 5;
+    [SerializeField] protected SkillUpgradeData upgradeData;
+    public SkillUpgradeData UpgradeData => upgradeData;
+
+    protected int level = 0;
+    public int Level => level;
 
     public virtual void Init(CharacterStats stats)
     {
@@ -16,16 +18,16 @@ public abstract class BaseSkill : MonoBehaviour, ISkill
     public virtual void OnUnlock()
     {
         level = 1;
-        gameObject.SetActive(true);
+        ApplyLevelData();
     }
 
     public virtual void OnLevelUp()
     {
-        if (level < maxLevel)
-            level++;
+        if (level >= upgradeData.MaxLevel) return;
 
-        ApplyLevelScaling();
+        level++;
+        ApplyLevelData();
     }
 
-    protected abstract void ApplyLevelScaling();
+    protected abstract void ApplyLevelData();
 }

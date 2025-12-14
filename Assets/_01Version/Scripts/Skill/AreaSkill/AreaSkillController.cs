@@ -5,16 +5,22 @@ public class AreaSkillController : BaseSkill
     [Header("Data")]
     [SerializeField] private AreaSkillData data;
     [SerializeField] private GameObject areaPrefab;
+    [SerializeField] private AreaSkill areaSkill;
 
     private GameObject areaInstance;
     private float cooldownTimer;
     private float lifeTimer;
 
-    protected override void ApplyLevelScaling()
+    protected override void ApplyLevelData()
     {
-        // Ví dụ scale
-        // damage +20% mỗi level
-        data.damage = Mathf.RoundToInt(data.damage * (1 + 0.2f * (level - 1)));
+        var data = upgradeData.GetLevelData(level);
+
+        areaSkill.SetData(
+            data.damage,
+            data.radius,
+            data.duration,
+            data.cooldown
+        );
     }
 
     void Start()

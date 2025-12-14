@@ -6,45 +6,68 @@ public class UIUpgradePanel : MonoBehaviour
     [Header("Panel")]
     public GameObject panelRoot;
 
-    [Header("Upgrade option slots (3 item UI)")]
+    [Header("Upgrade option slots")]
     public UIUpgradeOption[] optionSlots;
 
     private List<UpgradeData> currentOptions;
 
-    void Start()
+    private PlayerUpgradeSystem upgradeSystem;
+
+    private void Start()
     {
-        if (PlayerUpgradeSystem.Instance != null)
-            PlayerUpgradeSystem.Instance.OnShowUpgradeUI += Show;
+        upgradeSystem = PlayerUpgradeSystem.Instance;
+
+        if (upgradeSystem != null)
+            upgradeSystem.OnShowUpgradeUI += Show;
 
         Hide();
     }
 
-    // show 3 UpgradeData option
-    void Show(List<UpgradeData> options)
+    private void OnDestroy()
+    {
+        if (upgradeSystem != null)
+            upgradeSystem.OnShowUpgradeUI -= Show;
+    }
+
+    // =========================
+    // SHOW UI
+    // =========================
+    private void Show(List<UpgradeData> options)
     {
         currentOptions = options;
         panelRoot.SetActive(true);
 
+        // Pause game
+        Time.timeScale = 0f;
+
         for (int i = 0; i < optionSlots.Length; i++)
         {
-            int index = i;
-            var upgrade = options[i];
-
-            // Cập nhật UI
-            optionSlots[i].SetData(upgrade);
-
-            // Gán hành động khi click
-            optionSlots[i].button.onClick.RemoveAllListeners();
-            optionSlots[i].button.onClick.AddListener(() =>
+            if (i >= options.Count)
             {
-                PlayerUpgradeSystem.Instance.ApplyUpgrade(currentOptions[index]);
+                optionSlots[i].gameObject.SetActive(false);
+                continue;
+            }
+
+            optionSlots[i].gameObject.SetActive(true);
+
+            var upgrade = options[i];
+            int index = i;
+
+            // ✅ SET DATA (LOGIC MỚI)
+            optionSlots[i].SetData(upgrade, upgradeSystem);
+
+            // ✅ BIND BUTTON
+            optionSlots[i].BindButton(() =>
+            {
+                upgradeSystem.ApplyUpgrade(currentOptions[index]);
                 Hide();
             });
         }
-
-        Time.timeScale = 0f;
     }
 
+    // =========================
+    // HIDE UI
+    // =========================
     public void Hide()
     {
         panelRoot.SetActive(false);

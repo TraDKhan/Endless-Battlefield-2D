@@ -6,140 +6,203 @@ public class PlayerUpgradeSystem : MonoBehaviour
 {
     public static PlayerUpgradeSystem Instance;
 
-    [Header("Upgrade Pool (ScriptableObject)")]
+    [Header("Upgrade Pool")]
     public List<UpgradeData> upgradePool;
 
-    // Event gửi UI 3 lựa chọn random
+    // Event gửi UI
     public event Action<List<UpgradeData>> OnShowUpgradeUI;
 
     private CharacterStats stats;
+    private PlayerLevelSystem levelSystem;
 
-    // Lưu bonus stat
-    private Dictionary<StatType, float> statBonuses = new Dictionary<StatType, float>();
+    // =========================
+    // STAT UPGRADE (NHIỀU CẤP)
+    // =========================
+    private Dictionary<StatType, StatUpgradeProgress> statUpgrades
+        = new Dictionary<StatType, StatUpgradeProgress>();
 
-    // Lưu skill đã unlock
-    private List<GameObject> unlockedSkills = new List<GameObject>();
+    // =========================
+    // SKILL UPGRADE
+    // =========================
+    private List<BaseSkill> unlockedSkills = new List<BaseSkill>();
 
-    void Awake()
+    #region Unity
+
+    private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
-    }
-
-    public void Init(PlayerLevelSystem level, CharacterStats characterStats)
-    {
-        stats = characterStats;
-
-        // Lắng nghe level up
-        level.OnLevelUp += HandleLevelUp;
     }
 
     private void OnDestroy()
     {
-        // Không leak event
-        var level = FindAnyObjectByType<PlayerLevelSystem>();
-        if (level != null)
-            level.OnLevelUp -= HandleLevelUp;
+        if (levelSystem != null)
+            levelSystem.OnLevelUp -= HandleLevelUp;
     }
+
+    #endregion
+
+    #region Init
+
+    public void Init(PlayerLevelSystem level, CharacterStats characterStats)
+    {
+        levelSystem = level;
+        stats = characterStats;
+
+        levelSystem.OnLevelUp += HandleLevelUp;
+    }
+
+    #endregion
+
+    #region Level Up
 
     private void HandleLevelUp(int newLevel)
     {
         ShowRandomUpgrades();
     }
 
-    // Random 3 upgrade
-    void ShowRandomUpgrades()
+    private void ShowRandomUpgrades()
     {
-        // Copy tránh làm thay đổi danh sách gốc
+        if (upgradePool.Count == 0)
+            return;
+
         List<UpgradeData> poolCopy = new List<UpgradeData>(upgradePool);
 
-        // Fisher-Yates Shuffle
+        // Shuffle
         for (int i = poolCopy.Count - 1; i > 0; i--)
         {
             int rand = UnityEngine.Random.Range(0, i + 1);
             (poolCopy[i], poolCopy[rand]) = (poolCopy[rand], poolCopy[i]);
         }
 
-        // Lấy 3 lựa chọn đầu tiên
-        List<UpgradeData> result = poolCopy.GetRange(0, Mathf.Min(3, poolCopy.Count));
+        List<UpgradeData> result =
+            poolCopy.GetRange(0, Mathf.Min(3, poolCopy.Count));
 
         OnShowUpgradeUI?.Invoke(result);
     }
 
+    #endregion
 
-    // --------------------------
-    // ÁP DỤNG UPGRADE
-    // --------------------------
+    #region Apply Upgrade
 
     public void ApplyUpgrade(UpgradeData upgrade)
     {
-        if (upgrade.upgradeType == UpgradeType.Stat)
+        switch (upgrade.upgradeType)
         {
-            ApplyStatUpgrade(upgrade);
-        }
-        else if (upgrade.upgradeType == UpgradeType.Skill)
-        {
-            ApplySkillUpgrade(upgrade);
+            case UpgradeType.Stat:
+                ApplyStatUpgrade(upgrade.statUpgradeData);
+                break;
+
+            case UpgradeType.Skill:
+                ApplySkillUpgrade(upgrade.skillUpgradeData);
+                break;
         }
 
-        // Cập nhật character stats
         stats.RecalculateStats();
     }
 
-    // --- STAT UPGRADE ---
-    private void ApplyStatUpgrade(UpgradeData upgrade)
-    {
-        if (!statBonuses.ContainsKey(upgrade.statType))
-            statBonuses[upgrade.statType] = 0;
+    #endregion
 
-        statBonuses[upgrade.statType] += upgrade.statValue;
-    }
+    // =========================================================
+    // STAT UPGRADE
+    // =========================================================
 
-    // --- SKILL UPGRADE ---
-    private void ApplySkillUpgrade(UpgradeData upgrade)
+    private void ApplyStatUpgrade(StatUpgradeData data)
     {
-        if (upgrade.skillPrefab == null)
+        if (data == null) return;
+
+        var type = data.statType;
+
+        if (!statUpgrades.ContainsKey(type))
         {
-            Debug.LogWarning("Skill upgrade nhưng không có skillPrefab!");
-            return;
+            statUpgrades[type] = new StatUpgradeProgress
+            {
+                data = data,
+                level = 0
+            };
         }
 
-        foreach (var s in unlockedSkills)
+        var progress = statUpgrades[type];
+
+        if (progress.level >= data.MaxLevel)
+            return;
+
+        progress.level++;
+        statUpgrades[type] = progress;
+    }
+
+    public float GetStatBonus(StatType type)
+    {
+        if (!statUpgrades.ContainsKey(type))
+            return 0;
+
+        var progress = statUpgrades[type];
+        return progress.data.GetValue(progress.level);
+    }
+
+    // =========================================================
+    // SKILL UPGRADE
+    // =========================================================
+
+    private void ApplySkillUpgrade(SkillUpgradeData data)
+    {
+        if (data == null || data.skillPrefab == null)
+            return;
+
+        // Đã có skill → level up
+        foreach (var skill in unlockedSkills)
         {
-            if (s.name.Contains(upgrade.skillPrefab.name))
+            if (skill.UpgradeData == data)
             {
-                // Skill đã có → level up
-                s.GetComponent<ISkill>()?.OnLevelUp();
+                skill.OnLevelUp();
                 return;
             }
         }
 
         // Skill mới
-        GameObject newSkill = Instantiate(upgrade.skillPrefab, transform);
+        GameObject skillGO = Instantiate(data.skillPrefab, transform);
+        var newSkill = skillGO.GetComponent<BaseSkill>();
+
+        if (newSkill == null)
+        {
+            Debug.LogError("Skill prefab không có BaseSkill!");
+            Destroy(skillGO);
+            return;
+        }
+
+        newSkill.Init(stats);
+        newSkill.OnUnlock();
+
         unlockedSkills.Add(newSkill);
-
-        var skill = newSkill.GetComponent<ISkill>();
-        skill?.Init(stats);
-        skill?.OnUnlock();
-
-        Debug.Log("Unlocked Skill: " + upgrade.upgradeName);
     }
-
-    // --------------------------
-    // GET BONUS cho CharacterStats
-    // --------------------------
-
-    public float GetStatBonus(StatType type)
+    public int GetStatLevel(StatType stat)
     {
-        if (statBonuses.ContainsKey(type))
-            return statBonuses[type];
+        if (!statUpgrades.ContainsKey(stat))
+            return 0;
 
+        return statUpgrades[stat].level;
+    }
+    public int GetSkillLevel(SkillUpgradeData data)
+    {
+        foreach (var skill in unlockedSkills)
+        {
+            if (skill.UpgradeData == data)
+                return skill.Level; // hoặc expose getter
+        }
         return 0;
     }
 
-    // Các hàm cũ tương thích CharacterStats
-    public int GetBonusHealth() => (int)GetStatBonus(StatType.MaxHealth);
-    public int GetBonusDamage() => (int)GetStatBonus(StatType.Damage);
+    #region Backward Compatibility (CharacterStats)
+
+    public int GetBonusHealth() => Mathf.RoundToInt(GetStatBonus(StatType.MaxHealth));
+    public int GetBonusDamage() => Mathf.RoundToInt(GetStatBonus(StatType.Damage));
     public float GetBonusMoveSpeed() => GetStatBonus(StatType.MoveSpeed);
     public float GetBonusAttackSpeed() => GetStatBonus(StatType.AttackSpeed);
-    public float GetBonusCrit() => 0; // chưa dùng trong cấu trúc mới
+    public float GetBonusCrit() => 0;
+
+    #endregion
 }

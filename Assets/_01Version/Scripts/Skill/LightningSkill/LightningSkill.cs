@@ -1,54 +1,88 @@
 ﻿using UnityEngine;
-public class LightningSkill : MonoBehaviour
+
+public class LightningSkill : BaseSkill
 {
-    [SerializeField] private LightningSkillData data;
-    private float timer;
-    public GameObject lightningEffectPrefab;
+    [SerializeField] private GameObject lightningEffectPrefab;
 
-    void Update()
+    private float cooldownTimer;
+
+    // cached data theo level
+    private int damage;
+    private int strikes;
+    private float radius;
+    private float cooldown;
+
+    // =========================
+    // BASESKILL OVERRIDE
+    // =========================
+    protected override void ApplyLevelData()
     {
-        timer -= Time.deltaTime;
+        var data = upgradeData.GetLevelData(level);
 
-        if (timer <= 0f)
+        damage = data.damage;
+        strikes = data.lightningCount;
+        radius = data.radius;
+        cooldown = data.cooldown;
+
+        cooldownTimer = cooldown;
+
+        Debug.Log($"Lightning Lv{level} | Strikes:{strikes} Damage:{damage}");
+    }
+
+    // =========================
+    // UPDATE
+    // =========================
+    private void Update()
+    {
+        if (level <= 0) return; // chưa unlock
+
+        cooldownTimer -= Time.deltaTime;
+        if (cooldownTimer <= 0f)
         {
             CastLightning();
-            timer = data.Cooldown;
+            cooldownTimer = cooldown;
         }
     }
 
-    void CastLightning()
+    // =========================
+    // CORE LOGIC
+    // =========================
+    private void CastLightning()
     {
-        // Tìm enemy trong vùng
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, data.Radius, LayerMask.GetMask("Enemy"));
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(
+            transform.position,
+            radius,
+            LayerMask.GetMask("Enemy")
+        );
 
         if (enemies.Length == 0) return;
 
-        for (int i = 0; i < data.StrikesPerCast; i++)
+        for (int i = 0; i < strikes; i++)
         {
-            // Lấy enemy random
             var target = enemies[Random.Range(0, enemies.Length)];
 
-            // Tạo hiệu ứng sét
             SpawnLightningEffect(target.transform.position);
-            Debug.Log("Set: tan cpng" + target.name);
 
-            // Gây damage
-            target.GetComponent<EnemyHealthController>().TakeDamage(data.Damage);
+            var hp = target.GetComponent<EnemyHealthController>();
+            if (hp != null)
+                hp.TakeDamage(damage);
         }
     }
 
-    void SpawnLightningEffect(Vector3 targetPos)
+    private void SpawnLightningEffect(Vector3 targetPos)
     {
-        // vị trí bắt đầu tia (trên trời)
-        Vector3 start = targetPos + new Vector3(0, 4, 0);
+        Vector3 start = targetPos + Vector3.up * 4f;
 
-        GameObject obj = Instantiate(lightningEffectPrefab);
-        obj.GetComponent<LightningEffect>().Init(start, targetPos);
+        var fx = Instantiate(lightningEffectPrefab);
+        fx.GetComponent<LightningEffect>().Init(start, targetPos);
     }
 
-    void OnDrawGizmosSelected()
+    // =========================
+    // GIZMOS
+    // =========================
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, data.Radius);
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }
