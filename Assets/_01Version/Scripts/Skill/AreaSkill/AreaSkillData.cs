@@ -1,6 +1,7 @@
 ﻿using System;
-[Serializable]
-public class AreaSkillData
+using UnityEngine;
+[CreateAssetMenu(menuName = "Skill/AreaSkillData")]
+public class AreaSkillData : ScriptableObject
 {
     public float radius = 3f;
     public float tickInterval = 0.3f;   // mỗi 0.3s gây damage

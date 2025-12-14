@@ -82,12 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af0d1ca58d92034c82677f8c5b3e2fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _areaSkillData:
-    radius: 3
-    tickInterval: 0.3
-    damage: 10
-    duration: 5
-    cooldown: 2
+  _areaSkillData: {fileID: 11400000, guid: dd5efc39e8a6c514d8d5f18e9e50efc3, type: 2}
   _areaEffectPrefab: {fileID: 3262302093279694285}
 --- !u!212 &-8044775900142563659
 SpriteRenderer:

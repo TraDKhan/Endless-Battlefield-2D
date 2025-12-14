@@ -1,50 +1,29 @@
 ﻿using UnityEngine;
 
-[SerializeField]
 public class AreaSkill : MonoBehaviour
 {
-    [SerializeField] private AreaSkillData _areaSkillData;
-    public GameObject _areaEffectPrefab;
-
+    [SerializeField] private AreaSkillData data;
     private float tickTimer;
-    void Awake()
-    {
-        var col = GetComponent<CircleCollider2D>();
-        if (col != null) col.radius = _areaSkillData.radius;
-    }
 
     void Update()
     {
         tickTimer -= Time.deltaTime;
-
-        if (tickTimer <= 0f)
+        if (tickTimer <= 0)
         {
             DealDamage();
-            tickTimer = _areaSkillData.tickInterval;
+            tickTimer = data.tickInterval;
         }
     }
 
     void DealDamage()
     {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(
+        var hits = Physics2D.OverlapCircleAll(
             transform.position,
-            _areaSkillData.radius,
+            data.radius,
             LayerMask.GetMask("Enemy")
         );
 
-        foreach (Collider2D enemy in enemies)
-        {
-            Debug.Log("Area: gay sat thuong len " + enemy.name);
-            enemy.GetComponent<EnemyHealthController>().TakeDamage(_areaSkillData.damage);
-        }
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _areaSkillData.radius);
+        foreach (var h in hits)
+            h.GetComponent<EnemyHealthController>()?.TakeDamage(data.damage);
     }
 }
-
-
-

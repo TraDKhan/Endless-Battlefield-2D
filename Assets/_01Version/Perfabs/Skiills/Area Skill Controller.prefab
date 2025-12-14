@@ -46,5 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _areaSkillPrefab: {fileID: 3262302093279694285, guid: d3cdca581c199594791e50b0108da9f9, type: 3}
   playerTransform: {fileID: 0}
+  skillData: {fileID: 11400000, guid: dd5efc39e8a6c514d8d5f18e9e50efc3, type: 2}
   duration: 5
   cooldown: 5

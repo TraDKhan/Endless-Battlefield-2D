@@ -1,70 +1,59 @@
 ﻿using UnityEngine;
 
-public class AreaSkillController : MonoBehaviour
+public class AreaSkillController : BaseSkill
 {
-    [SerializeField] private GameObject _areaSkillPrefab; // prefab gốc
-    private GameObject _areaSkillInstance;                // instance trong scene
+    [Header("Data")]
+    [SerializeField] private AreaSkillData data;
+    [SerializeField] private GameObject areaPrefab;
 
-    public Transform playerTransform;
-    public float duration = 5f;   // tồn tại 5s
-    public float cooldown = 2f;   // hồi chiêu 2s
-
+    private GameObject areaInstance;
     private float cooldownTimer;
     private float lifeTimer;
 
-    private void Awake()
+    protected override void ApplyLevelScaling()
     {
-        if (playerTransform == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-                playerTransform = player.transform;
-            else
-                Debug.LogError("Không tìm thấy Player trong scene!");
-        }
+        // Ví dụ scale
+        // damage +20% mỗi level
+        data.damage = Mathf.RoundToInt(data.damage * (1 + 0.2f * (level - 1)));
+    }
 
-        CastDamageArea(); // tạo skill lần đầu
-        lifeTimer = duration;
-        cooldownTimer = cooldown;
+    void Start()
+    {
+        Cast();
+        lifeTimer = data.duration;
+        cooldownTimer = data.cooldown;
     }
 
     void Update()
     {
-        if (_areaSkillInstance != null && _areaSkillInstance.activeSelf)
+        if (areaInstance != null && areaInstance.activeSelf)
         {
-            // skill đang hoạt động
             lifeTimer -= Time.deltaTime;
-            if (lifeTimer <= 0f)
+            if (lifeTimer <= 0)
             {
-                _areaSkillInstance.SetActive(false);
-                cooldownTimer = cooldown;
-                Debug.Log("Skill Area đang hồi");
+                areaInstance.SetActive(false);
+                cooldownTimer = data.cooldown;
             }
         }
         else
         {
-            // skill đang hồi
             cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer <= 0f)
+            if (cooldownTimer <= 0)
             {
-                CastDamageArea();
-                lifeTimer = duration;
-                Debug.Log("Skill Area được triển khai lại");
+                Cast();
+                lifeTimer = data.duration;
             }
         }
     }
 
-    void CastDamageArea()
+    void Cast()
     {
-        if (_areaSkillInstance != null)
+        if (areaInstance == null)
         {
-            Destroy(_areaSkillInstance); // xoá instance cũ nếu còn
+            areaInstance = Instantiate(areaPrefab, transform);
         }
-        _areaSkillInstance = Instantiate(_areaSkillPrefab, playerTransform.position, Quaternion.identity);
 
-        // Gắn skill làm con của player
-        _areaSkillInstance.transform.SetParent(playerTransform);
-
-        _areaSkillInstance.SetActive(true);
+        areaInstance.transform.localPosition = Vector3.zero;
+        areaInstance.SetActive(true);
     }
 }

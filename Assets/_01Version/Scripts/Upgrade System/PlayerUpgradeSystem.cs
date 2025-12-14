@@ -103,9 +103,23 @@ public class PlayerUpgradeSystem : MonoBehaviour
             return;
         }
 
-        // Gắn skill vào Player
+        foreach (var s in unlockedSkills)
+        {
+            if (s.name.Contains(upgrade.skillPrefab.name))
+            {
+                // Skill đã có → level up
+                s.GetComponent<ISkill>()?.OnLevelUp();
+                return;
+            }
+        }
+
+        // Skill mới
         GameObject newSkill = Instantiate(upgrade.skillPrefab, transform);
         unlockedSkills.Add(newSkill);
+
+        var skill = newSkill.GetComponent<ISkill>();
+        skill?.Init(stats);
+        skill?.OnUnlock();
 
         Debug.Log("Unlocked Skill: " + upgrade.upgradeName);
     }

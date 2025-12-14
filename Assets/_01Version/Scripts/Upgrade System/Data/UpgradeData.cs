@@ -23,7 +23,7 @@ public class UpgradeData : ScriptableObject
     public Sprite icon;
 
     public UpgradeType upgradeType;
-
+    public bool unique = true;
     // Nếu là Stat
     public StatType statType;
     public float statValue;
