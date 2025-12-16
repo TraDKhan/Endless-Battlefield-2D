@@ -75,9 +75,9 @@ public class BoomerangWeapon : Weapon
         return nearest;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, currentStats.range);
-    }
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.cyan;
+    //    Gizmos.DrawWireSphere(transform.position, currentStats.range);
+    //}
 }
