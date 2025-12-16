@@ -2,22 +2,44 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Upgrade/Skill Upgrade Data")]
-public class SkillUpgradeData : ScriptableObject
+public class SkillUpgradeData : UpgradeData
 {
-    public string skillName;
-    [TextArea] public string description;
-    public Sprite icon;
-
     public GameObject skillPrefab;
-
     [Header("Levels")]
-    public List<SkillLevelData> levels;
+    public SkillLevelData[] levels;
 
-    public int MaxLevel => levels.Count;
+    public int MaxLevel => levels.Length;
 
     public SkillLevelData GetLevelData(int level)
     {
-        level = Mathf.Clamp(level, 1, MaxLevel);
-        return levels[level - 1];
+        int index = Mathf.Clamp(level - 1, 0, levels.Length - 1);
+        return levels[index];
+    }
+    public override int GetCurrentLevel()
+    {
+        return PlayerUpgradeSystem.Instance.GetSkillLevel(this);
+    }
+
+    public override string GetTitle()
+    {
+        return upgradeName;
+    }
+
+    public override string GetDescription()
+    {
+        if (GetCurrentLevel() == 0)
+            return description;
+
+        return $"Nâng cấp {upgradeName} lên Lv {GetCurrentLevel() + 1}";
+    }
+    public override bool CanApply()
+    {
+        int current = PlayerUpgradeSystem.Instance.GetSkillLevel(this);
+        return current < MaxLevel;
+    }
+
+    public override void Apply()
+    {
+        PlayerUpgradeSystem.Instance.ApplySkillUpgrade(this);
     }
 }

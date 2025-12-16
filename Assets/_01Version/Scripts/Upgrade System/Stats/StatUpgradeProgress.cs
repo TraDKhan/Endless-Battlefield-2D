@@ -1,9 +1,22 @@
-﻿using System;
-using UnityEngine;
-
-[Serializable]
-public struct StatUpgradeProgress
+﻿[System.Serializable]
+public class StatUpgradeProgress
 {
-    public StatUpgradeData data;
-    public int level;
+    public int Level { get; private set; }
+    private float valuePerLevel;
+
+    public StatUpgradeProgress(float valuePerLevel)
+    {
+        this.valuePerLevel = valuePerLevel;
+        Level = 0;
+    }
+
+    public void LevelUp()
+    {
+        Level++;
+    }
+
+    public float GetValue()
+    {
+        return Level * valuePerLevel;
+    }
 }

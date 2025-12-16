@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using static Weapon;
 
+[RequireComponent(typeof(Collider2D))]
 public class BoomerangProjectile : MonoBehaviour
 {
     private Vector3 startPos;
@@ -10,18 +10,17 @@ public class BoomerangProjectile : MonoBehaviour
     private float speed;
     private Transform owner;
 
-    private DamageContext damageContext;
+    private WeaponDamageContext damageContext;
 
     private bool returning;
+    private HashSet<Collider2D> hitTargets = new HashSet<Collider2D>();
 
-    // tránh hit trùng enemy quá nhanh
-    private HashSet<Collider2D> hitEnemies = new HashSet<Collider2D>();
-
+    // ================= INIT =================
     public void Init(
         Vector3 dir,
         float range,
         float moveSpeed,
-        DamageContext ctx,
+        WeaponDamageContext ctx,
         Transform ownerTransform
     )
     {
@@ -32,6 +31,8 @@ public class BoomerangProjectile : MonoBehaviour
         owner = ownerTransform;
 
         startPos = transform.position;
+        returning = false;
+        hitTargets.Clear();
     }
 
     private void Update()
@@ -39,18 +40,17 @@ public class BoomerangProjectile : MonoBehaviour
         Move();
     }
 
+    // ================= MOVE =================
     void Move()
     {
-        Vector3 targetDir;
+        Vector3 moveDir;
 
         if (!returning)
         {
-            targetDir = direction;
+            moveDir = direction;
 
             if (Vector3.Distance(startPos, transform.position) >= maxDistance)
-            {
                 returning = true;
-            }
         }
         else
         {
@@ -60,32 +60,33 @@ public class BoomerangProjectile : MonoBehaviour
                 return;
             }
 
-            targetDir = (owner.position - transform.position).normalized;
+            moveDir = (owner.position - transform.position).normalized;
 
             if (Vector3.Distance(transform.position, owner.position) < 0.3f)
             {
                 Destroy(gameObject);
+                return;
             }
         }
 
-        transform.position += targetDir * speed * Time.deltaTime;
+        transform.position += moveDir * speed * Time.deltaTime;
     }
 
+    // ================= HIT =================
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Enemy")) return;
+        if (hitTargets.Contains(other)) return;
 
-        if (hitEnemies.Contains(other)) return;
+        if (!other.TryGetComponent<IDamageable>(out var target))
+            return;
 
-        hitEnemies.Add(other);
+        hitTargets.Add(other);
 
-        float finalDamage = damageContext.damage;
+        bool isCrit = Random.value < damageContext.critChance;
+        float finalDamage = isCrit
+            ? damageContext.damage * damageContext.critMultiplier
+            : damageContext.damage;
 
-        if (Random.value < damageContext.critChance)
-        {
-            finalDamage *= damageContext.critMultiplier;
-        }
-
-        other.GetComponent<EnemyHealthController>()?.TakeDamage((int)finalDamage);
+        target.TakeDamage((int)finalDamage);
     }
 }

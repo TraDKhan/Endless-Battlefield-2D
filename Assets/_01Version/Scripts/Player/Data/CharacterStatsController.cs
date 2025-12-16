@@ -1,33 +1,53 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PlayerHealthController))]
 public class CharacterStatsController : MonoBehaviour
 {
-    public PlayerData playerData;
-    public PlayerLevelSystem level;
-    public PlayerEquipmentController equip;
-    public PlayerBuffController buff;
+    public static CharacterStatsController Instance;
+
+    [Header("Data")]
+    [SerializeField] private PlayerData playerData;
+
+    [Header("Systems")]
+    [SerializeField] private PlayerLevelSystem level;
+    [SerializeField] private PlayerEquipmentController equip;
+    [SerializeField] private PlayerBuffController buff;
 
     public CharacterStats Stats { get; private set; }
+
     private PlayerHealthController healthController;
+    private PlayerUpgradeSystem upgradeSystem;
 
-    void Awake()
+    private void Awake()
     {
-        var upgrade = FindAnyObjectByType<PlayerUpgradeSystem>();
+        // ===== Singleton =====
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
 
-        Stats = new CharacterStats(playerData, level, equip, buff, upgrade);
-        healthController = GetComponent<PlayerHealthController>();
-
+        // ===== Find systems =====
         if (level == null)
             level = FindAnyObjectByType<PlayerLevelSystem>();
 
+        upgradeSystem = PlayerUpgradeSystem.Instance;
+        healthController = GetComponent<PlayerHealthController>();
+
+        // ===== Init stats =====
+        Stats = new CharacterStats(
+            playerData,
+            level,
+            equip,
+            buff,
+            upgradeSystem
+        );
+
+        // ===== Listen =====
         Stats.OnStatsChanged += ApplyStatsToHealth;
 
-        if (level != null)
-            level.OnLevelUp += OnLevelUpBonusReceived;
-
-        if (upgrade != null)
-            upgrade.Init(level, Stats);
-
+        // ===== First calc =====
         Stats.RecalculateStats();
         ApplyStatsToHealth();
     }
@@ -37,20 +57,19 @@ public class CharacterStatsController : MonoBehaviour
         if (Stats != null)
             Stats.OnStatsChanged -= ApplyStatsToHealth;
 
-        if (level != null)
-            level.OnLevelUp -= OnLevelUpBonusReceived;
+        if (Instance == this)
+            Instance = null;
     }
 
-    private void OnLevelUpBonusReceived(int hpBonus)
-    {
-        Stats.RecalculateStats();
-    }
-
+    // =========================
+    // APPLY TO HEALTH
+    // =========================
     private void ApplyStatsToHealth()
     {
-        if (healthController != null)
-        {
-            healthController.SetMaxHealth(Stats.GetMaxHealth());
-        }
+        if (healthController == null) return;
+
+        int newMaxHp = Stats.GetMaxHealth();
+
+        healthController.SetMaxHealth(newMaxHp);
     }
 }

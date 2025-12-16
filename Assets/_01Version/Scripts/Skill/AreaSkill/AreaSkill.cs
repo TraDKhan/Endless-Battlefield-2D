@@ -2,10 +2,10 @@
 
 public class AreaSkill : BaseSkill
 {
+    [Header("Effect")]
     [SerializeField] private GameObject areaEffectPrefab;
     [SerializeField] private float tickInterval = 0.3f;
 
-    private Transform player;
     private GameObject areaInstance;
 
     // cached level data
@@ -19,20 +19,13 @@ public class AreaSkill : BaseSkill
     private float tickTimer;
 
     // =========================
-    // UNITY
+    // INIT
     // =========================
-    private void Awake()
+    public override void Init(Transform ownerTransform, CharacterStats characterStats)
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        if (player == null)
-        {
-            Debug.LogError("AreaSkill: Player not found");
-            enabled = false;
-            return;
-        }
+        base.Init(ownerTransform, characterStats);
 
-        // AreaSkill luôn là con của Player
-        transform.SetParent(player);
+        transform.SetParent(owner);
         transform.localPosition = Vector3.zero;
     }
 
@@ -41,7 +34,7 @@ public class AreaSkill : BaseSkill
     // =========================
     protected override void ApplyLevelData()
     {
-        var data = upgradeData.GetLevelData(level);
+        var data = upgradeData.levels[Level - 1];
 
         damage = data.damage;
         radius = data.radius;
@@ -49,8 +42,6 @@ public class AreaSkill : BaseSkill
         cooldown = data.cooldown;
 
         cooldownTimer = cooldown;
-
-        Debug.Log($"Area Skill Lv{level} | dmg:{damage} radius:{radius}");
     }
 
     // =========================
@@ -58,7 +49,7 @@ public class AreaSkill : BaseSkill
     // =========================
     private void Update()
     {
-        if (level <= 0) return;
+        if (Level <= 0) return;
 
         if (areaInstance == null)
         {
@@ -87,11 +78,10 @@ public class AreaSkill : BaseSkill
     // =========================
     private void SpawnArea()
     {
-        areaInstance = Instantiate(areaEffectPrefab, player);
+        areaInstance = Instantiate(areaEffectPrefab, owner);
         areaInstance.transform.localPosition = Vector3.zero;
 
-        var col = areaInstance.GetComponent<CircleCollider2D>();
-        if (col != null)
+        if (areaInstance.TryGetComponent(out CircleCollider2D col))
             col.radius = radius;
 
         lifeTimer = duration;
@@ -107,9 +97,8 @@ public class AreaSkill : BaseSkill
 
     private void DealDamage()
     {
-        // 🔥 VỊ TRÍ LẤY TỪ PLAYER
         var hits = Physics2D.OverlapCircleAll(
-            player.position,
+            owner.position,
             radius,
             LayerMask.GetMask("Enemy")
         );
@@ -123,9 +112,9 @@ public class AreaSkill : BaseSkill
     // =========================
     private void OnDrawGizmosSelected()
     {
-        if (player == null) return;
+        if (owner == null) return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(player.position, radius);
+        Gizmos.DrawWireSphere(owner.position, radius);
     }
 }

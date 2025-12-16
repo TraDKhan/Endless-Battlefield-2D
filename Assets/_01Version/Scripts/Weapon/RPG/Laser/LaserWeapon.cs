@@ -12,10 +12,11 @@ public class LaserWeapon : Weapon
     [SerializeField] private float laserDuration = 1.5f;
     [SerializeField] private float tickRate = 0.1f;
 
-    private float laserTimer;
+    private float burstTimer;
     private float tickTimer;
-    private bool isFiring;
+    private float lastFireTime;
 
+    private bool isFiring;
     private Transform currentTarget;
 
     private void Update()
@@ -31,47 +32,55 @@ public class LaserWeapon : Weapon
         currentTarget = FindNearestEnemy();
     }
 
-    // ================= BURST =================
+    // ================= BURST / COOLDOWN =================
     void HandleBurst()
     {
         if (isFiring)
         {
-            laserTimer += Time.deltaTime;
+            burstTimer += Time.deltaTime;
 
-            if (laserTimer >= laserDuration)
-            {
+            if (burstTimer >= laserDuration)
                 StopLaser();
-            }
         }
         else
         {
-            if (CanShoot() && currentTarget != null)
-            {
+            if (CanFire() && currentTarget != null)
                 StartLaser();
-            }
         }
+    }
+
+    bool CanFire()
+    {
+        return Time.time >= lastFireTime + stats.Cooldown;
     }
 
     void StartLaser()
     {
         isFiring = true;
-        laserTimer = 0f;
+        burstTimer = 0f;
         tickTimer = 0f;
-        lastShootTime = Time.time;
+        lastFireTime = Time.time;
+
+        lineRenderer.enabled = true;
     }
 
     void StopLaser()
     {
         isFiring = false;
-        DisableLaser();
+        lineRenderer.enabled = false;
     }
 
-    // ================= LASER =================
+    public override void Fire()
+    {
+        // dành cho manual trigger nếu cần
+    }
+
+    // ================= LASER LOGIC =================
     void HandleLaser()
     {
         if (!isFiring || currentTarget == null)
         {
-            DisableLaser();
+            lineRenderer.enabled = false;
             return;
         }
 
@@ -81,15 +90,14 @@ public class LaserWeapon : Weapon
         RaycastHit2D[] hits = Physics2D.RaycastAll(
             origin,
             dir,
-            currentStats.range,
+            stats.Range,
             enemyLayer
         );
 
-        Vector3 endPos = origin + dir * currentStats.range;
-        DrawLaser(endPos);
+        Vector3 endPos = origin + dir * stats.Range;
+        DrawLaser(origin, endPos);
 
         tickTimer += Time.deltaTime;
-
         if (tickTimer >= tickRate)
         {
             tickTimer = 0f;
@@ -97,57 +105,54 @@ public class LaserWeapon : Weapon
         }
     }
 
+    // ================= DAMAGE =================
     void ApplyLaserDamage(RaycastHit2D[] hits)
     {
         if (hits == null || hits.Length == 0) return;
 
-        DamageContext ctx = CreateDamageContext();
+        WeaponDamageContext ctx = CreateDamageContext();
         float damagePerTick = ctx.damage * tickRate;
 
-        foreach (RaycastHit2D hit in hits)
+        foreach (var hit in hits)
         {
-            EnemyHealthController enemy = hit.collider.GetComponent<EnemyHealthController>();
-            if (enemy == null) continue;
+            if (!hit.collider.TryGetComponent<IDamageable>(out var target))
+                continue;
 
-            float finalDamage = damagePerTick;
+            bool isCrit = Random.value < ctx.critChance;
+            float finalDamage = isCrit
+                ? damagePerTick * ctx.critMultiplier
+                : damagePerTick;
 
-            if (Random.value < ctx.critChance)
-            {
-                finalDamage *= ctx.critMultiplier;
-            }
-
-            enemy.TakeDamage((int)finalDamage);
+            target.TakeDamage((int)finalDamage);
         }
     }
 
     // ================= VISUAL =================
-    void DrawLaser(Vector3 endPos)
+    void DrawLaser(Vector3 start, Vector3 end)
     {
-        lineRenderer.enabled = true;
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, endPos);
+        lineRenderer.SetPosition(0, start);
+        lineRenderer.SetPosition(1, end);
     }
 
-    void DisableLaser()
-    {
-        lineRenderer.enabled = false;
-    }
-
-    // ================= FIND TARGET =================
+    // ================= TARGET SEARCH =================
     Transform FindNearestEnemy()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
             transform.position,
-            currentStats.range,
+            stats.Range,
             enemyLayer
         );
 
         float minDist = float.MaxValue;
         Transform nearest = null;
 
-        foreach (Collider2D e in enemies)
+        foreach (var e in enemies)
         {
-            float dist = Vector2.Distance(transform.position, e.transform.position);
+            float dist = Vector2.Distance(
+                transform.position,
+                e.transform.position
+            );
+
             if (dist < minDist)
             {
                 minDist = dist;
@@ -157,10 +162,4 @@ public class LaserWeapon : Weapon
 
         return nearest;
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.magenta;
-    //    Gizmos.DrawWireSphere(transform.position, currentStats.range);
-    //}
 }

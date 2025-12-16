@@ -1,39 +1,48 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class WeaponUpgradeSystem : MonoBehaviour
 {
-    private PlayerLevelSystem levelSystem;
-    private Weapon weapon;
+    public static WeaponUpgradeSystem Instance;
 
-    private int bonusDamage;
-    private float bonusCrit;
-    private float bonusCooldown;
+    public event Action OnWeaponStatsChanged;
 
-    public void Init(PlayerLevelSystem level, Weapon weaponRef)
+    private Dictionary<WeaponStatType, StatUpgradeProgress> statUpgrades
+        = new Dictionary<WeaponStatType, StatUpgradeProgress>();
+
+    private void Awake()
     {
-        levelSystem = level;
-        weapon = weaponRef;
-
-        levelSystem.OnLevelUp += OnLevelUp;
+        Instance = this;
     }
 
-    private void OnDestroy()
+    // =============================
+    // APPLY UPGRADE
+    // =============================
+    public void ApplyUpgrade(WeaponStatType stat, float value)
     {
-        if (levelSystem != null)
-            levelSystem.OnLevelUp -= OnLevelUp;
+        if (!statUpgrades.ContainsKey(stat))
+            statUpgrades[stat] = new StatUpgradeProgress(value);
+
+        statUpgrades[stat].LevelUp();
+
+        OnWeaponStatsChanged?.Invoke();
     }
 
-    private void OnLevelUp(int level)
+    // =============================
+    // QUERY
+    // =============================
+    public float GetWeaponStatBonus(WeaponStatType stat)
     {
-        // Ví dụ
-        bonusDamage += 5;
-        bonusCrit += 0.05f;
-
-        //weapon.RecalculateStats();
+        return statUpgrades.TryGetValue(stat, out var p)
+            ? p.GetValue()
+            : 0;
     }
 
-    // ===== API =====
-    public int GetBonusDamage() => bonusDamage;
-    public float GetBonusCrit() => bonusCrit;
-    public float GetBonusCooldown() => bonusCooldown;
+    public int GetStatLevel(WeaponStatType stat)
+    {
+        return statUpgrades.TryGetValue(stat, out var p)
+            ? p.Level
+            : 0;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class CharacterStats
 {
@@ -12,7 +13,7 @@ public class CharacterStats
     private PlayerLevelSystem levelSystem;
     private PlayerEquipmentController equipmentController;
     private PlayerBuffController buffController;
-    private PlayerUpgradeSystem upgradeController;
+    private PlayerUpgradeSystem upgradeSystem;
 
     public event Action OnStatsChanged;
 
@@ -27,24 +28,24 @@ public class CharacterStats
         levelSystem = level;
         equipmentController = equipment;
         buffController = buff;
-        upgradeController = upgrade;
+        upgradeSystem = upgrade;
     }
 
     public void RecalculateStats()
     {
-        // 1. Base
+        // ===== 1. BASE =====
         maxHealth = playerData.baseHealth;
         maxEnergy = playerData.baseEnergy;
         armor = playerData.baseArmor;
         moveSpeed = playerData.baseMoveSpeed;
 
-        // 2. Level
+        // ===== 2. LEVEL =====
         if (levelSystem != null)
         {
             maxHealth += levelSystem.GetBonusHealth();
         }
 
-        // 3. Equipment
+        // ===== 3. EQUIPMENT =====
         if (equipmentController != null)
         {
             maxHealth += equipmentController.GetEquipHealthBonus();
@@ -52,23 +53,31 @@ public class CharacterStats
             moveSpeed += equipmentController.GetEquipMoveSpeedBonus();
         }
 
-        // 4. Buff
+        // ===== 4. BUFF =====
         if (buffController != null)
         {
             maxHealth += buffController.GetBuffHealthBonus();
             moveSpeed += buffController.GetBuffMoveSpeedBonus();
         }
 
-        // 5. Upgrade (PLAYER upgrade, không phải weapon)
-        if (upgradeController != null)
+        // ===== 5. PLAYER UPGRADE =====
+        if (upgradeSystem != null)
         {
-            maxHealth += upgradeController.GetBonusHealth();
-            moveSpeed += upgradeController.GetBonusMoveSpeed();
+            maxHealth += Mathf.RoundToInt(
+                upgradeSystem.GetPlayerStatBonus(PlayerStatType.MaxHealth)
+            );
+
+            moveSpeed += upgradeSystem.GetPlayerStatBonus(PlayerStatType.MoveSpeed);
+
+            armor += Mathf.RoundToInt(
+                upgradeSystem.GetPlayerStatBonus(PlayerStatType.Armor)
+            );
         }
 
         OnStatsChanged?.Invoke();
     }
 
+    // ===== GETTER =====
     public int GetMaxHealth() => maxHealth;
     public float GetMoveSpeed() => moveSpeed;
     public int GetArmor() => armor;

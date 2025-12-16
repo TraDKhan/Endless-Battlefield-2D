@@ -5,34 +5,48 @@ public class BoomerangWeapon : Weapon
     [Header("Targeting")]
     [SerializeField] private LayerMask enemyLayer;
 
+    private float lastFireTime;
+
     private void Update()
     {
-        TryAutoShoot();
+        TryAutoFire();
     }
 
-    void TryAutoShoot()
+    // ================= AUTO FIRE =================
+    void TryAutoFire()
     {
-        if (!CanShoot()) return;
+        if (!CanFire()) return;
 
         Transform target = FindNearestEnemy();
         if (target == null) return;
 
-        Vector3 direction = (target.position - transform.position).normalized;
-        Shoot(direction);
+        FireAt(target);
     }
 
-    public override void Shoot(Vector3 direction)
+    bool CanFire()
     {
-        base.Shoot(direction);
+        return Time.time >= lastFireTime + stats.Cooldown;
+    }
 
-        int count = Mathf.Max(1, currentStats.projectileCount);
+    void FireAt(Transform target)
+    {
+        lastFireTime = Time.time;
+
+        Vector3 direction =
+            (target.position - transform.position).normalized;
+
+        int count = Mathf.Max(1, stats.ProjectileCount);
 
         for (int i = 0; i < count; i++)
-        {
             SpawnBoomerang(direction);
-        }
     }
 
+    public override void Fire()
+    {
+        // manual trigger nếu cần
+    }
+
+    // ================= SPAWN =================
     void SpawnBoomerang(Vector3 direction)
     {
         GameObject obj = Instantiate(
@@ -41,30 +55,37 @@ public class BoomerangWeapon : Weapon
             Quaternion.identity
         );
 
-        BoomerangProjectile boomerang = obj.GetComponent<BoomerangProjectile>();
+        BoomerangProjectile boomerang =
+            obj.GetComponent<BoomerangProjectile>();
+
         boomerang.Init(
             direction,
-            currentStats.range,
-            currentStats.projectileSpeed,
+            stats.Range,
+            stats.ProjectileSpeed,
             CreateDamageContext(),
             transform
         );
     }
 
+    // ================= TARGET =================
     Transform FindNearestEnemy()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
             transform.position,
-            currentStats.range,
+            stats.Range,
             enemyLayer
         );
 
         float minDist = float.MaxValue;
         Transform nearest = null;
 
-        foreach (Collider2D e in enemies)
+        foreach (var e in enemies)
         {
-            float dist = Vector2.Distance(transform.position, e.transform.position);
+            float dist = Vector2.Distance(
+                transform.position,
+                e.transform.position
+            );
+
             if (dist < minDist)
             {
                 minDist = dist;
@@ -74,10 +95,4 @@ public class BoomerangWeapon : Weapon
 
         return nearest;
     }
-
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.cyan;
-    //    Gizmos.DrawWireSphere(transform.position, currentStats.range);
-    //}
 }

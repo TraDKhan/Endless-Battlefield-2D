@@ -3,49 +3,48 @@
 public abstract class Weapon : MonoBehaviour
 {
     public WeaponData data;
-    protected WeaponStats currentStats;
 
-    protected float lastShootTime;
+    protected WeaponStats stats;
+    protected WeaponUpgradeSystem upgradeSystem;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
-        currentStats = new WeaponStats();
-        currentStats.ApplyBonus(data.baseStats);
+        upgradeSystem = WeaponUpgradeSystem.Instance;
+        stats = new WeaponStats(data, upgradeSystem);
+
+        upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
     }
 
-    public virtual bool CanShoot()
+    protected virtual void OnDestroy()
     {
-        return Time.time - lastShootTime >= currentStats.cooldown;
+        if (upgradeSystem != null)
+            upgradeSystem.OnWeaponStatsChanged -= OnWeaponStatsChanged;
     }
 
-    public virtual void Shoot(Vector3 direction)
+    protected virtual void OnWeaponStatsChanged()
     {
-        if (!CanShoot()) return;
-
-        lastShootTime = Time.time;
+        stats.Recalculate();
     }
 
-    public void ApplyUpgrade(WeaponStats bonus)
+    // ===== Damage Context chuẩn hoá =====
+    protected WeaponDamageContext CreateDamageContext()
     {
-        currentStats.ApplyBonus(bonus);
-    }
-    public struct DamageContext
-    {
-        public float damage;
-        public float critChance;
-        public float critMultiplier;
-        public GameObject source; // weapon / player
-    }
-
-    protected DamageContext CreateDamageContext()
-    {
-        return new DamageContext
+        return new WeaponDamageContext
         {
-            damage = currentStats.damage,
-            critChance = currentStats.critChance,
+            damage = stats.Damage,
+            critChance = stats.CritChance,
             critMultiplier = 2f,
             source = gameObject
         };
     }
 
+    public abstract void Fire();
+}
+
+public struct WeaponDamageContext
+{
+    public float damage;
+    public float critChance;
+    public float critMultiplier;
+    public GameObject source;
 }

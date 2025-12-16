@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 
-public class PistolWeapon : Weapon
+public class ShotgunWeapon : Weapon
 {
     [Header("Targeting")]
     [SerializeField] private LayerMask enemyLayer;
+
+    [Header("Shotgun")]
+    [SerializeField] private float spreadAngle = 30f;
 
     private float lastFireTime;
 
@@ -12,6 +15,9 @@ public class PistolWeapon : Weapon
         TryAutoFire();
     }
 
+    // =========================
+    // AUTO FIRE
+    // =========================
     void TryAutoFire()
     {
         if (!CanFire()) return;
@@ -31,15 +37,37 @@ public class PistolWeapon : Weapon
     {
         lastFireTime = Time.time;
 
-        Vector3 direction =
+        Vector3 baseDirection =
             (target.position - transform.position).normalized;
 
-        SpawnProjectile(direction);
+        FirePellets(baseDirection);
     }
 
     public override void Fire()
     {
-        // Dành cho manual / skill trigger nếu cần
+        // Dành cho manual trigger nếu cần
+    }
+
+    // =========================
+    // SHOTGUN LOGIC
+    // =========================
+    void FirePellets(Vector3 baseDirection)
+    {
+        int pelletCount = Mathf.Max(1, stats.ProjectileCount);
+
+        float stepAngle =
+            pelletCount > 1 ? spreadAngle / (pelletCount - 1) : 0f;
+
+        float startAngle = -spreadAngle * 0.5f;
+
+        for (int i = 0; i < pelletCount; i++)
+        {
+            float angle = startAngle + stepAngle * i;
+            Vector3 dir =
+                Quaternion.Euler(0, 0, angle) * baseDirection;
+
+            SpawnProjectile(dir);
+        }
     }
 
     void SpawnProjectile(Vector3 direction)
@@ -57,6 +85,9 @@ public class PistolWeapon : Weapon
         bullet.Init(CreateDamageContext());
     }
 
+    // =========================
+    // TARGETING
+    // =========================
     Transform FindNearestEnemy()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
@@ -65,20 +96,20 @@ public class PistolWeapon : Weapon
             enemyLayer
         );
 
-        float minDistance = float.MaxValue;
+        float minDist = float.MaxValue;
         Transform nearest = null;
 
-        foreach (var enemy in enemies)
+        foreach (var e in enemies)
         {
             float dist = Vector2.Distance(
                 transform.position,
-                enemy.transform.position
+                e.transform.position
             );
 
-            if (dist < minDistance)
+            if (dist < minDist)
             {
-                minDistance = dist;
-                nearest = enemy.transform;
+                minDist = dist;
+                nearest = e.transform;
             }
         }
 

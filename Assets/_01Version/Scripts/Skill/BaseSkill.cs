@@ -2,32 +2,40 @@
 
 public abstract class BaseSkill : MonoBehaviour, ISkill
 {
-    protected CharacterStats ownerStats;
-
     [SerializeField] protected SkillUpgradeData upgradeData;
+
     public SkillUpgradeData UpgradeData => upgradeData;
+    public int Level { get; protected set; }
 
-    protected int level = 0;
-    public int Level => level;
+    protected Transform owner;
+    protected CharacterStats stats;
 
-    public virtual void Init(CharacterStats stats)
+    // =========================
+    // INIT
+    // =========================
+    public virtual void Init(Transform ownerTransform, CharacterStats characterStats)
     {
-        ownerStats = stats;
+        owner = ownerTransform;
+        stats = characterStats;
     }
 
+    // =========================
+    // LIFECYCLE
+    // =========================
     public virtual void OnUnlock()
     {
-        level = 1;
+        Level = 1;
         ApplyLevelData();
     }
 
     public virtual void OnLevelUp()
     {
-        if (level >= upgradeData.MaxLevel) return;
-
-        level++;
+        Level++;
         ApplyLevelData();
     }
 
+    // =========================
+    // CORE
+    // =========================
     protected abstract void ApplyLevelData();
 }

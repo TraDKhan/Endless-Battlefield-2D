@@ -4,12 +4,10 @@ using UnityEngine;
 public class UIUpgradePanel : MonoBehaviour
 {
     [Header("Panel")]
-    public GameObject panelRoot;
+    [SerializeField] private GameObject panelRoot;
 
     [Header("Upgrade option slots")]
-    public UIUpgradeOption[] optionSlots;
-
-    private List<UpgradeData> currentOptions;
+    [SerializeField] private UIUpgradeOption[] optionSlots;
 
     private PlayerUpgradeSystem upgradeSystem;
 
@@ -30,14 +28,11 @@ public class UIUpgradePanel : MonoBehaviour
     }
 
     // =========================
-    // SHOW UI
+    // SHOW
     // =========================
     private void Show(List<UpgradeData> options)
     {
-        currentOptions = options;
         panelRoot.SetActive(true);
-
-        // Pause game
         Time.timeScale = 0f;
 
         for (int i = 0; i < optionSlots.Length; i++)
@@ -50,23 +45,21 @@ public class UIUpgradePanel : MonoBehaviour
 
             optionSlots[i].gameObject.SetActive(true);
 
-            var upgrade = options[i];
-            int index = i;
+            UpgradeData upgrade = options[i];
 
-            // ✅ SET DATA (LOGIC MỚI)
-            optionSlots[i].SetData(upgrade, upgradeSystem);
-
-            // ✅ BIND BUTTON
-            optionSlots[i].BindButton(() =>
-            {
-                upgradeSystem.ApplyUpgrade(currentOptions[index]);
-                Hide();
-            });
+            optionSlots[i].SetData(
+                upgrade,
+                () =>
+                {
+                    upgrade.Apply();
+                    Hide();
+                }
+            );
         }
     }
 
     // =========================
-    // HIDE UI
+    // HIDE
     // =========================
     public void Hide()
     {

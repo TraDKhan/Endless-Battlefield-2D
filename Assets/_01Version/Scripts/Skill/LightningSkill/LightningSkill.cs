@@ -5,37 +5,24 @@ public class LightningSkill : BaseSkill
     [Header("Effect")]
     [SerializeField] private GameObject lightningEffectPrefab;
 
-    private Transform player;
+    [Header("Targeting")]
+    [SerializeField] private LayerMask enemyLayer;
 
+    // ===== Runtime =====
     private float cooldownTimer;
 
-    // cached data theo level
+    // ===== Cached per level =====
     private int damage;
     private int strikes;
     private float radius;
     private float cooldown;
 
     // =========================
-    // UNITY
+    // UPDATE
     // =========================
-    private void Awake()
-    {
-        // tìm player và gắn làm con
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        if (player == null)
-        {
-            Debug.LogError("LightningSkill: Player not found");
-            enabled = false;
-            return;
-        }
-
-        transform.SetParent(player);
-        transform.localPosition = Vector3.zero;
-    }
-
     private void Update()
     {
-        if (level <= 0) return; // chưa unlock
+        if (Level <= 0 || owner == null) return;
 
         cooldownTimer -= Time.deltaTime;
         if (cooldownTimer <= 0f)
@@ -46,21 +33,18 @@ public class LightningSkill : BaseSkill
     }
 
     // =========================
-    // BASESKILL
+    // LEVEL DATA
     // =========================
     protected override void ApplyLevelData()
     {
-        var data = upgradeData.GetLevelData(level);
+        var data = UpgradeData.GetLevelData(Level);
 
         damage = data.damage;
         strikes = data.lightningCount;
         radius = data.radius;
         cooldown = data.cooldown;
 
-        // reset cooldown khi lên level
         cooldownTimer = cooldown;
-
-        Debug.Log($"Lightning Lv{level} | Strikes:{strikes} Damage:{damage}");
     }
 
     // =========================
@@ -69,39 +53,46 @@ public class LightningSkill : BaseSkill
     private void CastLightning()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
-            player.position,
+            owner.position,
             radius,
-            LayerMask.GetMask("Enemy")
+            enemyLayer
         );
 
         if (enemies.Length == 0) return;
 
         for (int i = 0; i < strikes; i++)
         {
-            var target = enemies[Random.Range(0, enemies.Length)];
+            Collider2D target = enemies[Random.Range(0, enemies.Length)];
 
-            SpawnLightningEffect(target.transform.position);
+            SpawnLightningFX(target.transform.position);
 
             var hp = target.GetComponent<EnemyHealthController>();
-            if (hp != null)
-                hp.TakeDamage(damage);
+            if (hp == null) continue;
+
+            int finalDamage = damage;
+
+            // Có thể mở rộng crit / buff tại đây
+            hp.TakeDamage(finalDamage);
         }
     }
 
-    private void SpawnLightningEffect(Vector3 targetPos)
+    private void SpawnLightningFX(Vector3 targetPos)
     {
         Vector3 start = targetPos + Vector3.up * 4f;
 
         var fx = Instantiate(lightningEffectPrefab);
-        fx.GetComponent<LightningEffect>().Init(start, targetPos);
+        fx.GetComponent<LightningEffect>()
+          ?.Init(start, targetPos);
     }
 
     // =========================
-    // GIZMOS
+    // DEBUG
     // =========================
     private void OnDrawGizmosSelected()
     {
+        if (owner == null) return;
+
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(owner.position, radius);
     }
 }

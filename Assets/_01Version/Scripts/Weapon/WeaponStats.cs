@@ -1,21 +1,44 @@
-﻿[System.Serializable]
+﻿using UnityEngine;
+
 public class WeaponStats
 {
-    public float damage;
-    public float cooldown;
-    public float range;
-    public float projectileSpeed;
-    public int projectileCount;
-    public float critChance;
+    public int Damage;
+    public float Cooldown;
+    public float CritChance;
+    public int ProjectileCount;
+    public float Range;
+    public float ProjectileSpeed;
 
-    public void ApplyBonus(WeaponStats bonus)
+    private WeaponData data;
+    private WeaponUpgradeSystem upgrade;
+
+    public WeaponStats(WeaponData data, WeaponUpgradeSystem upgrade)
     {
-        damage += bonus.damage;
-        cooldown += bonus.cooldown;
-        range += bonus.range;
-        projectileSpeed += bonus.projectileSpeed;
-        projectileCount += bonus.projectileCount;
-        critChance += bonus.critChance;
+        this.data = data;
+        this.upgrade = upgrade;
+
+        Recalculate();
     }
 
+    public void Recalculate()
+    {
+        Damage = data.baseDamage
+            + Mathf.RoundToInt(upgrade.GetWeaponStatBonus(WeaponStatType.Damage));
+
+        Cooldown = Mathf.Max(0.05f,
+            data.baseCooldown
+            - upgrade.GetWeaponStatBonus(WeaponStatType.Cooldown));
+
+        CritChance = data.baseCritChance
+            + upgrade.GetWeaponStatBonus(WeaponStatType.CritChance);
+
+        ProjectileCount = data.baseProjectileCount
+            + Mathf.RoundToInt(upgrade.GetWeaponStatBonus(WeaponStatType.ProjectileCount));
+
+        Range = data.baseRange
+            + upgrade.GetWeaponStatBonus(WeaponStatType.Range);
+
+        ProjectileSpeed = data.baseProjectileSpeed
+            + upgrade.GetWeaponStatBonus(WeaponStatType.ProjectileSpeed);
+    }
 }

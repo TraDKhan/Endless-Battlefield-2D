@@ -1,6 +1,8 @@
-﻿public interface ISkill
+﻿using UnityEngine;
+
+public interface ISkill
 {
-    void Init(CharacterStats ownerStats);
+    void Init(Transform owner, CharacterStats stats);
     void OnUnlock();
     void OnLevelUp();
 }
