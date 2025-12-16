@@ -9,14 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 144d9863fd0088047a6f0e1aabc69b02, type: 3}
-  m_Name: Player Soldier
+  m_Script: {fileID: 11500000, guid: 71fe1a44bdc4a974e806211917134a50, type: 3}
+  m_Name: Player Data
   m_EditorClassIdentifier: 
-  playerName: Duy-Khanh
+  playerName: SOLDIER
   baseHealth: 1000
-  baseEnergy: 1000
-  baseArmor: 1000
-  baseDamage: 1000
-  baseMoveSpeed: 1000
-  baseAttackSpeed: 1000
-  baseCrit: 1000
+  baseEnergy: 800
+  baseArmor: 100
+  baseMoveSpeed: 1
+  startWeapon: 0

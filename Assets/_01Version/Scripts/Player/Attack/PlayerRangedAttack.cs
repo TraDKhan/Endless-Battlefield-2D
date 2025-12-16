@@ -5,7 +5,7 @@ public class PlayerRangedAttack : MonoBehaviour, IPlayerAttackController
     public float cooldown = 0.5f;
     public GameObject projectilePrefab;
     public Transform firePoint;
-    public float attackRange = 5f; // phạm vi dò tìm kẻ địch
+    public float attackRange = 5f;
     public LayerMask targetLayer;
 
     private float lastAttackTime = -99f;
@@ -74,7 +74,7 @@ public class PlayerRangedAttack : MonoBehaviour, IPlayerAttackController
 
         if (proj != null)
         {
-            proj.damage = statsCtrl.Stats.totalDamage;
+            //proj.damage = statsCtrl.Stats.totalDamage;
             proj.SetTarget(((MonoBehaviour)target).transform); // giả sử projectile có logic SetTarget
         }
 

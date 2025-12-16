@@ -1,28 +1,23 @@
 ﻿using System;
-using UnityEngine;
+
 public class CharacterStats
 {
-    public int totalHealth;
-    public int totalEnergy;
-    public int totalArmor;
-    public int totalDamage;
-    public float totalMoveSpeed;
-    public float totalAttackSpeed;
-    public float totalCrit;
+    public int maxHealth;
+    public int maxEnergy;
+    public int armor;
+    public float moveSpeed;
 
-
-    private Player playerData;
+    private PlayerData playerData;
 
     private PlayerLevelSystem levelSystem;
     private PlayerEquipmentController equipmentController;
     private PlayerBuffController buffController;
     private PlayerUpgradeSystem upgradeController;
-    
-    //event thay doi
+
     public event Action OnStatsChanged;
 
     public CharacterStats(
-        Player data,
+        PlayerData data,
         PlayerLevelSystem level,
         PlayerEquipmentController equipment,
         PlayerBuffController buff,
@@ -38,49 +33,43 @@ public class CharacterStats
     public void RecalculateStats()
     {
         // 1. Base
-        totalHealth = playerData.baseHealth;
-        totalEnergy = playerData.baseEnergy;
-        totalArmor = playerData.baseArmor;
-        totalDamage = playerData.baseDamage;
-        totalMoveSpeed = playerData.baseMoveSpeed;
-        totalAttackSpeed = playerData.baseAttackSpeed;
-        totalCrit = playerData.baseCrit;
+        maxHealth = playerData.baseHealth;
+        maxEnergy = playerData.baseEnergy;
+        armor = playerData.baseArmor;
+        moveSpeed = playerData.baseMoveSpeed;
 
-        // 2. Level bonus
+        // 2. Level
         if (levelSystem != null)
         {
-            totalHealth += levelSystem.GetHealthBonus();
-            totalDamage += levelSystem.GetDamageBonus();
+            maxHealth += levelSystem.GetBonusHealth();
         }
 
-        // 3. Equipment bonus
+        // 3. Equipment
         if (equipmentController != null)
         {
-            totalHealth += equipmentController.GetEquipHealthBonus();
-            totalDamage += equipmentController.GetEquipDamageBonus();
-            totalMoveSpeed += equipmentController.GetEquipMoveSpeedBonus();
+            maxHealth += equipmentController.GetEquipHealthBonus();
+            armor += equipmentController.GetEquipArmorBonus();
+            moveSpeed += equipmentController.GetEquipMoveSpeedBonus();
         }
 
-        // 4. Buff bonus
+        // 4. Buff
         if (buffController != null)
         {
-            totalHealth += buffController.GetBuffHealthBonus();
-            totalDamage += buffController.GetBuffDamageBonus();
-            totalMoveSpeed += buffController.GetBuffMoveSpeedBonus();
+            maxHealth += buffController.GetBuffHealthBonus();
+            moveSpeed += buffController.GetBuffMoveSpeedBonus();
         }
 
-        // 5. Upgrade bonus
+        // 5. Upgrade (PLAYER upgrade, không phải weapon)
         if (upgradeController != null)
         {
-            totalHealth += upgradeController.GetBonusHealth();
-            totalDamage += upgradeController.GetBonusDamage();
-            totalMoveSpeed += upgradeController.GetBonusMoveSpeed();
-            totalAttackSpeed += upgradeController.GetBonusAttackSpeed();
-            totalCrit += upgradeController.GetBonusCrit();
+            maxHealth += upgradeController.GetBonusHealth();
+            moveSpeed += upgradeController.GetBonusMoveSpeed();
         }
 
         OnStatsChanged?.Invoke();
     }
-    public int GetMaxHealth() => totalHealth;
-    public int GetDamage() => totalDamage;
+
+    public int GetMaxHealth() => maxHealth;
+    public float GetMoveSpeed() => moveSpeed;
+    public int GetArmor() => armor;
 }

@@ -17,4 +17,5 @@ public class WeaponStats
         projectileCount += bonus.projectileCount;
         critChance += bonus.critChance;
     }
+
 }

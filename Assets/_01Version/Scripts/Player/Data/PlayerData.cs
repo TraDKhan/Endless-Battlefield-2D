@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
+
 [CreateAssetMenu(fileName = "New Player", menuName = "Player/Player Data")]
-public class Player : ScriptableObject
+public class PlayerData : ScriptableObject
 {
+    [Header("Info")]
     public string playerName;
+
+    [Header("Base Stats")]
     public int baseHealth;
     public int baseEnergy;
     public int baseArmor;
-    public int baseDamage;    
     public float baseMoveSpeed;
-    public float baseAttackSpeed;
-    public float baseCrit;
+
+    [Header("Weapon")]
+    public WeaponType startWeapon;
 }

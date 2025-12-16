@@ -2,7 +2,7 @@
 
 public class CharacterStatsController : MonoBehaviour
 {
-    public Player playerData;
+    public PlayerData playerData;
     public PlayerLevelSystem level;
     public PlayerEquipmentController equip;
     public PlayerBuffController buff;
@@ -13,47 +13,44 @@ public class CharacterStatsController : MonoBehaviour
     void Awake()
     {
         var upgrade = FindAnyObjectByType<PlayerUpgradeSystem>();
+
         Stats = new CharacterStats(playerData, level, equip, buff, upgrade);
         healthController = GetComponent<PlayerHealthController>();
 
-        //tim
         if (level == null)
             level = FindAnyObjectByType<PlayerLevelSystem>();
 
-        // Lắng nghe sự kiện stats đổi
         Stats.OnStatsChanged += ApplyStatsToHealth;
 
-        // Khi lên cấp -> cần recal stats
         if (level != null)
-            level.OnStatsBonusApplied += OnLevelUpBonusReceived;
+            level.OnLevelUp += OnLevelUpBonusReceived;
 
-        // Khởi tạo upgrade system
         if (upgrade != null)
             upgrade.Init(level, Stats);
 
-        // Tính lần đầu
         Stats.RecalculateStats();
         ApplyStatsToHealth();
     }
+
     private void OnDestroy()
     {
         if (Stats != null)
             Stats.OnStatsChanged -= ApplyStatsToHealth;
 
         if (level != null)
-            level.OnStatsBonusApplied -= OnLevelUpBonusReceived;
+            level.OnLevelUp -= OnLevelUpBonusReceived;
     }
-    private void OnLevelUpBonusReceived(int hpBonus, int dmgBonus)
+
+    private void OnLevelUpBonusReceived(int hpBonus)
     {
-        // Gọi RecalculateStats để tính lại stat mới
         Stats.RecalculateStats();
     }
+
     private void ApplyStatsToHealth()
     {
         if (healthController != null)
         {
             healthController.SetMaxHealth(Stats.GetMaxHealth());
-            healthController.Heal(level.GetHealthBonus());
-        }          
+        }
     }
 }

@@ -2,10 +2,38 @@
 
 public class WeaponUpgradeSystem : MonoBehaviour
 {
-    public Weapon currentWeapon;
+    private PlayerLevelSystem levelSystem;
+    private Weapon weapon;
 
-    public void ApplyUpgrade(WeaponUpgrade upgrade)
+    private int bonusDamage;
+    private float bonusCrit;
+    private float bonusCooldown;
+
+    public void Init(PlayerLevelSystem level, Weapon weaponRef)
     {
-        currentWeapon.ApplyUpgrade(upgrade.bonusStats);
+        levelSystem = level;
+        weapon = weaponRef;
+
+        levelSystem.OnLevelUp += OnLevelUp;
     }
+
+    private void OnDestroy()
+    {
+        if (levelSystem != null)
+            levelSystem.OnLevelUp -= OnLevelUp;
+    }
+
+    private void OnLevelUp(int level)
+    {
+        // Ví dụ
+        bonusDamage += 5;
+        bonusCrit += 0.05f;
+
+        //weapon.RecalculateStats();
+    }
+
+    // ===== API =====
+    public int GetBonusDamage() => bonusDamage;
+    public float GetBonusCrit() => bonusCrit;
+    public float GetBonusCooldown() => bonusCooldown;
 }
