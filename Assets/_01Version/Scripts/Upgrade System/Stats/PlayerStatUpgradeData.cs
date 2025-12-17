@@ -19,7 +19,7 @@ public class PlayerStatUpgradeData : UpgradeData
     public override string GetDescription()
     {
         if (GetCurrentLevel() == 0)
-            return description;
+            return $"+{value} Health\n{description}";
 
         return $"Nâng cấp {upgradeName} lên Lv {GetCurrentLevel() + 1}";
     }

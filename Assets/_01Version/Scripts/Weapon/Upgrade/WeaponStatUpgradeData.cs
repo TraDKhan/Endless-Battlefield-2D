@@ -5,7 +5,7 @@ public class WeaponStatUpgradeData : UpgradeData
 {
     public WeaponStatType statType;
     public float value;
-    public int maxLevel;
+    public int maxLevel = 5;
     public override int GetCurrentLevel()
     {
         return WeaponUpgradeSystem.Instance.GetStatLevel(statType);
@@ -13,13 +13,13 @@ public class WeaponStatUpgradeData : UpgradeData
 
     public override string GetTitle()
     {
-        return statType.ToString();
+        return upgradeName;
     }
 
     public override string GetDescription()
     {
         int nextLevel = Mathf.Min(GetCurrentLevel() + 1, maxLevel);
-        return $"+{value} {statType}";
+        return $"+{value} {statType}\n{description}";
     }
     public override bool CanApply()
     {

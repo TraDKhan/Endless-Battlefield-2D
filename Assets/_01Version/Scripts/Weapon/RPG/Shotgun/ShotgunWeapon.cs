@@ -115,4 +115,13 @@ public class ShotgunWeapon : Weapon
 
         return nearest;
     }
+    // =========================
+    // GIZMOS
+    // =========================
+    private void OnDrawGizmosSelected()
+    {
+        // Vẽ vòng tròn phạm vi tìm enemy
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stats != null ? stats.Range : 1f);
+    }
 }

@@ -9,8 +9,6 @@ public abstract class UpgradeData : ScriptableObject
     [TextArea]
     public string description;
 
-    //public int MaxLevel;
-
     public abstract bool CanApply();
     public abstract void Apply();
     public abstract int GetCurrentLevel();

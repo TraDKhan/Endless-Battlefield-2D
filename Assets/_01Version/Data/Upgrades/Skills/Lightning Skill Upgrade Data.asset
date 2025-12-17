@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0966424efb1e0f49a01391fcd8c4fc9, type: 3}
+  m_Name: Lightning Skill Upgrade Data
+  m_EditorClassIdentifier: 
+  upgradeName: Lightning Skill
+  icon: {fileID: 13067566, guid: a5b76d47f390b98468d12355e4fdf68f, type: 3}
+  upgradeType: 2
+  description: It creates lightning strikes that hit random targets within its operating
+    range
+  skillPrefab: {fileID: 1665424553307335825, guid: 111871338b7591f408b0cdcd6422227d, type: 3}
+  levels:
+  - damage: 100
+    cooldown: 2
+    duration: 2
+    radius: 5
+    projectileCount: 1
+    lightningCount: 1
+    range: 5
+  - damage: 200
+    cooldown: 2
+    duration: 2
+    radius: 6
+    projectileCount: 2
+    lightningCount: 2
+    range: 6
+  - damage: 300
+    cooldown: 2
+    duration: 2
+    radius: 7
+    projectileCount: 3
+    lightningCount: 3
+    range: 7

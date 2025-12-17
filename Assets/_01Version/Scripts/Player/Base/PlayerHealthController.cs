@@ -13,6 +13,7 @@ public class PlayerHealthController : MonoBehaviour
 
     public void SetMaxHealth(int newMaxHealth)
     {
+        CurrentHealth += newMaxHealth - MaxHealth;
         MaxHealth = newMaxHealth;
 
         // Lần đầu thiết lập — full HP
@@ -27,8 +28,8 @@ public class PlayerHealthController : MonoBehaviour
             if (CurrentHealth > MaxHealth)
                 CurrentHealth = MaxHealth;
         }
-
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        Debug.Log($"HP: {CurrentHealth}/{MaxHealth}");
     }
     public void TakeDamage(int damage)
     {
