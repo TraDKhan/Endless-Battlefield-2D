@@ -17,6 +17,6 @@ MonoBehaviour:
   baseCooldown: 1
   baseCritChance: 1
   baseProjectileCount: 1
-  baseRange: 1
+  baseRange: 5
   baseProjectileSpeed: 1
   projectilePrefab: {fileID: 6030085412404535899, guid: e81adc5cdf097eb47a2133b73a2f70bf, type: 3}

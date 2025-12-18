@@ -8,6 +8,13 @@ public class WeaponAnimationController : MonoBehaviour
 
     public void PlayFire()
     {
+        if (animator == null)
+        {
+            Debug.LogWarning("Animator chưa được gán cho WeaponAnimationController");
+            return;
+        }
+
+        Debug.Log("PlayFire Trigger");
         animator.SetTrigger(fireTrigger);
     }
 

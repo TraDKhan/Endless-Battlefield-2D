@@ -2,44 +2,17 @@
 
 public class PistolWeapon : Weapon
 {
-    [Header("Targeting")]
-    [SerializeField] private LayerMask enemyLayer;
-
-    private float lastFireTime;
-
-    private void Update()
+    //[Header("Targeting")]
+    //[SerializeField] private LayerMask enemyLayer;
+    protected override void OnFireLogic()
     {
-        TryAutoFire();
-    }
-
-    void TryAutoFire()
-    {
-        if (!CanFire()) return;
-
         Transform target = FindNearestEnemy();
         if (target == null) return;
-
-        FireAt(target);
-    }
-
-    bool CanFire()
-    {
-        return Time.time >= lastFireTime + stats.Cooldown;
-    }
-
-    void FireAt(Transform target)
-    {
-        lastFireTime = Time.time;
 
         Vector3 direction =
             (target.position - transform.position).normalized;
 
         SpawnProjectile(direction);
-    }
-
-    public override void Fire()
-    {
-        // Dành cho manual / skill trigger nếu cần
     }
 
     void SpawnProjectile(Vector3 direction)
@@ -55,33 +28,5 @@ public class PistolWeapon : Weapon
 
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.Init(CreateDamageContext());
-    }
-
-    Transform FindNearestEnemy()
-    {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(
-            transform.position,
-            stats.Range,
-            enemyLayer
-        );
-
-        float minDistance = float.MaxValue;
-        Transform nearest = null;
-
-        foreach (var enemy in enemies)
-        {
-            float dist = Vector2.Distance(
-                transform.position,
-                enemy.transform.position
-            );
-
-            if (dist < minDistance)
-            {
-                minDistance = dist;
-                nearest = enemy.transform;
-            }
-        }
-
-        return nearest;
-    }
+    }    
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponUpgradeSystem : MonoBehaviour
 {
-    public static WeaponUpgradeSystem Instance;
+    public static WeaponUpgradeSystem Instance { get; private set; }
 
     public event Action OnWeaponStatsChanged;
 
@@ -13,7 +13,10 @@ public class WeaponUpgradeSystem : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     // =============================

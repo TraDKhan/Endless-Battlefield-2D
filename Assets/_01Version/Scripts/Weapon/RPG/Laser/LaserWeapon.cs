@@ -2,8 +2,8 @@
 
 public class LaserWeapon : Weapon
 {
-    [Header("Targeting")]
-    [SerializeField] private LayerMask enemyLayer;
+    //[Header("Targeting")]
+    //[SerializeField] private LayerMask enemyLayer;
 
     [Header("Laser Visual")]
     [SerializeField] private LineRenderer lineRenderer;
@@ -14,52 +14,44 @@ public class LaserWeapon : Weapon
 
     private float burstTimer;
     private float tickTimer;
-    private float lastFireTime;
 
     private bool isFiring;
     private Transform currentTarget;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update(); // vẫn cho Weapon quản cooldown / trigger
+
         UpdateTarget();
-        HandleBurst();
-        HandleLaser();
+
+        if (isFiring)
+        {
+            UpdateLaser();
+            UpdateBurst();
+        }
     }
 
-    // ================= TARGET =================
+    protected override void OnFireLogic()
+    {
+        if (isFiring) return;
+
+        if (currentTarget == null) return;
+
+        StartLaser();
+    }
+
+    // =====TARGET
     void UpdateTarget()
     {
         currentTarget = FindNearestEnemy();
     }
 
-    // ================= BURST / COOLDOWN =================
-    void HandleBurst()
-    {
-        if (isFiring)
-        {
-            burstTimer += Time.deltaTime;
-
-            if (burstTimer >= laserDuration)
-                StopLaser();
-        }
-        else
-        {
-            if (CanFire() && currentTarget != null)
-                StartLaser();
-        }
-    }
-
-    bool CanFire()
-    {
-        return Time.time >= lastFireTime + stats.Cooldown;
-    }
-
+    // ===== BURST
     void StartLaser()
     {
         isFiring = true;
         burstTimer = 0f;
         tickTimer = 0f;
-        lastFireTime = Time.time;
 
         lineRenderer.enabled = true;
     }
@@ -70,17 +62,20 @@ public class LaserWeapon : Weapon
         lineRenderer.enabled = false;
     }
 
-    public override void Fire()
+    void UpdateBurst()
     {
-        // dành cho manual trigger nếu cần
+        burstTimer += Time.deltaTime;
+
+        if (burstTimer >= laserDuration)
+            StopLaser();
     }
 
-    // ================= LASER LOGIC =================
-    void HandleLaser()
+    // ===== LASER
+    void UpdateLaser()
     {
-        if (!isFiring || currentTarget == null)
+        if (currentTarget == null)
         {
-            lineRenderer.enabled = false;
+            StopLaser();
             return;
         }
 
@@ -93,7 +88,10 @@ public class LaserWeapon : Weapon
             stats.Range,
             enemyLayer
         );
-
+        foreach (var hit in hits)
+        {
+            Debug.Log("Laser hit: " + hit.collider.name);
+        }
         Vector3 endPos = origin + dir * stats.Range;
         DrawLaser(origin, endPos);
 
@@ -105,7 +103,7 @@ public class LaserWeapon : Weapon
         }
     }
 
-    // ================= DAMAGE =================
+    // ===== DAMAGE
     void ApplyLaserDamage(RaycastHit2D[] hits)
     {
         if (hits == null || hits.Length == 0) return;
@@ -126,40 +124,10 @@ public class LaserWeapon : Weapon
             target.TakeDamage((int)finalDamage);
         }
     }
-
-    // ================= VISUAL =================
+    // ===== VISUAL
     void DrawLaser(Vector3 start, Vector3 end)
     {
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
-    }
-
-    // ================= TARGET SEARCH =================
-    Transform FindNearestEnemy()
-    {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(
-            transform.position,
-            stats.Range,
-            enemyLayer
-        );
-
-        float minDist = float.MaxValue;
-        Transform nearest = null;
-
-        foreach (var e in enemies)
-        {
-            float dist = Vector2.Distance(
-                transform.position,
-                e.transform.position
-            );
-
-            if (dist < minDist)
-            {
-                minDist = dist;
-                nearest = e.transform;
-            }
-        }
-
-        return nearest;
     }
 }

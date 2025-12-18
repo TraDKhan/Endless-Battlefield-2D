@@ -2,35 +2,13 @@
 
 public class BoomerangWeapon : Weapon
 {
-    [Header("Targeting")]
-    [SerializeField] private LayerMask enemyLayer;
+    //[Header("Targeting")]
+    //[SerializeField] private LayerMask enemyLayer;
 
-    private float lastFireTime;
-
-    private void Update()
+    protected override void OnFireLogic()
     {
-        TryAutoFire();
-    }
-
-    // ================= AUTO FIRE =================
-    void TryAutoFire()
-    {
-        if (!CanFire()) return;
-
         Transform target = FindNearestEnemy();
         if (target == null) return;
-
-        FireAt(target);
-    }
-
-    bool CanFire()
-    {
-        return Time.time >= lastFireTime + stats.Cooldown;
-    }
-
-    void FireAt(Transform target)
-    {
-        lastFireTime = Time.time;
 
         Vector3 direction =
             (target.position - transform.position).normalized;
@@ -38,15 +16,12 @@ public class BoomerangWeapon : Weapon
         int count = Mathf.Max(1, stats.ProjectileCount);
 
         for (int i = 0; i < count; i++)
+        {
             SpawnBoomerang(direction);
+        }
     }
 
-    public override void Fire()
-    {
-        // manual trigger nếu cần
-    }
-
-    // ================= SPAWN =================
+    // ===== SPAWN
     void SpawnBoomerang(Vector3 direction)
     {
         GameObject obj = Instantiate(
@@ -55,8 +30,7 @@ public class BoomerangWeapon : Weapon
             Quaternion.identity
         );
 
-        BoomerangProjectile boomerang =
-            obj.GetComponent<BoomerangProjectile>();
+        BoomerangProjectile boomerang = obj.GetComponent<BoomerangProjectile>();
 
         boomerang.Init(
             direction,
@@ -65,34 +39,5 @@ public class BoomerangWeapon : Weapon
             CreateDamageContext(),
             transform
         );
-    }
-
-    // ================= TARGET =================
-    Transform FindNearestEnemy()
-    {
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(
-            transform.position,
-            stats.Range,
-            enemyLayer
-        );
-
-        float minDist = float.MaxValue;
-        Transform nearest = null;
-
-        foreach (var e in enemies)
-        {
-            float dist = Vector2.Distance(
-                transform.position,
-                e.transform.position
-            );
-
-            if (dist < minDist)
-            {
-                minDist = dist;
-                nearest = e.transform;
-            }
-        }
-
-        return nearest;
     }
 }
