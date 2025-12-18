@@ -10,8 +10,9 @@ public class BoomerangWeapon : Weapon
         Transform target = FindNearestEnemy();
         if (target == null) return;
 
-        Vector3 direction =
-            (target.position - transform.position).normalized;
+        Vector2 direction = (target.position - transform.position).normalized;
+
+        RotateToDirection(direction);
 
         int count = Mathf.Max(1, stats.ProjectileCount);
 

@@ -12,8 +12,9 @@ public class ShotgunWeapon : Weapon
         Transform target = FindNearestEnemy();
         if (target == null) return;
 
-        Vector3 baseDirection =
-            (target.position - transform.position).normalized;
+        Vector2 baseDirection = (target.position - transform.position).normalized;
+
+        RotateToDirection(baseDirection);
 
         FirePellets(baseDirection);
     }

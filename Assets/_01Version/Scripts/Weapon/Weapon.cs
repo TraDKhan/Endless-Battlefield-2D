@@ -9,13 +9,21 @@ public abstract class Weapon : MonoBehaviour
     protected WeaponAnimationController animationController;
 
     protected float lastFireTime;
+
     [Header("Targeting")]
     [SerializeField] protected LayerMask enemyLayer;
 
+    [Header("Rotation")]
+    [SerializeField] protected bool rotateToFireDirection = true;
+    [SerializeField] protected float rotationOffset = 0f; // ví dụ sprite hướng phải = 0
+    [SerializeField] protected bool flipSpriteByDirection = true;
+
+    protected SpriteRenderer spriteRenderer;
     protected virtual void Awake()
     {
         upgradeSystem = WeaponUpgradeSystem.Instance;
         animationController = GetComponent<WeaponAnimationController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         stats = new WeaponStats(data, upgradeSystem);
         upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
@@ -37,7 +45,7 @@ public abstract class Weapon : MonoBehaviour
         return Time.time >= lastFireTime + stats.Cooldown;
     }
 
-    // ===== Auto fire (survivor) =====
+    // ===== Auto fire (survivor) 
     protected virtual void Update()
     {
         if (!CanFire()) return;
@@ -58,7 +66,7 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    // ===== Animation Event =====
+    // ===== Animation Event 
     public void OnFireAnimationEvent()
     {
         OnFireLogic();
@@ -71,7 +79,7 @@ public abstract class Weapon : MonoBehaviour
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
             transform.position,
             stats.Range,
-            LayerMask.GetMask("Enemy") // hoặc truyền từ data
+            LayerMask.GetMask("Enemy")
         );
 
         float minDistance = float.MaxValue;
@@ -90,6 +98,22 @@ public abstract class Weapon : MonoBehaviour
         return nearest;
     }
 
+    // ===== Rotation
+    protected void RotateToDirection(Vector2 direction)
+    {
+        if (!rotateToFireDirection) return;
+        if (direction == Vector2.zero) return;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle += rotationOffset;
+
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        if (flipSpriteByDirection && spriteRenderer != null)
+        {
+            spriteRenderer.flipY = direction.x < 0;
+        }
+    }
     // ===== Gizmos
     private void OnDrawGizmosSelected()
     {
