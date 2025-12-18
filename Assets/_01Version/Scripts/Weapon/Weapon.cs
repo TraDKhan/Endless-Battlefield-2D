@@ -7,6 +7,7 @@ public abstract class Weapon : MonoBehaviour
     protected WeaponStats stats;
     protected WeaponUpgradeSystem upgradeSystem;
     protected WeaponAnimationController animationController;
+    protected ArmPivotController arm;
 
     protected float lastFireTime;
 
@@ -24,6 +25,7 @@ public abstract class Weapon : MonoBehaviour
         upgradeSystem = WeaponUpgradeSystem.Instance;
         animationController = GetComponent<WeaponAnimationController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        arm = GetComponent<ArmPivotController>();
 
         stats = new WeaponStats(data, upgradeSystem);
         upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
@@ -113,6 +115,10 @@ public abstract class Weapon : MonoBehaviour
         {
             spriteRenderer.flipY = direction.x < 0;
         }
+    }
+    protected void AimWeapon(Vector2 direction)
+    {
+        arm?.AimAt(direction);
     }
     // ===== Gizmos
     private void OnDrawGizmosSelected()

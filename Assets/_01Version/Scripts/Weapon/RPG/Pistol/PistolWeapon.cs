@@ -11,8 +11,8 @@ public class PistolWeapon : Weapon
 
         Vector2 direction = (target.position - transform.position).normalized;
 
-        RotateToDirection(direction);
-
+        //RotateToDirection(direction);
+        AimWeapon(direction);
         SpawnProjectile(direction);
     }
 
