@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
+    static public PlayerHealthController Instance;
     public int CurrentHealth { get; private set; }
     public int MaxHealth { get; private set; }
 
@@ -11,6 +12,10 @@ public class PlayerHealthController : MonoBehaviour
 
     private bool initialized = false;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     public void SetMaxHealth(int newMaxHealth)
     {
         CurrentHealth += newMaxHealth - MaxHealth;
@@ -29,7 +34,6 @@ public class PlayerHealthController : MonoBehaviour
                 CurrentHealth = MaxHealth;
         }
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
-        Debug.Log($"HP: {CurrentHealth}/{MaxHealth}");
     }
     public void TakeDamage(int damage)
     {

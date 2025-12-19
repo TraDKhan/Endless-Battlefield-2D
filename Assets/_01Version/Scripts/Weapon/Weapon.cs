@@ -22,13 +22,19 @@ public abstract class Weapon : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected virtual void Awake()
     {
-        upgradeSystem = WeaponUpgradeSystem.Instance;
         animationController = GetComponent<WeaponAnimationController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         orb = GetComponent<WeaponOrbit>();
+    }
+    protected virtual void Start()
+    {
+        upgradeSystem = WeaponUpgradeSystem.Instance;
 
-        stats = new WeaponStats(data, upgradeSystem);
-        upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
+        stats = new WeaponStats(data);
+        stats.BindUpgradeSystem(upgradeSystem);
+
+        if (upgradeSystem != null)
+            upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
     }
 
     protected virtual void OnDestroy()

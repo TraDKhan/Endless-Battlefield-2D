@@ -19,4 +19,4 @@ MonoBehaviour:
   baseProjectileCount: 3
   baseRange: 3
   baseProjectileSpeed: 5
-  projectilePrefab: {fileID: 6030085412404535899, guid: e81adc5cdf097eb47a2133b73a2f70bf, type: 3}
+  projectilePrefab: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}

@@ -2,8 +2,6 @@
 
 public class PistolWeapon : Weapon
 {
-    //[Header("Targeting")]
-    //[SerializeField] private LayerMask enemyLayer;
     protected override void OnFireLogic()
     {
         Transform target = FindNearestEnemy();
@@ -16,7 +14,7 @@ public class PistolWeapon : Weapon
         SpawnProjectile(direction);
     }
 
-    void SpawnProjectile(Vector3 direction)
+    void SpawnProjectile(Vector2 direction)
     {
         GameObject bulletObj = Instantiate(
             data.projectilePrefab,
@@ -28,6 +26,6 @@ public class PistolWeapon : Weapon
         rb.linearVelocity = direction * stats.ProjectileSpeed;
 
         Bullet bullet = bulletObj.GetComponent<Bullet>();
-        bullet.Init(CreateDamageContext());
+        bullet.Init(CreateDamageContext(), direction);
     }    
 }

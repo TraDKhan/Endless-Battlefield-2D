@@ -7,14 +7,16 @@ public class PlayerInputController : MonoBehaviour
     public Joystick joystick;    // Tham chiếu joystick trên UI
 
     private Vector2 movement;
+    private bool dashPressed;
 
     private void Update()
     {
-    #if UNITY_STANDALONE || UNITY_EDITOR
+#if UNITY_STANDALONE || UNITY_EDITOR
         ReadKeyboardInput();
-    #else
-        ReadJoystickInput();
-    #endif
+        ReadKeyboardDash();
+#else
+    ReadJoystickInput();
+#endif
     }
 
     // PC / Editor
@@ -25,6 +27,24 @@ public class PlayerInputController : MonoBehaviour
 
         if (movement.magnitude > 1f)
             movement.Normalize();
+    }
+
+    // ----- Dash 
+    private void ReadKeyboardDash()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            dashPressed = true;
+    }
+    public void OnDashButtonPressed()
+    {
+        dashPressed = true;
+    }
+    public bool IsDashPressed()
+    {
+        if (!dashPressed) return false;
+
+        dashPressed = false; // reset sau khi đọc
+        return true;
     }
 
     // Mobile

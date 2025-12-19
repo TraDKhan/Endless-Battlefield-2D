@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(PlayerHealthController))]
 public class CharacterStatsController : MonoBehaviour
 {
     public static CharacterStatsController Instance;
+    public static event Action<CharacterStats> OnStatsReady;
 
     [Header("Data")]
     [SerializeField] private PlayerData playerData;
@@ -46,6 +48,7 @@ public class CharacterStatsController : MonoBehaviour
 
         // ===== Listen =====
         Stats.OnStatsChanged += ApplyStatsToHealth;
+        OnStatsReady?.Invoke(Stats);
 
         // ===== First calc =====
         Stats.RecalculateStats();

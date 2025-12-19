@@ -85,4 +85,6 @@ public class CharacterStats
     public int GetMaxHealth() => maxHealth;
     public float GetMoveSpeed() => moveSpeed;
     public int GetArmor() => armor;
+    public int GetMaxEnergy() => maxEnergy;
+
 }

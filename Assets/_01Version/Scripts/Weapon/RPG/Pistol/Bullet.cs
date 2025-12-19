@@ -9,23 +9,27 @@ public class Bullet : MonoBehaviour
 
     private WeaponDamageContext damageContext;
     private int penetrationLeft;
-
     private float spawnTime;
 
+    private Vector2 moveDir;
     // ============================
     // INIT
     // ============================
-    public void Init(WeaponDamageContext context)
+    public void Init(WeaponDamageContext context, Vector2 direction)
     {
         damageContext = context;
         penetrationLeft = maxPenetration;
         spawnTime = Time.time;
+
+        moveDir = direction.normalized;
+
+        RotateToDirection(moveDir);
     }
 
-    private void Update()
+    void RotateToDirection(Vector2 dir)
     {
-        if (Time.time >= spawnTime + lifeTime)
-            DestroyBullet();
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     // ============================
@@ -53,7 +57,11 @@ public class Bullet : MonoBehaviour
 
         target.TakeDamage((int)finalDamage);
     }
-
+    private void Update()
+    {
+        if (Time.time >= spawnTime + lifeTime)
+            Destroy(gameObject);
+    }
     void DestroyBullet()
     {
         Destroy(gameObject);

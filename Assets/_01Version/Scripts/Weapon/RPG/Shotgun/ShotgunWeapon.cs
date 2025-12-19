@@ -50,6 +50,6 @@ public class ShotgunWeapon : Weapon
         rb.linearVelocity = direction * stats.ProjectileSpeed;
 
         Bullet bullet = bulletObj.GetComponent<Bullet>();
-        bullet.Init(CreateDamageContext());
+        bullet.Init(CreateDamageContext(), direction);
     }
 }

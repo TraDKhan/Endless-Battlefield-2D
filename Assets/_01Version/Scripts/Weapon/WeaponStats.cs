@@ -12,16 +12,27 @@ public class WeaponStats
     private WeaponData data;
     private WeaponUpgradeSystem upgrade;
 
-    public WeaponStats(WeaponData data, WeaponUpgradeSystem upgrade)
+    //public WeaponStats(WeaponData data, WeaponUpgradeSystem upgrade)
+    //{
+    //    this.data = data;
+    //    this.upgrade = upgrade;
+
+    //    Recalculate();
+    //}
+    public WeaponStats(WeaponData data)
     {
         this.data = data;
+    }
+    public void BindUpgradeSystem(WeaponUpgradeSystem upgrade)
+    {
         this.upgrade = upgrade;
-
         Recalculate();
     }
-
     public void Recalculate()
     {
+        if (data == null) return;
+        if (upgrade == null) return;
+
         Damage = data.baseDamage
             + Mathf.RoundToInt(upgrade.GetWeaponStatBonus(WeaponStatType.Damage));
 
