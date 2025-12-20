@@ -14,7 +14,6 @@ public class WeaponAnimationController : MonoBehaviour
             return;
         }
 
-        Debug.Log("PlayFire Trigger");
         animator.SetTrigger(fireTrigger);
     }
 

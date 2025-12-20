@@ -15,7 +15,7 @@ public class ItemPickup : MonoBehaviour
     [SerializeField] private float detectRadius = 3f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float pickupDistance = 0.5f;
-    [SerializeField] private LayerMask playerLayer;       // layer của player
+    [SerializeField] private LayerMask playerLayer;
 
     private Transform player;
 

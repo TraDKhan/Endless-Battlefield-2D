@@ -171,6 +171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 7207274061179736146, guid: d992d204177f69b4fb087bc7adeea3e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -375,7 +379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1636716185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,6 +510,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2088437127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2088437129}
+  - component: {fileID: 2088437128}
+  m_Layer: 0
+  m_Name: Spawn Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2088437128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088437127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d634ebb88fd4fa4f97a0f49b2e37916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 344574938}
+  minSpawnRadius: 6
+  maxSpawnRadius: 10
+  waves:
+  - {fileID: 11400000, guid: 1a7e94b356ef11f49b96ea0352478e2d, type: 2}
+  - {fileID: 11400000, guid: b2ba801688ec8c64fabc9235ce6a46d5, type: 2}
+  - {fileID: 11400000, guid: ba1fb7300c93d1f45bba6f1c1447b306, type: 2}
+  spawnInterval: 0.7
+  timeBetweenWaves: 3
+--- !u!4 &2088437129
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088437127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &820710299997168666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -517,6 +574,10 @@ PrefabInstance:
     - target: {fileID: 7959649974938221918, guid: 5eb30c40e0f0e5743a0c375b6569de97, type: 3}
       propertyPath: m_Name
       value: Boomerang Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7959649974938221918, guid: 5eb30c40e0f0e5743a0c375b6569de97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8839397866206599165, guid: 5eb30c40e0f0e5743a0c375b6569de97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -615,6 +676,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 5757144308714031333, guid: f8fd0406a72ffc0468f3406aee99faef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -672,6 +737,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shotgun Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 7465869266519618458, guid: 6500bac33642b0c4b8121d3e2d33ed3e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -684,7 +753,8 @@ SceneRoots:
   - {fileID: 855363333}
   - {fileID: 1220897623965952354}
   - {fileID: 820710299997168666}
-  - {fileID: 1636716188}
   - {fileID: 3145195125393102100}
-  - {fileID: 344574938}
   - {fileID: 183568770}
+  - {fileID: 1636716188}
+  - {fileID: 2088437129}
+  - {fileID: 344574938}
