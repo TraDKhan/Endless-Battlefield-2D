@@ -16,16 +16,16 @@ public class PistolWeapon : Weapon
 
     void SpawnProjectile(Vector2 direction)
     {
-        GameObject bulletObj = Instantiate(
-            data.projectilePrefab,
-            transform.position,
-            Quaternion.identity
+        Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(data.projectilePrefab);
+
+        if (bullet == null) return;
+
+        bullet.transform.position = transform.position;
+
+        bullet.Init(
+            CreateDamageContext(),
+            direction,
+            stats.ProjectileSpeed
         );
-
-        Rigidbody2D rb = bulletObj.GetComponent<Rigidbody2D>();
-        rb.linearVelocity = direction * stats.ProjectileSpeed;
-
-        Bullet bullet = bulletObj.GetComponent<Bullet>();
-        bullet.Init(CreateDamageContext(), direction);
-    }    
+    }
 }

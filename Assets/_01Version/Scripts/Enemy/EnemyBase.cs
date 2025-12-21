@@ -32,8 +32,7 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable
     {
         isAlive = true;
 
-        health.ResetHP();
-        health.Enable();
+        health.ResetHealth();
 
         ResetState();
         OnSpawned();
@@ -44,7 +43,6 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable
         isAlive = false;
 
         StopAllCoroutines();
-        health.Disable();
         ClearRuntimeEvents();
     }
     #endregion

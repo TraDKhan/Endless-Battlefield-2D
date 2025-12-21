@@ -1,49 +1,67 @@
 ﻿using System;
 using UnityEngine;
 
-public class EnemyHealthController : MonoBehaviour
+public class EnemyHealthController : MonoBehaviour, IDamageable
 {
-    private int maxHealth = 1000;
+    [SerializeField] private int maxHealth = 100;
+
     private int currentHealth;
-    private bool isEnabled;
+    private bool isDead;
+
+    public bool IsDead => isDead;
 
     public event Action OnDeath;
+    public event Action<int, int> OnHealthChanged; // current, max
 
+    // =========================
+    // UNITY
+    // =========================
+    private void Awake()
+    {
+        ResetHealth();
+    }
+
+    // =========================
+    // PUBLIC API
+    // =========================
     public void Init(int maxHP)
     {
         maxHealth = maxHP;
-        currentHealth = maxHP;
+        ResetHealth();
     }
 
-    public void ResetHP()
+    public void ResetHealth()
     {
         currentHealth = maxHealth;
-        isEnabled = true;
+        isDead = false;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    public void Enable() => isEnabled = true;
-    public void Disable() => isEnabled = false;
-
+    // =========================
+    // DAMAGE
+    // =========================
     public void TakeDamage(int damage)
     {
-        if (!isEnabled) return;
+        if (isDead || damage <= 0)
+            return;
 
         currentHealth -= damage;
+        currentHealth = Mathf.Max(currentHealth, 0);
 
-        if (currentHealth <= 0)
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+
+        if (currentHealth == 0)
             Die();
     }
-    void Die()
+
+    // =========================
+    // INTERNAL
+    // =========================
+    private void Die()
     {
-        currentHealth = 0;
+        if (isDead) return;
+
+        isDead = true;
         OnDeath?.Invoke();
-    }
-    public void OnSpawn()
-    {
-        currentHealth = maxHealth;
-    }
-    public void OnDespawn()
-    {
-        OnDeath = null;
     }
 }
