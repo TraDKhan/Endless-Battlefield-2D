@@ -16,13 +16,7 @@ MonoBehaviour:
   enemies:
   - enemyPrefab: {fileID: 1310987893427050181, guid: 7341e916944747144a506fe83b8689b9, type: 3}
     count: 10
-  groups:
-  - groupName: AAA
-    enemies:
-    - enemyPrefab: {fileID: 4155775762062943043, guid: e4d5be93a784a0748831bb64edf1e145, type: 3}
-      count: 5
-    - enemyPrefab: {fileID: 4929142223484118432, guid: a29fc48b76dd90248904f581f187266d, type: 3}
-      count: 5
-    groupCount: 2
-    groupRadius: 4
-  isSpawnGroup: 1
+  - enemyPrefab: {fileID: 4155775762062943043, guid: e4d5be93a784a0748831bb64edf1e145, type: 3}
+    count: 5
+  groups: []
+  isSpawnGroup: 0

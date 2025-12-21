@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8695302036185379018}
   - component: {fileID: 2573698831963256768}
+  - component: {fileID: -2032259044931664577}
+  - component: {fileID: -8477219324524326018}
+  - component: {fileID: 480215459704764570}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -87,3 +90,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2032259044931664577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929142223484118432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4863e1995ed1f4798c490218abe8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  identity: {fileID: 480215459704764570}
+  maxHealth: 10
+  moveSpeed: 2
+--- !u!114 &-8477219324524326018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929142223484118432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4e2adcf163175941b62fb503e4b01a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &480215459704764570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929142223484118432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4929142223484118432}

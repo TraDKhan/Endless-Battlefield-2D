@@ -2,8 +2,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpawnIndicator : MonoBehaviour
+public class SpawnIndicator : MonoBehaviour, IPoolable
 {
+    [Header("Pool")]
+    public PoolIdentity Identity { get; set; }
+
     [Header("Timing")]
     [SerializeField] private float totalDuration = 0.8f;
     [SerializeField] private float fadeInTime = 0.2f;
@@ -20,23 +23,53 @@ public class SpawnIndicator : MonoBehaviour
     [SerializeField] private float maxAlpha = 0.8f;
 
     private SpriteRenderer sr;
+    private Coroutine playRoutine;
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
     }
 
-    /// <summary>
-    /// Play indicator effect then invoke callback
-    /// </summary>
-    public IEnumerator Play(Vector2 position, System.Action onComplete)
+    #region Pool Callbacks
+    public void OnSpawn()
+    {
+        if (Identity == null || Identity.Prefab == null)
+        {
+            Debug.LogError("[SpawnIndicator] PoolIdentity chưa được gán!");
+            return;
+        }
+
+        if (Identity.Prefab.name.Contains("(Clone)"))
+        {
+            Debug.LogError(
+                "[SpawnIndicator] PoolIdentity đang trỏ vào CLONE – gán sai prefab!"
+            );
+        }
+
+        SetAlpha(0f);
+        transform.localScale = startScale;
+    }
+
+
+    public void OnDespawn()
+    {
+        if (playRoutine != null)
+        {
+            StopCoroutine(playRoutine);
+            playRoutine = null;
+        }
+    }
+    #endregion
+
+    public void Play(Vector2 position, System.Action onComplete)
     {
         transform.position = position;
-        transform.localScale = startScale;
-        SetAlpha(0f);
 
-        gameObject.SetActive(true);
+        playRoutine = StartCoroutine(PlayRoutine(onComplete));
+    }
 
+    IEnumerator PlayRoutine(System.Action onComplete)
+    {
         float timer = 0f;
 
         while (timer < totalDuration)
@@ -44,11 +77,11 @@ public class SpawnIndicator : MonoBehaviour
             timer += Time.deltaTime;
             float t = Mathf.Clamp01(timer / totalDuration);
 
-            // 🔹 Scale
+            // Scale
             float scaleT = scaleCurve.Evaluate(t);
             transform.localScale = Vector3.Lerp(startScale, endScale, scaleT);
 
-            // 🔹 Alpha
+            // Alpha
             float alpha;
             if (timer < fadeInTime)
             {
@@ -73,7 +106,9 @@ public class SpawnIndicator : MonoBehaviour
 
         SetAlpha(0f);
         onComplete?.Invoke();
-        gameObject.SetActive(false);
+
+        // 🔥 QUAN TRỌNG: trả về pool
+        ObjectPoolManager.Instance.Despawn(this);
     }
 
     void SetAlpha(float alpha)

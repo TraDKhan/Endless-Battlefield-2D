@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 861969007949129993}
   - component: {fileID: 1036048972189046523}
+  - component: {fileID: 4528571423393822974}
   - component: {fileID: 3806215440873647924}
   m_Layer: 0
-  m_Name: Spawn Effect
+  m_Name: Spawn Indicator Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,6 +89,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4528571423393822974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341307148565924267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 341307148565924267}
 --- !u!114 &3806215440873647924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eec24e6e505f464ca7ccb72f8acbd5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identity: {fileID: 4528571423393822974}
   totalDuration: 0.8
   fadeInTime: 0.2
   fadeOutTime: 0.2

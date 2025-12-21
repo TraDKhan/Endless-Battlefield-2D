@@ -1,43 +1,49 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
+using UnityEngine;
 
-public class EnemyHealthController : MonoBehaviour, IDamageable
+public class EnemyHealthController : MonoBehaviour
 {
-    [Header("Stats")]
-    public int maxHealth = 20;
-    public int currentHealth;
+    private int maxHealth = 1000;
+    private int currentHealth;
+    private bool isEnabled;
 
-    public bool IsDead { get; private set; }
-
-    // Sự kiện để AI, Animation, Drop Item có thể đăng ký
     public event Action OnDeath;
-    public event Action<int> OnDamaged;
 
-    void Awake()
+    public void Init(int maxHP)
+    {
+        maxHealth = maxHP;
+        currentHealth = maxHP;
+    }
+
+    public void ResetHP()
     {
         currentHealth = maxHealth;
+        isEnabled = true;
     }
+
+    public void Enable() => isEnabled = true;
+    public void Disable() => isEnabled = false;
 
     public void TakeDamage(int damage)
     {
-        if (IsDead) return;   // Tránh xử lý lại khi đã chết
+        if (!isEnabled) return;
 
         currentHealth -= damage;
-        OnDamaged?.Invoke(damage);
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
-
-    private void Die()
+    void Die()
     {
-        IsDead = true;
-
+        currentHealth = 0;
         OnDeath?.Invoke();
-
-        // Nếu enemy không có logic AI chết, có thể gỡ bỏ object:
-        Destroy(gameObject, 1.2f); // đợi animation chết chạy xong
+    }
+    public void OnSpawn()
+    {
+        currentHealth = maxHealth;
+    }
+    public void OnDespawn()
+    {
+        OnDeath = null;
     }
 }
