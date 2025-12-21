@@ -6,6 +6,9 @@ public class EnemySpawnerController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Transform player;
+
+    [Header("Prefabs (Registered In Pool)")]
+    [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private SpawnIndicator spawnIndicatorPrefab;
 
     [Header("Spawn Radius")]
@@ -29,6 +32,8 @@ public class EnemySpawnerController : MonoBehaviour
     {
         foreach (WaveData wave in allWaves)
         {
+            if (!wave.isEnabled) continue;
+
             Debug.Log($"[Spawner] Start Wave: {wave.waveName}");
 
             yield return StartCoroutine(SpawnWave(wave));
@@ -46,14 +51,14 @@ public class EnemySpawnerController : MonoBehaviour
     #region Wave Spawn
     IEnumerator SpawnWave(WaveData wave)
     {
-        // 1️⃣ Spawn đơn (logic cũ)
+        // 🔹 Spawn đơn (logic cũ)
         if (wave.enemies != null && wave.enemies.Length > 0)
         {
             yield return StartCoroutine(SpawnSingleEnemies(wave.enemies));
         }
 
-        // 2️⃣ Spawn theo đàn (nếu có)
-        if (wave.isSpawnGroup && wave.groups != null && wave.groups.Length > 0)
+        // 🔹 Spawn theo đàn (nếu có)
+        if (wave.groups != null && wave.groups.Length > 0)
         {
             foreach (EnemyGroupData group in wave.groups)
             {
@@ -70,17 +75,17 @@ public class EnemySpawnerController : MonoBehaviour
     #region Single Spawn (Random)
     IEnumerator SpawnSingleEnemies(EnemySpawnData[] enemies)
     {
-        List<GameObject> spawnList = new();
+        List<Enemy> spawnList = new();
 
         foreach (EnemySpawnData data in enemies)
         {
             for (int i = 0; i < data.count; i++)
-                spawnList.Add(data.enemyPrefab);
+                spawnList.Add(enemyPrefab); // dùng prefab làm key pool
         }
 
         Shuffle(spawnList);
 
-        foreach (GameObject prefab in spawnList)
+        foreach (Enemy prefab in spawnList)
         {
             Vector2 pos = GetSpawnPositionAroundPlayer();
             yield return StartCoroutine(SpawnWithIndicator(prefab, pos));
@@ -99,43 +104,55 @@ public class EnemySpawnerController : MonoBehaviour
             for (int i = 0; i < enemy.count; i++)
             {
                 Vector2 offset = Random.insideUnitCircle * group.groupRadius;
-                Vector2 spawnPos = center + offset;
+                Vector2 pos = center + offset;
 
-                StartCoroutine(SpawnWithIndicator(enemy.enemyPrefab, spawnPos));
+                StartCoroutine(SpawnWithIndicator(enemyPrefab, pos));
             }
         }
     }
     #endregion
 
-    #region Spawn With Indicator
-    IEnumerator SpawnWithIndicator(GameObject prefab, Vector2 position)
+    #region Spawn With Indicator (POOL)
+    IEnumerator SpawnWithIndicator(Enemy prefab, Vector2 position)
     {
-        SpawnIndicator indicator = Instantiate(spawnIndicatorPrefab);
+        SpawnIndicator indicator =
+            ObjectPoolManager.Instance.Spawn(spawnIndicatorPrefab);
+
         yield return indicator.Play(position, () =>
         {
             SpawnEnemy(prefab, position);
         });
 
-        Destroy(indicator.gameObject);
+        ObjectPoolManager.Instance.Despawn(spawnIndicatorPrefab, indicator);
     }
     #endregion
 
-    #region Core Spawn
-    void SpawnEnemy(GameObject prefab, Vector2 position)
+    #region Core Spawn (POOL)
+    void SpawnEnemy(Enemy prefab, Vector2 position)
     {
-        GameObject enemy = Instantiate(prefab, position, Quaternion.identity);
+        Enemy enemy = ObjectPoolManager.Instance.Spawn(prefab);
+        enemy.transform.position = position;
+
         enemiesAlive++;
 
         EnemyHealthController health = enemy.GetComponent<EnemyHealthController>();
         if (health != null)
         {
-            health.OnDeath += OnEnemyDead;
+            health.OnDeath += () => OnEnemyDead(prefab, enemy);
         }
     }
 
-    void OnEnemyDead()
+    void OnEnemyDead(Enemy prefab, Enemy enemy)
     {
         enemiesAlive--;
+
+        EnemyHealthController health = enemy.GetComponent<EnemyHealthController>();
+        if (health != null)
+        {
+            health.OnDeath = null; // tránh leak event
+        }
+
+        ObjectPoolManager.Instance.Despawn(prefab, enemy);
     }
     #endregion
 

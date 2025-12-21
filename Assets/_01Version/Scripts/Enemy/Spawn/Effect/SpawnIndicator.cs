@@ -45,10 +45,9 @@ public class SpawnIndicator : MonoBehaviour
             float t = Mathf.Clamp01(timer / totalDuration);
 
             // 🔹 Scale
-            //float scaleT = scaleCurve.Evaluate(t);
-            //transform.localScale = Vector3.Lerp(startScale, endScale, scaleT);
-            float scaleX = scaleCurve.Evaluate(t); // curve chỉ áp dụng cho X
-            transform.localScale = new Vector3(scaleX, 0.3f, startScale.z);
+            float scaleT = scaleCurve.Evaluate(t);
+            transform.localScale = Vector3.Lerp(startScale, endScale, scaleT);
+
             // 🔹 Alpha
             float alpha;
             if (timer < fadeInTime)

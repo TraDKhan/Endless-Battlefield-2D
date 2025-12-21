@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5639fc1b979a0294b888a6a3988e813a, type: 3}
   m_Name: Wave 2 Data
   m_EditorClassIdentifier: 
-  waveName: 
-  enemies:
-  - enemyPrefab: {fileID: 1310987893427050181, guid: 7341e916944747144a506fe83b8689b9, type: 3}
-    count: 10
-  - enemyPrefab: {fileID: 4155775762062943043, guid: e4d5be93a784a0748831bb64edf1e145, type: 3}
-    count: 10
+  waveName: Wave 2
+  enemies: []
+  groups:
+  - groupName: BBB
+    enemies:
+    - enemyPrefab: {fileID: 1310987893427050181, guid: 7341e916944747144a506fe83b8689b9, type: 3}
+      count: 10
+    - enemyPrefab: {fileID: 4155775762062943043, guid: e4d5be93a784a0748831bb64edf1e145, type: 3}
+      count: 10
+    groupCount: 3
+    groupRadius: 2
+  isSpawnGroup: 1
