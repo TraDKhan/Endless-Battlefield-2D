@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-public abstract class EnemyBase : MonoBehaviour, IPoolable
+public abstract class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
 {
     [Header("Pool")]
     [SerializeField] public PoolIdentity Identity { get; set; }
@@ -9,6 +9,7 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable
     [Header("Base Stats")]
     [SerializeField] protected int maxHealth = 10;
     [SerializeField] protected float moveSpeed = 2f;
+    [SerializeField] private Rigidbody2D rb;
 
     protected EnemyHealthController health;
     protected Transform target;
@@ -21,6 +22,8 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable
     {
         health = GetComponent<EnemyHealthController>();
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
+        rb = GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
 
         health.Init(maxHealth);
         health.OnDeath += HandleDeath; // 🔥 chỉ subscribe 1 lần
@@ -59,7 +62,12 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable
         ObjectPoolManager.Instance.Despawn(this);
     }
     #endregion
-
+    #region Knockback
+    public void Knockback(Vector2 direction, float force)
+    {
+        rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+    }
+    #endregion
     #region Virtual Hooks
     protected abstract void ResetState();     // reset AI / FSM / timers
     protected virtual void OnSpawned() { }    // effect / sound spawn

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4966500058598756218}
   - component: {fileID: 1139027736822986594}
-  - component: {fileID: 4215745481797343643}
   - component: {fileID: 8923004421703877761}
+  - component: {fileID: 8558705145142736205}
   m_Layer: 0
   m_Name: Boomerang Projectile
   m_TagString: Untagged
@@ -82,33 +82,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.91431975, y: 0.83522993}
   m_EdgeRadius: 0
---- !u!50 &4215745481797343643
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1979819941540096210}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &8923004421703877761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +94,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19fa99ae31fc3534688a280df099d3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8558705145142736205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979819941540096210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1979819941540096210}
 --- !u!1 &3698653962993059712
 GameObject:
   m_ObjectHideFlags: 0

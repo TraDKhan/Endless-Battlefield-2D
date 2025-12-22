@@ -415,6 +415,9 @@ MonoBehaviour:
   - prefab: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}
     poolComponent: {fileID: 2884507207263960850, guid: 3868255dc6c8b914886814718a58b734, type: 3}
     initialSize: 5
+  - prefab: {fileID: 1979819941540096210, guid: 38e5fe429b760e648a42da238df93ded, type: 3}
+    poolComponent: {fileID: 8923004421703877761, guid: 38e5fe429b760e648a42da238df93ded, type: 3}
+    initialSize: 5
 --- !u!1 &855363330
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   moveSpeed: 2
+  rb: {fileID: 1636716191}
 --- !u!114 &1636716190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1100,7 +1104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5757144308714031333, guid: f8fd0406a72ffc0468f3406aee99faef, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1161,7 +1165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7465869266519618458, guid: 6500bac33642b0c4b8121d3e2d33ed3e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

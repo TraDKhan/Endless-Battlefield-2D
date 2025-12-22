@@ -2,9 +2,6 @@
 
 public class BoomerangWeapon : Weapon
 {
-    //[Header("Targeting")]
-    //[SerializeField] private LayerMask enemyLayer;
-
     protected override void OnFireLogic()
     {
         Transform target = FindNearestEnemy();
@@ -25,13 +22,14 @@ public class BoomerangWeapon : Weapon
     // ===== SPAWN
     void SpawnBoomerang(Vector3 direction)
     {
-        GameObject obj = Instantiate(
-            data.projectilePrefab,
-            transform.position,
-            Quaternion.identity
-        );
+        BoomerangProjectile boomerang =
+            ObjectPoolManager.Instance
+                .Spawn<BoomerangProjectile>(data.projectilePrefab);
 
-        BoomerangProjectile boomerang = obj.GetComponent<BoomerangProjectile>();
+        if (boomerang == null) return;
+
+        boomerang.transform.position = transform.position;
+        boomerang.transform.rotation = Quaternion.identity;
 
         boomerang.Init(
             direction,

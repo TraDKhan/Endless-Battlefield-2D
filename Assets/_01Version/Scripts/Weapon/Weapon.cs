@@ -137,6 +137,7 @@ public abstract class Weapon : MonoBehaviour
             damage = stats.Damage,
             critChance = stats.CritChance,
             critMultiplier = 2f,
+            knockbackForce = 1f,
             source = gameObject
         };
     }
@@ -147,5 +148,6 @@ public struct WeaponDamageContext
     public float damage;
     public float critChance;
     public float critMultiplier;
+    public float knockbackForce;
     public GameObject source;
 }
