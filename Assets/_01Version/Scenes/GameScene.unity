@@ -2569,7 +2569,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20000
-  currentHealth: 0
 --- !u!61 &387904430
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5525,7 +5524,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20000
-  currentHealth: 0
 --- !u!61 &1119006813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6575,7 +6573,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20000
-  currentHealth: 0
 --- !u!61 &1242903877
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8033,7 +8030,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20000
-  currentHealth: 0
 --- !u!1 &1492960906
 GameObject:
   m_ObjectHideFlags: 0
@@ -8612,7 +8608,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20000
-  currentHealth: 0
 --- !u!61 &1603887334
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10308,10 +10303,10 @@ RectTransform:
   - {fileID: 1602392869}
   m_Father: {fileID: 1567415763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -997, y: -328}
-  m_SizeDelta: {x: -2638, y: -1188}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -997, y: -438}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2037203650
 GameObject:
@@ -11418,6 +11413,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 352916999566531432, guid: 3a1d137837721e042851cb225a7e2658, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3345547826426779065, guid: 3a1d137837721e042851cb225a7e2658, type: 3}
       propertyPath: joystick
       value: 

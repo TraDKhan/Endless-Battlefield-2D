@@ -5,7 +5,7 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
 {
     [SerializeField] private int maxHealth = 100;
 
-    private int currentHealth;
+    [SerializeField] private int currentHealth;
     private bool isDead;
 
     public bool IsDead => isDead;
