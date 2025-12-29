@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿#region Player
+// ===== Player Stat
 public enum PlayerStatType
 {
     MaxHealth,
@@ -7,7 +7,19 @@ public enum PlayerStatType
     MoveSpeed,
     Energy
 }
+// ===== Player Movement
+public enum MoveDirection
+{
+    Up = 0,
+    RightUp = 1,
+    RightDown = 2,
+    Down = 3,
+    LeftDown = 4,
+    LeftUp = 5
+}
+#endregion
 
+#region Upgrade
 public enum UpgradeTarget
 {
     Player,
@@ -20,3 +32,4 @@ public enum UpgradeType
     WeaponStat,
     Skill
 }
+#endregion

@@ -66,7 +66,7 @@ public class PlayerRangedAttack : MonoBehaviour, IPlayerAttackController
 
         lastAttackTime = Time.time;
 
-        anim?.PlayAttack();
+        //anim?.PlayAttack();
 
         // Tạo projectile
         var obj = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);

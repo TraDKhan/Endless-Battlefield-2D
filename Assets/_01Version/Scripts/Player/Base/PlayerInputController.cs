@@ -33,7 +33,10 @@ public class PlayerInputController : MonoBehaviour
     private void ReadKeyboardDash()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space");
             dashPressed = true;
+        }
     }
     public void OnDashButtonPressed()
     {

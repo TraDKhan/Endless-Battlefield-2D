@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerHealthController))]
 public class CharacterStatsController : MonoBehaviour
 {
     public static CharacterStatsController Instance;

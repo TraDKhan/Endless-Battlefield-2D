@@ -44,14 +44,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2885630819
+    locked: 0
+  - name: Ground
+    uniqueID: 3364540135
+    locked: 0
+  - name: Decor
+    uniqueID: 1081356277
+    locked: 0
   - name: Weapon
     uniqueID: 2132846209
     locked: 0
   - name: Item
     uniqueID: 4197137139
-    locked: 0
-  - name: Background
-    uniqueID: 2885630819
     locked: 0
   m_RenderingLayers:
   - Default

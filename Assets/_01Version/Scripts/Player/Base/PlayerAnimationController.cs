@@ -4,21 +4,22 @@ public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
-    public void PlayWalk()
+    private Vector2 lastMoveDir = Vector2.down;
+
+    public void SetMovement(bool isMoving, Vector2 moveInput)
     {
-        animator.SetBool("IsMoving", true);
+        animator.SetBool("IsMoving", isMoving);
+
+        if (moveInput.sqrMagnitude > 0.0001f)
+            lastMoveDir = moveInput.normalized;
+
+        animator.SetFloat("MoveX", lastMoveDir.x);
+        animator.SetFloat("MoveY", lastMoveDir.y);
     }
 
-    public void PlayIdle()
+    public void SetDash(bool isDashing)
     {
-        animator.SetBool("IsMoving", false);
-    }
-
-    public void PlayAttack()
-    {
-        animator.SetBool("IsMoving", false);
-
-        animator.SetTrigger("Attack");
+        animator.SetBool("IsDashing", isDashing);
     }
 
     public void PlayHit()
@@ -29,8 +30,5 @@ public class PlayerAnimationController : MonoBehaviour
     public void PlayDeath()
     {
         animator.SetTrigger("Death");
-
-        // Nếu bạn muốn khoá điều khiển animation sau khi chết:
-        // animator.SetBool("IsMoving", false);
     }
 }

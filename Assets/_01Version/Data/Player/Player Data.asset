@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: SOLDIER
   baseHealth: 1000
-  baseEnergy: 100
+  baseEnergy: 1000
   baseArmor: 100
   baseMoveSpeed: 5
   startWeapon: 0
