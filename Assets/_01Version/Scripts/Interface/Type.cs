@@ -18,7 +18,7 @@ public enum MoveDirection
     LeftUp = 5
 }
 #endregion
-
+// ===== Upgrade
 #region Upgrade
 public enum UpgradeTarget
 {
@@ -31,5 +31,16 @@ public enum UpgradeType
     PlayerStat,
     WeaponStat,
     Skill
+}
+#endregion
+// ===== Item
+#region Item
+public enum ItemRarity
+{
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary
 }
 #endregion
