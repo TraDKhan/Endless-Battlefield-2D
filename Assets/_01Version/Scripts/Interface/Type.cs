@@ -44,3 +44,19 @@ public enum ItemRarity
     Legendary
 }
 #endregion
+// ===== Enemy
+#region Enemy
+public enum EnemyType
+{
+    MeeleEnemy, 
+    RangeEnemy
+}
+public enum EnemyStateType
+{
+    Idle,
+    Chase,
+    Attack,
+    Reposition,
+    Dead
+}
+#endregion
