@@ -46,11 +46,17 @@ public enum ItemRarity
 #endregion
 // ===== Enemy
 #region Enemy
-public enum EnemyType
+//public enum EnemyType
+//{
+//    MeeleEnemy, 
+//    RangeEnemy
+//}
+public enum EnemyAttackType
 {
-    MeeleEnemy, 
-    RangeEnemy
+    Melee,
+    Ranged
 }
+
 public enum EnemyStateType
 {
     Idle,

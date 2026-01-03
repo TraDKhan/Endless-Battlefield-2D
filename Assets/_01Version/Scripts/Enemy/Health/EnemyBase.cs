@@ -4,11 +4,9 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
 {
     [Header("Pool")]
     [SerializeField] public PoolIdentity Identity { get; set; }
-    //public PoolIdentity Identity => identity;
 
     [Header("Base Stats")]
-    [SerializeField] protected int maxHealth = 10;
-    [SerializeField] protected float moveSpeed = 2f;
+    [SerializeField] protected EnemyStats stats;
     [SerializeField] private Rigidbody2D rb;
 
     protected EnemyHealthController health;
@@ -23,10 +21,11 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
         health = GetComponent<EnemyHealthController>();
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
         rb = GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Kinematic;
 
-        health.Init(maxHealth);
-        health.OnDeath += HandleDeath; // 🔥 chỉ subscribe 1 lần
+        rb.gravityScale = 0;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+
+        health.OnDeath += HandleDeath;
     }
     #endregion
 
@@ -44,7 +43,7 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
     public virtual void OnDespawn()
     {
         isAlive = false;
-
+        health.Init(stats.maxHealth);
         StopAllCoroutines();
         ClearRuntimeEvents();
     }

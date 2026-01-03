@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
-
 public class EnemyController : MonoBehaviour
 {
     [Header("References")]
+    public EnemyStats stats;
+
+    [Header("Components")]
+    public EnemyHealthController health;
     public EnemyMovement movement;
     public EnemySensor sensor;
-    public EnemyStats stats;
 
     [HideInInspector] public Transform player;
 
@@ -14,22 +16,16 @@ public class EnemyController : MonoBehaviour
     // States
     public EnemyIdleState idleState;
     public EnemyChaseState chaseState;
-    //public EnemyAttackState attackState;
+    public EnemyAttackState attackState;
     //public EnemyDeadState deadState;
 
     void Awake()
     {
         movement = GetComponent<EnemyMovement>();
         sensor = GetComponent<EnemySensor>();
+        health = GetComponent<EnemyHealthController>();
 
-        if (movement == null)
-            Debug.LogError("EnemyMovement is missing!", this);
-
-        if (sensor == null)
-            Debug.LogError("EnemySensor is missing!", this);
-
-        if (stats == null)
-            Debug.LogError("EnemyStats is missing!", this);
+        health.OnDeath += HandleDeath;
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -39,10 +35,20 @@ public class EnemyController : MonoBehaviour
 
         idleState = new EnemyIdleState(this);
         chaseState = new EnemyChaseState(this);
-        //attackState = new EnemyAttackState(this);
+        attackState = new EnemyAttackState(this);
         //deadState = new EnemyDeadState(this);
     }
 
+    private void OnDestroy()
+    {
+        health.OnDeath -= HandleDeath;
+    }
+
+    private void HandleDeath()
+    {
+        ChangeState(new EnemyDeadState(this));
+    }
+    
     void Start()
     {
         ChangeState(idleState);

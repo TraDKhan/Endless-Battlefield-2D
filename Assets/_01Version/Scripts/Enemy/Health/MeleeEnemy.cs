@@ -19,6 +19,6 @@ public class MeleeEnemy : EnemyBase
         if (!isAlive || target == null) return;
 
         moveDir = (target.position - transform.position).normalized;
-        transform.Translate(moveDir * moveSpeed * Time.deltaTime);
+        transform.Translate(moveDir * stats.moveSpeed * Time.deltaTime);
     }
 }

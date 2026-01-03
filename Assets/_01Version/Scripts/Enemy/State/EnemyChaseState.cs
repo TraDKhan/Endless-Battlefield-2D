@@ -23,12 +23,12 @@ public class EnemyChaseState : IEnemyState
             return;
         }
 
-        // Đủ gần → Attack (sau này)
-        // if (enemy.IsInAttackRange())
-        // {
-        //     enemy.ChangeState(enemy.attackState);
-        //     return;
-        // }
+        //Đủ gần → Attack(sau này)
+         if (enemy.IsInAttackRange())
+        {
+            enemy.ChangeState(enemy.attackState);
+            return;
+        }
     }
 
     public void FixedUpdate()
@@ -43,11 +43,11 @@ public class EnemyChaseState : IEnemyState
 
         switch (enemy.stats.enemyType)
         {
-            case EnemyType.MeeleEnemy:
+            case EnemyAttackType.Melee:
                 HandleMelee(pos, playerPos, toPlayer, dist);
                 break;
 
-            case EnemyType.RangeEnemy:
+            case EnemyAttackType.Ranged:
                 HandleRanged(pos, playerPos, toPlayer, dist);
                 break;
         }

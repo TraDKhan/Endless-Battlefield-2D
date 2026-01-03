@@ -1,29 +1,18 @@
 ﻿using System;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class EnemyHealthController : MonoBehaviour, IDamageable
 {
-    [SerializeField] private int maxHealth = 100;
-
+    [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
     private bool isDead;
 
     public bool IsDead => isDead;
 
     public event Action OnDeath;
-    public event Action<int, int> OnHealthChanged; // current, max
+    public event Action<int, int> OnHealthChanged; 
 
-    // =========================
-    // UNITY
-    // =========================
-    private void Awake()
-    {
-        ResetHealth();
-    }
-
-    // =========================
-    // PUBLIC API
-    // =========================
     public void Init(int maxHP)
     {
         maxHealth = maxHP;
@@ -37,9 +26,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    // =========================
-    // DAMAGE
-    // =========================
     public void TakeDamage(int damage)
     {
         if (isDead || damage <= 0)
@@ -54,9 +40,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
             Die();
     }
 
-    // =========================
-    // INTERNAL
-    // =========================
     private void Die()
     {
         if (isDead) return;

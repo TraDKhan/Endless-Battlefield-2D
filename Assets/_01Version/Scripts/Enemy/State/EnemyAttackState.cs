@@ -12,7 +12,8 @@ public class EnemyAttackState : IEnemyState
 
     public void Enter()
     {
-        //enemy.movement.Stop();
+        Debug.Log("Enter Attack State");
+        enemy.movement.Stop();
         lastAttackTime = Time.time - enemy.stats.attackCooldown;
     }
 
@@ -20,7 +21,7 @@ public class EnemyAttackState : IEnemyState
     {
         float dist = Vector2.Distance(enemy.transform.position, enemy.player.position);
 
-        if (dist > enemy.stats.attackRange)
+        if (dist > enemy.stats.attackRange + 0.2f)
         {
             enemy.ChangeState(enemy.chaseState);
             return;
