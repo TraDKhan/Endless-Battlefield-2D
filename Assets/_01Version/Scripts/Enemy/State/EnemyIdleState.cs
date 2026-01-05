@@ -7,7 +7,10 @@ public class EnemyIdleState : IEnemyState
         this.enemy = enemy;
     }
 
-    public void Enter() { }
+    public void Enter() 
+    {
+        enemy.anim.SetMoving(false);
+    }
 
     public void Update()
     {

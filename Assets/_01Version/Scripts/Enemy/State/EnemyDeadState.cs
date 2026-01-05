@@ -13,16 +13,15 @@ public class EnemyDeadState : IEnemyState
     public void Enter()
     {
         enemy.movement.Stop();
-        enemy.gameObject.SetActive(false);
-
-        // Nếu dùng pooling
-        //enemy.StartCoroutine(DisableAfterDeath());
+        enemy.StartCoroutine(Despawn());
     }
-    //private IEnumerator DisableAfterDeath()
-    //{
-    //    yield return new WaitForSeconds(enemy.animation.DeathDuration);
-    //    enemy.gameObject.SetActive(false);
-    //}
+
+    IEnumerator Despawn()
+    {
+        yield return new WaitForSeconds(0.5f);
+        ObjectPoolManager.Instance.Despawn(enemy.enemyBase);
+    }
+
     public void Update() { }
     public void FixedUpdate() { }
     public void Exit() { }

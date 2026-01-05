@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-public abstract class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
+public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
 {
     [Header("Pool")]
     [SerializeField] public PoolIdentity Identity { get; set; }
@@ -33,10 +33,8 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
     public virtual void OnSpawn()
     {
         isAlive = true;
-
         health.ResetHealth();
 
-        ResetState();
         OnSpawned();
     }
 
@@ -67,8 +65,7 @@ public abstract class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
         rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
     }
     #endregion
-    #region Virtual Hooks
-    protected abstract void ResetState();     // reset AI / FSM / timers
+    #region Virtual Hooks    
     protected virtual void OnSpawned() { }    // effect / sound spawn
     protected virtual void ClearRuntimeEvents() { }
     #endregion

@@ -18,8 +18,9 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 toTarget = (target - rb.position).normalized;
 
-        Vector2 finalDir = GetBestDirection(toTarget);
+        FlipByDirection(target.x);
 
+        Vector2 finalDir = GetBestDirection(toTarget);
         rb.linearVelocity = finalDir * speed;
     }
 
@@ -53,7 +54,14 @@ public class EnemyMovement : MonoBehaviour
             v.x * Mathf.Sin(rad) + v.y * Mathf.Cos(rad)
         );
     }
+    void FlipByDirection(float xDir)
+    {
+        if (Mathf.Abs(xDir) < 0.01f) return;
 
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Sign(xDir) * Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
     public void Stop()
     {
         rb.linearVelocity = Vector2.zero;

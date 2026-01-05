@@ -5,9 +5,10 @@ public class EnemyController : MonoBehaviour
     public EnemyStats stats;
 
     [Header("Components")]
-    public EnemyHealthController health;
+    public EnemyBase enemyBase;
     public EnemyMovement movement;
     public EnemySensor sensor;
+    public EnemyAnimationController anim;
 
     [HideInInspector] public Transform player;
 
@@ -17,15 +18,14 @@ public class EnemyController : MonoBehaviour
     public EnemyIdleState idleState;
     public EnemyChaseState chaseState;
     public EnemyAttackState attackState;
-    //public EnemyDeadState deadState;
+    public EnemyDeadState deadState;
 
     void Awake()
     {
+        enemyBase = GetComponent<EnemyBase>();
         movement = GetComponent<EnemyMovement>();
         sensor = GetComponent<EnemySensor>();
-        health = GetComponent<EnemyHealthController>();
-
-        health.OnDeath += HandleDeath;
+        anim = GetComponent<EnemyAnimationController>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -36,17 +36,7 @@ public class EnemyController : MonoBehaviour
         idleState = new EnemyIdleState(this);
         chaseState = new EnemyChaseState(this);
         attackState = new EnemyAttackState(this);
-        //deadState = new EnemyDeadState(this);
-    }
-
-    private void OnDestroy()
-    {
-        health.OnDeath -= HandleDeath;
-    }
-
-    private void HandleDeath()
-    {
-        ChangeState(new EnemyDeadState(this));
+        deadState = new EnemyDeadState(this);
     }
     
     void Start()
@@ -67,7 +57,11 @@ public class EnemyController : MonoBehaviour
     public void ChangeState(IEnemyState newState)
     {
         if (currentState == newState) return;
-
+        Debug.Log(
+            $"[EnemyFSM] {gameObject.name}: " +
+            $"{currentState?.GetType().Name ?? "None"} → {newState.GetType().Name}",
+            this
+        );
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();
@@ -82,4 +76,36 @@ public class EnemyController : MonoBehaviour
     {
         return Vector2.Distance(transform.position, player.position) <= stats.attackRange;
     }
+
+    public void FaceTarget(Vector2 targetPos)
+    {
+        Vector2 dir = targetPos - (Vector2)transform.position;
+
+        if (Mathf.Abs(dir.x) < 0.01f) return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (stats == null) return;
+
+        // Detect Range
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, stats.detectRange);
+
+        // Attack Range
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stats.attackRange);
+
+        // Nếu là melee enemy
+        if (stats.enemyType == EnemyAttackType.Melee)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, stats.meleeStopRange);
+        }
+    }
+
 }

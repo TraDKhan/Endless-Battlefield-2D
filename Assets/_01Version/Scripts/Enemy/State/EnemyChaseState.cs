@@ -8,10 +8,9 @@ public class EnemyChaseState : IEnemyState
     {
         this.enemy = enemy;
     }
-
     public void Enter()
     {
-        // Play run animation nếu có
+        enemy.anim.SetMoving(true);
     }
 
     public void Update()
@@ -67,6 +66,7 @@ public class EnemyChaseState : IEnemyState
         else
         {
             enemy.movement.Stop();
+            enemy.ChangeState(enemy.attackState);
         }
     }
 
@@ -91,6 +91,7 @@ public class EnemyChaseState : IEnemyState
         else
         {
             enemy.movement.Stop();
+            enemy.ChangeState(enemy.attackState);
         }
     }
     public void Exit()

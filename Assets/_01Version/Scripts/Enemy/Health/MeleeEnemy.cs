@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
 
-public class MeleeEnemy : EnemyBase
+public class MeleeEnemy : MonoBehaviour
 {
     private Vector2 moveDir;
 
-    protected override void ResetState()
-    {
-        moveDir = Vector2.zero;
-    }
+    //protected override void ResetState()
+    //{
+    //    moveDir = Vector2.zero;
+    //}
 
-    protected override void OnSpawned()
-    {
-        // spawn effect / sound
-    }
+    //protected override void OnSpawned()
+    //{
+    //    // spawn effect / sound
+    //}
 
-    void Update()
-    {
-        if (!isAlive || target == null) return;
+    //void Update()
+    //{
+    //    if (!isAlive || target == null) return;
 
-        moveDir = (target.position - transform.position).normalized;
-        transform.Translate(moveDir * stats.moveSpeed * Time.deltaTime);
-    }
+    //    moveDir = (target.position - transform.position).normalized;
+    //    transform.Translate(moveDir * stats.moveSpeed * Time.deltaTime);
+    //}
 }

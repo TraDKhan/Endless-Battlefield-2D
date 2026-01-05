@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5303d934f7d08741a39cc6a9ef8c6fe, type: 3}
-  m_Name: Meele Enemy 1
+  m_Name: Meele Enemy
   m_EditorClassIdentifier: 
   enemyType: 0
-  moveSpeed: 2.5
-  detectRange: 10
-  attackRange: 0.7
-  attackCooldown: 1
+  maxHealth: 100
   damage: 1
-  meleeStopRange: 0.6
+  moveSpeed: 2.5
+  detectRange: 5
+  attackRange: 1.2
+  attackCooldown: 1
+  meleeStopRange: 1.1
   meleeTolerance: 0.1
   preferredRange: 4
   rangeTolerance: 0.5

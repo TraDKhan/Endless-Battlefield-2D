@@ -1,46 +1,48 @@
-﻿using UnityEngine;
-
-public class EnemyAttackState : IEnemyState
+﻿public class EnemyAttackState : IEnemyState
 {
     EnemyController enemy;
-    float lastAttackTime;
+    IEnemyAttack attack;
 
     public EnemyAttackState(EnemyController enemy)
     {
         this.enemy = enemy;
+        attack = enemy.GetComponent<IEnemyAttack>();
     }
 
     public void Enter()
     {
-        Debug.Log("Enter Attack State");
         enemy.movement.Stop();
-        lastAttackTime = Time.time - enemy.stats.attackCooldown;
+        enemy.anim.SetMoving(false);
+        enemy.FaceTarget(enemy.player.position);
+
+        TryStartAttack();
     }
 
     public void Update()
     {
-        float dist = Vector2.Distance(enemy.transform.position, enemy.player.position);
+        if (!enemy.IsPlayerDetected())
+        {
+            enemy.ChangeState(enemy.idleState);
+            return;
+        }
 
-        if (dist > enemy.stats.attackRange + 0.2f)
+        if (!enemy.IsInAttackRange())
         {
             enemy.ChangeState(enemy.chaseState);
             return;
         }
 
-        if (Time.time - lastAttackTime >= enemy.stats.attackCooldown)
-        {
-            Attack();
-            lastAttackTime = Time.time;
-        }
+        TryStartAttack();
+        attack.UpdateAttack();
     }
 
-    void Attack()
+
+    void TryStartAttack()
     {
-        Debug.Log("Enemy melee attack!");
-        // Gọi animation
-        // Gây damage cho player
-    }
+        if (!attack.CanAttack) return;
 
+        attack.StartAttack();
+    }
     public void FixedUpdate() { }
 
     public void Exit() { }

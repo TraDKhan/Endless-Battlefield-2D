@@ -54,6 +54,7 @@ public enum ItemRarity
 public enum EnemyAttackType
 {
     Melee,
+    Charge,
     Ranged
 }
 
