@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveName: Wave 1
   enemies:
-  - enemyPrefab: {fileID: 1310987893427050181, guid: 7341e916944747144a506fe83b8689b9, type: 3}
+  - enemyPrefab: {fileID: 2484597863641456937, guid: 2539b9943265efa49b60e65f4ee8d3e6, type: 3}
     count: 10
-  - enemyPrefab: {fileID: 4155775762062943043, guid: e4d5be93a784a0748831bb64edf1e145, type: 3}
+  - enemyPrefab: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
     count: 5
   groups:
   - groupName: AAA
     enemies:
-    - enemyPrefab: {fileID: 1310987893427050181, guid: 7341e916944747144a506fe83b8689b9, type: 3}
+    - enemyPrefab: {fileID: 1809125044350354637, guid: ea9636591e0a7f946809ba2b05965d91, type: 3}
       count: 10
-    - enemyPrefab: {fileID: 4929142223484118432, guid: a29fc48b76dd90248904f581f187266d, type: 3}
+    - enemyPrefab: {fileID: 6114853448046589499, guid: de8e52100df320e498bbb4603f85c543, type: 3}
       count: 10
     groupCount: 2
-    groupRadius: 4
+    groupRadius: 5.16
   isSpawnGroup: 1

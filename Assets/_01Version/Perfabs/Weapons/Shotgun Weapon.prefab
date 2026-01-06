@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -97830157
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 1275589539659018210, guid: daa43114ecf685b46b7bd0552d73af30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -128,6 +128,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  rotateToFireDirection: 1
+  rotationOffset: 0
+  flipSpriteByDirection: 1
   spreadAngle: 30
 --- !u!114 &29863311422611903
 MonoBehaviour:

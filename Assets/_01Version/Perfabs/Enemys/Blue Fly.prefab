@@ -19,7 +19,8 @@ GameObject:
   - component: {fileID: 6615683074200022403}
   - component: {fileID: 3608108337265266340}
   - component: {fileID: 3440351174102747371}
-  m_Layer: 0
+  - component: {fileID: 6512238299843710069}
+  m_Layer: 6
   m_Name: Blue Fly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,3 +281,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 65353347356988172}
+--- !u!114 &6512238299843710069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484597863641456937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2484597863641456937}

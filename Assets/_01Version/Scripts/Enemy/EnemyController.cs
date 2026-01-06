@@ -55,11 +55,6 @@ public class EnemyController : MonoBehaviour
     public void ChangeState(IEnemyState newState)
     {
         if (currentState == newState) return;
-        Debug.Log(
-            $"[EnemyFSM] {gameObject.name}: " +
-            $"{currentState?.GetType().Name ?? "None"} → {newState.GetType().Name}",
-            this
-        );
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();

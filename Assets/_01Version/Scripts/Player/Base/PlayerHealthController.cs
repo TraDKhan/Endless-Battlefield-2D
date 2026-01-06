@@ -41,6 +41,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     {
         if (damage <= 0) return;
 
+        Debug.Log("Nhận " + damage);
         CurrentHealth -= damage;
         if (CurrentHealth < 0) CurrentHealth = 0;
 

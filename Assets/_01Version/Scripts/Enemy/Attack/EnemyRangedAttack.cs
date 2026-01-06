@@ -98,7 +98,7 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
         {
             case ProjectileMode.Position:
                 return new ExplosionDamageEffect(
-                    0.3f,
+                    3f,
                     2f,
                     playerLayer
                 );

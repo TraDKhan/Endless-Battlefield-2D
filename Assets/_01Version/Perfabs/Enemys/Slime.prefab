@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2609465117916331311}
   - component: {fileID: 6316423778873976156}
   - component: {fileID: 1679657956193471040}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1250123013
-  m_SortingLayer: 7
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 5463189583543264802, guid: 15d0bd90bb8567642aac7eadef4875c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

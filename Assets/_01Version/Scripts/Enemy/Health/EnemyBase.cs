@@ -33,15 +33,13 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
     public virtual void OnSpawn()
     {
         isAlive = true;
-        health.ResetHealth();
-
+        health.Init(stats.maxHealth);        
         OnSpawned();
     }
 
     public virtual void OnDespawn()
     {
-        isAlive = false;
-        health.Init(stats.maxHealth);
+        isAlive = false;        
         StopAllCoroutines();
         ClearRuntimeEvents();
     }
