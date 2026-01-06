@@ -67,3 +67,15 @@ public enum EnemyStateType
     Dead
 }
 #endregion
+
+public enum ProjectileType
+{
+    Arrow,
+    Bomb,
+    Poison
+}
+public enum ProjectileMode
+{
+    Direction,
+    Position
+}

@@ -2,10 +2,17 @@
 
 public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
 {
+    [Header("Stats")]
     [SerializeField] private EnemyStats stats;
+
+    [Header("Projectile")]
     [SerializeField] private GameObject projectilePrefab;
+
+    [Header("References")]
     [SerializeField] private EnemyAnimationController anim;
     [SerializeField] private Transform firePoint;
+
+    [Header("Target")]
     [SerializeField] private LayerMask playerLayer;
 
     private float lastAttackTime;
@@ -20,6 +27,11 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
         //Shoot();
     }
 
+    public void UpdateAttack() { }
+    public void StopAttack()
+    {
+        anim.StopAttack();
+    }
     private void Shoot()
     {
         Transform target = FindPlayer();
@@ -31,17 +43,34 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
 
     void SpawnProjectile(Vector2 direction)
     {
-        Projectile bullet = ObjectPoolManager.Instance.Spawn<Projectile>(projectilePrefab);
-        if (bullet == null) return;
+        ProjectileCore projectile = ObjectPoolManager.Instance.Spawn<ProjectileCore>(projectilePrefab);
 
-        bullet.transform.position = firePoint.position;
-        bullet.Init(
+        if (projectile == null) return;
+
+        projectile.transform.position = firePoint.position;
+
+        IProjectileEffect effect = CreateProjectileEffect();
+        projectile.Initialize(
             direction,
             stats.damage,
-            3
+            stats.projectileSpeed,
+            effect
         );
     }
+    private IProjectileEffect CreateProjectileEffect()
+    {
+        switch (stats.projectileType)
+        {
+            case ProjectileType.Bomb:
+                return new ExplosionDamageEffect(0.3f, 2.5f, playerLayer);
 
+            case ProjectileType.Poison:
+                return new PoisonProjectileEffect(4f, 2);
+
+            default:
+                return new DirectDamageEffect();
+        }
+    }
     protected Transform FindPlayer()
     {
         Collider2D player = Physics2D.OverlapCircle(
@@ -52,10 +81,29 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
 
         return player != null ? player.transform : null;
     }
+    private void SpawnBomb()
+    {
+        Transform target = FindPlayer();
+        if (target == null) return;
 
-    public void UpdateAttack() { }
-    public void StopAttack() 
-    { 
-        anim.StopAttack();
+        Vector2 targetPosition = target.position; // SNAPSHOT 🔥
+
+        ProjectileCore bomb = ObjectPoolManager.Instance.Spawn<ProjectileCore>(projectilePrefab);
+
+        bomb.transform.position = firePoint.position;
+
+        IProjectileEffect effect =
+            new ExplosionDamageEffect(
+                delay: 1.2f,
+                radius: 2.5f,
+                layer: playerLayer
+            );
+
+        bomb.InitializeTargetPosition(
+            targetPosition,
+            stats.damage,
+            stats.projectileSpeed,
+            effect
+        );
     }
 }

@@ -13,6 +13,10 @@ public class EnemyStats : ScriptableObject
     public int damage = 1;
     public float attackCooldown = 1f;
 
+    [Header("Tấn công tầm xa")]
+    public ProjectileType projectileType;
+    public float projectileSpeed = 3f;
+
     [Header("Khoảng cách")]
     public float attackRange = 1.2f; //tấn công
     public float personalSpace = 0.6f; // khoảng cách với player
