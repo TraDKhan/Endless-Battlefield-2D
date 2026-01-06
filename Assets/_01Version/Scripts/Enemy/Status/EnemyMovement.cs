@@ -8,6 +8,8 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask obstacleLayer;
 
     Rigidbody2D rb;
+    Vector2 cachedDir;
+    float avoidTimer;
 
     void Awake()
     {
@@ -18,14 +20,27 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 toTarget = (target - rb.position).normalized;
 
-        FlipByDirection(target.x);
+        FlipByDirection(toTarget.x);
 
-        Vector2 finalDir = GetBestDirection(toTarget);
+        //Vector2 finalDir = GetBestDirection(toTarget);
+        Vector2 finalDir;
+
+        if (Vector2.Distance(rb.position, target) < 6f)
+            finalDir = GetBestDirection(toTarget);
+        else
+            finalDir = toTarget;
+
         rb.linearVelocity = finalDir * speed;
     }
 
     Vector2 GetBestDirection(Vector2 desired)
     {
+        if (avoidTimer > 0)
+        {
+            avoidTimer -= Time.deltaTime;
+            return cachedDir;
+        }
+
         // Danh sách hướng kiểm tra
         Vector2[] dirs =
         {
@@ -39,7 +54,11 @@ public class EnemyMovement : MonoBehaviour
         foreach (var dir in dirs)
         {
             if (!Physics2D.Raycast(rb.position, dir, avoidDistance, obstacleLayer))
+            {
+                cachedDir = dir;
+                avoidTimer = 0.1f; // giữ hướng 0.1s
                 return dir;
+            }
         }
 
         // Bị kẹt → lùi nhẹ

@@ -7,10 +7,9 @@ public class EnemyController : MonoBehaviour
     [Header("Components")]
     public EnemyBase enemyBase;
     public EnemyMovement movement;
-    public EnemySensor sensor;
     public EnemyAnimationController anim;
 
-    [HideInInspector] public Transform player;
+    public Transform player;
 
     IEnemyState currentState;
 
@@ -24,7 +23,6 @@ public class EnemyController : MonoBehaviour
     {
         enemyBase = GetComponent<EnemyBase>();
         movement = GetComponent<EnemyMovement>();
-        sensor = GetComponent<EnemySensor>();
         anim = GetComponent<EnemyAnimationController>();
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -41,7 +39,7 @@ public class EnemyController : MonoBehaviour
     
     void Start()
     {
-        ChangeState(idleState);
+        ChangeState(chaseState);
     }
 
     void Update()
@@ -67,13 +65,9 @@ public class EnemyController : MonoBehaviour
         currentState?.Enter();
     }
 
-    public bool IsPlayerDetected()
-    {
-        return sensor.IsPlayerInRange(stats.detectRange);
-    }
-
     public bool IsInAttackRange()
     {
+        if (player == null) return false;
         return Vector2.Distance(transform.position, player.position) <= stats.attackRange;
     }
 
@@ -92,20 +86,11 @@ public class EnemyController : MonoBehaviour
     {
         if (stats == null) return;
 
-        // Detect Range
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, stats.detectRange);
-
         // Attack Range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, stats.attackRange);
 
-        // Nếu là melee enemy
-        if (stats.enemyType == EnemyAttackType.Melee)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, stats.meleeStopRange);
-        }
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, stats.personalSpace);
     }
-
 }

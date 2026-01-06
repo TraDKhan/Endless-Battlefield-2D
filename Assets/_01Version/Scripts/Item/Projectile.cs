@@ -21,15 +21,8 @@ public class Projectile : MonoBehaviour, IPoolable
         penetrationLeft = maxPenetration;
     }
 
-    public void OnDespawn()
-    {
-        // reset nếu cần
-    }
-    public void Init(
-        Vector2 direction,
-        int dmg,
-        float speed
-    )
+    public void OnDespawn() { }
+    public void Init(Vector2 direction, int dmg, float speed)
     {
         moveDir = direction.normalized;
         damage = dmg;

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 4200762892865267812}
   - component: {fileID: 2370909599476489137}
   - component: {fileID: 5590746256366940295}
-  - component: {fileID: 8731353593121993426}
   - component: {fileID: 8188792731101652385}
   - component: {fileID: 8281818105282583133}
   - component: {fileID: 4741796729026902773}
@@ -213,7 +212,6 @@ MonoBehaviour:
   stats: {fileID: 11400000, guid: 95923c5a35031a748b53b5f864765a55, type: 2}
   enemyBase: {fileID: 4200762892865267812}
   movement: {fileID: 5590746256366940295}
-  sensor: {fileID: 8731353593121993426}
   anim: {fileID: 8188792731101652385}
   player: {fileID: 0}
 --- !u!114 &5590746256366940295
@@ -230,22 +228,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avoidDistance: 0.6
   sideAngle: 35
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!114 &8731353593121993426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846302508575641821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c1fca33a6fac44ebc87f4834ed94d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 512

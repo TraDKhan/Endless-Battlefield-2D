@@ -1,4 +1,6 @@
-﻿public class EnemyAttackState : IEnemyState
+﻿using UnityEngine;
+
+public class EnemyAttackState : IEnemyState
 {
     EnemyController enemy;
     IEnemyAttack attack;
@@ -21,11 +23,7 @@
 
     public void Update()
     {
-        if (!enemy.IsPlayerDetected())
-        {
-            enemy.ChangeState(enemy.idleState);
-            return;
-        }
+        enemy.FaceTarget(enemy.player.position);
 
         if (!enemy.IsInAttackRange())
         {
@@ -33,11 +31,9 @@
             return;
         }
 
-        enemy.FaceTarget(enemy.player.position);
         TryStartAttack();
         attack.UpdateAttack();
     }
-
 
     void TryStartAttack()
     {
@@ -47,5 +43,8 @@
     }
     public void FixedUpdate() { }
 
-    public void Exit() { }
+    public void Exit() 
+    {
+        attack.StopAttack();
+    }
 }

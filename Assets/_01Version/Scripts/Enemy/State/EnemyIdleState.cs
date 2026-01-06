@@ -14,11 +14,7 @@ public class EnemyIdleState : IEnemyState
 
     public void Update()
     {
-        if (enemy.IsPlayerDetected())
-        {
-            enemy.ChangeState(enemy.chaseState);
-            return;
-        }            
+                  
     }
 
     public void FixedUpdate() { }

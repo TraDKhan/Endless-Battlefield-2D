@@ -14,12 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 2
   maxHealth: 100
-  damage: 1
   moveSpeed: 2.5
-  detectRange: 5
-  attackRange: 1.2
+  damage: 1
   attackCooldown: 1
-  meleeStopRange: 0.4
-  meleeTolerance: 0.1
-  preferredRange: 3
-  rangeTolerance: 0.5
+  attackRange: 2.14
+  personalSpace: 0.78

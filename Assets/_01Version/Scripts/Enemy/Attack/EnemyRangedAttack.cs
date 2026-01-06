@@ -46,7 +46,7 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
     {
         Collider2D player = Physics2D.OverlapCircle(
             transform.position,
-            stats.preferredRange,
+            stats.attackRange,
             playerLayer
         );
 
@@ -57,20 +57,5 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
     public void StopAttack() 
     { 
         anim.StopAttack();
-    }
-    private void OnDrawGizmos()
-    {
-        if (stats == null) return;
-        //Detect Range 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, stats.detectRange);
-        //Attack Range 
-        Gizmos.color = Color.red; Gizmos.DrawWireSphere(transform.position, stats.attackRange);
-        //Nếu là melee enemy
-        if (stats.enemyType == EnemyAttackType.Ranged)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, stats.preferredRange);
-        }
     }
 }

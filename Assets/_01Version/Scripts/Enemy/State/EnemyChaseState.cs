@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyChaseState : IEnemyState
 {
@@ -15,18 +14,15 @@ public class EnemyChaseState : IEnemyState
 
     public void Update()
     {
-        // Mất player → Idle
-        if (!enemy.IsPlayerDetected())
-        {
-            enemy.ChangeState(enemy.idleState);
-            return;
-        }
+        if (!enemy.player) return;
 
-        //Đủ gần → Attack(sau này)
-         if (enemy.IsInAttackRange())
+        enemy.FaceTarget(enemy.player.position);
+
+        bool check = Vector2.Distance(enemy.transform.position, enemy.player.position) > enemy.stats.attackRange * 0.6f;
+        // Đủ gần → Attack
+        if (enemy.IsInAttackRange() && check)
         {
             enemy.ChangeState(enemy.attackState);
-            return;
         }
     }
 
@@ -37,13 +33,13 @@ public class EnemyChaseState : IEnemyState
         Vector2 pos = enemy.transform.position;
         Vector2 playerPos = enemy.player.position;
 
-        Vector2 toPlayer = (playerPos - pos).normalized;
         float dist = Vector2.Distance(pos, playerPos);
+        Vector2 toPlayer = (playerPos - pos).normalized;
 
         switch (enemy.stats.enemyType)
         {
             case EnemyAttackType.Melee:
-                HandleMelee(pos, playerPos, toPlayer, dist);
+                HandleMelee(playerPos);
                 break;
 
             case EnemyAttackType.Ranged:
@@ -52,47 +48,36 @@ public class EnemyChaseState : IEnemyState
         }
     }
 
-    void HandleMelee(Vector2 pos, Vector2 playerPos, Vector2 toPlayer, float dist)
+    void HandleMelee(Vector2 playerPos)
     {
-        float stop = enemy.stats.meleeStopRange;
-        float tol = enemy.stats.meleeTolerance;
-
-        // Còn xa → tiến
-        if (dist > stop + tol)
-        {
-            enemy.movement.MoveTowards(playerPos, enemy.stats.moveSpeed);
-        }
-        // Đã đủ gần → dừng / ép
-        else
-        {
-            enemy.movement.Stop();
-            enemy.ChangeState(enemy.attackState);
-        }
+        enemy.movement.MoveTowards(playerPos, enemy.stats.moveSpeed);
     }
-
 
     void HandleRanged(Vector2 pos, Vector2 playerPos, Vector2 toPlayer, float dist)
     {
-        float pref = enemy.stats.preferredRange;
-        float tol = enemy.stats.rangeTolerance;
+        float attackRange = enemy.stats.attackRange;
+        float speed = enemy.stats.moveSpeed;
 
         // Quá xa → tiến
-        if (dist > pref + tol)
+        if (dist > attackRange)
         {
             enemy.movement.MoveTowards(playerPos, enemy.stats.moveSpeed);
+            return;
         }
-        // Quá gần → lùi
-        else if (dist < pref - tol)
-        {
-            Vector2 retreatTarget = pos - toPlayer;
-            enemy.movement.MoveTowards(retreatTarget, enemy.stats.moveSpeed);
-        }
-        // Đúng tầm → strafe
-        else
+
+        //trong tầm đánh đổi state
+        if (dist > attackRange * 0.6f)
         {
             enemy.movement.Stop();
-            enemy.ChangeState(enemy.attackState);
+            return;
         }
+
+        // Player áp sát → lùi chậm
+        Vector2 retreatTarget = pos - toPlayer;
+        enemy.movement.MoveTowards(
+            retreatTarget,
+            speed * 0.5f
+        );
     }
     public void Exit()
     {
