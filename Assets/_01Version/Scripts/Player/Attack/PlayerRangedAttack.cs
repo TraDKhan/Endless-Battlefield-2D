@@ -75,7 +75,7 @@ public class PlayerRangedAttack : MonoBehaviour, IPlayerAttackController
         if (proj != null)
         {
             //proj.damage = statsCtrl.Stats.totalDamage;
-            proj.SetTarget(((MonoBehaviour)target).transform); // giả sử projectile có logic SetTarget
+            //proj.SetTarget(((MonoBehaviour)target).transform); // giả sử projectile có logic SetTarget
         }
 
         Debug.Log("Bắn projectile vào: " + ((MonoBehaviour)target).name);

@@ -1,15 +1,17 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerHealthController : MonoBehaviour
+public class PlayerHealthController : MonoBehaviour, IDamageable
 {
     static public PlayerHealthController Instance;
     public int CurrentHealth { get; private set; }
     public int MaxHealth { get; private set; }
+    public bool isDead;
 
     public event Action<int, int> OnHealthChanged;    
     public event Action OnDeath;
 
+    public bool IsDead => isDead;
     private bool initialized = false;
 
     private void Awake()

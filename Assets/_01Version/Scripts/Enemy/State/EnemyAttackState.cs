@@ -13,6 +13,7 @@
     {
         enemy.movement.Stop();
         enemy.anim.SetMoving(false);
+
         enemy.FaceTarget(enemy.player.position);
 
         TryStartAttack();
@@ -32,6 +33,7 @@
             return;
         }
 
+        enemy.FaceTarget(enemy.player.position);
         TryStartAttack();
         attack.UpdateAttack();
     }
