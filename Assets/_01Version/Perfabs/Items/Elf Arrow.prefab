@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4831539530889336487}
   - component: {fileID: 386436455882130386}
   - component: {fileID: 7649304219513271781}
-  - component: {fileID: 931680487704100651}
-  - component: {fileID: 8501960686591629429}
+  - component: {fileID: -4920428901643282514}
+  - component: {fileID: -5075578064102531980}
   m_Layer: 0
   m_Name: Elf Arrow
   m_TagString: Untagged
@@ -136,7 +136,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.42018723, y: 0.019944668}
   m_EdgeRadius: 0
---- !u!114 &931680487704100651
+--- !u!114 &-4920428901643282514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,12 +145,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9202343707709957090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe8a1c0e582ef4440b6547a789b2ee00, type: 3}
+  m_Script: {fileID: 11500000, guid: 87173be1bec5de64ca27c2016c93dc46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 3
-  maxPenetration: 1
---- !u!114 &8501960686591629429
+  maxLifetime: 5
+--- !u!114 &-5075578064102531980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

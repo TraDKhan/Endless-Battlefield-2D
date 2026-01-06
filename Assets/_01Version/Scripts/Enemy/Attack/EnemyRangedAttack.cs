@@ -32,17 +32,18 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
     {
         anim.StopAttack();
     }
-    private void Shoot()
+
+    // gọi trong animation
+    public void Shoot()
+    {
+        SpawnProjectile();
+    }
+
+    private void SpawnProjectile()
     {
         Transform target = FindPlayer();
         if (target == null) return;
 
-        Vector2 direction = (target.position - firePoint.position).normalized;
-        SpawnProjectile(direction);
-    }
-
-    void SpawnProjectile(Vector2 direction)
-    {
         ProjectileCore projectile = ObjectPoolManager.Instance.Spawn<ProjectileCore>(projectilePrefab);
 
         if (projectile == null) return;
@@ -50,22 +51,57 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
         projectile.transform.position = firePoint.position;
 
         IProjectileEffect effect = CreateProjectileEffect();
-        projectile.Initialize(
+
+        switch (stats.projectileMode)
+        {
+            case ProjectileMode.Position:
+                SpawnToTargetPosition(projectile, target, effect);
+                break;
+
+            default:
+                SpawnToDirection(projectile, target, effect);
+                break;
+        }
+    }
+
+
+    private void SpawnToDirection(ProjectileCore projectile, Transform target, IProjectileEffect effect)
+    {
+        if (target == null) return;
+
+        Vector2 direction = (target.position - firePoint.position).normalized;
+
+        projectile.InitializeDirection(
             direction,
             stats.damage,
             stats.projectileSpeed,
             effect
         );
     }
+    private void SpawnToTargetPosition(ProjectileCore projectile, Transform target, IProjectileEffect effect)
+    {
+        if (target == null) return;
+
+        Vector2 targetPosition = target.position; // SNAPSHOT 🔥
+
+        projectile.InitializeTargetPosition(
+            targetPosition,
+            stats.damage,
+            stats.projectileSpeed,
+            effect
+        );
+    }
+
     private IProjectileEffect CreateProjectileEffect()
     {
-        switch (stats.projectileType)
+        switch (stats.projectileMode)
         {
-            case ProjectileType.Bomb:
-                return new ExplosionDamageEffect(0.3f, 2.5f, playerLayer);
-
-            case ProjectileType.Poison:
-                return new PoisonProjectileEffect(4f, 2);
+            case ProjectileMode.Position:
+                return new ExplosionDamageEffect(
+                    0.3f,
+                    2f,
+                    playerLayer
+                );
 
             default:
                 return new DirectDamageEffect();
@@ -80,30 +116,5 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
         );
 
         return player != null ? player.transform : null;
-    }
-    private void SpawnBomb()
-    {
-        Transform target = FindPlayer();
-        if (target == null) return;
-
-        Vector2 targetPosition = target.position; // SNAPSHOT 🔥
-
-        ProjectileCore bomb = ObjectPoolManager.Instance.Spawn<ProjectileCore>(projectilePrefab);
-
-        bomb.transform.position = firePoint.position;
-
-        IProjectileEffect effect =
-            new ExplosionDamageEffect(
-                delay: 1.2f,
-                radius: 2.5f,
-                layer: playerLayer
-            );
-
-        bomb.InitializeTargetPosition(
-            targetPosition,
-            stats.damage,
-            stats.projectileSpeed,
-            effect
-        );
     }
 }

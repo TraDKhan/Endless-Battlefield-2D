@@ -68,12 +68,6 @@ public enum EnemyStateType
 }
 #endregion
 
-public enum ProjectileType
-{
-    Arrow,
-    Bomb,
-    Poison
-}
 public enum ProjectileMode
 {
     Direction,

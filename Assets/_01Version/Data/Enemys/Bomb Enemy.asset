@@ -17,7 +17,7 @@ MonoBehaviour:
   moveSpeed: 2.5
   damage: 1
   attackCooldown: 1
-  projectileType: 1
+  projectileMode: 1
   projectileSpeed: 3
-  attackRange: 1.35
+  attackRange: 2.71
   personalSpace: 0.6

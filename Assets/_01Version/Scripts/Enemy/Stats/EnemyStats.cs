@@ -14,7 +14,7 @@ public class EnemyStats : ScriptableObject
     public float attackCooldown = 1f;
 
     [Header("Tấn công tầm xa")]
-    public ProjectileType projectileType;
+    public ProjectileMode projectileMode;
     public float projectileSpeed = 3f;
 
     [Header("Khoảng cách")]

@@ -10,7 +10,6 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void SetMoving(bool value)
     {
-        Debug.LogWarning("Moving" + value);
         animator.SetBool(IsMoving, value);
     }
 
