@@ -12,17 +12,41 @@ public class PlayerLevelSystem : MonoBehaviour
     // ===== EVENT =====
     public event Action<int, int, int> OnExpChanged; // curExp, nextExp, level
     public event Action<int> OnLevelUp;              // newLevel
-    
+    [ContextMenu("ADD LEVEL")]
+    public void AddEXP1()
+    {
+        CurrentEXP += 1000;
+
+        while (true)
+        {
+            int expNeeded = ExpToNextLevel;
+            if (CurrentEXP < expNeeded)
+                break;
+
+            CurrentEXP -= expNeeded;
+            CurrentLevel++;
+
+            OnLevelUp?.Invoke(CurrentLevel);
+        }
+
+        OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
+    }
     public void AddEXP(int value)
     {
         if (value <= 0) return;
 
         CurrentEXP += value;
 
-        while (CurrentEXP >= ExpToNextLevel)
+        while (true)
         {
-            CurrentEXP -= ExpToNextLevel;
-            LevelUp();
+            int expNeeded = ExpToNextLevel;
+            if (CurrentEXP < expNeeded)
+                break;
+
+            CurrentEXP -= expNeeded;
+            CurrentLevel++;
+
+            OnLevelUp?.Invoke(CurrentLevel);
         }
 
         OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
@@ -32,8 +56,6 @@ public class PlayerLevelSystem : MonoBehaviour
     private void LevelUp()
     {
         CurrentLevel++;
-
-        Debug.Log($"LEVEL UP → {CurrentLevel}");
 
         OnLevelUp?.Invoke(CurrentLevel);
         OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);

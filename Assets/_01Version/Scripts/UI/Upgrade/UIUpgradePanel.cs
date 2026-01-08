@@ -51,7 +51,7 @@ public class UIUpgradePanel : MonoBehaviour
                 upgrade,
                 () =>
                 {
-                    upgrade.Apply();
+                    PlayerUpgradeSystem.Instance.SelectUpgrade(upgrade);
                     Hide();
                 }
             );

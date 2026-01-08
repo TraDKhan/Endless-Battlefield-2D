@@ -15,7 +15,6 @@ public class PlayerUpgradeSystem : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("PlayerUpgradeSystem Awake");
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -25,7 +24,6 @@ public class PlayerUpgradeSystem : MonoBehaviour
     }
     private void Start()
     {
-        Debug.Log("PlayerUpgradeSystem Start");
         var playerLevelSystem = FindFirstObjectByType<PlayerLevelSystem>();
         if (playerLevelSystem != null)
         {
@@ -33,32 +31,43 @@ public class PlayerUpgradeSystem : MonoBehaviour
         }
     }
 
-    private void HandleLevelUp(int newLevel)
+    private void Update()
     {
-        pendingLevelUps++;
-
-        ShowUpgrade();
+        TryShowUpgrade();
     }
-    private void ShowUpgrade()
-    {
-        if (isChoosingUpgrade)
-            return;
+    public void HandleLevelUp(int newLevel)
+    {     
+        pendingLevelUps++;
+        Debug.Log($"LevelUp → pending = {pendingLevelUps}");
+        //TryShowUpgrade();
+    }
 
-        if (pendingLevelUps <= 0)
-            return;
+    private void TryShowUpgrade()
+    {
+        if (isChoosingUpgrade) return;
+        if (pendingLevelUps <= 0) return;
 
         isChoosingUpgrade = true;
         pendingLevelUps--;
 
-        Debug.Log("Show Upgrade UI");
+        Debug.Log($"Show Upgrade UI | Pending: {pendingLevelUps}");
 
+        Time.timeScale = 0f;
         List<UpgradeData> options = GetRandomUpgrades(3);
         OnShowUpgradeUI?.Invoke(options);
     }
 
+
     // ================= RANDOM KHÔNG TRÙNG =================
     List<UpgradeData> GetRandomUpgrades(int count)
     {
+        //List<UpgradeData> validPool = new List<UpgradeData>();
+        if (upgradePool == null || upgradePool.Count == 0)
+        {
+            Debug.LogWarning("Upgrade pool is empty or null!");
+            return new List<UpgradeData>();
+        }
+
         List<UpgradeData> validPool = new List<UpgradeData>();
 
         foreach (var up in upgradePool)
@@ -80,14 +89,13 @@ public class PlayerUpgradeSystem : MonoBehaviour
     }
 
     // ===== APPLY =================
-    public void ApplyUpgrade(UpgradeData data)
+    public void SelectUpgrade(UpgradeData data)
     {
+        Debug.Log("Upgrade");
         data.Apply();
 
         isChoosingUpgrade = false;
-
-        // thử mở tiếp nếu còn level chưa xử lý
-        ShowUpgrade();
+        Time.timeScale = 1f;
     }
 
     // ===== PLAYER STAT =====
