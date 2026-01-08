@@ -78,11 +78,15 @@ public class LightningSkill : BaseSkill
 
     private void SpawnLightningFX(Vector3 targetPos)
     {
-        Vector3 start = targetPos + Vector3.up * 4f;
+        Debug.Log("Spawm");
 
-        var fx = Instantiate(lightningEffectPrefab);
-        fx.GetComponent<LightningEffect>()
-          ?.Init(start, targetPos);
+        var fx = Instantiate(lightningEffectPrefab, targetPos, Quaternion.identity);
+
+        var effect = fx.GetComponent<LightningEffect>();
+        if (effect != null)
+        {
+            effect.Init(damage, enemyLayer);
+        }
     }
 
     // =========================
@@ -95,4 +99,15 @@ public class LightningSkill : BaseSkill
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(owner.position, radius);
     }
+    private void Start()
+    {
+        if (owner == null)
+        {
+            owner = GameObject.FindWithTag("Player")?.transform;
+            stats = CharacterStatsController.Instance.Stats;
+
+            OnUnlock(); // ép mở skill
+        }
+    }
+
 }

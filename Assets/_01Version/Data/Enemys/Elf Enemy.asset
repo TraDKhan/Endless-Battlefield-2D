@@ -10,16 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5303d934f7d08741a39cc6a9ef8c6fe, type: 3}
-  m_Name: Enemy
+  m_Name: Elf Enemy
   m_EditorClassIdentifier: 
-  enemyType: 0
-  maxHealth: 100
-  damage: 1
+  enemyType: 2
+  maxHealth: 458
   moveSpeed: 2.5
-  detectRange: 5
-  attackRange: 1.6
+  damage: 1
   attackCooldown: 1
-  meleeStopRange: 1.5
-  meleeTolerance: 0.1
-  preferredRange: 4
-  rangeTolerance: 0.5
+  projectileMode: 0
+  projectileSpeed: 3
+  attackRange: 2.14
+  personalSpace: 0.78

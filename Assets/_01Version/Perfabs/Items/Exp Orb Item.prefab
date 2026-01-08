@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
-  value: 45
+  value: 5
   detectRadius: 3
   moveSpeed: 5
   pickupDistance: 0.5

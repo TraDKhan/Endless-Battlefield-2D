@@ -45,4 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeData: {fileID: 11400000, guid: 7201cdcaa3fb92a4680fe4ab363759d3, type: 2}
-  lightningEffectPrefab: {fileID: 3884268980274007626, guid: c3910ca83170e9b43b13c0489084ef3f, type: 3}
+  lightningEffectPrefab: {fileID: 8194268359840909472, guid: 31538b13ec2d83e4ca3fd999f34ef111, type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64

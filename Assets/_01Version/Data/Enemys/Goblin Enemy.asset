@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5303d934f7d08741a39cc6a9ef8c6fe, type: 3}
-  m_Name: Range Enemy
+  m_Name: Goblin Enemy
   m_EditorClassIdentifier: 
-  enemyType: 2
-  maxHealth: 100
+  enemyType: 0
+  maxHealth: 320
   moveSpeed: 2.5
   damage: 1
   attackCooldown: 1
-  attackRange: 2.14
-  personalSpace: 0.78
+  projectileMode: 0
+  projectileSpeed: 3
+  attackRange: 1.2
+  personalSpace: 0.6

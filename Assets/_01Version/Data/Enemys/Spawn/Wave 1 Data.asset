@@ -27,4 +27,4 @@ MonoBehaviour:
       count: 10
     groupCount: 2
     groupRadius: 5.16
-  isSpawnGroup: 1
+  isSpawnGroup: 0

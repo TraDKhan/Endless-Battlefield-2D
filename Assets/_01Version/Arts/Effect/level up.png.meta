@@ -1,67 +1,37 @@
 fileFormatVersion: 2
-guid: 53d6ebab93ec3054596523060bff6538
+guid: 85a50b08f0a27c74c96390d9b75e90d1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8105560202311982947
-    second: Thunder_0
+      213: 973285989598542056
+    second: level up_0
   - first:
-      213: 6004246453574341425
-    second: Thunder_1
+      213: 1637382897645695221
+    second: level up_1
   - first:
-      213: -6931400272290298348
-    second: Thunder_2
+      213: 3417863031842086260
+    second: level up_2
   - first:
-      213: -190768770967579635
-    second: Thunder_3
+      213: -7109356399864011019
+    second: level up_3
   - first:
-      213: -8380717354252690839
-    second: Thunder_4
+      213: 3075892418335731940
+    second: level up_4
   - first:
-      213: 8799301134570436102
-    second: Thunder_5
+      213: 129561174917180279
+    second: level up_5
   - first:
-      213: 1761046200499368084
-    second: Thunder_6
+      213: -7423776471653021339
+    second: level up_6
   - first:
-      213: 7037491742420195075
-    second: Thunder_7
+      213: 4987872752220191717
+    second: level up_7
   - first:
-      213: 3124090762863060102
-    second: Thunder_8
+      213: -3505278249717531262
+    second: level up_8
   - first:
-      213: -5115337406901343682
-    second: Thunder_9
-  - first:
-      213: 6316668372097886032
-    second: Thunder_10
-  - first:
-      213: 924418762217591757
-    second: Thunder_11
-  - first:
-      213: -233549916652994903
-    second: Thunder_12
-  - first:
-      213: -7415237113034372892
-    second: Thunder_13
-  - first:
-      213: -3021923920303750328
-    second: Thunder_14
-  - first:
-      213: -6127067529278685481
-    second: Thunder_15
-  - first:
-      213: -6273266519053821224
-    second: Thunder_16
-  - first:
-      213: 1376359215811867530
-    second: Thunder_17
-  - first:
-      213: 1000053904435206401
-    second: Thunder_18
-  - first:
-      213: 1814722923549630026
-    second: Thunder_19
+      213: 5452003044484344596
+    second: level up_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,7 +78,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -170,155 +140,221 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Thunder_0
+      name: level up_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 3
+        y: 194
+        width: 186
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b8448c1c203c0a946bea16e1b86873f2
-      internalID: -1132189032
+      spriteID: 8e8b2ea637ec18d00800000000000000
+      internalID: 973285989598542056
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thunder_1
+      name: level up_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 195
+        y: 194
+        width: 186
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 0c587e5442afdf14eb2edcb6a5ed07c0
-      internalID: 572401272
+      spriteID: 5f0b877f11729b610800000000000000
+      internalID: 1637382897645695221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thunder_2
+      name: level up_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 388
+        y: 194
+        width: 185
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 16cc56294c41ba144b0034301ca6d8d6
-      internalID: 1580562284
+      spriteID: 47d13ef9150be6f20800000000000000
+      internalID: 3417863031842086260
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thunder_3
+      name: level up_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 580
+        y: 195
+        width: 184
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 875aa79d45efdae41bf2189bf2a9be1d
-      internalID: -2042784730
+      spriteID: 5f6a474750e765d90800000000000000
+      internalID: -7109356399864011019
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thunder_4
+      name: level up_4
       rect:
         serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 772
+        y: 195
+        width: 184
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: e7da2049f715efc4887f846c269ee0f0
-      internalID: -1221388789
+      spriteID: 4e0f7329bd3cfaa20800000000000000
+      internalID: 3075892418335731940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thunder_5
+      name: level up_5
       rect:
         serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 4
+        y: 3
+        width: 185
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: f3a7332d8b96a644abf2854533d10d9b
-      internalID: -126088830
+      spriteID: 77bee9fb33b4cc100800000000000000
+      internalID: 129561174917180279
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thunder_6
+      name: level up_6
       rect:
         serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 196
+        y: 2
+        width: 185
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: bf643854da9406e4f850124b03850ecb
-      internalID: 1975318545
+      spriteID: 5690833c1a279f890800000000000000
+      internalID: -7423776471653021339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: level up_7
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 2
+        width: 185
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eb3fec57db783540800000000000000
+      internalID: 4987872752220191717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: level up_8
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 2
+        width: 186
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28dfeaee000ca5fc0800000000000000
+      internalID: -3505278249717531262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: level up_9
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 2
+        width: 186
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41b66dc02e769ab40800000000000000
+      internalID: 5452003044484344596
       vertices: []
       indices: 
       edges: []
@@ -327,7 +363,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: efbf7148318017b40a7055e0c5a93a32
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -336,14 +372,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Thunder_0: -1132189032
-      Thunder_1: 572401272
-      Thunder_2: 1580562284
-      Thunder_3: -2042784730
-      Thunder_4: -1221388789
-      Thunder_5: -126088830
-      Thunder_6: 1975318545
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

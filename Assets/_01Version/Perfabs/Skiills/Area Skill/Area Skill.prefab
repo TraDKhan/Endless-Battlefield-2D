@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeData: {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
-  areaEffectPrefab: {fileID: 5519435523298774649, guid: a41c9c85155787e4cabd2e6062c00fcf, type: 3}
+  areaEffectPrefab: {fileID: 3432052335991829970, guid: 14773729a4b885240a4d4763a34441c5, type: 3}
   tickInterval: 0.3

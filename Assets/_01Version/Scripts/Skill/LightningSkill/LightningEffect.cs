@@ -2,42 +2,36 @@
 
 public class LightningEffect : MonoBehaviour
 {
-    public LineRenderer line;
-    public int segments = 12;         // số điểm zigzag
-    public float jaggedness = 0.2f;   // độ zigzag
-    public float duration = 0.15f;    // tồn tại bao lâu
+    private int damage;
+    private LayerMask enemyLayer;
 
-    private float timer;
-
-    public void Init(Vector3 start, Vector3 end)
+    public void Init(int damage, LayerMask enemyLayer)
     {
-        if (line == null) line = GetComponent<LineRenderer>();
-
-        line.positionCount = segments;
-
-        for (int i = 0; i < segments; i++)
-        {
-            float t = (float)i / (segments - 1);
-
-            // vị trí đường thẳng
-            Vector3 pos = Vector3.Lerp(start, end, t);
-
-            // thêm zigzag
-            pos.x += Random.Range(-jaggedness, jaggedness);
-            pos.y += Random.Range(-jaggedness, jaggedness);
-
-            line.SetPosition(i, pos);
-        }
-
-        timer = duration;
+        this.damage = damage;
+        this.enemyLayer = enemyLayer;
     }
 
-    private void Update()
+    // GỌI TỪ ANIMATION EVENT
+    public void DealDamage()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
+        Collider2D hit = Physics2D.OverlapCircle(
+            transform.position,
+            0.6f,
+            enemyLayer
+        );
+
+        if (hit == null) return;
+
+        var hp = hit.GetComponent<EnemyHealthController>();
+        if (hp != null)
         {
-            Destroy(gameObject);
+            hp.TakeDamage(damage);
         }
+    }
+
+    // GỌI TỪ ANIMATION EVENT CUỐI
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 }

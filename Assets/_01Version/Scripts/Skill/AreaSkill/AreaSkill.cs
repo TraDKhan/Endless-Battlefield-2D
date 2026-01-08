@@ -78,6 +78,7 @@ public class AreaSkill : BaseSkill
     // =========================
     private void SpawnArea()
     {
+        Debug.Log("Spawm skill");
         areaInstance = Instantiate(areaEffectPrefab, owner);
         areaInstance.transform.localPosition = Vector3.zero;
 
@@ -116,5 +117,15 @@ public class AreaSkill : BaseSkill
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(owner.position, radius);
+    }
+    private void Start()
+    {
+        if (owner == null)
+        {
+            owner = GameObject.FindWithTag("Player")?.transform;
+            stats = CharacterStatsController.Instance.Stats;
+
+            OnUnlock(); // ép mở skill
+        }
     }
 }

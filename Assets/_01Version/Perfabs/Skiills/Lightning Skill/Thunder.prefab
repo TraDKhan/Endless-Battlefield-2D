@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3669257599610005973}
   - component: {fileID: 7551467969053699818}
   - component: {fileID: 2898872462487531382}
+  - component: {fileID: -8986271931383143227}
   m_Layer: 0
   m_Name: Thunder
   m_TagString: Untagged
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -97830157
-  m_SortingLayer: 5
+  m_SortingLayerID: -1042873421
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -2042784730, guid: 53d6ebab93ec3054596523060bff6538, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -110,3 +111,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8986271931383143227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8194268359840909472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3db1551bdc4fa34ea0c0702655635ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

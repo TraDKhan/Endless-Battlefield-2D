@@ -19,7 +19,7 @@ MonoBehaviour:
     range
   skillPrefab: {fileID: 1665424553307335825, guid: 111871338b7591f408b0cdcd6422227d, type: 3}
   levels:
-  - damage: 100
+  - damage: 2
     cooldown: 2
     duration: 2
     radius: 5
@@ -39,4 +39,18 @@ MonoBehaviour:
     radius: 7
     projectileCount: 3
     lightningCount: 3
+    range: 7
+  - damage: 300
+    cooldown: 2
+    duration: 2
+    radius: 7
+    projectileCount: 3
+    lightningCount: 4
+    range: 7
+  - damage: 300
+    cooldown: 2
+    duration: 2
+    radius: 7
+    projectileCount: 3
+    lightningCount: 5
     range: 7
