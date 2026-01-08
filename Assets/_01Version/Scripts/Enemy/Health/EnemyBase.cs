@@ -14,6 +14,7 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
     protected bool isAlive;
 
     public event Action<EnemyBase> OnEnemyDead;
+    public event Action OnDeath;
 
     #region Unity
     protected virtual void Awake()
@@ -52,6 +53,7 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
 
         isAlive = false;
         OnEnemyDead?.Invoke(this);
+        OnDeath?.Invoke();
 
         // 🔥 TRẢ VỀ POOL NGAY TẠI ĐÂY
         ObjectPoolManager.Instance.Despawn(this);

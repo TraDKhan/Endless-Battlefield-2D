@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerLevelSystem : MonoBehaviour
 {
@@ -11,19 +12,7 @@ public class PlayerLevelSystem : MonoBehaviour
     // ===== EVENT =====
     public event Action<int, int, int> OnExpChanged; // curExp, nextExp, level
     public event Action<int> OnLevelUp;              // newLevel
-    [ContextMenu ("EXP")]
-    public void AddEXP1()
-    {
-        CurrentEXP += 100;
-
-        while (CurrentEXP >= ExpToNextLevel)
-        {
-            CurrentEXP -= ExpToNextLevel;
-            LevelUp();
-        }
-
-        OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
-    }
+    
     public void AddEXP(int value)
     {
         if (value <= 0) return;

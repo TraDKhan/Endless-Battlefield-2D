@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   weaponName: Pistol
-  baseDamage: 1
-  baseCooldown: 0.2
+  baseDamage: 62
+  baseCooldown: 0.97
   baseCritChance: 1
   baseProjectileCount: 1
   baseRange: 5

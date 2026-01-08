@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 1188650562947747964}
   - component: {fileID: 5341184762549206902}
   - component: {fileID: -6611782382439081003}
+  - component: {fileID: 6914328287681408779}
   m_Layer: 6
   m_Name: Goblin
   m_TagString: Untagged
@@ -129,7 +130,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ff07070ada46ba346859c7c78365badd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -256,8 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454a8b35e60f99945b16c10a0634f20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  currentHealth: 0
 --- !u!114 &5341184762549206902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,11 +271,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 5d6743e17430a474a93d04905236b10b, type: 2}
   anim: {fileID: 1120408695173923521}
-  attackRadius: 1.2
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
-  drawGizmos: 1
 --- !u!114 &-6611782382439081003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,3 +287,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1809125044350354637}
+--- !u!114 &6914328287681408779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809125044350354637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214d0f3940365bf4fb7613b28d2b567c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropTable: {fileID: 11400000, guid: 5ce1259fb6363c346a17dc6ba8746c3a, type: 2}

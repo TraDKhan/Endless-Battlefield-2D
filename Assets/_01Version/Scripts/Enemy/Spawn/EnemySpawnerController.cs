@@ -23,6 +23,15 @@ public class EnemySpawnerController : MonoBehaviour
 
     void Start()
     {
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                player = playerObj.transform;
+            else
+                Debug.LogError("Player not found");
+        }
+
         StartCoroutine(WaveLoop());
     }
 

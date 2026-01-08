@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4741796729026902773}
   - component: {fileID: 3401367221151210532}
   - component: {fileID: -3210179608005951128}
+  - component: {fileID: 241216700736192305}
   m_Layer: 6
   m_Name: Elf
   m_TagString: Untagged
@@ -131,7 +132,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ff07070ada46ba346859c7c78365badd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -303,6 +304,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropTable: {fileID: 11400000, guid: 9cf4c50ecb28c8948835f35d4d264a10, type: 2}
+--- !u!114 &241216700736192305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846302508575641821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214d0f3940365bf4fb7613b28d2b567c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropTable: {fileID: 11400000, guid: 7a8cef92e7f671b468ae5d1dbd045d48, type: 2}
 --- !u!1 &8919128308040376423
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,12 +10,22 @@ public class PlayerUpgradeSystem : MonoBehaviour
     public List<UpgradeData> upgradePool;
     public event Action<List<UpgradeData>> OnShowUpgradeUI;
 
+    private int pendingLevelUps = 0;
+    private bool isChoosingUpgrade = false;
+
     private void Awake()
     {
+        Debug.Log("PlayerUpgradeSystem Awake");
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
     }
     private void Start()
     {
+        Debug.Log("PlayerUpgradeSystem Start");
         var playerLevelSystem = FindFirstObjectByType<PlayerLevelSystem>();
         if (playerLevelSystem != null)
         {
@@ -25,12 +35,23 @@ public class PlayerUpgradeSystem : MonoBehaviour
 
     private void HandleLevelUp(int newLevel)
     {
-        OnLevelUp(); // gọi hàm hiện UI
-    }
+        pendingLevelUps++;
 
-    // ================= LEVEL UP =================
-    public void OnLevelUp()
+        ShowUpgrade();
+    }
+    private void ShowUpgrade()
     {
+        if (isChoosingUpgrade)
+            return;
+
+        if (pendingLevelUps <= 0)
+            return;
+
+        isChoosingUpgrade = true;
+        pendingLevelUps--;
+
+        Debug.Log("Show Upgrade UI");
+
         List<UpgradeData> options = GetRandomUpgrades(3);
         OnShowUpgradeUI?.Invoke(options);
     }
@@ -62,6 +83,11 @@ public class PlayerUpgradeSystem : MonoBehaviour
     public void ApplyUpgrade(UpgradeData data)
     {
         data.Apply();
+
+        isChoosingUpgrade = false;
+
+        // thử mở tiếp nếu còn level chưa xử lý
+        ShowUpgrade();
     }
 
     // ===== PLAYER STAT =====

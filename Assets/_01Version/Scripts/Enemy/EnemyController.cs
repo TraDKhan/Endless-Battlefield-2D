@@ -55,6 +55,7 @@ public class EnemyController : MonoBehaviour
     public void ChangeState(IEnemyState newState)
     {
         if (currentState == newState) return;
+        Debug.Log(newState.ToString());
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();

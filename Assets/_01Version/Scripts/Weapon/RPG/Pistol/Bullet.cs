@@ -71,6 +71,8 @@ public class Bullet : MonoBehaviour, IPoolable
         if (!other.TryGetComponent<IDamageable>(out var target))
             return;
 
+        if (other.CompareTag("Player")) return;
+
         ApplyDamage(target);
 
         penetrationLeft--; 

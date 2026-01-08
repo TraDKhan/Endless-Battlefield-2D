@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 3608108337265266340}
   - component: {fileID: 3440351174102747371}
   - component: {fileID: 6512238299843710069}
+  - component: {fileID: -5613232334626206827}
   m_Layer: 6
   m_Name: Blue Fly
   m_TagString: Untagged
@@ -129,7 +130,7 @@ CircleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ff07070ada46ba346859c7c78365badd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -242,8 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454a8b35e60f99945b16c10a0634f20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  currentHealth: 0
 --- !u!114 &3608108337265266340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,3 +293,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2484597863641456937}
+--- !u!114 &-5613232334626206827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2484597863641456937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 214d0f3940365bf4fb7613b28d2b567c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropTable: {fileID: 11400000, guid: 9cf4c50ecb28c8948835f35d4d264a10, type: 2}

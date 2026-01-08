@@ -33,7 +33,7 @@ public class ExplosionDamageEffect : IProjectileEffect
             if (hit.TryGetComponent<IDamageable>(out var damageable))
                 damageable.TakeDamage(projectile.Damage);
         }
-
+        Debug.Log("De Spawn");
         projectile.Despawn();
     }
 }

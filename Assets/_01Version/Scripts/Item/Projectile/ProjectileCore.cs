@@ -74,8 +74,7 @@ public class ProjectileCore : MonoBehaviour, IPoolable
 
         if (moveMode == ProjectileMode.Direction)
         {
-            transform.position +=
-                (Vector3)(moveDirection * speed * Time.deltaTime);
+            transform.position += (Vector3)(moveDirection * speed * Time.deltaTime);
         }
         else
         {
@@ -117,7 +116,10 @@ public class ProjectileCore : MonoBehaviour, IPoolable
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!other.CompareTag("Player")) return;
         projectileEffect?.Apply(this, other);
+
+        if(moveMode == ProjectileMode.Direction)
         Despawn();
     }
 }

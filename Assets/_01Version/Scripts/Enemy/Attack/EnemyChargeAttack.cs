@@ -37,7 +37,17 @@ public class EnemyChargeAttack : MonoBehaviour, IEnemyAttack
     }
 
     private State currentState = State.Idle;
-
+    private void Start()
+    {
+        if (target == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+                target = playerObj.transform;
+            else
+                Debug.LogError("Player not found");
+        }
+    }
     #region IEnemyAttack
 
     public bool CanAttack =>

@@ -19,11 +19,6 @@ public class PlayerEnergyController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
         Instance = this;
 
         CharacterStatsController.OnStatsReady += OnStatsReady;

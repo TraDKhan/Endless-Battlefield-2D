@@ -7,11 +7,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IEnemyAttack
     [SerializeField] private EnemyAnimationController anim;
 
     [Header("Attack Settings")]
-    [SerializeField] private float attackRadius = 1.2f;
     [SerializeField] private LayerMask targetLayer;
-
-    [Header("Debug")]
-    [SerializeField] private bool drawGizmos = true;
 
     private float lastAttackTime;
 
@@ -48,7 +44,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IEnemyAttack
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             origin,
-            attackRadius,
+            stats.attackRange,
             targetLayer
         );
 
@@ -64,28 +60,5 @@ public class EnemyMeleeAttack : MonoBehaviour, IEnemyAttack
                 ?.TakeDamage(stats.damage);
         }
     }
-
-    #endregion
-
-    #region Gizmos
-
-    private void OnDrawGizmosSelected()
-    {
-        if (!drawGizmos) return;
-
-        Vector3 origin = transform.position;
-        float facing = Application.isPlaying
-            ? Mathf.Sign(transform.localScale.x)
-            : 1f;
-
-        Vector3 forward = Vector3.right * facing;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(origin, attackRadius);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(origin, origin + forward * attackRadius);
-    }
-
     #endregion
 }

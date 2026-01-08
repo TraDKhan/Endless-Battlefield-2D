@@ -3,6 +3,20 @@
 public class ItemDropper : MonoBehaviour
 {
     [SerializeField] private DropTable dropTable;
+    void Awake()
+    {
+        var enemyBase = GetComponent<EnemyBase>();
+        if (enemyBase != null)
+            enemyBase.OnDeath += DropItems;
+    }
+
+    void OnDestroy()
+    {
+        var enemyBase = GetComponent<EnemyBase>();
+        if (enemyBase != null)
+            enemyBase.OnDeath -= DropItems;
+    }
+
 
     [ContextMenu ("Drop Item")]
     public void DropItems()

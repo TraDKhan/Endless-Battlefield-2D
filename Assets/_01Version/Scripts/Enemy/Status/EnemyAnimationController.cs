@@ -20,7 +20,6 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void SetAttackPhase(AttackAnimPhase phase)
     {
-        Debug.Log($"AttackPhase = {animator.GetInteger("AttackPhase")}");
         animator.SetInteger(AttackPhase, (int)phase);
     }
 

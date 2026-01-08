@@ -4,7 +4,8 @@ enum ItemType
 {
     None,
     Heart,
-    Exp
+    Exp, 
+    Coin
 }
 public class ItemPickup : MonoBehaviour
 {
