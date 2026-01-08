@@ -19,24 +19,38 @@ MonoBehaviour:
     targets within that zone
   skillPrefab: {fileID: 3262302093279694285, guid: d3cdca581c199594791e50b0108da9f9, type: 3}
   levels:
-  - damage: 100
+  - damage: 2
     cooldown: 2
     duration: 5
-    radius: 5
+    radius: 0.5
     projectileCount: 0
     lightningCount: 0
     range: 0
-  - damage: 250
+  - damage: 4
     cooldown: 2
     duration: 5
-    radius: 5
+    radius: 1
+    projectileCount: 0
+    lightningCount: 0
+    range: 0
+  - damage: 6
+    cooldown: 2
+    duration: 6
+    radius: 1.5
+    projectileCount: 0
+    lightningCount: 0
+    range: 0
+  - damage: 8
+    cooldown: 2
+    duration: 6
+    radius: 1.5
     projectileCount: 0
     lightningCount: 0
     range: 0
   - damage: 250
     cooldown: 2
     duration: 6
-    radius: 6
+    radius: 1.5
     projectileCount: 0
     lightningCount: 0
     range: 0

@@ -4896,9 +4896,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePool:
-  - {fileID: 11400000, guid: 7201cdcaa3fb92a4680fe4ab363759d3, type: 2}
-  - {fileID: 11400000, guid: 7201cdcaa3fb92a4680fe4ab363759d3, type: 2}
-  - {fileID: 11400000, guid: 7201cdcaa3fb92a4680fe4ab363759d3, type: 2}
+  - {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
+  - {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
+  - {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
 --- !u!114 &990947894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7251,7 +7251,7 @@ MonoBehaviour:
   minSpawnRadius: 6
   maxSpawnRadius: 10
   allWaves:
-  - {fileID: 11400000, guid: b2ba801688ec8c64fabc9235ce6a46d5, type: 2}
+  - {fileID: 11400000, guid: 1a7e94b356ef11f49b96ea0352478e2d, type: 2}
   spawnInterval: 0.6
   timeBetweenWaves: 3
 --- !u!1 &1408508516
@@ -10000,9 +10000,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432798238542077531, guid: d3cdca581c199594791e50b0108da9f9, type: 3}
+      propertyPath: areaEffectPrefab
+      value: 
+      objectReference: {fileID: 2266211268081501898, guid: 14773729a4b885240a4d4763a34441c5, type: 3}
     - target: {fileID: 3262302093279694285, guid: d3cdca581c199594791e50b0108da9f9, type: 3}
       propertyPath: m_Name
       value: Area Skill
+      objectReference: {fileID: 0}
+    - target: {fileID: 3262302093279694285, guid: d3cdca581c199594791e50b0108da9f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208891840678862585, guid: d3cdca581c199594791e50b0108da9f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10827,6 +10835,10 @@ PrefabInstance:
     - target: {fileID: 3432052335991829970, guid: 14773729a4b885240a4d4763a34441c5, type: 3}
       propertyPath: m_Name
       value: Pipo Btleffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432052335991829970, guid: 14773729a4b885240a4d4763a34441c5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -3,12 +3,12 @@
 public class AreaSkill : BaseSkill
 {
     [Header("Effect")]
-    [SerializeField] private GameObject areaEffectPrefab;
+    [SerializeField] private AreaEffect areaEffectPrefab;
     [SerializeField] private float tickInterval = 0.3f;
 
-    private GameObject areaInstance;
+    private AreaEffect activeEffect;
 
-    // cached level data
+    // ===== Level data =====
     private int damage;
     private float radius;
     private float duration;
@@ -16,7 +16,6 @@ public class AreaSkill : BaseSkill
 
     private float cooldownTimer;
     private float lifeTimer;
-    private float tickTimer;
 
     // =========================
     // INIT
@@ -24,14 +23,10 @@ public class AreaSkill : BaseSkill
     public override void Init(Transform ownerTransform, CharacterStats characterStats)
     {
         base.Init(ownerTransform, characterStats);
-
         transform.SetParent(owner);
         transform.localPosition = Vector3.zero;
     }
 
-    // =========================
-    // BASESKILL
-    // =========================
     protected override void ApplyLevelData()
     {
         var data = upgradeData.levels[Level - 1];
@@ -41,7 +36,7 @@ public class AreaSkill : BaseSkill
         duration = data.duration;
         cooldown = data.cooldown;
 
-        cooldownTimer = cooldown;
+        cooldownTimer = 0f; // cast ngay khi unlock / level up
     }
 
     // =========================
@@ -49,74 +44,46 @@ public class AreaSkill : BaseSkill
     // =========================
     private void Update()
     {
-        if (Level <= 0) return;
+        if (Level <= 0 || owner == null) return;
 
-        if (areaInstance == null)
+        if (activeEffect == null)
         {
             cooldownTimer -= Time.deltaTime;
             if (cooldownTimer <= 0f)
-                SpawnArea();
+                SpawnEffect();
         }
         else
         {
             lifeTimer -= Time.deltaTime;
-            tickTimer -= Time.deltaTime;
-
-            if (tickTimer <= 0f)
-            {
-                DealDamage();
-                tickTimer = tickInterval;
-            }
-
             if (lifeTimer <= 0f)
-                DestroyArea();
+                DespawnEffect();
         }
     }
 
     // =========================
     // CORE
     // =========================
-    private void SpawnArea()
+    private void SpawnEffect()
     {
-        Debug.Log("Spawm skill");
-        areaInstance = Instantiate(areaEffectPrefab, owner);
-        areaInstance.transform.localPosition = Vector3.zero;
+        activeEffect = Instantiate(areaEffectPrefab, owner);
+        activeEffect.transform.localPosition = Vector3.zero;
 
-        if (areaInstance.TryGetComponent(out CircleCollider2D col))
-            col.radius = radius;
+        activeEffect.Init(damage, tickInterval);
+
+        // 🔑 Scale = diameter (Prefab scale = 1 tương ứng radius = 0.5)
+        float diameter = radius * 2f;
+        activeEffect.SetScale(diameter);
 
         lifeTimer = duration;
-        tickTimer = tickInterval;
     }
 
-    private void DestroyArea()
+    private void DespawnEffect()
     {
-        Destroy(areaInstance);
-        areaInstance = null;
+        if (activeEffect != null)
+            Destroy(activeEffect.gameObject);
+
+        activeEffect = null;
         cooldownTimer = cooldown;
-    }
-
-    private void DealDamage()
-    {
-        var hits = Physics2D.OverlapCircleAll(
-            owner.position,
-            radius,
-            LayerMask.GetMask("Enemy")
-        );
-
-        foreach (var h in hits)
-            h.GetComponent<EnemyHealthController>()?.TakeDamage(damage);
-    }
-
-    // =========================
-    // GIZMOS
-    // =========================
-    private void OnDrawGizmosSelected()
-    {
-        if (owner == null) return;
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(owner.position, radius);
     }
     private void Start()
     {
