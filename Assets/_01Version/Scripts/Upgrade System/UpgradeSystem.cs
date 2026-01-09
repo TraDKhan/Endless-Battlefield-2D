@@ -103,7 +103,7 @@ public class UpgradeSystem : MonoBehaviour
 
         CharacterStatsController.Instance.Stats.RecalculateStats();
     }
-    public float CalculatePlayerStatBonus(PlayerStatType stat)
+    public float GetPlayerStatBonus(PlayerStatType stat)
     {
         int level = GetPlayerStatLevel(stat);
 

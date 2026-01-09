@@ -64,17 +64,17 @@ public class CharacterStats
         if (upgradeSystem != null)
         {
             maxHealth += Mathf.RoundToInt(
-                upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.MaxHealth)
+                upgradeSystem.GetPlayerStatBonus(PlayerStatType.MaxHealth)
             );
 
             maxEnergy += Mathf.RoundToInt(
-                upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.Energy)
+                upgradeSystem.GetPlayerStatBonus(PlayerStatType.Energy)
             );
 
-            moveSpeed += upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.MoveSpeed);
+            moveSpeed += upgradeSystem.GetPlayerStatBonus(PlayerStatType.MoveSpeed);
 
             armor += Mathf.RoundToInt(
-                upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.Armor)
+                upgradeSystem.GetPlayerStatBonus(PlayerStatType.Armor)
             );
         }
 

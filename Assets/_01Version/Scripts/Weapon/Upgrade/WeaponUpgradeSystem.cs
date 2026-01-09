@@ -8,8 +8,8 @@ public class WeaponUpgradeSystem : MonoBehaviour
 
     public event Action OnWeaponStatsChanged;
 
-    private Dictionary<WeaponStatType, StatUpgradeProgress> statUpgrades
-        = new Dictionary<WeaponStatType, StatUpgradeProgress>();
+    private Dictionary<WeaponStatType, StatUpgrade> statUpgrades
+        = new Dictionary<WeaponStatType, StatUpgrade>();
 
     private void Awake()
     {
@@ -19,12 +19,19 @@ public class WeaponUpgradeSystem : MonoBehaviour
     // =============================
     // APPLY UPGRADE
     // =============================
-    public void ApplyUpgrade(WeaponStatType stat, float value)
+    public void ApplyUpgrade(WeaponStatType stat, float valuePerLevel)
     {
-        if (!statUpgrades.ContainsKey(stat))
-            statUpgrades[stat] = new StatUpgradeProgress(value);
+        if (!statUpgrades.TryGetValue(stat, out var upgrade))
+        {
+            upgrade = new StatUpgrade
+            {
+                level = 0,
+                valuePerLevel = valuePerLevel
+            };
+        }
 
-        statUpgrades[stat].LevelUp();
+        upgrade.level++;
+        statUpgrades[stat] = upgrade;
 
         OnWeaponStatsChanged?.Invoke();
     }
@@ -34,15 +41,24 @@ public class WeaponUpgradeSystem : MonoBehaviour
     // =============================
     public float GetWeaponStatBonus(WeaponStatType stat)
     {
-        return statUpgrades.TryGetValue(stat, out var p)
-            ? p.GetValue()
+        return statUpgrades.TryGetValue(stat, out var upgrade)
+            ? upgrade.Value
             : 0;
     }
 
     public int GetStatLevel(WeaponStatType stat)
     {
-        return statUpgrades.TryGetValue(stat, out var p)
-            ? p.Level
+        return statUpgrades.TryGetValue(stat, out var upgrade)
+            ? upgrade.level
             : 0;
     }
+}
+
+[System.Serializable]
+public struct StatUpgrade
+{
+    public int level;
+    public float valuePerLevel;
+
+    public float Value => level * valuePerLevel;
 }
