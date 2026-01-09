@@ -197,7 +197,10 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Bullet Cooldown_0: 6201451030192042776
+      Bullet Cooldown_1: 635127228699262585
+      Bullet Cooldown_2: 4378226715600128331
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
