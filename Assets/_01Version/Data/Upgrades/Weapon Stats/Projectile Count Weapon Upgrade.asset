@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeType: 1
   description: Increase the number of bullets fired
   statType: 3
-  value: 1
+  valuePerLevel: 1
   maxLevel: 17

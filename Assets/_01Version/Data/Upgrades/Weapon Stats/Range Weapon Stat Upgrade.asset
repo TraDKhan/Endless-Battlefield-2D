@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeType: 1
   description: Increase the range of weapons
   statType: 4
-  value: 2
+  valuePerLevel: 1
   maxLevel: 5

@@ -19,5 +19,5 @@ MonoBehaviour:
 
 '
   statType: 2
-  value: 1
+  valuePerLevel: 1
   maxLevel: 5

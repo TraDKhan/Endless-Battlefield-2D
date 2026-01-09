@@ -30,7 +30,8 @@ public enum UpgradeType
 {
     PlayerStat,
     WeaponStat,
-    Skill
+    Skill,
+    NewWeapon
 }
 #endregion
 // ===== Item

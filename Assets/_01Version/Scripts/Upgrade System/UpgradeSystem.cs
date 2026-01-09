@@ -154,5 +154,27 @@ public class UpgradeSystem : MonoBehaviour
         return 0;
     }
     #endregion
+
+    #region WEAPON
+    // ===== WEAPON ===== \\
+    HashSet<WeaponUpgradeData> unlockedWeapons = new();
+
+    public void UnlockWeapon(WeaponUpgradeData data)
+    {
+        if (unlockedWeapons.Contains(data))
+            return;
+
+        unlockedWeapons.Add(data);
+
+        var weapon = Instantiate(data.weaponPrefab);
+        weapon.transform.SetParent(CharacterStatsController.Instance.transform);
+    }
+
+    public bool HasWeapon(WeaponUpgradeData data)
+    {
+        return unlockedWeapons.Contains(data);
+    }
+    #endregion
+
 }
 

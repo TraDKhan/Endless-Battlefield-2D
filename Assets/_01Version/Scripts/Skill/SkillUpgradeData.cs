@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Upgrade/Skill Upgrade Data")]
 public class SkillUpgradeData : UpgradeData

@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeType: 1
   description: Reduce the firing time of weapons
   statType: 1
-  value: 0.3
+  valuePerLevel: 1
   maxLevel: 5

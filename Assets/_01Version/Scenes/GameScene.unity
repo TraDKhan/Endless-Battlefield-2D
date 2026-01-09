@@ -4843,9 +4843,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePool:
-  - {fileID: 11400000, guid: 19dab9369bc10d34c91a2fd169a2d837, type: 2}
-  - {fileID: 11400000, guid: abccfaf7458bb5e48aa1e7ccb8804d17, type: 2}
-  - {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
+  - {fileID: 11400000, guid: 4530cab98316aed4fb783c50f13d61b6, type: 2}
+  - {fileID: 11400000, guid: 0e9d35ae7fcbb3b47983205969c47519, type: 2}
+  - {fileID: 11400000, guid: ab2b8a424baa2574c9fbdcf3b31a884e, type: 2}
+  - {fileID: 11400000, guid: 5dccd24ae53fca44e9fa1b50711782d4, type: 2}
 --- !u!114 &990947894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5805,10 +5806,6 @@ PrefabInstance:
     - target: {fileID: 2608027867914496931, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
       propertyPath: m_Name
       value: Pool System
-      objectReference: {fileID: 0}
-    - target: {fileID: 2608027867914496931, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2860315237969356861, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
       propertyPath: m_LocalPosition.x

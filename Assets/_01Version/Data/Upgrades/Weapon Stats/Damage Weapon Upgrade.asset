@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeType: 1
   description: Increase damage dealt
   statType: 0
-  value: 100
+  valuePerLevel: 11
   maxLevel: 5

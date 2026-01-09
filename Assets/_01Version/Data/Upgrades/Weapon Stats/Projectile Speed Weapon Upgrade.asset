@@ -17,5 +17,5 @@ MonoBehaviour:
   upgradeType: 1
   description: Increase the bullet's speed
   statType: 5
-  value: 1
+  valuePerLevel: 1
   maxLevel: 5
