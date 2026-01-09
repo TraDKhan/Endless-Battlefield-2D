@@ -1,5 +1,5 @@
-﻿#region Player
-// ===== Player Stat
+﻿#region PLAYER
+// ===== Player Stat ===== \\
 public enum PlayerStatType
 {
     MaxHealth,
@@ -7,7 +7,7 @@ public enum PlayerStatType
     MoveSpeed,
     Energy
 }
-// ===== Player Movement
+// ===== Player Movement ====== \\
 public enum MoveDirection
 {
     Up = 0,
@@ -18,14 +18,9 @@ public enum MoveDirection
     LeftUp = 5
 }
 #endregion
-// ===== Upgrade
-#region Upgrade
-public enum UpgradeTarget
-{
-    Player,
-    Weapon
-}
 
+#region UPGRADE
+// ===== type ====== \\
 public enum UpgradeType
 {
     PlayerStat,
@@ -34,8 +29,9 @@ public enum UpgradeType
     NewWeapon
 }
 #endregion
-// ===== Item
-#region Item
+
+#region ITEM
+// ===== Item ===== \\
 public enum ItemRarity
 {
     Common,
@@ -45,13 +41,9 @@ public enum ItemRarity
     Legendary
 }
 #endregion
-// ===== Enemy
-#region Enemy
-//public enum EnemyType
-//{
-//    MeeleEnemy, 
-//    RangeEnemy
-//}
+
+#region ENEMY
+// ===== attack ===== \\
 public enum EnemyAttackType
 {
     Melee,
@@ -59,6 +51,7 @@ public enum EnemyAttackType
     Ranged
 }
 
+// ===== state ===== \\
 public enum EnemyStateType
 {
     Idle,
@@ -67,15 +60,17 @@ public enum EnemyStateType
     Reposition,
     Dead
 }
-#endregion
 
+// ===== mode ===== \\
 public enum ProjectileMode
 {
     Direction,
     Position
 }
+#endregion
 
-// ===== WEAPON =====
+#region WEAPON
+// ===== stats ===== \\
 public enum WeaponStatType
 {
     Damage,
@@ -86,6 +81,7 @@ public enum WeaponStatType
     ProjectileSpeed
 }
 
+// ===== type ===== \\
 public enum WeaponType
 {
     Pistol,
@@ -93,3 +89,11 @@ public enum WeaponType
     Laser,
     Boomerang
 }
+
+// ===== socket ===== \\
+public enum WeaponSlotType
+{
+    MainHand,
+    OffHand
+}
+#endregion

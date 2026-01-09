@@ -20,3 +20,4 @@ MonoBehaviour:
   baseRange: 5
   baseProjectileSpeed: 3
   projectilePrefab: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}
+  slotType: 1

@@ -159,6 +159,16 @@ public class UpgradeSystem : MonoBehaviour
     // ===== WEAPON ===== \\
     HashSet<WeaponUpgradeData> unlockedWeapons = new();
 
+    //public void UnlockWeapon(WeaponUpgradeData data)
+    //{
+    //    if (unlockedWeapons.Contains(data))
+    //        return;
+
+    //    unlockedWeapons.Add(data);
+
+    //    var weapon = Instantiate(data.weaponPrefab);
+    //    weapon.transform.SetParent(CharacterStatsController.Instance.transform);
+    //}
     public void UnlockWeapon(WeaponUpgradeData data)
     {
         if (unlockedWeapons.Contains(data))
@@ -166,8 +176,16 @@ public class UpgradeSystem : MonoBehaviour
 
         unlockedWeapons.Add(data);
 
-        var weapon = Instantiate(data.weaponPrefab);
-        weapon.transform.SetParent(CharacterStatsController.Instance.transform);
+        var weaponGO = Instantiate(data.weaponPrefab);
+
+        var weapon = weaponGO.GetComponent<Weapon>();
+        var weaponData = weapon.data;
+
+        Transform socket = WeaponSocketController.Instance.GetSocket(weaponData.slotType);
+
+        weaponGO.transform.SetParent(socket);
+        weaponGO.transform.localPosition = Vector3.zero;
+        weaponGO.transform.localRotation = Quaternion.identity;
     }
 
     public bool HasWeapon(WeaponUpgradeData data)

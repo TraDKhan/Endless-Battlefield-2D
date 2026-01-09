@@ -16,4 +16,7 @@ public class WeaponData : ScriptableObject
 
     [Header("Projectile")]
     public GameObject projectilePrefab;
+
+    [Header("Socket")]
+    public WeaponSlotType slotType;
 }

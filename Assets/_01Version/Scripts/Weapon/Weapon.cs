@@ -7,7 +7,6 @@ public abstract class Weapon : MonoBehaviour
     protected WeaponStats stats;
     protected WeaponUpgradeSystem upgradeSystem;
     protected WeaponAnimationController animationController;
-    protected WeaponOrbit orb;
 
     protected float lastFireTime;
 
@@ -24,7 +23,6 @@ public abstract class Weapon : MonoBehaviour
     {
         animationController = GetComponent<WeaponAnimationController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        orb = GetComponent<WeaponOrbit>();
     }
     protected virtual void Start()
     {
