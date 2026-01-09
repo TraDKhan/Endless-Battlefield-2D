@@ -76,6 +76,7 @@ public class CharacterStats
             armor += Mathf.RoundToInt(
                 upgradeSystem.GetPlayerStatBonus(PlayerStatType.Armor)
             );
+            Debug.Log($"Player stats: HP ({maxHealth}) - MP ({maxEnergy}) - Speed ({moveSpeed}) - Amr ({armor})");
         }
 
         OnStatsChanged?.Invoke();

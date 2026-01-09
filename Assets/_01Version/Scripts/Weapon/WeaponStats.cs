@@ -44,7 +44,5 @@ public class WeaponStats
 
         ProjectileSpeed = data.baseProjectileSpeed
             + upgrade.GetWeaponStatBonus(WeaponStatType.ProjectileSpeed);
-
-        Debug.Log($"STATS: ATK ({Damage}) - Col ({Cooldown}) - Crit ({CritChance}) - PrCount ({ProjectileCount}) - Range ({Range}) - Speed ({ProjectileSpeed})");
     }
 }
