@@ -12,13 +12,6 @@ public class WeaponStats
     private WeaponData data;
     private WeaponUpgradeSystem upgrade;
 
-    //public WeaponStats(WeaponData data, WeaponUpgradeSystem upgrade)
-    //{
-    //    this.data = data;
-    //    this.upgrade = upgrade;
-
-    //    Recalculate();
-    //}
     public WeaponStats(WeaponData data)
     {
         this.data = data;
@@ -51,5 +44,7 @@ public class WeaponStats
 
         ProjectileSpeed = data.baseProjectileSpeed
             + upgrade.GetWeaponStatBonus(WeaponStatType.ProjectileSpeed);
+
+        Debug.Log($"STATS: ATK ({Damage}) - Col ({Cooldown}) - Crit ({CritChance}) - PrCount ({ProjectileCount}) - Range ({Range}) - Speed ({ProjectileSpeed})");
     }
 }

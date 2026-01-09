@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02eefd34bcdea6a468e3140f768cce7f, type: 3}
-  m_Name: Projectile Count Weapon Upgrade
+  m_Name: Cooldown Weapon Upgrade
   m_EditorClassIdentifier: 
-  upgradeName: Projectile
-  icon: {fileID: 21300000, guid: 2cfbfaac39d05433db3befcd19af777e, type: 3}
+  upgradeName: Cooldown
+  icon: {fileID: 6201451030192042776, guid: c0d437ba65bd82b4fab861ac88e7ab44, type: 3}
   upgradeType: 1
-  description: Increase the number of bullets fired
-  statType: 3
-  value: 1
-  maxLevel: 17
+  description: Reduce the firing time of weapons
+  statType: 1
+  value: 0.3
+  maxLevel: 5

@@ -38,8 +38,6 @@ public class PlayerUpgradeSystem : MonoBehaviour
     public void HandleLevelUp(int newLevel)
     {     
         pendingLevelUps++;
-        Debug.Log($"LevelUp → pending = {pendingLevelUps}");
-        //TryShowUpgrade();
     }
 
     private void TryShowUpgrade()
@@ -49,8 +47,6 @@ public class PlayerUpgradeSystem : MonoBehaviour
 
         isChoosingUpgrade = true;
         pendingLevelUps--;
-
-        Debug.Log($"Show Upgrade UI | Pending: {pendingLevelUps}");
 
         Time.timeScale = 0f;
         List<UpgradeData> options = GetRandomUpgrades(3);
@@ -157,4 +153,6 @@ public class PlayerUpgradeSystem : MonoBehaviour
 
         return 0;
     }
+    // ===== WEAPON =====
+
 }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02eefd34bcdea6a468e3140f768cce7f, type: 3}
-  m_Name: Projectile Count Weapon Upgrade
+  m_Name: Damage Weapon Upgrade
   m_EditorClassIdentifier: 
-  upgradeName: Projectile
-  icon: {fileID: 21300000, guid: 2cfbfaac39d05433db3befcd19af777e, type: 3}
+  upgradeName: Damage
+  icon: {fileID: 21300000, guid: 6369955c1a43f406eb4d345fbbf87f8d, type: 3}
   upgradeType: 1
-  description: Increase the number of bullets fired
-  statType: 3
-  value: 1
-  maxLevel: 17
+  description: Increase damage dealt
+  statType: 0
+  value: 100
+  maxLevel: 5

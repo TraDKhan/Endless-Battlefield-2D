@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02eefd34bcdea6a468e3140f768cce7f, type: 3}
-  m_Name: Projectile Count Weapon Upgrade
+  m_Name: Crit Weapon Upgrade
   m_EditorClassIdentifier: 
-  upgradeName: Projectile
-  icon: {fileID: 21300000, guid: 2cfbfaac39d05433db3befcd19af777e, type: 3}
+  upgradeName: Crit
+  icon: {fileID: -402947830134935616, guid: 081fbf87331cb674d86485edc2400e85, type: 3}
   upgradeType: 1
-  description: Increase the number of bullets fired
-  statType: 3
+  description: 'Increase the critical hit rate of weapons
+
+'
+  statType: 2
   value: 1
-  maxLevel: 17
+  maxLevel: 5

@@ -16,7 +16,7 @@ public abstract class Weapon : MonoBehaviour
 
     [Header("Rotation")]
     [SerializeField] protected bool rotateToFireDirection = true;
-    [SerializeField] protected float rotationOffset = 0f; // ví dụ sprite hướng phải = 0
+    [SerializeField] protected float rotationOffset = 0f;
     [SerializeField] protected bool flipSpriteByDirection = true;
 
     protected SpriteRenderer spriteRenderer;
