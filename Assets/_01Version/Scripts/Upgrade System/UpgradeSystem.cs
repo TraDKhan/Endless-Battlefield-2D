@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerUpgradeSystem : MonoBehaviour
+public class UpgradeSystem : MonoBehaviour
 {
-    public static PlayerUpgradeSystem Instance;
+    public static UpgradeSystem Instance;
 
     [Header("Upgrade Pool")]
     public List<UpgradeData> upgradePool;
+
     public event Action<List<UpgradeData>> OnShowUpgradeUI;
 
     private int pendingLevelUps = 0;
@@ -27,20 +27,21 @@ public class PlayerUpgradeSystem : MonoBehaviour
         var playerLevelSystem = FindFirstObjectByType<PlayerLevelSystem>();
         if (playerLevelSystem != null)
         {
-            playerLevelSystem.OnLevelUp += HandleLevelUp;
+            playerLevelSystem.OnLevelUp += OnPlayerLevelUp;
         }
     }
-
     private void Update()
     {
-        TryShowUpgrade();
+        ShowUpgradeOptions();
     }
-    public void HandleLevelUp(int newLevel)
-    {     
+
+    #region CORE
+    public void OnPlayerLevelUp(int newLevel)
+    {
         pendingLevelUps++;
     }
 
-    private void TryShowUpgrade()
+    private void ShowUpgradeOptions()
     {
         if (isChoosingUpgrade) return;
         if (pendingLevelUps <= 0) return;
@@ -49,15 +50,12 @@ public class PlayerUpgradeSystem : MonoBehaviour
         pendingLevelUps--;
 
         Time.timeScale = 0f;
-        List<UpgradeData> options = GetRandomUpgrades(3);
+        List<UpgradeData> options = RandomUpgrades(3);
         OnShowUpgradeUI?.Invoke(options);
     }
 
-
-    // ================= RANDOM KHÔNG TRÙNG =================
-    List<UpgradeData> GetRandomUpgrades(int count)
+    List<UpgradeData> RandomUpgrades(int count)
     {
-        //List<UpgradeData> validPool = new List<UpgradeData>();
         if (upgradePool == null || upgradePool.Count == 0)
         {
             Debug.LogWarning("Upgrade pool is empty or null!");
@@ -84,19 +82,19 @@ public class PlayerUpgradeSystem : MonoBehaviour
         return result;
     }
 
-    // ===== APPLY =================
     public void SelectUpgrade(UpgradeData data)
     {
-        Debug.Log("Upgrade");
         data.Apply();
 
         isChoosingUpgrade = false;
         Time.timeScale = 1f;
     }
+    #endregion
 
-    // ===== PLAYER STAT =====
+    #region PLAYER
+    // ===== PLAYER STAT ===== \\
     Dictionary<PlayerStatType, int> statLevels = new();
-    public void ApplyPlayerStat(PlayerStatType stat, float value)
+    public void IncreasePlayerStatLevel(PlayerStatType stat, float value)
     {
         if (!statLevels.ContainsKey(stat))
             statLevels[stat] = 0;
@@ -105,7 +103,7 @@ public class PlayerUpgradeSystem : MonoBehaviour
 
         CharacterStatsController.Instance.Stats.RecalculateStats();
     }
-    public float GetPlayerStatBonus(PlayerStatType stat)
+    public float CalculatePlayerStatBonus(PlayerStatType stat)
     {
         int level = GetPlayerStatLevel(stat);
 
@@ -119,8 +117,10 @@ public class PlayerUpgradeSystem : MonoBehaviour
         return 0f;
     }
     public int GetPlayerStatLevel(PlayerStatType stat) => statLevels.ContainsKey(stat) ? statLevels[stat] : 0;
+    #endregion
 
-    // ===== SKILL =====
+    #region SKILL
+    // ===== SKILL ===== \\
     List<BaseSkill> skills = new();
     public void ApplySkillUpgrade(SkillUpgradeData data)
     {
@@ -153,6 +153,6 @@ public class PlayerUpgradeSystem : MonoBehaviour
 
         return 0;
     }
-    // ===== WEAPON =====
-
+    #endregion
 }
+

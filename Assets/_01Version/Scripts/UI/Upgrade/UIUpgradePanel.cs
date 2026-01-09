@@ -9,11 +9,11 @@ public class UIUpgradePanel : MonoBehaviour
     [Header("Upgrade option slots")]
     [SerializeField] private UIUpgradeOption[] optionSlots;
 
-    private PlayerUpgradeSystem upgradeSystem;
+    private UpgradeSystem upgradeSystem;
 
     private void Start()
     {
-        upgradeSystem = PlayerUpgradeSystem.Instance;
+        upgradeSystem = UpgradeSystem.Instance;
 
         if (upgradeSystem != null)
             upgradeSystem.OnShowUpgradeUI += Show;
@@ -51,7 +51,7 @@ public class UIUpgradePanel : MonoBehaviour
                 upgrade,
                 () =>
                 {
-                    PlayerUpgradeSystem.Instance.SelectUpgrade(upgrade);
+                    UpgradeSystem.Instance.SelectUpgrade(upgrade);
                     Hide();
                 }
             );

@@ -73,3 +73,22 @@ public enum ProjectileMode
     Direction,
     Position
 }
+
+// ===== WEAPON =====
+public enum WeaponStatType
+{
+    Damage,
+    Cooldown,
+    CritChance,
+    ProjectileCount,
+    Range,
+    ProjectileSpeed
+}
+
+public enum WeaponType
+{
+    Pistol,
+    Shotgun,
+    Laser,
+    Boomerang
+}

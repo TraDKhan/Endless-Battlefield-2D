@@ -5,10 +5,10 @@ public class Test : MonoBehaviour
     void Start()
     {
         var playerLevelSystem = new PlayerLevelSystem();
-        var playerUpgradeSystem = new PlayerUpgradeSystem();
+        var playerUpgradeSystem = new UpgradeSystem();
 
         // giả lập kết nối event
-        playerLevelSystem.OnLevelUp += playerUpgradeSystem.HandleLevelUp;
+        playerLevelSystem.OnLevelUp += playerUpgradeSystem.OnPlayerLevelUp;
         playerUpgradeSystem.OnShowUpgradeUI += (options) =>
         {
             Debug.Log($"UI hiển thị {options.Count} upgrade");

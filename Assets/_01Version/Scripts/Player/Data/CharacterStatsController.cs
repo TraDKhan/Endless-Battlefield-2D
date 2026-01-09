@@ -17,7 +17,7 @@ public class CharacterStatsController : MonoBehaviour
     public CharacterStats Stats { get; private set; }
 
     private PlayerHealthController healthController;
-    private PlayerUpgradeSystem upgradeSystem;
+    private UpgradeSystem upgradeSystem;
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class CharacterStatsController : MonoBehaviour
         if (level == null)
             level = FindAnyObjectByType<PlayerLevelSystem>();
 
-        upgradeSystem = PlayerUpgradeSystem.Instance;
+        upgradeSystem = UpgradeSystem.Instance;
         healthController = GetComponent<PlayerHealthController>();
 
         // ===== Init stats =====

@@ -8,7 +8,7 @@ public class PlayerStatUpgradeData : UpgradeData
     public int maxLevel;
     public override int GetCurrentLevel()
     {
-        return PlayerUpgradeSystem.Instance.GetPlayerStatLevel(statType);
+        return UpgradeSystem.Instance.GetPlayerStatLevel(statType);
     }
 
     public override string GetTitle()
@@ -25,11 +25,11 @@ public class PlayerStatUpgradeData : UpgradeData
     }
     public override bool CanApply()
     {
-        return PlayerUpgradeSystem.Instance.GetPlayerStatLevel(statType) < maxLevel;
+        return UpgradeSystem.Instance.GetPlayerStatLevel(statType) < maxLevel;
     }
 
     public override void Apply()
     {
-        PlayerUpgradeSystem.Instance.ApplyPlayerStat(statType, value);
+        UpgradeSystem.Instance.IncreasePlayerStatLevel(statType, value);
     }
 }

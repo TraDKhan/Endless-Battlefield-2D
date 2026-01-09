@@ -13,7 +13,7 @@ public class CharacterStats
     private PlayerLevelSystem levelSystem;
     private PlayerEquipmentController equipmentController;
     private PlayerBuffController buffController;
-    private PlayerUpgradeSystem upgradeSystem;
+    private UpgradeSystem upgradeSystem;
 
     public event Action OnStatsChanged;
 
@@ -22,7 +22,7 @@ public class CharacterStats
         PlayerLevelSystem level,
         PlayerEquipmentController equipment,
         PlayerBuffController buff,
-        PlayerUpgradeSystem upgrade)
+        UpgradeSystem upgrade)
     {
         playerData = data;
         levelSystem = level;
@@ -64,17 +64,17 @@ public class CharacterStats
         if (upgradeSystem != null)
         {
             maxHealth += Mathf.RoundToInt(
-                upgradeSystem.GetPlayerStatBonus(PlayerStatType.MaxHealth)
+                upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.MaxHealth)
             );
 
             maxEnergy += Mathf.RoundToInt(
-                upgradeSystem.GetPlayerStatBonus(PlayerStatType.Energy)
+                upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.Energy)
             );
 
-            moveSpeed += upgradeSystem.GetPlayerStatBonus(PlayerStatType.MoveSpeed);
+            moveSpeed += upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.MoveSpeed);
 
             armor += Mathf.RoundToInt(
-                upgradeSystem.GetPlayerStatBonus(PlayerStatType.Armor)
+                upgradeSystem.CalculatePlayerStatBonus(PlayerStatType.Armor)
             );
         }
 
