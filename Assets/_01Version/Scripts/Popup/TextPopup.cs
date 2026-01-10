@@ -1,9 +1,9 @@
-﻿using TMPro;
+﻿using DG.Tweening;
+using TMPro;
 using UnityEngine;
-using DG.Tweening;
 
 [RequireComponent(typeof(PoolIdentity))]
-public class DamagePopup : MonoBehaviour, IPoolable
+public class TextPopup : MonoBehaviour, IPoolable
 {
     [Header("Motion")]
     public float moveUpDistance = 0.8f;
@@ -23,7 +23,7 @@ public class DamagePopup : MonoBehaviour, IPoolable
     {
         text = GetComponent<TextMeshPro>();
     }
-
+    #region POOL
     // ================= POOL =================
     public void OnSpawn()
     {
@@ -42,8 +42,10 @@ public class DamagePopup : MonoBehaviour, IPoolable
         sequence?.Kill();
         gameObject.SetActive(false);
     }
+    #endregion
 
-    // ================= PLAY =================
+    #region ANIMATION
+    // ===== PLAY ===== \\
     public void Play(int damage, Color color)
     {
         text.text = damage.ToString();
@@ -77,10 +79,10 @@ public class DamagePopup : MonoBehaviour, IPoolable
                 .SetDelay(duration * 0.6f)
         );
 
-        // 👉 QUAN TRỌNG: trả về pool
         sequence.OnComplete(() =>
         {
             ObjectPoolManager.Instance.Despawn(this);
         });
     }
+    #endregion
 }

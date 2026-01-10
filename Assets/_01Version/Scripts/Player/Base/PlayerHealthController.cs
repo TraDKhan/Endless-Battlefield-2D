@@ -94,10 +94,12 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     #endregion
 
 #if UNITY_EDITOR
-    [ContextMenu("Test Damage")]
+    [ContextMenu("Test Text popup")]
     private void TestDamage()
     {
         TakeDamage(120);
+        Heal(100);
     }
+
 #endif
 }

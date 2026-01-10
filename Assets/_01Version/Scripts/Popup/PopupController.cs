@@ -36,7 +36,7 @@ public class PopupController : MonoBehaviour
     public void ShowDamage(int amount, Vector3 worldPos, bool isCrit = false)
     {
         var popup = ObjectPoolManager.Instance
-            .Spawn<DamagePopup>(damagePopupPrefab);
+            .Spawn<TextPopup>(damagePopupPrefab);
 
         if (popup == null) return;
 
@@ -47,9 +47,9 @@ public class PopupController : MonoBehaviour
     public void ShowHeal(int amount, Vector3 worldPos)
     {
         var popup = ObjectPoolManager.Instance
-            .Spawn<DamagePopup>(healPopupPrefab);
+            .Spawn<TextPopup>(healPopupPrefab);
 
-        popup.transform.position = worldPos;
+        popup.transform.position = worldPos + GetRandomOffset();
         popup.Play(amount, Color.green);
     }
 }
