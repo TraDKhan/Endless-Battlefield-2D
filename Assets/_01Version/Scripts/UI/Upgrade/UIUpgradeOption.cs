@@ -7,8 +7,10 @@ public class UIUpgradeOption : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text title;
-    [SerializeField] private TMP_Text description;
+    [SerializeField] private TMP_Text typeText;
     [SerializeField] private TMP_Text levelText;
+    [SerializeField] private TMP_Text valueText;
+    [SerializeField] private TMP_Text description;
     [SerializeField] private Button button;
 
     private UpgradeData data;
