@@ -4037,6 +4037,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &859575916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 859575917}
+  - component: {fileID: 859575918}
+  m_Layer: 0
+  m_Name: Popup System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &859575917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859575916}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 922892449}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &859575918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859575916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ad7752e0f4ade4cb62e8eedbf7fcf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePopupPrefab: {fileID: 2208156834062976471, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
+  healPopupPrefab: {fileID: 2208156834062976471, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
 --- !u!1 &860654435
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,6 +4718,7 @@ Transform:
   - {fileID: 704508380}
   - {fileID: 1127220793}
   - {fileID: 1386738632}
+  - {fileID: 859575917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &922892450
@@ -5797,6 +5844,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
+      propertyPath: pools.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
+      propertyPath: pools.Array.data[8].prefab
+      value: 
+      objectReference: {fileID: 2208156834062976471, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
+    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
+      propertyPath: pools.Array.data[8].initialSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
+      propertyPath: pools.Array.data[8].poolComponent
+      value: 
+      objectReference: {fileID: 5139600563452595737, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10150,6 +10213,10 @@ PrefabInstance:
     - target: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
       propertyPath: m_Name
       value: Elf
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -3,27 +3,25 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour, IDamageable
 {
-    static public PlayerHealthController Instance;
     public int CurrentHealth { get; private set; }
     public int MaxHealth { get; private set; }
-    public bool isDead;
 
-    public event Action<int, int> OnHealthChanged;    
+    public bool IsDead => CurrentHealth <= 0;
+
+    public event Action<int, int> OnHealthChanged;
     public event Action OnDeath;
 
-    public bool IsDead => isDead;
-    private bool initialized = false;
+    private bool initialized;
+    private bool deathInvoked;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+    #region Init
     public void SetMaxHealth(int newMaxHealth)
     {
-        CurrentHealth += newMaxHealth - MaxHealth;
+        if (newMaxHealth <= 0) return;
+
+        int oldMax = MaxHealth;
         MaxHealth = newMaxHealth;
 
-        // Lần đầu thiết lập — full HP
         if (!initialized)
         {
             CurrentHealth = MaxHealth;
@@ -31,50 +29,75 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         }
         else
         {
-            // Nếu max hp giảm mà current > max → hạ xuống
-            if (CurrentHealth > MaxHealth)
-                CurrentHealth = MaxHealth;
+            // Giữ % HP
+            float percent = oldMax > 0
+                ? (float)CurrentHealth / oldMax
+                : 1f;
+
+            CurrentHealth = Mathf.RoundToInt(MaxHealth * percent);
         }
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+
+        ClampHealth();
+        NotifyHealthChanged();
     }
+    #endregion
+
+    #region Damage / Heal
     public void TakeDamage(int damage)
     {
-        if (damage <= 0) return;
+        if (damage <= 0 || IsDead) return;
 
-        Debug.Log("Nhận " + damage);
+        int finalDamage = damage; // sau này xử lý armor
+
         CurrentHealth -= damage;
-        if (CurrentHealth < 0) CurrentHealth = 0;
+        ClampHealth();
+        NotifyHealthChanged();
 
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        PopupController.Instance.ShowDamage(damage, transform.position + Vector3.up * 0.5f);
 
-        if (CurrentHealth == 0)
-            Die();
-    }
-    [ContextMenu("Attack")]
-    public void TakeDamage1()
-    {
-        CurrentHealth -= 120;
-        if (CurrentHealth < 0) CurrentHealth = 0;
-
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
-
-        if (CurrentHealth == 0)
+        if (IsDead)
             Die();
     }
 
     public void Heal(int amount)
     {
-        if (amount <= 0) return;
+        if (amount <= 0 || IsDead) return;
 
         CurrentHealth += amount;
-        if (CurrentHealth > MaxHealth)
-            CurrentHealth = MaxHealth;
+        ClampHealth();
+        NotifyHealthChanged();
 
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        PopupController.Instance.ShowHeal(amount, transform.position + Vector3.up * 0.5f);
     }
+    #endregion
 
+    #region Death
     private void Die()
     {
+        if (deathInvoked) return;
+
+        deathInvoked = true;
         OnDeath?.Invoke();
     }
+    #endregion
+
+    #region Utils
+    private void ClampHealth()
+    {
+        CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+    }
+
+    private void NotifyHealthChanged()
+    {
+        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+    }
+    #endregion
+
+#if UNITY_EDITOR
+    [ContextMenu("Test Damage")]
+    private void TestDamage()
+    {
+        TakeDamage(120);
+    }
+#endif
 }

@@ -118,7 +118,11 @@ public class ObjectPoolManager : MonoBehaviour
             return null;
         }
 
-        return pool.Spawn() as T;
+        var obj = pool.Spawn();
+        Debug.Assert(obj is T,
+            $"Pool trả về {obj.GetType().Name} nhưng yêu cầu {typeof(T).Name}");
+
+        return obj as T;
     }
     #endregion
 
