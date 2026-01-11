@@ -55,16 +55,17 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
         OnEnemyDead?.Invoke(this);
         OnDeath?.Invoke();
 
-        // 🔥 TRẢ VỀ POOL NGAY TẠI ĐÂY
         ObjectPoolManager.Instance.Despawn(this);
     }
     #endregion
+
     #region Knockback
     public void Knockback(Vector2 direction, float force)
     {
         rb.AddForce(direction.normalized * force, ForceMode2D.Impulse);
     }
     #endregion
+
     #region Virtual Hooks    
     protected virtual void OnSpawned() { }    // effect / sound spawn
     protected virtual void ClearRuntimeEvents() { }
