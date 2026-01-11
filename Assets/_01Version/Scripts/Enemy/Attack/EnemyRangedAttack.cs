@@ -28,10 +28,7 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
     }
 
     public void UpdateAttack() { }
-    public void StopAttack()
-    {
-        anim.StopAttack();
-    }
+    public void StopAttack() { }
 
     // gọi trong animation
     public void Shoot()

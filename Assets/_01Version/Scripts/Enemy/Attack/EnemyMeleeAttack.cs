@@ -25,10 +25,7 @@ public class EnemyMeleeAttack : MonoBehaviour, IEnemyAttack
 
     public void UpdateAttack() { }
 
-    public void StopAttack()
-    {
-        anim.StopAttack();
-    }
+    public void StopAttack() { }
 
     #endregion
 

@@ -43,8 +43,6 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
     public void StopAttack()
     {
         isAttacking = false;
-        if (anim != null)
-            anim.StopAttack();
     }
 
     #endregion

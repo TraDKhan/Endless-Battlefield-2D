@@ -106,7 +106,6 @@ public class EnemyChargeAttack : MonoBehaviour, IEnemyAttack
 
     private void UpdateWindUp()
     {
-        anim.SetAttackPhase(AttackAnimPhase.WindUp);
         timer -= Time.deltaTime;
         if (timer <= 0f)
         {
@@ -117,7 +116,6 @@ public class EnemyChargeAttack : MonoBehaviour, IEnemyAttack
     private void StartDash()
     {
         currentState = State.Dashing;
-        anim.SetAttackPhase(AttackAnimPhase.Attack);
         timer = dashDuration;
         rb.linearVelocity = dashDirection * dashSpeed;
     }

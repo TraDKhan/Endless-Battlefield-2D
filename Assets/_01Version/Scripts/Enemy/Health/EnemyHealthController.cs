@@ -8,6 +8,8 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
     private bool isDead;
 
     public bool IsDead => isDead;
+    public int MaxHealth => maxHealth;
+    public int CurrentHealth => currentHealth;
 
     public event Action OnDeath;
     public event Action<int, int> OnHealthChanged; 
@@ -49,5 +51,18 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
 
         isDead = true;
         OnDeath?.Invoke();
+    }
+
+
+
+    private void Start()
+    {
+        Init(1000);
+
+    }
+    [ContextMenu("Damage")]
+    private void TestDamge()
+    {
+        TakeDamage(120);
     }
 }
