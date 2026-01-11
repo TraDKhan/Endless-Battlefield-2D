@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 2
   maxHealth: 303
-  moveSpeed: 2.5
+  moveSpeed: 2.42
   damage: 1
   attackCooldown: 1
   projectileMode: 1

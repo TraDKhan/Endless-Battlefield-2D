@@ -19,8 +19,8 @@ GameObject:
   - component: {fileID: 6075581671038236196}
   - component: {fileID: 1323796457728530602}
   - component: {fileID: 269122731646198135}
-  - component: {fileID: 4501932541411335590}
   - component: {fileID: 7760774885848196828}
+  - component: {fileID: 5590760453819024234}
   m_Layer: 6
   m_Name: Mushroom
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Animator:
   m_GameObject: {fileID: 3360977197827516108}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8eb4bd20a5cc7b245b37c17479cb5d75, type: 2}
+  m_Controller: {fileID: 22100000, guid: 9699515a02a1350448f3298538d60e9c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -269,23 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454a8b35e60f99945b16c10a0634f20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4501932541411335590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360977197827516108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80d771aef0e72e34a91ac65764908f72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 041cd6032de06d145a84c34fc39d8d7f, type: 2}
-  anim: {fileID: 1323796457728530602}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &7760774885848196828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,3 +282,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropTable: {fileID: 11400000, guid: 725cab5a3cca5dd408dc24adf9c31272, type: 2}
+--- !u!114 &5590760453819024234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3360977197827516108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc5ffe5669095c429677e7ca9f0f5f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 041cd6032de06d145a84c34fc39d8d7f, type: 2}
+  anim: {fileID: 1323796457728530602}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
