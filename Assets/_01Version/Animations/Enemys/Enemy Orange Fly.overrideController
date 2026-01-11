@@ -8,4 +8,14 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Enemy Orange Fly
   m_Controller: {fileID: 9100000, guid: d5e2fa5cd68b3b04497968f4498a49a2, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: d7466f2baeca3ce4db504e0e6dd456ba, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cad39c82084e3de49bc7aab17a701e6c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e01a88e218c5b9f43a3058652b40cd7e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7e584e99e1a9d1b46b4460a14cf5d2c3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fee3c3075e1c4454289ee942010120cc, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d379c8b6765d5cc408d2ce98335fdff3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 4e4b34c093db9174f9e1763dc83d512a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 10a2d20bc16b4684c83bcced9f2eac67, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 46816a306cfe65c46a00a52d893ed831, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 10a2d20bc16b4684c83bcced9f2eac67, type: 2}
