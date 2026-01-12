@@ -5,12 +5,13 @@ public class WaveData : ScriptableObject
 {
     public string waveName;
 
+    [Header("Wave Type")]
+    public bool isBossWave;
+
     [Header("Single Spawn")]
     public EnemySpawnData[] enemies;
 
     [Header("Group Spawn")]
-    public EnemyGroupData[] groups;
-
-    [Tooltip("Wave này có được spawn không")]
     public bool isSpawnGroup = true;
+    public EnemyGroupData[] groups;
 }

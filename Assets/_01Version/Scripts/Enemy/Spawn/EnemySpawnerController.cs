@@ -17,7 +17,9 @@ public class EnemySpawnerController : MonoBehaviour
     [Header("Wave Settings")]
     [SerializeField] private WaveData[] allWaves;
     [SerializeField] private float spawnInterval = 0.6f;
-    [SerializeField] private float timeBetweenWaves = 3f;
+
+    [Header("Events")]
+    [SerializeField] private WaveEventChannel waveEventChannel;
 
     private int enemiesAlive = 0;
 
@@ -39,16 +41,33 @@ public class EnemySpawnerController : MonoBehaviour
     #region Wave Loop
     IEnumerator WaveLoop()
     {
-        foreach (WaveData wave in allWaves)
+        for (int i = 0; i < allWaves.Length; i++)
         {
+            WaveData wave = allWaves[i];
+
+            // 🔔 Báo UI preview
+            waveEventChannel?.OnWavePreview?.Invoke(wave, i + 1);
+
+            // ⏳ ĐỢI UI báo bắt đầu
+            bool canStart = false;
+
+            System.Action startHandler = null;
+            startHandler = () =>
+            {
+                waveEventChannel.OnWaveStart -= startHandler;
+                canStart = true;
+            };
+
+            waveEventChannel.OnWaveStart += startHandler;
+
+            yield return new WaitUntil(() => canStart);
+
             Debug.Log($"[Spawner] Start Wave: {wave.waveName}");
 
             yield return StartCoroutine(SpawnWave(wave));
-
             yield return new WaitUntil(() => enemiesAlive <= 0);
 
-            Debug.Log($"[Spawner] Wave Cleared: {wave.waveName}");
-            yield return new WaitForSeconds(timeBetweenWaves);
+            waveEventChannel?.OnWaveCleared?.Invoke();
         }
 
         Debug.Log("[Spawner] All waves completed!");
