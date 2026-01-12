@@ -1,20 +1,22 @@
+using UnityEngine;
+
 public class EnemyIdleState : IEnemyState
 {
-    EnemyController enemy;
+    private readonly EnemyContext ctx;
 
-    public EnemyIdleState(EnemyController enemy)
+    public EnemyIdleState(EnemyContext context)
     {
-        this.enemy = enemy;
+        ctx = context;
     }
 
-    public void Enter() 
+    public void Enter()
     {
-        enemy.anim.SetMoving(false);
+        ctx.Movement?.Stop();
+        ctx.Anim?.SetMoving(false);
     }
 
     public void Update()
     {
-                  
     }
 
     public void FixedUpdate() { }

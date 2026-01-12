@@ -233,6 +233,9 @@ MonoBehaviour:
   movement: {fileID: 1300893507901111759}
   anim: {fileID: 4767796527282096652}
   player: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &7583432696392170428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,13 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f79b7dd029538a44180e7ac7c140c1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 781f5ab85e140f746b92f51cba291deb, type: 2}
   projectilePrefab: {fileID: 1565544100716240067, guid: 5ab324707818cd946a252d28e5a2ec02, type: 3}
-  anim: {fileID: 4767796527282096652}
   firePoint: {fileID: 1815713810421357841}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &1734091481134727143
 MonoBehaviour:
   m_ObjectHideFlags: 0

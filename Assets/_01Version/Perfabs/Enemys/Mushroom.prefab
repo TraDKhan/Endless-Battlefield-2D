@@ -213,6 +213,9 @@ MonoBehaviour:
   movement: {fileID: 6075581671038236196}
   anim: {fileID: 1323796457728530602}
   player: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &5407269268873112367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,8 +297,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc5ffe5669095c429677e7ca9f0f5f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 041cd6032de06d145a84c34fc39d8d7f, type: 2}
-  anim: {fileID: 1323796457728530602}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 256

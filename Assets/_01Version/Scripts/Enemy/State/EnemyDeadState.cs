@@ -3,23 +3,25 @@ using UnityEngine;
 
 public class EnemyDeadState : IEnemyState
 {
-    EnemyController enemy;
+    private readonly EnemyContext ctx;
 
-    public EnemyDeadState(EnemyController enemy)
+    public EnemyDeadState(EnemyContext context)
     {
-        this.enemy = enemy;
+        ctx = context;
     }
 
     public void Enter()
     {
-        enemy.movement.Stop();
-        enemy.StartCoroutine(Despawn());
+        ctx.Movement?.Stop();
+        ctx.Anim?.SetMoving(false);
+
+        ctx.Controller.StartCoroutine(DespawnRoutine());
     }
 
-    IEnumerator Despawn()
+    IEnumerator DespawnRoutine()
     {
         yield return new WaitForSeconds(0.5f);
-        ObjectPoolManager.Instance.Despawn(enemy.enemyBase);
+        ctx.Controller.Despawn();
     }
 
     public void Update() { }

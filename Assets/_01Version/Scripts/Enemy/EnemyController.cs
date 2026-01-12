@@ -10,8 +10,10 @@ public class EnemyController : MonoBehaviour
     public EnemyAnimationController anim;
 
     public Transform player;
+    public LayerMask targetLayer;
 
-    IEnemyState currentState;
+    private EnemyContext context;
+    private IEnemyState currentState;
 
     // States
     public EnemyIdleState idleState;
@@ -25,21 +27,37 @@ public class EnemyController : MonoBehaviour
         movement = GetComponent<EnemyMovement>();
         anim = GetComponent<EnemyAnimationController>();
 
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            player = playerObj.transform;
-        else
-            Debug.LogError("Player not found");
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        idleState = new EnemyIdleState(this);
-        chaseState = new EnemyChaseState(this);
-        attackState = new EnemyAttackState(this);
-        deadState = new EnemyDeadState(this);
+        context = new EnemyContext(this);
+        enemyBase.OnEnemyDead += HandleEnemyDead;
+
+        //
+        var melee = GetComponent<EnemyMeleeAttack>();
+        if (melee != null)
+            melee.Init(context);
+
+        var charge = GetComponent<EnemyChargeAttack>();
+        if (charge != null)
+            charge.Init(context);
+
+        var contact = GetComponent<EnemyContactAttack>();
+        if (contact != null)
+            contact.Init(context);
+
+        var ranged = GetComponent<EnemyRangedAttack>();
+        if (ranged != null)
+            ranged.Init(context);
+
+        idleState = new EnemyIdleState(context);
+        chaseState = new EnemyChaseState(context);
+        attackState = new EnemyAttackState(context);
+        deadState = new EnemyDeadState(context);
     }
-    
+
     void Start()
     {
-        ChangeState(chaseState);
+        ChangeState(EnemyStateID.Chase);
     }
 
     void Update()
@@ -52,15 +70,39 @@ public class EnemyController : MonoBehaviour
         currentState?.FixedUpdate();
     }
 
-    public void ChangeState(IEnemyState newState)
+    public void ChangeState(EnemyStateID id)
+    {
+        switch (id)
+        {
+            case EnemyStateID.Idle:
+                ChangeState(idleState);
+                break;
+
+            case EnemyStateID.Chase:
+                ChangeState(chaseState);
+                break;
+
+            case EnemyStateID.Attack:
+                ChangeState(attackState);
+                break;
+
+            case EnemyStateID.Dead:
+                ChangeState(deadState);
+                break;
+        }
+    }
+    void ChangeState(IEnemyState newState)
     {
         if (currentState == newState) return;
 
+        Debug.Log($"Exiting state: {currentState?.GetType().Name}");
         currentState?.Exit();
-        currentState = newState;
-        currentState?.Enter();
-    }
 
+        currentState = newState;
+
+        Debug.Log($"Entering state: {currentState.GetType().Name}");
+        currentState.Enter();
+    }
     public bool IsInAttackRange()
     {
         if (player == null) return false;
@@ -76,6 +118,14 @@ public class EnemyController : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
         transform.localScale = scale;
+    }
+    void HandleEnemyDead(EnemyBase enemy)
+    {
+        ChangeState(EnemyStateID.Dead);
+    }
+    public void Despawn()
+    {
+        ObjectPoolManager.Instance.Despawn(enemyBase);
     }
 
     private void OnDrawGizmos()

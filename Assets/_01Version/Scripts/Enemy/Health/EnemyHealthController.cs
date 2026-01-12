@@ -50,6 +50,7 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         if (isDead) return;
 
         isDead = true;
+        Debug.Log($"{gameObject.name} DIE");
         OnDeath?.Invoke();
     }
 

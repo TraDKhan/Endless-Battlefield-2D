@@ -60,7 +60,13 @@ public enum EnemyStateType
     Reposition,
     Dead
 }
-
+public enum EnemyStateID
+{
+    Idle,
+    Chase,
+    Attack,
+    Dead
+}
 // ===== mode ===== \\
 public enum ProjectileMode
 {

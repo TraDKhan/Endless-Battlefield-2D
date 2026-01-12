@@ -52,10 +52,9 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
         if (!isAlive) return;
 
         isAlive = false;
+
         OnEnemyDead?.Invoke(this);
         OnDeath?.Invoke();
-
-        ObjectPoolManager.Instance.Despawn(this);
     }
     #endregion
 

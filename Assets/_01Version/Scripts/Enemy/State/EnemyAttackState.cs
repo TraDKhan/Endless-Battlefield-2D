@@ -2,49 +2,59 @@
 
 public class EnemyAttackState : IEnemyState
 {
-    EnemyController enemy;
-    IEnemyAttack attack;
+    private readonly EnemyContext ctx;
+    private readonly IEnemyAttack attack;
 
-    public EnemyAttackState(EnemyController enemy)
+    public EnemyAttackState(EnemyContext context)
     {
-        this.enemy = enemy;
-        attack = enemy.GetComponent<IEnemyAttack>();
+        ctx = context;
+        attack = ctx.Controller.GetComponent<IEnemyAttack>();
+        if (attack == null)
+            Debug.LogError($"{ctx.Controller.name} missing IEnemyAttack");
     }
 
     public void Enter()
     {
-        enemy.movement.Stop();
-        enemy.anim.SetMoving(false);
+        ctx.Movement.Stop();
+        ctx.Anim.SetMoving(false);
 
-        enemy.FaceTarget(enemy.player.position);
+        FaceTarget();
 
         TryStartAttack();
     }
 
     public void Update()
     {
-        enemy.FaceTarget(enemy.player.position);
+        FaceTarget();
 
-        if (!enemy.IsInAttackRange())
+        if (!ctx.Controller.IsInAttackRange())
         {
-            enemy.ChangeState(enemy.chaseState);
+            ctx.Controller.ChangeState(EnemyStateID.Chase);
             return;
         }
 
         TryStartAttack();
-        attack.UpdateAttack();
+        attack?.UpdateAttack();
     }
+
+    public void FixedUpdate() { }
+
+    public void Exit()
+    {
+        attack.StopAttack();
+    }
+
+    // ===== Helpers =====
 
     void TryStartAttack()
     {
-        if (!attack.CanAttack) return;
-
+        if (attack == null || !attack.CanAttack) return;
         attack.StartAttack();
     }
-    public void FixedUpdate() { }
 
-    public void Exit() 
+    void FaceTarget()
     {
-        attack.StopAttack();
+        if (ctx.Target == null) return;
+        ctx.Controller.FaceTarget(ctx.Target.position);
     }
 }

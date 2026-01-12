@@ -2824,7 +2824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2088437129
 Transform:
   m_ObjectHideFlags: 0
@@ -2858,7 +2858,7 @@ MonoBehaviour:
   maxSpawnRadius: 10
   allWaves:
   - {fileID: 11400000, guid: b2ba801688ec8c64fabc9235ce6a46d5, type: 2}
-  spawnInterval: 0.6
+  spawnInterval: 10
   timeBetweenWaves: 3
 --- !u!1 &2109163318
 GameObject:

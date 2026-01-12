@@ -2,85 +2,94 @@
 
 public class EnemyChaseState : IEnemyState
 {
-    private EnemyController enemy;
-    public EnemyChaseState(EnemyController enemy)
+    private readonly EnemyContext ctx;
+
+    public EnemyChaseState(EnemyContext context)
     {
-        this.enemy = enemy;
+        ctx = context;
     }
     public void Enter()
     {
-        enemy.anim.SetMoving(true);
+        ctx.Anim.SetMoving(true);
     }
 
     public void Update()
     {
-        if (!enemy.player) return;
+        if (ctx.Target == null) return;
 
-        enemy.FaceTarget(enemy.player.position);
+        ctx.Controller.FaceTarget(ctx.Target.position);
 
-        bool check = Vector2.Distance(enemy.transform.position, enemy.player.position) > enemy.stats.attackRange * 0.6f;
+        bool keepDistance =
+            Vector2.Distance(
+                ctx.Controller.transform.position,
+                ctx.Target.position
+            ) > ctx.Stats.attackRange * 0.6f;
+
         // Đủ gần → Attack
-        if (enemy.IsInAttackRange() && check)
+        if (ctx.Controller.IsInAttackRange() && keepDistance)
         {
-            enemy.ChangeState(enemy.attackState);
+            ctx.Controller.ChangeState(EnemyStateID.Attack);
         }
     }
 
     public void FixedUpdate()
     {
-        if (!enemy.player || !enemy.movement) return;
+        if (ctx.Target == null || ctx.Movement == null) return;
 
-        Vector2 pos = enemy.transform.position;
-        Vector2 playerPos = enemy.player.position;
+        Vector2 pos = ctx.Controller.transform.position;
+        Vector2 targetPos = ctx.Target.position;
 
-        float dist = Vector2.Distance(pos, playerPos);
-        Vector2 toPlayer = (playerPos - pos).normalized;
+        float dist = Vector2.Distance(pos, targetPos);
+        Vector2 toTarget = (targetPos - pos).normalized;
 
-        switch (enemy.stats.enemyType)
+        switch (ctx.Stats.enemyType)
         {
             case EnemyAttackType.Melee:
-                HandleMelee(playerPos);
+                HandleMelee(targetPos);
                 break;
 
             case EnemyAttackType.Ranged:
-                HandleRanged(pos, playerPos, toPlayer, dist);
+                HandleRanged(pos, targetPos, toTarget, dist);
                 break;
         }
     }
-
-    void HandleMelee(Vector2 playerPos)
+    public void Exit()
     {
-        enemy.movement.MoveTowards(playerPos, enemy.stats.moveSpeed);
+        ctx.Movement.Stop();
     }
 
-    void HandleRanged(Vector2 pos, Vector2 playerPos, Vector2 toPlayer, float dist)
+    // ================== MOVE LOGIC ==================
+    void HandleMelee(Vector2 targetPos)
     {
-        float attackRange = enemy.stats.attackRange;
-        float speed = enemy.stats.moveSpeed;
+        ctx.Movement.MoveTowards(targetPos, ctx.Stats.moveSpeed);
+    }
+
+    void HandleRanged(
+        Vector2 pos,
+        Vector2 targetPos,
+        Vector2 toTarget,
+        float dist
+    )
+    {
+        float attackRange = ctx.Stats.attackRange;
+        float speed = ctx.Stats.moveSpeed;
 
         // Quá xa → tiến
         if (dist > attackRange)
         {
-            enemy.movement.MoveTowards(playerPos, enemy.stats.moveSpeed);
+            ctx.Movement.MoveTowards(targetPos, speed);
             return;
         }
 
-        //trong tầm đánh đổi state
+        // Trong tầm đánh → đứng yên
         if (dist > attackRange * 0.6f)
         {
-            enemy.movement.Stop();
+            ctx.Movement.Stop();
             return;
         }
 
         // Player áp sát → lùi chậm
-        Vector2 retreatTarget = pos - toPlayer;
-        enemy.movement.MoveTowards(
-            retreatTarget,
-            speed * 0.5f
-        );
-    }
-    public void Exit()
-    {
-        enemy.movement.Stop();
+        Vector2 retreatTarget = pos - toTarget;
+        ctx.Movement.MoveTowards(retreatTarget, speed * 0.5f);
     }
 }

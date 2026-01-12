@@ -2,46 +2,53 @@
 
 public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
 {
-    [Header("Stats")]
-    [SerializeField] private EnemyStats stats;
+    private EnemyContext ctx;
 
     [Header("Projectile")]
     [SerializeField] private GameObject projectilePrefab;
 
-    [Header("References")]
-    [SerializeField] private EnemyAnimationController anim;
+    [Header("Fire Point")]
     [SerializeField] private Transform firePoint;
-
-    [Header("Target")]
-    [SerializeField] private LayerMask playerLayer;
 
     private float lastAttackTime;
 
-    public bool CanAttack => Time.time >= lastAttackTime + stats.attackCooldown;
-    public float Cooldown => stats.attackCooldown;
+    public void Init(EnemyContext context)
+    {
+        ctx = context;
+    }
+    #region IENEMY ATTACK
+
+    public bool CanAttack => Time.time >= lastAttackTime + ctx.Stats.attackCooldown;
+    public float Cooldown => ctx.Stats.attackCooldown;
 
     public void StartAttack()
     {
         lastAttackTime = Time.time;
-        anim.PlayAttack();
-        //Shoot();
+        ctx.Anim?.PlayAttack();
     }
 
     public void UpdateAttack() { }
     public void StopAttack() { }
 
-    // gọi trong animation
+    #endregion
+
+    #region Animation Event
+
+    // ===== GỌI TỪ ANIMATION ===== \\
     public void Shoot()
     {
-        SpawnProjectile();
+        if (ctx.Target == null) return;
+        SpawnProjectile(ctx.Target);
     }
 
-    private void SpawnProjectile()
-    {
-        Transform target = FindPlayer();
-        if (target == null) return;
+    #endregion
 
-        ProjectileCore projectile = ObjectPoolManager.Instance.Spawn<ProjectileCore>(projectilePrefab);
+    #region SPAWN LOGIC
+
+    private void SpawnProjectile(Transform target)
+    {
+        ProjectileCore projectile =
+            ObjectPoolManager.Instance.Spawn<ProjectileCore>(projectilePrefab);
 
         if (projectile == null) return;
 
@@ -49,7 +56,7 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
 
         IProjectileEffect effect = CreateProjectileEffect();
 
-        switch (stats.projectileMode)
+        switch (ctx.Stats.projectileMode)
         {
             case ProjectileMode.Position:
                 SpawnToTargetPosition(projectile, target, effect);
@@ -61,57 +68,51 @@ public class EnemyRangedAttack : MonoBehaviour, IEnemyAttack
         }
     }
 
-
-    private void SpawnToDirection(ProjectileCore projectile, Transform target, IProjectileEffect effect)
+    private void SpawnToDirection(
+        ProjectileCore projectile,
+        Transform target,
+        IProjectileEffect effect
+    )
     {
-        if (target == null) return;
-
-        Vector2 direction = (target.position - firePoint.position).normalized;
+        Vector2 dir =
+            ((Vector2)target.position - (Vector2)firePoint.position).normalized;
 
         projectile.InitializeDirection(
-            direction,
-            stats.damage,
-            stats.projectileSpeed,
+            dir,
+            ctx.Stats.damage,
+            ctx.Stats.projectileSpeed,
             effect
         );
     }
-    private void SpawnToTargetPosition(ProjectileCore projectile, Transform target, IProjectileEffect effect)
+    private void SpawnToTargetPosition(
+        ProjectileCore projectile,
+        Transform target,
+        IProjectileEffect effect
+    )
     {
-        if (target == null) return;
-
-        Vector2 targetPosition = target.position; // SNAPSHOT 🔥
-
+        Vector2 targetPos = target.position; // snapshot
         projectile.InitializeTargetPosition(
-            targetPosition,
-            stats.damage,
-            stats.projectileSpeed,
+            targetPos,
+            ctx.Stats.damage,
+            ctx.Stats.projectileSpeed,
             effect
         );
     }
 
     private IProjectileEffect CreateProjectileEffect()
     {
-        switch (stats.projectileMode)
+        switch (ctx.Stats.projectileMode)
         {
             case ProjectileMode.Position:
                 return new ExplosionDamageEffect(
                     3f,
                     2f,
-                    playerLayer
+                    ctx.TargetLayer
                 );
 
             default:
                 return new DirectDamageEffect();
         }
     }
-    protected Transform FindPlayer()
-    {
-        Collider2D player = Physics2D.OverlapCircle(
-            transform.position,
-            stats.attackRange,
-            playerLayer
-        );
-
-        return player != null ? player.transform : null;
-    }
+    #endregion
 }

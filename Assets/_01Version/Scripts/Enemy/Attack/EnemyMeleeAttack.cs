@@ -2,25 +2,22 @@
 
 public class EnemyMeleeAttack : MonoBehaviour, IEnemyAttack
 {
-    [Header("References")]
-    [SerializeField] private EnemyStats stats;
-    [SerializeField] private EnemyAnimationController anim;
-
-    [Header("Attack Settings")]
-    [SerializeField] private LayerMask targetLayer;
-
+    private EnemyContext ctx;
     private float lastAttackTime;
 
+    public void Init(EnemyContext context)
+    {
+        ctx = context;
+    }
+
     #region IEnemyAttack
-
-    public bool CanAttack => Time.time >= lastAttackTime + stats.attackCooldown;
-
-    public float Cooldown => stats.attackCooldown;
+    public bool CanAttack => Time.time >= lastAttackTime + ctx.Stats.attackCooldown;
+    public float Cooldown => ctx.Stats.attackCooldown;
 
     public void StartAttack()
     {
         lastAttackTime = Time.time;
-        anim.PlayAttack();
+        ctx.Anim.PlayAttack();
     }
 
     public void UpdateAttack() { }
@@ -34,27 +31,25 @@ public class EnemyMeleeAttack : MonoBehaviour, IEnemyAttack
     // GỌI TỪ ANIMATION EVENT
     public void DealDamage()
     {
-        Vector2 origin = transform.position;
+        if (ctx.Target == null) return;
 
-        float facing = Mathf.Sign(transform.localScale.x);
+        Vector2 origin = ctx.Controller.transform.position;
+
+        float facing = Mathf.Sign(ctx.Controller.transform.localScale.x);
         Vector2 forward = Vector2.right * facing;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             origin,
-            stats.attackRange,
-            targetLayer
+            ctx.Stats.attackRange,
+            ctx.TargetLayer
         );
 
         foreach (var hit in hits)
         {
-            Vector2 dirToTarget = ((Vector2)hit.transform.position - origin).normalized;
+            Vector2 dir = ((Vector2)hit.transform.position - origin).normalized;
+            if (Vector2.Dot(forward, dir) <= 0f) continue;
 
-            // Chỉ đánh phía trước
-            float dot = Vector2.Dot(forward, dirToTarget);
-            if (dot <= 0f) continue;
-
-            hit.GetComponent<IDamageable>()
-                ?.TakeDamage(stats.damage);
+            hit.GetComponent<IDamageable>()?.TakeDamage(ctx.Stats.damage);
         }
     }
     #endregion

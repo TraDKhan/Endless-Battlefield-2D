@@ -15,6 +15,6 @@ MonoBehaviour:
   waveName: Wave 2
   enemies:
   - enemyPrefab: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
-    count: 1
+    count: 5
   groups: []
   isSpawnGroup: 0

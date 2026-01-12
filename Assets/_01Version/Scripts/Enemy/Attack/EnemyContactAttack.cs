@@ -2,9 +2,7 @@
 
 public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
 {
-    [SerializeField] private EnemyStats stats;
-    [SerializeField] private EnemyAnimationController anim;
-    [SerializeField] private LayerMask targetLayer;
+    private EnemyContext ctx;
 
     private bool isAttacking;
     private bool targetInRange;
@@ -12,18 +10,22 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
 
     private float lastDamageTime;
 
-    // Có thể bắt đầu 1 đợt attack mới?
-    public bool CanAttack => Time.time >= lastDamageTime + stats.attackCooldown;
+    public void Init(EnemyContext context)
+    {
+        ctx = context;
+    }
 
-    public float Cooldown => stats.attackCooldown;
+    // Có thể bắt đầu 1 đợt attack mới?
+    public bool CanAttack => Time.time >= lastDamageTime + ctx.Stats.attackCooldown;
+
+    public float Cooldown => ctx.Stats.attackCooldown;
 
     #region IEnemyAttack
 
     public void StartAttack()
     {
         isAttacking = true;
-        if(anim != null) 
-            anim.PlayAttack();
+        ctx.Anim?.PlayAttack();
     }
 
     public void UpdateAttack()
@@ -32,12 +34,11 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
         if (!targetInRange) return;
         if (currentTarget == null) return;
 
-        if (Time.time < lastDamageTime + stats.attackCooldown)
+        if (Time.time < lastDamageTime + ctx.Stats.attackCooldown)
             return;
 
         lastDamageTime = Time.time;
-        currentTarget.TakeDamage(stats.damage);
-
+        currentTarget.TakeDamage(ctx.Stats.damage);
     }
 
     public void StopAttack()
@@ -50,19 +51,16 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
     #region Trigger Detection ONLY
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (((1 << other.gameObject.layer) & targetLayer) == 0)
+        if (((1 << other.gameObject.layer) & ctx.TargetLayer) == 0)
             return;
 
         currentTarget = other.GetComponent<IDamageable>();
-        if (currentTarget != null)
-        {
-            targetInRange = true;
-        }
+        targetInRange = currentTarget != null;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (((1 << other.gameObject.layer) & targetLayer) == 0)
+        if (((1 << other.gameObject.layer) & ctx.TargetLayer) == 0)
             return;
 
         if (other.GetComponent<IDamageable>() == currentTarget)
@@ -71,5 +69,6 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
             currentTarget = null;
         }
     }
+
     #endregion
 }
