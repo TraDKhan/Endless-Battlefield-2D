@@ -64,6 +64,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
     [ContextMenu("Damage")]
     private void TestDamge()
     {
-        TakeDamage(120);
+        TakeDamage(1200);
     }
 }

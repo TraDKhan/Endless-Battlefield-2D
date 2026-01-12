@@ -8,6 +8,8 @@ public class BossController : MonoBehaviour
     public BossPhaseController phaseController;
     public EnemyMovement movement;
     public EnemyAnimationController anim;
+    [SerializeField] private EnemyHealthController health;
+    [SerializeField] private UIBossHealth bossUI;
 
     [Header("Runtime")]
     public Transform player;
@@ -25,7 +27,8 @@ public class BossController : MonoBehaviour
 
     private void Start()
     {
-
+        bossUI.Bind(health);
+        health.OnDeath += () => bossUI.gameObject.SetActive(false);
     }
 
     void Update()

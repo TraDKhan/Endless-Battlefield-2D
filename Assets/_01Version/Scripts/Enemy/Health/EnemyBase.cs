@@ -28,6 +28,11 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
 
         health.OnDeath += HandleDeath;
     }
+
+    private void Start()
+    {
+        
+    }
     #endregion
 
     #region Poolable

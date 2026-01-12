@@ -26,6 +26,7 @@ public class EnemySpawnerController : MonoBehaviour
         if (player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
             if (playerObj != null)
                 player = playerObj.transform;
             else
