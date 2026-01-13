@@ -9,26 +9,14 @@ public class ObjectPoolManager : MonoBehaviour
     [Serializable]
     public class PoolConfig
     {
-        [Tooltip("Prefab gốc (KHÔNG phải clone)")]
         public GameObject prefab;
-
-        [Tooltip("Component chính để pool (EnemyBase, SpawnIndicator, Bullet...)")]
-        public MonoBehaviour poolComponent;
-
-        [Min(1)]
-        public int initialSize = 10;
+        [Min(1)] public int initialSize = 10;
     }
 
-    [Header("Pool Configs")]
     [SerializeField] private PoolConfig[] pools;
 
-    /// <summary>
-    /// Key = PoolIdentity (prefab gốc)
-    /// Value = pool tương ứng
-    /// </summary>
-    private readonly Dictionary<PoolIdentity, IObjectPool> poolDict = new();
+    private readonly Dictionary<string, IObjectPool> poolDict = new();
 
-    #region Unity
     private void Awake()
     {
         if (Instance != null)
@@ -38,117 +26,66 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         Instance = this;
-
         InitializePools();
     }
-    #endregion
 
-    #region Init
     private void InitializePools()
     {
         foreach (var config in pools)
-        {
             CreatePool(config);
-        }
     }
 
     private void CreatePool(PoolConfig config)
     {
-        if (config.prefab == null || config.poolComponent == null)
-        {
-            Debug.LogError("[PoolManager] PoolConfig thiếu prefab hoặc component");
-            return;
-        }
+        if (config.prefab == null) return;
 
-        PoolIdentity identity = config.prefab.GetComponent<PoolIdentity>();
+        var identity = config.prefab.GetComponent<PoolIdentity>();
         if (identity == null)
         {
-            Debug.LogError(
-                $"[PoolManager] Prefab {config.prefab.name} thiếu PoolIdentity"
-            );
+            Debug.LogError($"Prefab {config.prefab.name} thiếu PoolIdentity");
             return;
         }
 
-        if (poolDict.ContainsKey(identity))
-        {
-            Debug.LogWarning(
-                $"[PoolManager] Pool cho {config.prefab.name} đã tồn tại"
-            );
+        if (poolDict.ContainsKey(identity.PoolKey))
             return;
-        }
 
-        Type componentType = config.poolComponent.GetType();
-        Type poolType = typeof(ObjectPool<>).MakeGenericType(componentType);
-
-        IObjectPool pool = (IObjectPool)Activator.CreateInstance(
-            poolType,
-            config.poolComponent,
+        var pool = new ObjectPool(
+            config.prefab,
             config.initialSize,
             transform
         );
 
-        poolDict.Add(identity, pool);
+        poolDict.Add(identity.PoolKey, pool);
     }
-    #endregion
 
-    #region Spawn
+    // ================= SPAWN =================
     public T Spawn<T>(GameObject prefab) where T : Component
     {
-        if (prefab == null)
-        {
-            Debug.LogError("[PoolManager] Spawn prefab null");
+        var identity = prefab.GetComponent<PoolIdentity>();
+        if (identity == null) return null;
+
+        if (!poolDict.TryGetValue(identity.PoolKey, out var pool))
             return null;
-        }
 
-        PoolIdentity identity = prefab.GetComponent<PoolIdentity>();
-        if (identity == null)
-        {
-            Debug.LogError(
-                $"[PoolManager] Prefab {prefab.name} thiếu PoolIdentity"
-            );
-            return null;
-        }
-
-        if (!poolDict.TryGetValue(identity, out var pool))
-        {
-            Debug.LogError(
-                $"[PoolManager] Không tìm thấy pool cho {prefab.name}"
-            );
-            return null;
-        }
-
-        var obj = pool.Spawn();
-        Debug.Assert(obj is T,
-            $"Pool trả về {obj.GetType().Name} nhưng yêu cầu {typeof(T).Name}");
-
-        return obj as T;
+        GameObject go = pool.Spawn();
+        return go.GetComponent<T>();
     }
-    #endregion
 
-    #region Despawn
+    // ================= DESPAWN =================
+    public void Despawn(GameObject go)
+    {
+        var identity = go.GetComponent<PoolIdentity>();
+        if (identity == null) return;
+
+        if (!poolDict.TryGetValue(identity.PoolKey, out var pool))
+            return;
+
+        pool.Despawn(go);
+    }
+
     public void Despawn(IPoolable poolable)
     {
-        if (poolable == null)
-            return;
-
-        PoolIdentity identity = poolable.Identity;
-        if (identity == null)
-        {
-            Debug.LogError(
-                $"[PoolManager] Poolable {poolable} thiếu PoolIdentity"
-            );
-            return;
-        }
-
-        if (!poolDict.TryGetValue(identity, out var pool))
-        {
-            Debug.LogError(
-                $"[PoolManager] Không tìm thấy pool cho {identity.name}"
-            );
-            return;
-        }
-
-        pool.Despawn((Component)poolable);
+        if (poolable == null) return;
+        Despawn(((Component)poolable).gameObject);
     }
-    #endregion
 }

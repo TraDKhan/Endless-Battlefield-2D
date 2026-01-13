@@ -33,13 +33,7 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
     {
         isAlive = true;
         health.Init(stats.maxHealth);
-        //
         rb.linearVelocity = Vector2.zero;
-        rb.angularVelocity = 0;
-        rb.simulated = true;
-
-        GetComponent<EnemyController>()?.OnSpawn();
-        //
         OnSpawned();
     }
 

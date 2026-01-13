@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9180821811944628130}
-  - component: {fileID: -2456386076608474384}
-  - component: {fileID: 7512159882814853776}
   - component: {fileID: 438056165998765739}
   - component: {fileID: 3454795467439542143}
+  - component: {fileID: -2456386076608474384}
+  - component: {fileID: 7512159882814853776}
   m_Layer: 0
   m_Name: Text Popup
   m_TagString: Untagged
@@ -39,36 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: -2.3914, y: 2.6582}
   m_SizeDelta: {x: 4, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &-2456386076608474384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2208156834062976471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69a0dd5d7bae3ab4784c1a8c6b11b550, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveUpDistance: 0.8
-  duration: 1
-  startScale: {x: 0, y: 0, z: 0}
-  peakScale: {x: 1.2, y: 1.2, z: 1.2}
-  endScale: {x: 0.8, y: 0.8, z: 0.8}
---- !u!114 &7512159882814853776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2208156834062976471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 2208156834062976471}
 --- !u!23 &438056165998765739
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -208,3 +178,33 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 438056165998765739}
   m_maskType: 0
+--- !u!114 &-2456386076608474384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208156834062976471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69a0dd5d7bae3ab4784c1a8c6b11b550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveUpDistance: 0.8
+  duration: 1
+  startScale: {x: 0, y: 0, z: 0}
+  peakScale: {x: 1.2, y: 1.2, z: 1.2}
+  endScale: {x: 0.8, y: 0.8, z: 0.8}
+--- !u!114 &7512159882814853776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2208156834062976471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolKey: Text Popup

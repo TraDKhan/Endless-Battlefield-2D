@@ -1,72 +1,73 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T> : IObjectPool where T : Component
+public class ObjectPool: IObjectPool
 {
-    private readonly Queue<T> pool = new();
-    private readonly T prefab;
+    private readonly Queue<GameObject> pool = new();
+    private readonly GameObject prefab;
     private readonly Transform parent;
+    private readonly string poolKey;
 
-    private readonly PoolIdentity prefabIdentity;
-
-    public ObjectPool(T prefab, int initialSize, Transform parent)
+    public ObjectPool(GameObject prefab, int initialSize, Transform parent)
     {
         this.prefab = prefab;
         this.parent = parent;
 
-        prefabIdentity = prefab.GetComponent<PoolIdentity>();
-        if (prefabIdentity == null)
+        var identity = prefab.GetComponent<PoolIdentity>();
+        if (identity == null)
         {
-            Debug.LogError($"[ObjectPool] Prefab {prefab.name} thiếu PoolIdentity");
+            Debug.LogError($"[Pool] Prefab {prefab.name} thiếu PoolIdentity");
             return;
         }
 
+        poolKey = identity.PoolKey;
+
         for (int i = 0; i < initialSize; i++)
         {
-            T obj = CreateInstance();
-            obj.gameObject.SetActive(false);
-            pool.Enqueue(obj);
+            var go = CreateInstance();
+            go.SetActive(false);
+            pool.Enqueue(go);
         }
     }
 
-    private T CreateInstance()
+    private GameObject CreateInstance()
     {
-        T obj = Object.Instantiate(prefab, parent);
+        GameObject go = Object.Instantiate(prefab, parent);
 
-        // ⭐ GÁN IDENTITY PREFAB GỐC
-        if (obj is IPoolable poolable)
-        {
-            poolable.Identity = prefabIdentity;
-        }
+        var identity = go.GetComponent<PoolIdentity>();
+        if (identity == null)
+            identity = go.AddComponent<PoolIdentity>();
 
-        return obj;
+        // clone dùng chung key
+        typeof(PoolIdentity)
+            .GetField("poolKey", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(identity, poolKey);
+
+        return go;
     }
 
-    public Component Spawn()
+    public GameObject Spawn()
     {
-        T obj = pool.Count > 0
+        GameObject go = pool.Count > 0
             ? pool.Dequeue()
             : CreateInstance();
 
-        obj.gameObject.SetActive(true);
+        go.SetActive(true);
 
-        if (obj is IPoolable poolable)
+        foreach (var poolable in go.GetComponentsInChildren<IPoolable>())
             poolable.OnSpawn();
 
-        return obj;
+        return go;
     }
 
-    public void Despawn(Component obj)
+    public void Despawn(GameObject obj)
     {
-        if (obj is not T t) return;
+        if (!obj.activeSelf) return;
 
-        // chống despawn 2 lần
-        if (!t.gameObject.activeSelf) return;
-
-        if (t is IPoolable poolable)
+        foreach (var poolable in obj.GetComponentsInChildren<IPoolable>())
             poolable.OnDespawn();
 
-        t.gameObject.SetActive(false);
-        pool.Enqueue(t);
+        obj.SetActive(false);
+        pool.Enqueue(obj);
     }
 }

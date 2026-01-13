@@ -1,33 +1,46 @@
-﻿using UnityEngine;
-public class EnemyController : MonoBehaviour
+﻿using System;
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(EnemyHealthController))]
+public class EnemyController : MonoBehaviour, IPoolable
 {
-    [Header("References")]
+    [Header("Pool")]
+    [SerializeField] public PoolIdentity Identity { get; set; }
+
+    [Header("Stats")]
     public EnemyStats stats;
 
     [Header("Components")]
-    public EnemyBase enemyBase;
+    //public EnemyBase enemyBase;
     public EnemyMovement movement;
     public EnemyAnimationController anim;
 
-    public Transform player;
+    private EnemyHealthController health;
+    private Rigidbody2D rb;
+
+    public Transform target;
     public LayerMask targetLayer;
 
+    #region State Machine
     private EnemyContext context;
     private IEnemyState currentState;
 
-    // States
     public EnemyIdleState idleState;
     public EnemyChaseState chaseState;
     public EnemyAttackState attackState;
     public EnemyDeadState deadState;
+    #endregion
+
+    private bool isAlive;
+    public event Action<EnemyController> OnEnemyDead;
 
     void Awake()
     {
-        enemyBase = GetComponent<EnemyBase>();
         movement = GetComponent<EnemyMovement>();
         anim = GetComponent<EnemyAnimationController>();
 
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        target = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         context = new EnemyContext(this);
         enemyBase.OnEnemyDead += HandleEnemyDead;
@@ -57,10 +70,16 @@ public class EnemyController : MonoBehaviour
 
     public void OnSpawn()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        target = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         currentState = null;
         ChangeState(EnemyStateID.Chase);
+    }
+
+    public void OnDespawn()
+    {
+        currentState?.Exit();
+        currentState = null;
     }
 
     void Update()
@@ -108,8 +127,8 @@ public class EnemyController : MonoBehaviour
     }
     public bool IsInAttackRange()
     {
-        if (player == null) return false;
-        return Vector2.Distance(transform.position, player.position) <= stats.attackRange;
+        if (target == null) return false;
+        return Vector2.Distance(transform.position, target.position) <= stats.attackRange;
     }
 
     public void FaceTarget(Vector2 targetPos)

@@ -33,18 +33,18 @@ public class SpawnIndicator : MonoBehaviour, IPoolable
     #region Pool Callbacks
     public void OnSpawn()
     {
-        if (Identity == null || Identity.Prefab == null)
-        {
-            Debug.LogError("[SpawnIndicator] PoolIdentity chưa được gán!");
-            return;
-        }
+        //if (Identity == null || Identity.gameObject == null)
+        //{
+        //    Debug.LogError("[SpawnIndicator] PoolIdentity chưa được gán!");
+        //    return;
+        //}
 
-        if (Identity.Prefab.name.Contains("(Clone)"))
-        {
-            Debug.LogError(
-                "[SpawnIndicator] PoolIdentity đang trỏ vào CLONE – gán sai prefab!"
-            );
-        }
+        //if (Identity.gameObject.name.Contains("(Clone)"))
+        //{
+        //    Debug.LogError(
+        //        "[SpawnIndicator] PoolIdentity đang trỏ vào CLONE – gán sai prefab!"
+        //    );
+        //}
 
         SetAlpha(0f);
         transform.localScale = startScale;

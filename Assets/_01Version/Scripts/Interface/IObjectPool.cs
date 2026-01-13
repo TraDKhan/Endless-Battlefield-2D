@@ -2,6 +2,6 @@
 
 public interface IObjectPool
 {
-    Component Spawn();
-    void Despawn(Component obj);
+    GameObject Spawn();
+    void Despawn(GameObject obj);
 }

@@ -17,7 +17,7 @@ public class EnemyContext
         Stats = controller.stats;
         Movement = controller.movement;
         Anim = controller.anim;
-        Target = controller.player;
+        Target = controller.target;
         TargetLayer = controller.targetLayer;
     }
 }

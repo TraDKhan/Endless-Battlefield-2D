@@ -2,14 +2,14 @@
 
 public class PoolIdentity : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
-    public GameObject Prefab => prefab;
+    [SerializeField] private string poolKey;
+    public string PoolKey => poolKey;
 
 #if UNITY_EDITOR
-    void OnValidate()
+    private void OnValidate()
     {
-        if (prefab == null)
-            prefab = gameObject; // prefab gốc
+        if (string.IsNullOrEmpty(poolKey))
+            poolKey = gameObject.name;
     }
 #endif
 }
