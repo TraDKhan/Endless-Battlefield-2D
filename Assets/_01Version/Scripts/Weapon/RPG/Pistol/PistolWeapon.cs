@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PistolWeapon : Weapon
 {
@@ -11,10 +12,10 @@ public class PistolWeapon : Weapon
 
         RotateToDirection(direction);
         //AimWeapon(direction);
-        SpawnProjectile(direction);
+        SpawnProjectile(direction, target);
     }
 
-    void SpawnProjectile(Vector2 direction)
+    void SpawnProjectile(Vector2 direction, Transform target)
     {
         Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(data.projectilePrefab);
 
@@ -23,9 +24,10 @@ public class PistolWeapon : Weapon
         bullet.transform.position = transform.position;
 
         bullet.Init(
-            CreateDamageContext(),
+            CreateWeaponContext(),
             direction,
-            stats.ProjectileSpeed
+            BulletMoveType.Homing,
+            target
         );
     }
 }

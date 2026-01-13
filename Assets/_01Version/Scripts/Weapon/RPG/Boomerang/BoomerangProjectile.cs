@@ -4,21 +4,31 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class BoomerangProjectile : MonoBehaviour, IPoolable
 {
+    // =========================
+    // POOL
+    // =========================
     public PoolIdentity Identity { get; set; }
 
+    // =========================
+    // CONFIG
+    // =========================
     [Header("Move")]
-    private Vector3 startPos;
-    private Vector3 forwardDir;
-    private float maxDistance;
-    private float speed;
+    [SerializeField] private float catchDistance = 0.3f;
+
+    // =========================
+    // RUNTIME
+    // =========================
+    private WeaponContext ctx;
+
     private Transform owner;
+    private Vector2 forwardDir;
+    private Vector3 startPos;
 
-    [Header("Damage")]
-    private WeaponDamageContext damageContext;
-
+    private float speed;
+    private float maxDistance;
     private bool returning;
 
-    // ⭐ TRACK HIT THEO ENEMY
+    // TRACK HIT THEO ENEMY
     private HashSet<IDamageable> hitOnForward = new();
     private HashSet<IDamageable> hitOnReturn = new();
 
@@ -30,44 +40,57 @@ public class BoomerangProjectile : MonoBehaviour, IPoolable
         hitOnReturn.Clear();
     }
 
-    public void OnDespawn() { }
+    public void OnDespawn() 
+    {
+        ctx = default;
+        owner = null;
+    }
+
+    void Despawn()
+    {
+        ObjectPoolManager.Instance.Despawn(this);
+    }
 
     // ================= INIT =================
     public void Init(
-        Vector3 dir,
-        float range,
-        float moveSpeed,
-        WeaponDamageContext ctx,
+        WeaponContext weaponContext,
+        Vector2 fireDirection,
         Transform ownerTransform
     )
     {
-        forwardDir = dir.normalized;
-        maxDistance = range;
-        speed = moveSpeed;
-        damageContext = ctx;
+        ctx = weaponContext;
+
         owner = ownerTransform;
+        forwardDir = fireDirection.normalized;
+
+        speed = ctx.ProjectileSpeed;
+        maxDistance = ctx.Range;
 
         startPos = transform.position;
         returning = false;
+
+        RotateToDirection(forwardDir);
     }
 
     // ================= UPDATE =================
     private void Update()
     {
-        Move();
+        UpdateMovement();
     }
 
     // ================= MOVE =================
-    void Move()
+    void UpdateMovement()
     {
-        Vector3 moveDir;
+        Vector2 moveDir;
 
         if (!returning)
         {
             moveDir = forwardDir;
 
             if (Vector3.Distance(startPos, transform.position) >= maxDistance)
+            {
                 returning = true;
+            }
         }
         else
         {
@@ -77,23 +100,26 @@ public class BoomerangProjectile : MonoBehaviour, IPoolable
                 return;
             }
 
-            moveDir = (owner.position - transform.position).normalized;
+            moveDir = ((Vector2)owner.position - (Vector2)transform.position).normalized;
 
-            if (Vector3.Distance(transform.position, owner.position) < 0.3f)
+            if (Vector2.Distance(transform.position, owner.position) <= catchDistance)
             {
                 Despawn();
                 return;
             }
         }
 
-        transform.position += moveDir * speed * Time.deltaTime;
+        transform.position += (Vector3)(moveDir * speed * Time.deltaTime);
+        RotateToDirection(moveDir);
     }
+
+    #region HIT
 
     // ================= HIT =================
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.TryGetComponent<IDamageable>(out var target))
-            return;
+        if (!IsValidTarget(other)) return;
+        if (!other.TryGetComponent<IDamageable>(out var target)) return;
 
         // ===== FORWARD =====
         if (!returning)
@@ -110,32 +136,38 @@ public class BoomerangProjectile : MonoBehaviour, IPoolable
 
             hitOnReturn.Add(target);
 
-            Vector2 returnDir = (owner.position - transform.position).normalized;
+            Vector2 returnDir = ((Vector2)owner.position - (Vector2)transform.position).normalized;
 
             ApplyDamage(target, returnDir);
         }
+    }
+    bool IsValidTarget(Collider2D col)
+    {
+        return ((1 << col.gameObject.layer) & ctx.TargetLayer) != 0;
     }
 
     // ================= DAMAGE + KNOCKBACK =================
     void ApplyDamage(IDamageable target, Vector2 hitDir)
     {
-        bool isCrit = Random.value < damageContext.critChance;
-        float finalDamage = isCrit
-            ? damageContext.damage * damageContext.critMultiplier
-            : damageContext.damage;
+        bool isCrit = Random.value < ctx.CritChance;
+        float damage = isCrit
+            ? ctx.Damage * 1.5f
+            : ctx.Damage;
 
-        target.TakeDamage((int)finalDamage);
+        target.TakeDamage(Mathf.RoundToInt(damage));
 
-        //// ⭐ KNOCKBACK
         if (target is IKnockbackable kb)
         {
-            kb.Knockback(hitDir, damageContext.knockbackForce);
+            kb.Knockback(hitDir, ctx.KnockbackForce);
         }
     }
+    #endregion
 
-    // ================= DESPAWN =================
-    void Despawn()
+    void RotateToDirection(Vector2 dir)
     {
-        ObjectPoolManager.Instance.Despawn(this);
+        if (dir == Vector2.zero) return;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

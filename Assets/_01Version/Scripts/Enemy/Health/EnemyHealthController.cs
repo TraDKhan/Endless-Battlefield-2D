@@ -56,7 +56,7 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        Init(1000);
+        Init(10000);
 
     }
     [ContextMenu("Damage")]

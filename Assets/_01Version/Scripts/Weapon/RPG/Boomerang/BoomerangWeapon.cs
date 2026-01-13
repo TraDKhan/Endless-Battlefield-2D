@@ -11,16 +11,18 @@ public class BoomerangWeapon : Weapon
 
         RotateToDirection(direction);
 
-        int count = Mathf.Max(1, stats.ProjectileCount);
+        WeaponContext ctx = CreateWeaponContext();
+
+        int count = Mathf.Max(1, ctx.ProjectileCount);
 
         for (int i = 0; i < count; i++)
         {
-            SpawnBoomerang(direction);
+            SpawnBoomerang(ctx, direction);
         }
     }
 
     // ===== SPAWN
-    void SpawnBoomerang(Vector3 direction)
+    void SpawnBoomerang(WeaponContext ctx, Vector3 direction)
     {
         BoomerangProjectile boomerang =
             ObjectPoolManager.Instance
@@ -28,15 +30,12 @@ public class BoomerangWeapon : Weapon
 
         if (boomerang == null) return;
 
-        boomerang.transform.position = transform.position;
-        boomerang.transform.rotation = Quaternion.identity;
+        boomerang.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
 
         boomerang.Init(
-            direction,
-            stats.Range,
-            stats.ProjectileSpeed,
-            CreateDamageContext(),
-            transform
-        );
+             ctx,
+             direction,
+             transform   // owner
+         );
     }
 }

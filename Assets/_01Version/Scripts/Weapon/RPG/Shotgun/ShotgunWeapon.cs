@@ -44,9 +44,9 @@ public class ShotgunWeapon : Weapon
         bullet.transform.position = transform.position;
 
         bullet.Init(
-            CreateDamageContext(),
+            CreateWeaponContext(),
             direction,
-            stats.ProjectileSpeed
+            BulletMoveType.Straight
         );
     }
 }

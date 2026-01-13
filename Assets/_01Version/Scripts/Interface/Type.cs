@@ -103,3 +103,9 @@ public enum WeaponSlotType
     OffHand
 }
 #endregion
+
+public enum BulletMoveType
+{
+    Straight,
+    Homing
+}

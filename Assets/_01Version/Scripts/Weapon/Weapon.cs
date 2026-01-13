@@ -128,24 +128,14 @@ public abstract class Weapon : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, stats != null ? stats.Range : 1f);
     }
 
-    protected WeaponDamageContext CreateDamageContext()
+    protected WeaponContext CreateWeaponContext()
     {
-        return new WeaponDamageContext
-        {
-            damage = stats.Damage,
-            critChance = stats.CritChance,
-            critMultiplier = 2f,
-            knockbackForce = 1f,
-            source = gameObject
-        };
+        return new WeaponContext(
+            source: gameObject,
+            firePoint: transform,
+            stats: stats,
+            targetLayer: enemyLayer,
+            knockbackForce: 1f
+        );
     }
-}
-
-public struct WeaponDamageContext
-{
-    public float damage;
-    public float critChance;
-    public float critMultiplier;
-    public float knockbackForce;
-    public GameObject source;
 }

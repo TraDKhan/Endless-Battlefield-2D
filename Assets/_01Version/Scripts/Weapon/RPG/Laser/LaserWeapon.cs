@@ -2,27 +2,24 @@
 
 public class LaserWeapon : Weapon
 {
-    //[Header("Targeting")]
-    //[SerializeField] private LayerMask enemyLayer;
-
     [Header("Laser Visual")]
     [SerializeField] private LineRenderer lineRenderer;
 
-    [Header("Laser Burst")]
+    [Header("Laser Config")]
     [SerializeField] private float laserDuration = 1.5f;
     [SerializeField] private float tickRate = 0.1f;
 
+    // ===== Runtime
+    private bool isFiring;
     private float burstTimer;
     private float tickTimer;
 
-    private bool isFiring;
     private Transform currentTarget;
+    private WeaponContext ctx;
 
     protected override void Update()
     {
         base.Update(); // vẫn cho Weapon quản cooldown / trigger
-
-        UpdateTarget();
 
         if (isFiring)
         {
@@ -35,24 +32,21 @@ public class LaserWeapon : Weapon
     {
         if (isFiring) return;
 
+        currentTarget = FindNearestEnemy();
+
         if (currentTarget == null) return;
 
         StartLaser();
     }
 
-    // =====TARGET
-    void UpdateTarget()
-    {
-        currentTarget = FindNearestEnemy();
-    }
-
-    // ===== BURST
+    // ====== LASER FLOW
     void StartLaser()
     {
         isFiring = true;
         burstTimer = 0f;
         tickTimer = 0f;
 
+        ctx = CreateWeaponContext();
         lineRenderer.enabled = true;
     }
 
@@ -60,6 +54,7 @@ public class LaserWeapon : Weapon
     {
         isFiring = false;
         lineRenderer.enabled = false;
+        currentTarget = null;
     }
 
     void UpdateBurst()
@@ -70,7 +65,7 @@ public class LaserWeapon : Weapon
             StopLaser();
     }
 
-    // ===== LASER
+    // ===== LASER UPDATE
     void UpdateLaser()
     {
         if (currentTarget == null)
@@ -82,46 +77,53 @@ public class LaserWeapon : Weapon
         Vector3 origin = transform.position;
         Vector3 dir = (currentTarget.position - origin).normalized;
 
+        RotateToDirection(dir);
+        float maxRange = ctx.Range;
+
         RaycastHit2D[] hits = Physics2D.RaycastAll(
             origin,
             dir,
-            stats.Range,
-            enemyLayer
+            maxRange,
+            ctx.TargetLayer
         );
+
         foreach (var hit in hits)
         {
             Debug.Log("Laser hit: " + hit.collider.name);
         }
-        Vector3 endPos = origin + dir * stats.Range;
+
+        Vector3 endPos = origin + dir * maxRange;
         DrawLaser(origin, endPos);
 
+        // ===== Tick damage
         tickTimer += Time.deltaTime;
         if (tickTimer >= tickRate)
         {
             tickTimer = 0f;
-            ApplyLaserDamage(hits);
+            ApplyLaserDamage(hits, dir);
         }
     }
 
     // ===== DAMAGE
-    void ApplyLaserDamage(RaycastHit2D[] hits)
+    void ApplyLaserDamage(RaycastHit2D[] hits, Vector2 hitDir)
     {
         if (hits == null || hits.Length == 0) return;
 
-        WeaponDamageContext ctx = CreateDamageContext();
-        float damagePerTick = ctx.damage * tickRate;
+        float damagePerTick = ctx.Damage * tickRate;
 
         foreach (var hit in hits)
         {
+            if (!hit.collider) continue;
+
             if (!hit.collider.TryGetComponent<IDamageable>(out var target))
                 continue;
 
-            bool isCrit = Random.value < ctx.critChance;
+            bool isCrit = Random.value < ctx.CritChance;
             float finalDamage = isCrit
-                ? damagePerTick * ctx.critMultiplier
+                ? damagePerTick * 1.5f
                 : damagePerTick;
 
-            target.TakeDamage((int)finalDamage);
+            target.TakeDamage(Mathf.RoundToInt(finalDamage));
         }
     }
     // ===== VISUAL
@@ -129,5 +131,11 @@ public class LaserWeapon : Weapon
     {
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
+    }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        if (lineRenderer != null)
+            lineRenderer.enabled = false;
     }
 }
