@@ -38,7 +38,6 @@ public class ObjectPoolManager : MonoBehaviour
         }
 
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
 
         InitializePools();
     }

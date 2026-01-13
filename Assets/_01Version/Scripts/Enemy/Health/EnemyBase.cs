@@ -16,7 +16,6 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
     public event Action<EnemyBase> OnEnemyDead;
     public event Action OnDeath;
 
-    #region Unity
     protected virtual void Awake()
     {
         health = GetComponent<EnemyHealthController>();
@@ -29,17 +28,18 @@ public class EnemyBase : MonoBehaviour, IPoolable, IKnockbackable
         health.OnDeath += HandleDeath;
     }
 
-    private void Start()
-    {
-        
-    }
-    #endregion
-
     #region Poolable
     public virtual void OnSpawn()
     {
         isAlive = true;
-        health.Init(stats.maxHealth);        
+        health.Init(stats.maxHealth);
+        //
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0;
+        rb.simulated = true;
+
+        GetComponent<EnemyController>()?.OnSpawn();
+        //
         OnSpawned();
     }
 

@@ -55,8 +55,11 @@ public class EnemyController : MonoBehaviour
         deadState = new EnemyDeadState(context);
     }
 
-    void Start()
+    public void OnSpawn()
     {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        currentState = null;
         ChangeState(EnemyStateID.Chase);
     }
 

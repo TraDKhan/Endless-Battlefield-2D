@@ -15,7 +15,7 @@ MonoBehaviour:
   waveName: Wave Normal
   isBossWave: 0
   enemies:
-  - enemyPrefab: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
+  - enemyPrefab: {fileID: 1809125044350354637, guid: ea9636591e0a7f946809ba2b05965d91, type: 3}
     count: 2
-  isSpawnGroup: 1
+  isSpawnGroup: 0
   groups: []
