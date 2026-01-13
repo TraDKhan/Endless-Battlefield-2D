@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 970086138227184377}
   - component: {fileID: 1153524248815099207}
   - component: {fileID: 7828743593567537062}
-  - component: {fileID: 7284524834093083453}
+  - component: {fileID: -8221542607057700212}
+  - component: {fileID: -2563038805157877515}
   m_Layer: 0
   m_Name: Exp Orb Item
   m_TagString: Untagged
@@ -111,7 +112,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7284524834093083453
+--- !u!114 &-8221542607057700212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,14 +121,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 6698914895533268769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be96a20cbebcf5e49943a25fd67f3981, type: 3}
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 2
-  value: 5
-  detectRadius: 3
-  moveSpeed: 5
+  poolKey: Exp Orb Item
+--- !u!114 &-2563038805157877515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698914895533268769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85475c9e0049afc44964f11ee0e436f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expAmount: 5
   pickupDistance: 0.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256

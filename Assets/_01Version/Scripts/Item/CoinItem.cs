@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class HeartItem : PooledItem
+public class CoinItem : PooledItem
 {
-    [SerializeField] private int healAmount = 1;
+    [SerializeField] private int value = 1;
     [SerializeField] private float pickupDistance = 0.5f;
 
     void Update()
@@ -12,12 +12,12 @@ public class HeartItem : PooledItem
         transform.position = Vector2.MoveTowards(
             transform.position,
             player.position,
-            5f * Time.deltaTime
+            7f * Time.deltaTime
         );
 
         if (Vector2.Distance(transform.position, player.position) < pickupDistance)
         {
-            player.GetComponent<PlayerHealthController>()?.Heal(healAmount);
+            //player.GetComponent<PlayerCurrency>()?.AddCoin(value);
             DespawnSelf();
         }
     }

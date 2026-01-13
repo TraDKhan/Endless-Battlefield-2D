@@ -3,34 +3,37 @@
 public class ItemDropper : MonoBehaviour
 {
     [SerializeField] private DropTable dropTable;
+
+    private EnemyController enemy;
+
     void Awake()
     {
-        var enemyBase = GetComponent<EnemyBase>();
-        if (enemyBase != null)
-            enemyBase.OnDeath += DropItems;
+        enemy = GetComponent<EnemyController>();
+
+        if (enemy == null)
+            Debug.Log("[Drop Item] EnemyController is not found!");
     }
 
-    void OnDestroy()
+    void OnEnable()
     {
-        var enemyBase = GetComponent<EnemyBase>();
-        if (enemyBase != null)
-            enemyBase.OnDeath -= DropItems;
+        enemy.OnEnemyDead += DropItems;
     }
 
+    void OnDisable()
+    {
+        enemy.OnEnemyDead -= DropItems;
+    }
 
-    [ContextMenu ("Drop Item")]
-    public void DropItems()
+    public void DropItems(EnemyController enemy)
     {
         if (dropTable == null) return;
-        Debug.Log("Spawn Item");
 
         foreach (var entry in dropTable.drops)
         {
             float roll = Random.Range(0f, 100f);
             if (roll > entry.dropChance) continue;
 
-            int amount = entry.amount;
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < entry.amount; i++)
             {
                 SpawnItem(entry.item);
             }
@@ -40,13 +43,19 @@ public class ItemDropper : MonoBehaviour
     private void SpawnItem(ItemData item)
     {
         if (item == null || item.prefab == null) return;
-        Debug.Log("Drop Item");
 
         Vector2 offset = Random.insideUnitCircle * 0.5f;
-        Instantiate(item.prefab, (Vector2)transform.position + offset, Quaternion.identity);
+
+        var pooledItem = ObjectPoolManager.Instance.Spawn<PooledItem>(item.prefab);
+
+        pooledItem.transform.position = (Vector2)transform.position + offset;
     }
+
+    // Optional: roll 1 item theo weight
     public ItemData RollOneItem()
     {
+        if (dropTable == null) return null;
+
         float totalWeight = 0;
         foreach (var d in dropTable.drops)
             totalWeight += d.dropChance;
@@ -60,6 +69,7 @@ public class ItemDropper : MonoBehaviour
             if (roll <= current)
                 return d.item;
         }
+
         return null;
     }
 }

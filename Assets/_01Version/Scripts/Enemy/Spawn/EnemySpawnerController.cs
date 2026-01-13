@@ -38,19 +38,19 @@ public class EnemySpawnerController : MonoBehaviour
         StartCoroutine(WaveLoop());
     }
 
-    #region Wave Loop
+    #region WAVE LOOP
+
     IEnumerator WaveLoop()
     {
         for (int i = 0; i < allWaves.Length; i++)
         {
             WaveData wave = allWaves[i];
 
-            // 🔔 Báo UI preview
+            // Báo UI preview
             waveEventChannel?.OnWavePreview?.Invoke(wave, i + 1);
 
-            // ⏳ ĐỢI UI báo bắt đầu
+            // ĐỢI UI báo bắt đầu
             bool canStart = false;
-
             System.Action startHandler = null;
             startHandler = () =>
             {
@@ -74,16 +74,17 @@ public class EnemySpawnerController : MonoBehaviour
     }
     #endregion
 
-    #region Wave Spawn
+    #region WAVE SPAWN
+
     IEnumerator SpawnWave(WaveData wave)
     {
-        // 🔹 Spawn đơn
+        // Spawn đơn
         if (wave.enemies != null && wave.enemies.Length > 0)
         {
             yield return StartCoroutine(SpawnSingleEnemies(wave.enemies));
         }
 
-        // 🔹 Spawn theo đàn
+        // Spawn theo đàn
         if (wave.isSpawnGroup && wave.groups != null && wave.groups.Length > 0)
         {
             foreach (EnemyGroupData group in wave.groups)
@@ -98,7 +99,7 @@ public class EnemySpawnerController : MonoBehaviour
     }
     #endregion
 
-    #region Single Spawn (Random)
+    #region SINGLE SPAWN
     IEnumerator SpawnSingleEnemies(EnemySpawnData[] enemies)
     {
         List<GameObject> spawnList = new();
@@ -106,7 +107,7 @@ public class EnemySpawnerController : MonoBehaviour
         foreach (EnemySpawnData data in enemies)
         {
             for (int i = 0; i < data.count; i++)
-                spawnList.Add(data.enemyPrefab); // lấy prefab riêng
+                spawnList.Add(data.enemyPrefab);
         }
 
         Shuffle(spawnList);
@@ -120,7 +121,8 @@ public class EnemySpawnerController : MonoBehaviour
     }
     #endregion
 
-    #region Group Spawn
+    #region GROUP SPAWN
+
     void SpawnGroup(EnemyGroupData group)
     {
         Vector2 center = GetSpawnPositionAroundPlayer();
@@ -138,7 +140,8 @@ public class EnemySpawnerController : MonoBehaviour
     }
     #endregion
 
-    #region Spawn With Indicator (POOL)
+    #region SPAWN WITH INDICATOR
+
     IEnumerator SpawnWithIndicator(GameObject enemyPrefab, Vector2 position)
     {
         SpawnIndicator indicator =
@@ -146,7 +149,7 @@ public class EnemySpawnerController : MonoBehaviour
 
         if (indicator == null)
         {
-            Debug.LogError("SpawnIndicator pool missing!");
+            Debug.LogError("[Spawner] SpawnIndicator pool missing!");
             yield break;
         }
 
@@ -158,46 +161,35 @@ public class EnemySpawnerController : MonoBehaviour
             done = true;
         });
 
-        // đợi indicator xong (nó sẽ tự despawn)
         yield return new WaitUntil(() => done);
     }
     #endregion
 
-    #region Core Spawn (POOL)
+    #region CORE SPAWN
+
     void SpawnEnemy(GameObject prefab, Vector2 position)
     {
-        EnemyBase enemy =
-            ObjectPoolManager.Instance.Spawn<EnemyBase>(prefab);
+        EnemyController enemy = ObjectPoolManager.Instance.Spawn<EnemyController>(prefab);
 
         if (enemy == null) return;
 
-        enemy.transform.position = position;
-        enemy.transform.rotation = Quaternion.identity;
+        enemy.transform.SetPositionAndRotation(position, Quaternion.identity);
         enemy.transform.localScale = Vector3.one;
 
         enemiesAlive++;
 
-        EnemyHealthController health = enemy.GetComponent<EnemyHealthController>();
-        if (health != null)
-        {
-            System.Action deathHandler = null;
-            deathHandler = () =>
-            {
-                health.OnDeath -= deathHandler;
-                OnEnemyDead(enemy);
-            };
-            health.OnDeath += deathHandler;
-        }
+        enemy.OnEnemyDead += HandleEnemyDead;
     }
 
-    void OnEnemyDead(EnemyBase enemy)
+    void HandleEnemyDead(EnemyController enemy)
     {
+        enemy.OnEnemyDead -= HandleEnemyDead;
         enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
-        ObjectPoolManager.Instance.Despawn(enemy);
     }
     #endregion
 
-    #region Utils
+    #region UTILS
+
     Vector2 GetSpawnPositionAroundPlayer()
     {
         float angle = Random.Range(0f, 360f);

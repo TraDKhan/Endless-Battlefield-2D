@@ -2629,62 +2629,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[0].prefab
-      value: 
-      objectReference: {fileID: 1809125044350354637, guid: ea9636591e0a7f946809ba2b05965d91, type: 3}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[1].prefab
-      value: 
-      objectReference: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[2].prefab
-      value: 
-      objectReference: {fileID: 968831194234069319, guid: f363a02cb8f5f0d4d9a9eee5ba1a6d61, type: 3}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[3].prefab
-      value: 
-      objectReference: {fileID: 2208156834062976471, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[5].prefab
-      value: 
-      objectReference: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[8].prefab
-      value: 
-      objectReference: {fileID: 2208156834062976471, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[0].initialSize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[1].initialSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[2].initialSize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[3].initialSize
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[5].initialSize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[8].initialSize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2926545103606494570, guid: d5dc30adfc7d75244a9fdf699bdf8787, type: 3}
-      propertyPath: pools.Array.data[8].poolComponent
-      value: 
-      objectReference: {fileID: -2456386076608474384, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

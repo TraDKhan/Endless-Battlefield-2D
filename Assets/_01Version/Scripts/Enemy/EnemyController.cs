@@ -3,6 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(EnemyHealthController))]
+[RequireComponent (typeof(PoolIdentity))]
 public class EnemyController : MonoBehaviour, IPoolable
 {
     [Header("Pool")]
@@ -37,51 +38,28 @@ public class EnemyController : MonoBehaviour, IPoolable
 
     void Awake()
     {
+        health = GetComponent<EnemyHealthController>();
+        rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<EnemyMovement>();
         anim = GetComponent<EnemyAnimationController>();
+
+        rb.gravityScale = 0;
+        rb.bodyType = RigidbodyType2D.Dynamic;
 
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         context = new EnemyContext(this);
-        enemyBase.OnEnemyDead += HandleEnemyDead;
 
         //
-        var melee = GetComponent<EnemyMeleeAttack>();
-        if (melee != null)
-            melee.Init(context);
-
-        var charge = GetComponent<EnemyChargeAttack>();
-        if (charge != null)
-            charge.Init(context);
-
-        var contact = GetComponent<EnemyContactAttack>();
-        if (contact != null)
-            contact.Init(context);
-
-        var ranged = GetComponent<EnemyRangedAttack>();
-        if (ranged != null)
-            ranged.Init(context);
+        InitAttacks();
 
         idleState = new EnemyIdleState(context);
         chaseState = new EnemyChaseState(context);
         attackState = new EnemyAttackState(context);
         deadState = new EnemyDeadState(context);
+
+        health.OnDeath += HandleDeath;
     }
-
-    public void OnSpawn()
-    {
-        target = GameObject.FindGameObjectWithTag("Player")?.transform;
-
-        currentState = null;
-        ChangeState(EnemyStateID.Chase);
-    }
-
-    public void OnDespawn()
-    {
-        currentState?.Exit();
-        currentState = null;
-    }
-
     void Update()
     {
         currentState?.Update();
@@ -92,6 +70,38 @@ public class EnemyController : MonoBehaviour, IPoolable
         currentState?.FixedUpdate();
     }
 
+    #region POOLABLE
+    public void OnSpawn()
+    {
+        isAlive = true;
+
+        target = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        health.Init(stats.maxHealth);
+        rb.linearVelocity = Vector2.zero;
+
+        currentState = null;
+        ChangeState(EnemyStateID.Chase);
+    }
+
+    public void OnDespawn()
+    {
+        isAlive = false;
+
+        currentState?.Exit();
+        currentState = null;
+
+        StopAllCoroutines();
+        ClearRuntimeEvents();
+    }
+
+    public void Despawn()
+    {
+        ObjectPoolManager.Instance.Despawn(this);
+    }
+    #endregion
+
+    #region STATE CONTROL
     public void ChangeState(EnemyStateID id)
     {
         switch (id)
@@ -117,14 +127,15 @@ public class EnemyController : MonoBehaviour, IPoolable
     {
         if (currentState == newState) return;
 
-        Debug.Log($"Exiting state: {currentState?.GetType().Name}");
         currentState?.Exit();
 
         currentState = newState;
 
-        Debug.Log($"Entering state: {currentState.GetType().Name}");
         currentState.Enter();
     }
+    #endregion
+
+    #region COMBAT HELPERS
     public bool IsInAttackRange()
     {
         if (target == null) return false;
@@ -141,14 +152,42 @@ public class EnemyController : MonoBehaviour, IPoolable
         scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
         transform.localScale = scale;
     }
-    void HandleEnemyDead(EnemyBase enemy)
+
+    #endregion
+
+    #region Death
+    private void HandleDeath()
     {
+        if (!isAlive) return;
+
+        isAlive = false;
+        OnEnemyDead?.Invoke(this);
+
         ChangeState(EnemyStateID.Dead);
     }
-    public void Despawn()
+    #endregion
+
+    #region Init Helpers
+    private void InitAttacks()
     {
-        ObjectPoolManager.Instance.Despawn(enemyBase);
+        var melee = GetComponent<EnemyMeleeAttack>();
+        if (melee != null) melee.Init(context);
+
+        var charge = GetComponent<EnemyChargeAttack>();
+        if (charge != null) charge.Init(context);
+
+        var contact = GetComponent<EnemyContactAttack>();
+        if (contact != null) contact.Init(context);
+
+        var ranged = GetComponent<EnemyRangedAttack>();
+        if (ranged != null) ranged.Init(context);
     }
+
+    private void ClearRuntimeEvents()
+    {
+        // clear delegate runtime nếu có
+    }
+    #endregion
 
     private void OnDrawGizmos()
     {

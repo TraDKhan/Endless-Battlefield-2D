@@ -45,27 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - prefab: {fileID: 9202343707709957090, guid: c94282caffca5bf4cabacd83e2409b2b, type: 3}
-    poolComponent: {fileID: -4920428901643282514, guid: c94282caffca5bf4cabacd83e2409b2b, type: 3}
-    initialSize: 5
-  - prefab: {fileID: 1565544100716240067, guid: 5ab324707818cd946a252d28e5a2ec02, type: 3}
-    poolComponent: {fileID: 3083608799134669481, guid: 5ab324707818cd946a252d28e5a2ec02, type: 3}
-    initialSize: 5
-  - prefab: {fileID: 2484597863641456937, guid: 2539b9943265efa49b60e65f4ee8d3e6, type: 3}
-    poolComponent: {fileID: 330929304396446220, guid: 2539b9943265efa49b60e65f4ee8d3e6, type: 3}
-    initialSize: 5
-  - prefab: {fileID: 6114853448046589499, guid: de8e52100df320e498bbb4603f85c543, type: 3}
-    poolComponent: {fileID: 7428522539763132566, guid: de8e52100df320e498bbb4603f85c543, type: 3}
-    initialSize: 5
-  - prefab: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
-    poolComponent: {fileID: 4200762892865267812, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
-    initialSize: 5
   - prefab: {fileID: 1809125044350354637, guid: ea9636591e0a7f946809ba2b05965d91, type: 3}
-    poolComponent: {fileID: 312058964107681403, guid: ea9636591e0a7f946809ba2b05965d91, type: 3}
-    initialSize: 5
-  - prefab: {fileID: 968831194234069319, guid: f363a02cb8f5f0d4d9a9eee5ba1a6d61, type: 3}
-    poolComponent: {fileID: 3979728134105757502, guid: f363a02cb8f5f0d4d9a9eee5ba1a6d61, type: 3}
     initialSize: 5
   - prefab: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}
-    poolComponent: {fileID: 2884507207263960850, guid: 3868255dc6c8b914886814718a58b734, type: 3}
+    initialSize: 10
+  - prefab: {fileID: 968831194234069319, guid: f363a02cb8f5f0d4d9a9eee5ba1a6d61, type: 3}
     initialSize: 5
+  - prefab: {fileID: 2208156834062976471, guid: c31340a5a53d4c04a9c7942336e34430, type: 3}
+    initialSize: 10
+  - prefab: {fileID: 6698914895533268769, guid: 15551664562fcb44284fcebc04645379, type: 3}
+    initialSize: 10
+  - prefab: {fileID: 8047185763220562195, guid: 21f25d28f03399245b726983ba388a5a, type: 3}
+    initialSize: 10

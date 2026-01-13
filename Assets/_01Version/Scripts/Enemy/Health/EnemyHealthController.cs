@@ -33,7 +33,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         if (isDead || damage <= 0)
             return;
 
-        Debug.LogWarning("Nhận " + damage + "ST" + "Còn " + currentHealth);
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 

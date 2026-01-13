@@ -3,7 +3,6 @@
 public class EnemyContext
 {
     public EnemyController Controller { get; }
-    public EnemyBase Base { get; }
     public EnemyStats Stats { get; }
     public EnemyMovement Movement { get; }
     public EnemyAnimationController Anim { get; }
@@ -13,7 +12,6 @@ public class EnemyContext
     public EnemyContext(EnemyController controller)
     {
         Controller = controller;
-        Base = controller.enemyBase;
         Stats = controller.stats;
         Movement = controller.movement;
         Anim = controller.anim;
