@@ -16,7 +16,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
 
     public void Init(int maxHP)
     {
-        Debug.Log(maxHP);
         maxHealth = maxHP;
         ResetHealth();
     }

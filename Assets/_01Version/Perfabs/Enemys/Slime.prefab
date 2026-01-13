@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2742242767723342429}
   - component: {fileID: 669573975666860204}
   - component: {fileID: 8005505541502419228}
-  - component: {fileID: 6869803521308383201}
   - component: {fileID: 93231782329920603}
   - component: {fileID: 1096803000911987165}
   - component: {fileID: 8191150993074406903}
@@ -195,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3247279516341965413}
+  poolKey: Slime
 --- !u!114 &8005505541502419228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,27 +208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: edf60b80be0e7e1469bbeab537543074, type: 2}
-  enemyBase: {fileID: 6869803521308383201}
   movement: {fileID: 93231782329920603}
   anim: {fileID: 1096803000911987165}
-  player: {fileID: 0}
+  target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &6869803521308383201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3247279516341965413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083a37d6fdf949749943aafe291842ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: edf60b80be0e7e1469bbeab537543074, type: 2}
-  rb: {fileID: 2742242767723342429}
 --- !u!114 &93231782329920603
 MonoBehaviour:
   m_ObjectHideFlags: 0

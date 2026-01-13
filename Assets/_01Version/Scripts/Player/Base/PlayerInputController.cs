@@ -11,12 +11,9 @@ public class PlayerInputController : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_STANDALONE || UNITY_EDITOR
         ReadKeyboardInput();
         ReadKeyboardDash();
-#else
-    ReadJoystickInput();
-#endif
+        ReadJoystickInput();
     }
 
     // PC / Editor
@@ -53,6 +50,7 @@ public class PlayerInputController : MonoBehaviour
     // Mobile
     private void ReadJoystickInput()
     {
+        Debug.Log("s");
         if (joystick != null)
         {
             movement = new Vector2(joystick.Horizontal, joystick.Vertical);

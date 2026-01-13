@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 7141514312679835318}
   - component: {fileID: 5543836866771733159}
   - component: {fileID: 7428522539763132566}
-  - component: {fileID: 7583432696392170428}
   - component: {fileID: 1300893507901111759}
   - component: {fileID: 4767796527282096652}
   - component: {fileID: 4472534303103877256}
@@ -229,27 +228,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 781f5ab85e140f746b92f51cba291deb, type: 2}
-  enemyBase: {fileID: 7583432696392170428}
   movement: {fileID: 1300893507901111759}
   anim: {fileID: 4767796527282096652}
-  player: {fileID: 0}
+  target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &7583432696392170428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6114853448046589499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083a37d6fdf949749943aafe291842ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 781f5ab85e140f746b92f51cba291deb, type: 2}
-  rb: {fileID: 5543836866771733159}
 --- !u!114 &1300893507901111759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6114853448046589499}
+  poolKey: Bomber Goblin
 --- !u!114 &-3566015384070134317
 MonoBehaviour:
   m_ObjectHideFlags: 0

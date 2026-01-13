@@ -60,6 +60,12 @@ public class EnemyController : MonoBehaviour, IPoolable
 
         health.OnDeath += HandleDeath;
     }
+
+    private void Start()
+    {
+        ChangeState(EnemyStateID.Chase);
+    }
+
     void Update()
     {
         currentState?.Update();

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4283418298978277283}
   - component: {fileID: 2590491920595181598}
   - component: {fileID: 8452467087505726477}
-  - component: {fileID: 5407269268873112367}
   - component: {fileID: 6075581671038236196}
   - component: {fileID: 1323796457728530602}
   - component: {fileID: 269122731646198135}
@@ -195,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3360977197827516108}
+  poolKey: Mushroom
 --- !u!114 &8452467087505726477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,27 +208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 041cd6032de06d145a84c34fc39d8d7f, type: 2}
-  enemyBase: {fileID: 5407269268873112367}
   movement: {fileID: 6075581671038236196}
   anim: {fileID: 1323796457728530602}
-  player: {fileID: 0}
+  target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &5407269268873112367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3360977197827516108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083a37d6fdf949749943aafe291842ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 041cd6032de06d145a84c34fc39d8d7f, type: 2}
-  rb: {fileID: 4283418298978277283}
 --- !u!114 &6075581671038236196
 MonoBehaviour:
   m_ObjectHideFlags: 0

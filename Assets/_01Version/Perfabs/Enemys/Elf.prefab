@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1701546866503125303}
   - component: {fileID: 5275211482149880953}
   - component: {fileID: 3722125918435398207}
-  - component: {fileID: 4200762892865267812}
   - component: {fileID: 2370909599476489137}
   - component: {fileID: 5590746256366940295}
   - component: {fileID: 8188792731101652385}
@@ -186,20 +185,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4200762892865267812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846302508575641821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083a37d6fdf949749943aafe291842ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 95923c5a35031a748b53b5f864765a55, type: 2}
-  rb: {fileID: 3722125918435398207}
 --- !u!114 &2370909599476489137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,10 +198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 95923c5a35031a748b53b5f864765a55, type: 2}
-  enemyBase: {fileID: 4200762892865267812}
   movement: {fileID: 5590746256366940295}
   anim: {fileID: 8188792731101652385}
-  player: {fileID: 0}
+  target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -288,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2846302508575641821}
+  poolKey: Elf
 --- !u!114 &-3210179608005951128
 MonoBehaviour:
   m_ObjectHideFlags: 0

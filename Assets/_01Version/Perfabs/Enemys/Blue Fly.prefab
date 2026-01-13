@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 65353347356988172}
   - component: {fileID: 7559856860568094916}
   - component: {fileID: 2722234226950488120}
-  - component: {fileID: 330929304396446220}
   - component: {fileID: 7855938375812493644}
   - component: {fileID: 3644685787358710637}
   - component: {fileID: 6615683074200022403}
@@ -183,20 +182,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &330929304396446220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2484597863641456937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083a37d6fdf949749943aafe291842ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 761e5037516f32641ae39c9b4dc1cd61, type: 2}
-  rb: {fileID: 2722234226950488120}
 --- !u!114 &7855938375812493644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,10 +195,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 761e5037516f32641ae39c9b4dc1cd61, type: 2}
-  enemyBase: {fileID: 330929304396446220}
   movement: {fileID: 3644685787358710637}
   anim: {fileID: 3440351174102747371}
-  player: {fileID: 0}
+  target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -289,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2484597863641456937}
+  poolKey: Blue Fly
 --- !u!114 &-5613232334626206827
 MonoBehaviour:
   m_ObjectHideFlags: 0
