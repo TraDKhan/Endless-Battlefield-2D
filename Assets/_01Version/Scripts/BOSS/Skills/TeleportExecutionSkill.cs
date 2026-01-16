@@ -80,7 +80,11 @@ public class TeleportExecutionSkill : MonoBehaviour, IBossSkill
             meleeSkill.EmpowerNextHits(2);
         }
     }
-
+    public void OnAnimationEvent(BossContext ctx)
+    {
+        if (ctx.Player == null)
+            return;
+    }
     // ===== GỌI TỪ ANIMATION EVENT =====
     public void ApplySkillDamage()
     {

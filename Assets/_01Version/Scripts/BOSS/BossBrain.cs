@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent (typeof(BossDecisionSystem))]
+[RequireComponent (typeof(BossSkillExecutor))]
 public class BossBrain : MonoBehaviour
 {
     private BossDecisionSystem decision;
@@ -30,5 +32,11 @@ public class BossBrain : MonoBehaviour
         {
             executor.ExecuteSkill(skill);
         }
+    }
+    [ContextMenu("Fire")]
+    public void AnimationEvent(string eventId)
+    {
+        Debug.Log(eventId);
+        executor.OnAnimationEvent(eventId);
     }
 }

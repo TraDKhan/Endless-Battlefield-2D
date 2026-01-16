@@ -26,7 +26,7 @@ public class PistolWeapon : Weapon
         bullet.Init(
             CreateWeaponContext(),
             direction,
-            BulletMoveType.Homing,
+            ProjectileMoveType.Homing,
             target
         );
     }

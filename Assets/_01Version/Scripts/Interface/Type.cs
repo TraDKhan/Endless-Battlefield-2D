@@ -104,7 +104,7 @@ public enum WeaponSlotType
 }
 #endregion
 
-public enum BulletMoveType
+public enum ProjectileMoveType
 {
     Straight,
     Homing

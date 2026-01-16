@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent (typeof(PoolIdentity))]
 public class Bullet : MonoBehaviour, IPoolable
 {
-    // ===== Pool =====
+    // ===== Pool ===== \\
     public PoolIdentity Identity { get; set; }
 
-    // ===== Config =====
+    // ===== Config ===== \\
     [Header("Life")]
     [SerializeField] private float lifeTime = 3f;
     [SerializeField] private int maxPenetration = 1;
@@ -14,9 +16,9 @@ public class Bullet : MonoBehaviour, IPoolable
     [Header("Homing")]
     [SerializeField] private float turnSpeed = 720f; // độ/giây
 
-    // ===== Runtime =====
+    // ===== Runtime ===== \\
     private WeaponContext ctx;
-    private BulletMoveType moveType;
+    private ProjectileMoveType moveType;
     private Transform homingTarget;
 
     private Vector2 moveDir;
@@ -37,6 +39,7 @@ public class Bullet : MonoBehaviour, IPoolable
         ctx = default;
         homingTarget = null;
     }
+
     void Despawn()
     {
         ObjectPoolManager.Instance.Despawn(this);
@@ -46,7 +49,7 @@ public class Bullet : MonoBehaviour, IPoolable
     public void Init(
         WeaponContext weaponContext,
         Vector2 direction,
-        BulletMoveType type,
+        ProjectileMoveType type,
         Transform target = null
     )
     {
@@ -55,7 +58,7 @@ public class Bullet : MonoBehaviour, IPoolable
         this.moveSpeed = ctx.ProjectileSpeed;
         this.moveType = type;
 
-        homingTarget = (type == BulletMoveType.Homing) ? target : null;
+        homingTarget = (type == ProjectileMoveType.Homing) ? target : null;
 
         RotateToDirection(moveDir);
     }
@@ -67,16 +70,18 @@ public class Bullet : MonoBehaviour, IPoolable
         UpdateMovement();
         UpdateLifeTime();
     }
+
     void UpdateMovement()
     {
-        if (moveType == BulletMoveType.Homing && homingTarget != null)
+
+        if (moveType == ProjectileMoveType.Homing && homingTarget != null)
         {
             UpdateHomingDirection();
         }
 
-        transform.position +=
-            (Vector3)(moveDir * moveSpeed * Time.deltaTime);
+        transform.position += (Vector3)(moveDir * moveSpeed * Time.deltaTime);
     }
+
     void UpdateHomingDirection()
     {
         Vector2 targetDir =
@@ -90,6 +95,7 @@ public class Bullet : MonoBehaviour, IPoolable
 
         RotateToDirection(moveDir);
     }
+
     void UpdateLifeTime()
     {
         lifeTimer += Time.deltaTime;
@@ -113,8 +119,19 @@ public class Bullet : MonoBehaviour, IPoolable
         ApplyDamage(target);
 
         penetrationLeft--;
+
         if (penetrationLeft <= 0)
-            Despawn();
+        {
+            WaitDespawn(0.3f);
+        }
+            
+    }
+
+    // ===== DELAY ===== \\
+    private IEnumerator WaitDespawn(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Despawn();
     }
 
     // ===== CHECK TARGET ===== \\

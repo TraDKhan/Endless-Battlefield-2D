@@ -46,7 +46,7 @@ public class ShotgunWeapon : Weapon
         bullet.Init(
             CreateWeaponContext(),
             direction,
-            BulletMoveType.Straight
+            ProjectileMoveType.Straight
         );
     }
 }

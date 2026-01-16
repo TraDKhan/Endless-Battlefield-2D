@@ -5,9 +5,11 @@ public class BossSkillExecutor : MonoBehaviour
 {
     BossController boss;
     BossContext context;
-    public BossContext Context => context;
 
+    IBossSkill currentSkill;
     bool isExecuting;
+
+    public BossContext Context => context;
     public bool IsBusy => isExecuting;
 
     void Awake()
@@ -27,8 +29,19 @@ public class BossSkillExecutor : MonoBehaviour
 
     IEnumerator RunSkill(IBossSkill skill)
     {
+        currentSkill = skill;
         isExecuting = true;
+
         yield return skill.Execute(context);
         isExecuting = false;
+        currentSkill = null;
+    }
+
+    public void OnAnimationEvent(string eventId)
+    {
+        if (currentSkill is IAnimEventSkill evtSkill)
+        {
+            evtSkill.OnAnimationEvent(context, eventId);
+        }
     }
 }

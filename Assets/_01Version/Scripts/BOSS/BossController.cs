@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(BossPhaseController))]
+[RequireComponent(typeof(EnemyMovement))]
+[RequireComponent(typeof(EnemyAnimationController))]
+[RequireComponent(typeof(EnemyHealthController))]
+
 public class BossController : MonoBehaviour
 {
     public EnemyStats stats;
@@ -36,37 +41,45 @@ public class BossController : MonoBehaviour
         if (!player) return;
 
         HandleMovement();
+        FaceTarget(player.position);
     }
 
     void HandleMovement()
     {
         float distance = Vector2.Distance(transform.position, player.position);
 
-        // Nếu quá gần thì dừng (chuẩn bị attack)
-        if (distance <= stats.personalSpace)
+        if (distance > stats.attackRange)
+        {
+            movement.MoveTowards(player.position, stats.moveSpeed);
+            return;
+        }
+
+        // trong khoảng tấn công
+        if (distance > stats.personalSpace && distance <= stats.attackRange)
         {
             movement.Stop();
             anim.SetMoving(false);
             return;
         }
 
-        float speed = stats.moveSpeed;
-
-        switch (CurrentPhase)
-        {
-            case 1:
-                speed *= 0.8f;
-                break;
-
-            case 2:
-                speed *= 1.5f;
-                break;
-        }
-
-        movement.MoveTowards(player.position, speed);
+        // Quá sát → lùi ra xa
+        Vector2 retreatTarget = (Vector2)transform.position +
+                                ((Vector2)transform.position - 
+                                (Vector2)player.position).normalized * 
+                                stats.personalSpace;
+        movement.MoveTowards(retreatTarget, stats.moveSpeed * 0.5f);
         anim.SetMoving(true);
     }
+    public void FaceTarget(Vector2 targetPos)
+    {
+        Vector2 dir = targetPos - (Vector2)transform.position;
 
+        if (Mathf.Abs(dir.x) < 0.01f) return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
     private void OnDrawGizmos()
     {
         if (stats == null) return;
