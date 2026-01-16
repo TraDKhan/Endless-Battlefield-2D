@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using static BossRangedSkill;
+using static BRangedAttack;
 
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent (typeof(PoolIdentity))]

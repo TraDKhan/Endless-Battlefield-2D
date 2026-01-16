@@ -109,3 +109,10 @@ public enum ProjectileMoveType
     Straight,
     Homing
 }
+
+// ===== BOSS
+public enum BossSkillType
+{
+    Basic,
+    Special
+}

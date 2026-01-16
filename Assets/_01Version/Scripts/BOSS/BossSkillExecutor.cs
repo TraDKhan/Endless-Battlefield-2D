@@ -3,45 +3,63 @@ using UnityEngine;
 
 public class BossSkillExecutor : MonoBehaviour
 {
-    BossController boss;
     BossContext context;
 
-    IBossSkill currentSkill;
     bool isExecuting;
+    float globalAttackCooldown;
 
+    public bool IsBusy => isExecuting || globalAttackCooldown > 0f;
     public BossContext Context => context;
-    public bool IsBusy => isExecuting;
 
     void Awake()
     {
-        boss = GetComponent<BossController>();
         context = new BossContext
         {
-            boss = boss
+            boss = GetComponent<BossController>()
         };
     }
 
+    void Update()
+    {
+        if (globalAttackCooldown > 0f)
+            globalAttackCooldown -= Time.deltaTime;
+    }
+
+    // ================= SKILL =================
     public void ExecuteSkill(IBossSkill skill)
     {
-        if (isExecuting || skill == null) return;
+        if (IsBusy || skill == null)
+            return;
+
         StartCoroutine(RunSkill(skill));
     }
 
     IEnumerator RunSkill(IBossSkill skill)
     {
-        currentSkill = skill;
         isExecuting = true;
 
         yield return skill.Execute(context);
+
         isExecuting = false;
-        currentSkill = null;
+        globalAttackCooldown = skill.Cooldown;
     }
 
-    public void OnAnimationEvent(string eventId)
+    // ================= BASIC =================
+    public void ExecuteBasicAttack(IBasicAttack attack)
     {
-        if (currentSkill is IAnimEventSkill evtSkill)
-        {
-            evtSkill.OnAnimationEvent(context, eventId);
-        }
+        if (IsBusy || attack == null)
+            return;
+
+        StartCoroutine(RunBasicAttack(attack));
+    }
+
+    IEnumerator RunBasicAttack(IBasicAttack attack)
+    {
+        isExecuting = true;
+
+        yield return attack.Attack(context);
+
+        isExecuting = false;
+        globalAttackCooldown = context.Stats.attackCooldown;
     }
 }

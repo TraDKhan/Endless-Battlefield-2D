@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class BossMeleeSkill : MonoBehaviour, IBossSkill
+public class BossMeleeSkill : MonoBehaviour//, IBossSkill
 {
     public string SkillID => "Melee";
 

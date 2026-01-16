@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TeleportExecutionSkill : MonoBehaviour, IBossSkill
+public class TeleportExecutionSkill : BaseBossSkill, IAnimEventSkill
 {
-    public string SkillID => "TeleportExecution";
+    public override string SkillID => "TeleportExecution";
 
     [Header("Teleport Conditions")]
     [SerializeField] private float minTeleportDistance = 6f;
@@ -12,21 +12,16 @@ public class TeleportExecutionSkill : MonoBehaviour, IBossSkill
     [SerializeField] private int skillDamage = 30;
     [SerializeField] private float damageRadius = 2.5f;
 
-    [Header("Cooldown")]
-    [SerializeField] private float skillCooldown = 6f;
-
     private LayerMask targetLayer;
     private Transform bossTransform;
-    private float lastCastTime = -999f;
     private bool damageApplied;
+    private bool finished;
 
-    public bool CanExecute(BossContext ctx)
+    public override bool CanExecute(BossContext ctx)
     {
-        if (ctx.Player == null)
-            return false;
+        if(!base.CanExecute(ctx)) return false;
 
-        if (Time.time < lastCastTime + skillCooldown)
-            return false;
+        if (ctx.Player == null) return false;
 
         float dist = Vector2.Distance(
             ctx.boss.transform.position,
@@ -47,9 +42,8 @@ public class TeleportExecutionSkill : MonoBehaviour, IBossSkill
         return true;
     }
 
-    public IEnumerator Execute(BossContext ctx)
+    protected override IEnumerator OnExecute(BossContext ctx)
     {
-        lastCastTime = Time.time;
         damageApplied = false;
 
         // Dừng di chuyển
@@ -70,8 +64,9 @@ public class TeleportExecutionSkill : MonoBehaviour, IBossSkill
         // ===== PLAY SKILL1 ANIMATION =====
         ctx.Anim.PlaySkill1();
 
-        // Chờ animation Skill1
-        yield return new WaitForSeconds(0.6f);
+        // Chờ animation kết thúc bằng event
+        yield return new WaitUntil(() => finished);
+        finished = false;
 
         // ===== SAU KHI SKILL1 XONG → CƯỜNG HÓA MELEE =====
         var meleeSkill = ctx.boss.GetComponent<BossMeleeSkill>();
@@ -80,11 +75,15 @@ public class TeleportExecutionSkill : MonoBehaviour, IBossSkill
             meleeSkill.EmpowerNextHits(2);
         }
     }
-    public void OnAnimationEvent(BossContext ctx)
+    public void OnAnimationEvent(BossContext ctx, string eventId)
     {
-        if (ctx.Player == null)
-            return;
+        if (eventId == "ApplyDamage")
+            ApplySkillDamage();
+
+        if (eventId == "EndSkill")
+            finished = true;
     }
+
     // ===== GỌI TỪ ANIMATION EVENT =====
     public void ApplySkillDamage()
     {

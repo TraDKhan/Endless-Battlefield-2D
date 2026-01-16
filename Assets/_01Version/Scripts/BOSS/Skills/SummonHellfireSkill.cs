@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class SummonHellfireSkill : MonoBehaviour, IBossSkill
+public class SummonHellfireSkill : MonoBehaviour//, IBossSkill
 {
     public string SkillID => "SummonHellfire";
 
