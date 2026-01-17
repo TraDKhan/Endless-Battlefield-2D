@@ -20,10 +20,10 @@ GameObject:
   - component: {fileID: 6958159352126188720}
   - component: {fileID: 8383265252480925253}
   - component: {fileID: 5348775025888948695}
-  - component: {fileID: 5166871523242252003}
   - component: {fileID: 8187050960509854037}
   - component: {fileID: 2861832159436310452}
-  - component: {fileID: 3825820580872682291}
+  - component: {fileID: 7630998862362209663}
+  - component: {fileID: 5861366026229297086}
   m_Layer: 0
   m_Name: Undead Executioner
   m_TagString: Untagged
@@ -203,6 +203,8 @@ MonoBehaviour:
   phaseController: {fileID: 2794267147069794918}
   movement: {fileID: 6234398581258737722}
   anim: {fileID: 6958159352126188720}
+  health: {fileID: 7467287588666627191}
+  bossUI: {fileID: 0}
   player: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -290,20 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillBehaviours:
   - {fileID: 2861832159436310452}
-  - {fileID: 3825820580872682291}
-  - {fileID: 5166871523242252003}
---- !u!114 &5166871523242252003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922181083909124111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5ea0b5651271f419ea92138c452b0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  - {fileID: 5861366026229297086}
 --- !u!114 &8187050960509854037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,11 +317,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ffd44942d9bcc40ad4db23a67264a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldown: 3
   minTeleportDistance: 6
   skillDamage: 30
   damageRadius: 2.5
-  skillCooldown: 6
---- !u!114 &3825820580872682291
+  skillAnimMaxTime: 1.2
+--- !u!114 &7630998862362209663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,11 +331,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 7922181083909124111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8188c175931c6e54f9e72489e3a10217, type: 3}
+  m_Script: {fileID: 11500000, guid: a74aaef23dac6da469cceae54686401a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hellfirePrefab: {fileID: 2484597863641456937, guid: 2539b9943265efa49b60e65f4ee8d3e6, type: 3}
+  attackAnimDuration: 0.7
+  hitRadiusMultiplier: 1
+--- !u!114 &5861366026229297086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7922181083909124111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcdccc09481c134fa1ee8aeda8bf244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  summonObjectPrefab: {fileID: 2484597863641456937, guid: 2539b9943265efa49b60e65f4ee8d3e6, type: 3}
   baseCount: 3
   radius: 2.5
-  cooldown: 8
   minPhase: 2
+  summonAnimDuration: 0.6

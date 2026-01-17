@@ -52,16 +52,14 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         OnDeath?.Invoke();
     }
 
-
-
     private void Start()
     {
-        Init(10000);
+        Init(1000);
 
     }
     [ContextMenu("Damage")]
     private void TestDamge()
     {
-        TakeDamage(1200);
+        TakeDamage(300);
     }
 }

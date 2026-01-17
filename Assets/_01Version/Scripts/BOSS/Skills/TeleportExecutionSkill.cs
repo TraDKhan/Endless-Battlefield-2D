@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class TeleportExecutionSkill : BaseBossSkill, IAnimEventSkill
+public class TeleportExecutionSkill : BaseBossSkill
 {
     public override string SkillID => "TeleportExecution";
 
@@ -12,102 +12,104 @@ public class TeleportExecutionSkill : BaseBossSkill, IAnimEventSkill
     [SerializeField] private int skillDamage = 30;
     [SerializeField] private float damageRadius = 2.5f;
 
-    private LayerMask targetLayer;
-    private Transform bossTransform;
+    [Header("Animation")]
+    [SerializeField] float skillAnimMaxTime = 1.2f;
+
+    BossContext cachedCtx;
     private bool damageApplied;
-    private bool finished;
+    private bool skillFinished;
 
     public override bool CanExecute(BossContext ctx)
     {
-        if(!base.CanExecute(ctx)) return false;
+        if (!base.CanExecute(ctx))
+            return false;
 
-        if (ctx.Player == null) return false;
+        if (ctx.Player == null)
+            return false;
 
         float dist = Vector2.Distance(
             ctx.boss.transform.position,
             ctx.Player.position
         );
 
-        // Trong tầm đánh thường → không teleport
         if (dist <= ctx.Stats.attackRange + ctx.Stats.personalSpace)
             return false;
 
-        // Quá gần
         if (dist < minTeleportDistance)
             return false;
-
-        targetLayer = ctx.TargetLayer;
-        bossTransform = ctx.boss.transform;
 
         return true;
     }
 
     protected override IEnumerator OnExecute(BossContext ctx)
     {
+        cachedCtx = ctx;
         damageApplied = false;
+        skillFinished = false;
 
-        // Dừng di chuyển
-        ctx.Movement.Stop();
-        ctx.Anim.SetMoving(false);
+        // STOP
+        ctx.Movement?.Stop();
+        ctx.Anim?.SetMoving(false);
 
-        // Teleport
-        float angle = Random.Range(0f, 360f);
-        Vector2 offset = new Vector2(
-            Mathf.Cos(angle),
-            Mathf.Sin(angle)
-        ).normalized;
-
-        ctx.boss.transform.position = (Vector2)ctx.Player.position + offset * ctx.Stats.attackRange;
+        // TELEPORT
+        Vector2 dir = (ctx.Player.position - ctx.boss.transform.position).normalized;
+        ctx.boss.transform.position =
+            (Vector2)ctx.Player.position - dir * ctx.Stats.attackRange;
 
         yield return new WaitForSeconds(0.15f);
 
-        // ===== PLAY SKILL1 ANIMATION =====
-        ctx.Anim.PlaySkill1();
+        // PLAY ANIM
+        ctx.Anim?.PlaySkill1();
 
-        // Chờ animation kết thúc bằng event
-        yield return new WaitUntil(() => finished);
-        finished = false;
-
-        // ===== SAU KHI SKILL1 XONG → CƯỜNG HÓA MELEE =====
-        var meleeSkill = ctx.boss.GetComponent<BossMeleeSkill>();
-        if (meleeSkill != null)
+        // WAIT EVENT OR TIMEOUT
+        float timer = 0f;
+        while (!skillFinished && timer < skillAnimMaxTime)
         {
-            meleeSkill.EmpowerNextHits(2);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // EMPOWER MELEE BASIC
+        var melee = ctx.boss.GetComponent<BMeeleAttack>();
+        if (melee != null)
+        {
+            melee.EmpowerNextHits(2);
         }
     }
-    public void OnAnimationEvent(BossContext ctx, string eventId)
-    {
-        if (eventId == "ApplyDamage")
-            ApplySkillDamage();
 
-        if (eventId == "EndSkill")
-            finished = true;
-    }
-
-    // ===== GỌI TỪ ANIMATION EVENT =====
-    public void ApplySkillDamage()
+    // =========================
+    // ANIMATION EVENT – HIT
+    // =========================
+    public void AnimEvent_ApplySkillDamage()
     {
-        if (damageApplied) return;
+        if (damageApplied || cachedCtx == null)
+            return;
+
         damageApplied = true;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(
-            bossTransform.position,
+            cachedCtx.boss.transform.position,
             damageRadius,
-            targetLayer
+            cachedCtx.TargetLayer
         );
 
         foreach (var hit in hits)
         {
-            var health = hit.GetComponent<IDamageable>();
-            if (health != null)
-            {
-                health.TakeDamage(skillDamage);
-            }
+            hit.GetComponent<IDamageable>()
+                ?.TakeDamage(skillDamage);
         }
     }
 
+    // =========================
+    // ANIMATION EVENT – END
+    // =========================
+    public void AnimEvent_FinishSkill()
+    {
+        skillFinished = true;
+    }
+
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, damageRadius);

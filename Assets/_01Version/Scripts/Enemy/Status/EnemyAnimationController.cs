@@ -22,11 +22,13 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void SetDead(bool value)
     {
+        Debug.Log("Anim Dead = " + value);
         animator.SetBool(IsDead, value);
     }
 
     public void PlayAttack()
     {
+        Debug.LogWarning("Anim: Attack");
         animator.ResetTrigger(Attack);
         animator.SetTrigger(Attack);
     }

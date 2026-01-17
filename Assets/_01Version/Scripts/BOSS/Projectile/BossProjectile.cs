@@ -11,7 +11,6 @@ public class BossProjectile : MonoBehaviour, IPoolable
     // ===== Config =====
     [Header("Life")]
     [SerializeField] float lifeTime = 4f;
-    [SerializeField] int maxPenetration = 1;
 
     [Header("Homing")]
     [SerializeField] float turnSpeed = 720f;
@@ -29,21 +28,31 @@ public class BossProjectile : MonoBehaviour, IPoolable
     Vector2 moveDir;
 
     float lifeTimer;
-    int penetrationLeft;
+    private bool isHit;
     private bool isDespawning;
 
+    Collider2D col;
+
+    private void Awake()
+    {
+        col = GetComponent<Collider2D>();
+    }
     // =========================
     // POOL
     // =========================
     public void OnSpawn()
     {
         lifeTimer = 0f;
-        penetrationLeft = maxPenetration;
+        isHit = false;
         isDespawning = false;
+
+        if (col != null)
+            col.enabled = true;
 
         if (animator != null)
         {
             animator.Rebind();
+            animator.ResetTrigger(HitTrigger);
             animator.Update(0f);
         }
     }
@@ -85,6 +94,8 @@ public class BossProjectile : MonoBehaviour, IPoolable
     // =========================
     private void Update()
     {
+        if (isHit) return;
+
         UpdateMovement();
         UpdateLifeTime();
     }
@@ -125,24 +136,15 @@ public class BossProjectile : MonoBehaviour, IPoolable
     // =========================
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isDespawning) return;
+        if (isHit || isDespawning) return;
 
         if (!IsValidTarget(other)) return;
 
         if (!other.TryGetComponent<IDamageable>(out var target)) return;
 
         DealDamage(target);
-        penetrationLeft--;
-
-        if (penetrationLeft > 0)
-        {
-            PlayHitEffect();
-        }
-        else
-        {
-            PlayHitEffect();
-            Despawn();
-        }
+        PlayHitEffect();
+        EnterHitState();
     }
 
     void DealDamage(IDamageable target)
@@ -153,35 +155,49 @@ public class BossProjectile : MonoBehaviour, IPoolable
         target.TakeDamage(dmg);
     }
 
-    // =========================
-    // HIT FX
-    // =========================
-    private void PlayHitEffect()
-    {
-        if (animator != null)
-        {
-            animator.SetTrigger(HitTrigger);
-        }
-    }
-
-    // =========================
-    // UTIL
-    // =========================
     bool IsValidTarget(Collider2D col)
     {
         return ((1 << col.gameObject.layer) & ctx.TargetLayer) != 0;
     }
 
-    private void RotateToDirection(Vector2 dir)
+    // =========================
+    // HIT STATE
+    // =========================
+    void EnterHitState()
+    {
+        isHit = true;
+
+        // Ngừng di chuyển
+        moveDir = Vector2.zero;
+
+        // Tắt collider tránh hit nhiều lần
+        if (col != null)
+            col.enabled = false;
+    }
+
+    void PlayHitEffect()
+    {
+        if (animator != null)
+        {
+            Debug.Log("Projectile Hit Player");
+            animator.SetTrigger(HitTrigger);
+        }
+    }
+
+    // =========================
+    // ANIMATION EVENT
+    // =========================
+    public void AnimaEvent_HitEnd()
+    {
+        Despawn();
+    }
+
+    // =========================
+    // UTIL
+    // =========================
+    void RotateToDirection(Vector2 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
-    }
-
-    // Animation Event (optional)
-    public void AnimationHitEnd()
-    {
-        if (penetrationLeft <= 0)
-            Despawn();
     }
 }

@@ -22,9 +22,9 @@ public class BRangedAttack : BaseBasicAttack
     // =========================
     // ANIMATION EVENT
     // =========================
+
     public void AnimEvent_Fire()
     {
-        Debug.Log(cachedCtx + cachedCtx.Player.ToString());
         if (cachedCtx == null || cachedCtx.Player == null)
             return;
 
@@ -36,8 +36,6 @@ public class BRangedAttack : BaseBasicAttack
     // =========================
     void FireProjectile(BossContext ctx)
     {
-        Debug.Log("FIRE");
-
         BossProjectile projectile =
             ObjectPoolManager.Instance
                 .Spawn<BossProjectile>(projectilePrefab);

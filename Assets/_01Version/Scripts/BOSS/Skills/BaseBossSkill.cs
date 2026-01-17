@@ -1,33 +1,27 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-public abstract class BaseBossSkill : MonoBehaviour//, IBossSkill
+public abstract class BaseBossSkill : MonoBehaviour, IBossSkill
 {
-    [Header("Skill Type")]
-    [SerializeField] protected BossSkillType skillType;
-
     [Header("Cooldown")]
     [SerializeField] protected float cooldown = 2f;
 
     protected float lastUseTime = -999f;
 
     public abstract string SkillID { get; }
-    public BossSkillType SkillType => skillType;
+
+    public float Cooldown => cooldown;
+
     public bool IsOnCooldown => Time.time < lastUseTime + cooldown;
 
     public virtual bool CanExecute(BossContext ctx)
     {
-        if (skillType == BossSkillType.Special)
-            return !IsOnCooldown;
-
-        return true;
+        return !IsOnCooldown;
     }
 
     public IEnumerator Execute(BossContext ctx)
     {
-        if (skillType == BossSkillType.Special)
-            lastUseTime = Time.time;
-
+        lastUseTime = Time.time;
         yield return OnExecute(ctx);
     }
 
