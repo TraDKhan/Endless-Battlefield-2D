@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 3
   maxPenetration: 1
+  turnSpeed: 720
 --- !u!114 &8192455025238770660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,4 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2480542894489494438}
+  poolKey: Bullet

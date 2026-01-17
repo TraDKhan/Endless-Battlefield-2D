@@ -32,7 +32,10 @@ public class UIWavePopupController : MonoBehaviour
         if (flowRoutine != null)
             StopCoroutine(flowRoutine);
 
-        currentView = wave.isBossWave ? bossWaveView : normalWaveView;
+        if (wave is BossWaveData)
+            currentView = bossWaveView;
+        else
+            currentView = normalWaveView;
 
         flowRoutine = StartCoroutine(WaveFlow(wave, waveIndex));
     }

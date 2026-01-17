@@ -15,6 +15,8 @@ public class BossBrain : MonoBehaviour
     [SerializeField] float thinkInterval = 0.3f;
     [SerializeField] float postSkillRecovery = 1.0f;
     [SerializeField] int maxBasicAttackBetweenSkills = 2;
+    [SerializeField] float postBasicDelay = 0.2f;
+    float postBasicTimer;
 
     State currentState;
 
@@ -55,7 +57,6 @@ public class BossBrain : MonoBehaviour
                 UpdateBasicAttack();
                 break;
         }
-        Debug.Log(currentState);
     }
 
     // ================= STATES =================
@@ -68,6 +69,12 @@ public class BossBrain : MonoBehaviour
         if (recoveryTimer > 0)
         {
             recoveryTimer -= Time.deltaTime;
+            return;
+        }
+
+        if (postBasicTimer > 0)
+        {
+            postBasicTimer -= Time.deltaTime;
             return;
         }
 
@@ -87,16 +94,23 @@ public class BossBrain : MonoBehaviour
             return;
         }
 
-        IBossSkill skill = decision.ChooseSkill(executor.Context);
-        if (skill != null)
+        //Nếu đã đánh đủ → ưu tiên dùng skill
+        if (basicAttackCount >= maxBasicAttackBetweenSkills && !executor.IsSkillOnCooldown)
         {
-            executor.ExecuteSkill(skill);
-            currentState = State.UsingSkill;
-            return;
+            var skill = decision.ChooseSkill(executor.Context);
+            if (skill != null)
+            {
+                executor.ExecuteSkill(skill);
+                currentState = State.UsingSkill;
+                return;
+            }
         }
 
-        if (basicAttackCount < maxBasicAttackBetweenSkills &&
+
+        //Đánh thường
+        if (
             basicAttack != null &&
+            !executor.IsBasicOnCooldown &&
             basicAttack.CanAttack(executor.Context))
         {
             executor.ExecuteBasicAttack(basicAttack);
@@ -105,8 +119,10 @@ public class BossBrain : MonoBehaviour
             return;
         }
 
+
         currentState = State.Idle;
     }
+
 
     void UpdateUsingSkill()
     {
@@ -122,6 +138,7 @@ public class BossBrain : MonoBehaviour
     {
         if (!executor.IsBusy)
         {
+            postBasicTimer = postBasicDelay;
             currentState = State.Idle;
         }
     }

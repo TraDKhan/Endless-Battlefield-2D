@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5639fc1b979a0294b888a6a3988e813a, type: 3}
-  m_Name: WaveData
+  m_Script: {fileID: 11500000, guid: b8fb953a6476a574381858efe74b9a57, type: 3}
+  m_Name: New Enemy Wave Data
   m_EditorClassIdentifier: 
-  waveName: Wave Normal
-  isBossWave: 0
+  waveName: SSSS
   enemies:
-  - enemyPrefab: {fileID: 1809125044350354637, guid: ea9636591e0a7f946809ba2b05965d91, type: 3}
-    count: 1
+  - enemyPrefab: {fileID: 2846302508575641821, guid: e61e5264f2e943f40a429dca10d9122d, type: 3}
+    count: 2
   isSpawnGroup: 0
   groups: []

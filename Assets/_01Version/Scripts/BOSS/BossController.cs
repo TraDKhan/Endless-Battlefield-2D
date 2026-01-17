@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(BossPhaseController))]
 [RequireComponent(typeof(EnemyMovement))]
@@ -14,27 +15,31 @@ public class BossController : MonoBehaviour
     public EnemyMovement movement;
     public EnemyAnimationController anim;
     [SerializeField] private EnemyHealthController health;
-    [SerializeField] private UIBossHealth bossUI;
 
     [Header("Runtime")]
     public Transform player;
     public LayerMask targetLayer;
     public int CurrentPhase => phaseController.CurrentPhase;
+    public EnemyHealthController Health => health;
     public bool IsCastingSkill { get; private set; }
+    public event System.Action<BossController> OnBossDead;
 
     void Awake()
     {
         phaseController = GetComponent<BossPhaseController>();
         movement = GetComponent<EnemyMovement>();
         anim = GetComponent<EnemyAnimationController>();
+        health = GetComponent<EnemyHealthController>();
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Start()
     {
-        bossUI.Bind(health);
-        health.OnDeath += () => bossUI.gameObject.SetActive(false);
+        health.Init(stats.maxHealth);
+        health.OnDeath += HandleDeath;
+
+        BossUIManager.Instance.RegisterBoss(this);
     }
 
     void Update()
@@ -49,6 +54,23 @@ public class BossController : MonoBehaviour
         FaceTarget(player.position);
     }
 
+    private void OnDestroy()
+    {
+        if (health != null)
+            health.OnDeath -= HandleDeath;
+        BossUIManager.Instance.UnregisterBoss(this);
+    }
+    void HandleDeath()
+    {
+        // 1️⃣ Báo cho Spawner
+        OnBossDead?.Invoke(this);
+
+        // 2️⃣ Gỡ UI
+        BossUIManager.Instance.UnregisterBoss(this);
+
+        // 3️⃣ Hủy boss
+        Destroy(gameObject);
+    }
     void HandleMovement()
     {
         float distance = Vector2.Distance(transform.position, player.position);
@@ -89,6 +111,7 @@ public class BossController : MonoBehaviour
         scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
         transform.localScale = scale;
     }
+
     public void SetCastingSkill(bool value)
     {
         IsCastingSkill = value;

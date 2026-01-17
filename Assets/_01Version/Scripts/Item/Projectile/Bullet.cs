@@ -121,18 +121,9 @@ public class Bullet : MonoBehaviour, IPoolable
         penetrationLeft--;
 
         if (penetrationLeft <= 0)
-        {
-            WaitDespawn(0.3f);
-        }
-            
+            Despawn();         
     }
 
-    // ===== DELAY ===== \\
-    private IEnumerator WaitDespawn(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        Despawn();
-    }
 
     // ===== CHECK TARGET ===== \\
     bool IsValidTarget(Collider2D col)

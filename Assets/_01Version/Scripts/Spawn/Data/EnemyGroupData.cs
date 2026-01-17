@@ -3,8 +3,6 @@
 [System.Serializable]
 public class EnemyGroupData
 {
-    public string groupName;
-
     [Tooltip("Danh sách quái trong đàn")]
     public EnemySpawnData[] enemies;
 

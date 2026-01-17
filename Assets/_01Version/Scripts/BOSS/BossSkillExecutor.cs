@@ -6,9 +6,13 @@ public class BossSkillExecutor : MonoBehaviour
     BossContext context;
 
     bool isExecuting;
-    float globalAttackCooldown;
+    float skillCooldown;
+    float basicCooldown;
 
-    public bool IsBusy => isExecuting || globalAttackCooldown > 0f;
+    public bool IsBusy => isExecuting;
+    public bool IsSkillOnCooldown => skillCooldown > 0f;
+    public bool IsBasicOnCooldown => basicCooldown > 0f;
+
     public BossContext Context => context;
 
     void Awake()
@@ -21,8 +25,8 @@ public class BossSkillExecutor : MonoBehaviour
 
     void Update()
     {
-        if (globalAttackCooldown > 0f)
-            globalAttackCooldown -= Time.deltaTime;
+        if (skillCooldown > 0) skillCooldown -= Time.deltaTime;
+        if (basicCooldown > 0) basicCooldown -= Time.deltaTime;
     }
 
     // ================= SKILL =================
@@ -37,11 +41,9 @@ public class BossSkillExecutor : MonoBehaviour
     IEnumerator RunSkill(IBossSkill skill)
     {
         isExecuting = true;
-
         yield return skill.Execute(context);
-
         isExecuting = false;
-        globalAttackCooldown = skill.Cooldown;
+        skillCooldown = skill.Cooldown;
     }
 
     // ================= BASIC =================
@@ -56,10 +58,8 @@ public class BossSkillExecutor : MonoBehaviour
     IEnumerator RunBasicAttack(IBasicAttack attack)
     {
         isExecuting = true;
-
         yield return attack.Attack(context);
-
         isExecuting = false;
-        globalAttackCooldown = context.Stats.attackCooldown;
+        basicCooldown = context.Stats.attackCooldown;
     }
 }

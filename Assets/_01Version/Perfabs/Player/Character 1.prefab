@@ -172,6 +172,7 @@ GameObject:
   - component: {fileID: 4753805396862610238}
   - component: {fileID: 2351441895952689743}
   - component: {fileID: 3211721895992312980}
+  - component: {fileID: 211381670128725054}
   m_Layer: 8
   m_Name: Character 1
   m_TagString: Player
@@ -480,6 +481,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb4c8745d541bd45969a7b26e22ce3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &211381670128725054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061738363453199701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb4c8745d541bd45969a7b26e22ce3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1186106535816290216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -531,6 +544,10 @@ PrefabInstance:
     - target: {fileID: 5757144308714031333, guid: f8fd0406a72ffc0468f3406aee99faef, type: 3}
       propertyPath: m_Name
       value: Pistol Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 5757144308714031333, guid: f8fd0406a72ffc0468f3406aee99faef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

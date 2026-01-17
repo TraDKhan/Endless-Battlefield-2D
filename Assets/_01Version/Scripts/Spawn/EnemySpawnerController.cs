@@ -7,7 +7,7 @@ public class EnemySpawnerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform player;
 
-    [Header("Prefabs (Registered In Pool)")]
+    [Header("Indicator")]
     [SerializeField] private SpawnIndicator spawnIndicatorPrefab;
 
     [Header("Spawn Radius")]
@@ -21,22 +21,19 @@ public class EnemySpawnerController : MonoBehaviour
     [Header("Events")]
     [SerializeField] private WaveEventChannel waveEventChannel;
 
-    private int enemiesAlive = 0;
+    private int enemiesAlive;
+
+    #region UNITY
 
     void Start()
     {
         if (player == null)
-        {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-
-            if (playerObj != null)
-                player = playerObj.transform;
-            else
-                Debug.LogError("Player not found");
-        }
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         StartCoroutine(WaveLoop());
     }
+
+    #endregion
 
     #region WAVE LOOP
 
@@ -46,46 +43,48 @@ public class EnemySpawnerController : MonoBehaviour
         {
             WaveData wave = allWaves[i];
 
-            // Báo UI preview
             waveEventChannel?.OnWavePreview?.Invoke(wave, i + 1);
-
-            // ĐỢI UI báo bắt đầu
-            bool canStart = false;
-            System.Action startHandler = null;
-            startHandler = () =>
-            {
-                waveEventChannel.OnWaveStart -= startHandler;
-                canStart = true;
-            };
-
-            waveEventChannel.OnWaveStart += startHandler;
-
-            yield return new WaitUntil(() => canStart);
+            yield return WaitForWaveStart();
 
             Debug.Log($"[Spawner] Start Wave: {wave.waveName}");
 
-            yield return StartCoroutine(SpawnWave(wave));
-            yield return new WaitUntil(() => enemiesAlive <= 0);
+            if (wave is EnemyWaveData enemyWave)
+                yield return SpawnEnemyWave(enemyWave);
+            else if (wave is BossWaveData bossWave)
+                yield return SpawnBossWave(bossWave);
 
+            yield return new WaitUntil(() => enemiesAlive <= 0);
             waveEventChannel?.OnWaveCleared?.Invoke();
         }
 
         Debug.Log("[Spawner] All waves completed!");
     }
+
+    IEnumerator WaitForWaveStart()
+    {
+        bool canStart = false;
+
+        System.Action handler = null;
+        handler = () =>
+        {
+            waveEventChannel.OnWaveStart -= handler;
+            canStart = true;
+        };
+
+        waveEventChannel.OnWaveStart += handler;
+        yield return new WaitUntil(() => canStart);
+    }
+
     #endregion
 
-    #region WAVE SPAWN
+    #region ENEMY WAVE
 
-    IEnumerator SpawnWave(WaveData wave)
+    IEnumerator SpawnEnemyWave(EnemyWaveData wave)
     {
-        // Spawn đơn
         if (wave.enemies != null && wave.enemies.Length > 0)
-        {
-            yield return StartCoroutine(SpawnSingleEnemies(wave.enemies));
-        }
+            yield return SpawnSingleEnemies(wave.enemies);
 
-        // Spawn theo đàn
-        if (wave.isSpawnGroup && wave.groups != null && wave.groups.Length > 0)
+        if (wave.isSpawnGroup && wave.groups != null)
         {
             foreach (EnemyGroupData group in wave.groups)
             {
@@ -97,14 +96,12 @@ public class EnemySpawnerController : MonoBehaviour
             }
         }
     }
-    #endregion
 
-    #region SINGLE SPAWN
     IEnumerator SpawnSingleEnemies(EnemySpawnData[] enemies)
     {
         List<GameObject> spawnList = new();
 
-        foreach (EnemySpawnData data in enemies)
+        foreach (var data in enemies)
         {
             for (int i = 0; i < data.count; i++)
                 spawnList.Add(data.enemyPrefab);
@@ -115,61 +112,73 @@ public class EnemySpawnerController : MonoBehaviour
         foreach (GameObject prefab in spawnList)
         {
             Vector2 pos = GetSpawnPositionAroundPlayer();
-            yield return StartCoroutine(SpawnWithIndicator(prefab, pos));
+            yield return SpawnWithIndicator(prefab, pos, SpawnEnemy);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-    #endregion
-
-    #region GROUP SPAWN
 
     void SpawnGroup(EnemyGroupData group)
     {
         Vector2 center = GetSpawnPositionAroundPlayer();
 
-        foreach (EnemySpawnData enemy in group.enemies)
+        foreach (var enemy in group.enemies)
         {
             for (int i = 0; i < enemy.count; i++)
             {
-                Vector2 offset = Random.insideUnitCircle * group.groupRadius;
-                Vector2 pos = center + offset;
-
-                StartCoroutine(SpawnWithIndicator(enemy.enemyPrefab, pos));
+                Vector2 pos = center + Random.insideUnitCircle * group.groupRadius;
+                StartCoroutine(
+                    SpawnWithIndicator(enemy.enemyPrefab, pos, SpawnEnemy)
+                );
             }
         }
     }
+
     #endregion
 
-    #region SPAWN WITH INDICATOR
+    #region BOSS WAVE (NO POOL)
 
-    IEnumerator SpawnWithIndicator(GameObject enemyPrefab, Vector2 position)
+    IEnumerator SpawnBossWave(BossWaveData wave)
     {
-        SpawnIndicator indicator =
-            ObjectPoolManager.Instance.Spawn<SpawnIndicator>(spawnIndicatorPrefab.gameObject);
-
-        if (indicator == null)
+        foreach (BossSpawnData bossData in wave.bosses)
         {
-            Debug.LogError("[Spawner] SpawnIndicator pool missing!");
-            yield break;
+            for (int i = 0; i < bossData.count; i++)
+            {
+                Vector2 pos = GetSpawnPositionAroundPlayer();
+
+                yield return SpawnWithIndicator(
+                    bossData.bossPrefab.gameObject,
+                    pos,
+                    SpawnBoss
+                );
+
+                yield return new WaitForSeconds(spawnInterval);
+            }
         }
-
-        bool done = false;
-
-        indicator.Play(position, () =>
-        {
-            SpawnEnemy(enemyPrefab, position);
-            done = true;
-        });
-
-        yield return new WaitUntil(() => done);
     }
+
+    void SpawnBoss(GameObject prefab, Vector2 position)
+    {
+        BossController boss =
+            Instantiate(prefab, position, Quaternion.identity)
+            .GetComponent<BossController>();
+
+        enemiesAlive++;
+    }
+
     #endregion
 
     #region CORE SPAWN
 
     void SpawnEnemy(GameObject prefab, Vector2 position)
     {
-        EnemyController enemy = ObjectPoolManager.Instance.Spawn<EnemyController>(prefab);
+        EnemyController enemy =
+            ObjectPoolManager.Instance.Spawn<EnemyController>(prefab);
+
+        if (enemy == null)
+        {
+            Debug.LogError($"[Spawner] FAILED TO SPAWN ENEMY: {prefab.name}");
+            return;
+        }
 
         if (enemy == null) return;
 
@@ -177,15 +186,48 @@ public class EnemySpawnerController : MonoBehaviour
         enemy.transform.localScale = Vector3.one;
 
         enemiesAlive++;
-
         enemy.OnEnemyDead += HandleEnemyDead;
     }
+
+    IEnumerator SpawnWithIndicator(
+        GameObject prefab,
+        Vector2 position,
+        System.Action<GameObject, Vector2> spawnAction
+    )
+    {
+        SpawnIndicator indicator =
+            ObjectPoolManager.Instance.Spawn<SpawnIndicator>(
+                spawnIndicatorPrefab.gameObject
+            );
+
+        bool done = false;
+
+        indicator.Play(position, () =>
+        {
+            Debug.Log("SpawnIndicator callback fired");
+            spawnAction?.Invoke(prefab, position);
+            done = true;
+        });
+
+        yield return new WaitUntil(() => done);
+    }
+
+    #endregion
+
+    #region DEAD CALLBACKS
 
     void HandleEnemyDead(EnemyController enemy)
     {
         enemy.OnEnemyDead -= HandleEnemyDead;
         enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
     }
+
+    void HandleBossDead(BossController boss)
+    {
+        boss.OnBossDead -= HandleBossDead;
+        enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
+    }
+
     #endregion
 
     #region UTILS
@@ -193,13 +235,13 @@ public class EnemySpawnerController : MonoBehaviour
     Vector2 GetSpawnPositionAroundPlayer()
     {
         float angle = Random.Range(0f, 360f);
-        float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
+        float dist = Random.Range(minSpawnRadius, maxSpawnRadius);
 
         return (Vector2)player.position +
                new Vector2(
                    Mathf.Cos(angle * Mathf.Deg2Rad),
                    Mathf.Sin(angle * Mathf.Deg2Rad)
-               ) * distance;
+               ) * dist;
     }
 
     void Shuffle<T>(List<T> list)
@@ -210,5 +252,6 @@ public class EnemySpawnerController : MonoBehaviour
             (list[i], list[j]) = (list[j], list[i]);
         }
     }
+
     #endregion
 }
