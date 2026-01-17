@@ -16,8 +16,8 @@ MonoBehaviour:
   maxHealth: 100
   moveSpeed: 2.5
   damage: 1
-  attackCooldown: 2.89
+  attackCooldown: 2
   projectileMode: 0
   projectileSpeed: 3
   attackRange: 5
-  personalSpace: 2.5
+  personalSpace: 1.5

@@ -2,49 +2,78 @@
 using static BRangedAttack;
 
 [RequireComponent(typeof(Collider2D))]
-[RequireComponent (typeof(PoolIdentity))]
+[RequireComponent(typeof(PoolIdentity))]
 public class BossProjectile : MonoBehaviour, IPoolable
 {
-    // ===== Pool =====
+    // =========================
+    // POOL
+    // =========================
     public PoolIdentity Identity { get; set; }
 
-    // ===== Config =====
+    // =========================
+    // CONFIG
+    // =========================
     [Header("Life")]
-    [SerializeField] float lifeTime = 4f;
+    [SerializeField] private float lifeTime = 4f;
 
     [Header("Homing")]
-    [SerializeField] float turnSpeed = 720f;
+    [SerializeField] private float turnSpeed = 720f;
 
     [Header("Animation")]
-    [SerializeField] Animator animator;
+    [SerializeField] private Animator animator;
 
-    static readonly int HitTrigger = Animator.StringToHash("Hit");
+    private static readonly int HitTrigger = Animator.StringToHash("Hit");
 
-    // ===== Runtime =====
-    BossProjectileContext ctx;
-    ProjectileMoveType moveType;
-    Transform homingTarget;
+    // =========================
+    // STATE
+    // =========================
+    public enum ProjectileState
+    {
+        Idle,       // đứng yên / charge
+        Moving,     // đang bay
+        Hit         // trúng mục tiêu
+    }
 
-    Vector2 moveDir;
+    private ProjectileState state;
 
-    float lifeTimer;
-    private bool isHit;
+    // =========================
+    // RUNTIME
+    // =========================
+    private BossProjectileContext ctx;
+    private ProjectileMoveType moveType;
+    private Transform homingTarget;
+
+    private Vector2 moveDir;
+    private float lifeTimer;
+
     private bool isDespawning;
+    private Collider2D col;
 
-    Collider2D col;
-
+    // =========================
+    // UNITY
+    // =========================
     private void Awake()
     {
         col = GetComponent<Collider2D>();
     }
+
+    private void Update()
+    {
+        if (state != ProjectileState.Moving)
+            return;
+
+        UpdateMovement();
+        UpdateLifeTime();
+    }
+
     // =========================
-    // POOL
+    // POOL CALLBACK
     // =========================
     public void OnSpawn()
     {
         lifeTimer = 0f;
-        isHit = false;
         isDespawning = false;
+        state = ProjectileState.Idle;
 
         if (col != null)
             col.enabled = true;
@@ -62,7 +91,7 @@ public class BossProjectile : MonoBehaviour, IPoolable
         homingTarget = null;
     }
 
-    void Despawn()
+    private void Despawn()
     {
         if (isDespawning) return;
         isDespawning = true;
@@ -71,9 +100,13 @@ public class BossProjectile : MonoBehaviour, IPoolable
     }
 
     // =========================
-    // INIT
+    // INIT API
     // =========================
-    public void Init(
+
+    /// <summary>
+    /// Spawn projectile nhưng CHƯA bay (dùng cho skill charge / vòng tròn)
+    /// </summary>
+    public void InitIdle(
         BossProjectileContext context,
         Vector2 direction,
         ProjectileMoveType type,
@@ -83,33 +116,49 @@ public class BossProjectile : MonoBehaviour, IPoolable
         ctx = context;
         moveDir = direction.normalized;
         moveType = type;
+        homingTarget = (type == ProjectileMoveType.Homing) ? target : null;
 
-        homingTarget = (type == ProjectileMoveType.Homing)? target : null;
-
+        state = ProjectileState.Idle;
         RotateToDirection(moveDir);
     }
 
-    // =========================
-    // UPDATE
-    // =========================
-    private void Update()
+    /// <summary>
+    /// Spawn projectile và bay NGAY (dùng cho đánh thường)
+    /// </summary>
+    public void InitAndFire(
+        BossProjectileContext context,
+        Vector2 direction,
+        ProjectileMoveType type,
+        Transform target = null
+    )
     {
-        if (isHit) return;
-
-        UpdateMovement();
-        UpdateLifeTime();
+        InitIdle(context, direction, type, target);
+        Fire();
     }
 
+    /// <summary>
+    /// Bắt đầu bay
+    /// </summary>
+    public void Fire()
+    {
+        if (state != ProjectileState.Idle)
+            return;
+
+        state = ProjectileState.Moving;
+    }
+
+    // =========================
+    // MOVEMENT
+    // =========================
     private void UpdateMovement()
     {
-        if (isDespawning) return;
-
         if (moveType == ProjectileMoveType.Homing && homingTarget != null)
         {
             UpdateHoming();
         }
 
-        transform.position += (Vector3)(moveDir * ctx.Speed * Time.deltaTime);
+        transform.position +=
+            (Vector3)(moveDir * ctx.Speed * Time.deltaTime);
     }
 
     private void UpdateHoming()
@@ -118,7 +167,6 @@ public class BossProjectile : MonoBehaviour, IPoolable
             ((Vector2)homingTarget.position - (Vector2)transform.position).normalized;
 
         float t = turnSpeed * Time.deltaTime / 360f;
-
         moveDir = Vector2.Lerp(moveDir, targetDir, t).normalized;
 
         RotateToDirection(moveDir);
@@ -136,58 +184,47 @@ public class BossProjectile : MonoBehaviour, IPoolable
     // =========================
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isHit || isDespawning) return;
+        if (state != ProjectileState.Moving)
+            return;
 
-        if (!IsValidTarget(other)) return;
+        if (!IsValidTarget(other))
+            return;
 
-        if (!other.TryGetComponent<IDamageable>(out var target)) return;
+        if (!other.TryGetComponent<IDamageable>(out var target))
+            return;
 
         DealDamage(target);
-        PlayHitEffect();
         EnterHitState();
     }
 
-    void DealDamage(IDamageable target)
+    private void DealDamage(IDamageable target)
     {
-        bool isCrit = Random.value < ctx.CritChance;
-        int dmg = isCrit ? Mathf.RoundToInt(ctx.Damage * 1.5f) : ctx.Damage;
-
+        bool crit = Random.value < ctx.CritChance;
+        int dmg = crit ? Mathf.RoundToInt(ctx.Damage * 1.5f) : ctx.Damage;
         target.TakeDamage(dmg);
     }
 
-    bool IsValidTarget(Collider2D col)
+    private bool IsValidTarget(Collider2D other)
     {
-        return ((1 << col.gameObject.layer) & ctx.TargetLayer) != 0;
+        return ((1 << other.gameObject.layer) & ctx.TargetLayer) != 0;
     }
 
-    // =========================
-    // HIT STATE
-    // =========================
-    void EnterHitState()
+    private void EnterHitState()
     {
-        isHit = true;
-
-        // Ngừng di chuyển
+        state = ProjectileState.Hit;
         moveDir = Vector2.zero;
 
-        // Tắt collider tránh hit nhiều lần
         if (col != null)
             col.enabled = false;
-    }
 
-    void PlayHitEffect()
-    {
         if (animator != null)
-        {
-            Debug.Log("Projectile Hit Player");
             animator.SetTrigger(HitTrigger);
-        }
     }
 
     // =========================
     // ANIMATION EVENT
     // =========================
-    public void AnimaEvent_HitEnd()
+    public void AnimEvent_HitEnd()
     {
         Despawn();
     }
@@ -195,7 +232,7 @@ public class BossProjectile : MonoBehaviour, IPoolable
     // =========================
     // UTIL
     // =========================
-    void RotateToDirection(Vector2 dir)
+    private void RotateToDirection(Vector2 dir)
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);

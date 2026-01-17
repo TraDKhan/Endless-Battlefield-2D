@@ -13,6 +13,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     static readonly int Skill1 = Animator.StringToHash("Skill1");
     static readonly int Skill2 = Animator.StringToHash("Skill2");
+    static readonly int BTeleportSkill = Animator.StringToHash("BTeleportSkill");
 
     // ===== BASE ===== \\
     public void SetMoving(bool value)
@@ -56,5 +57,10 @@ public class EnemyAnimationController : MonoBehaviour
     {
         animator.ResetTrigger(Skill2);
         animator.SetTrigger(Skill2);
+    }
+    public void Play_BTeleportSkill()
+    {
+        animator.ResetTrigger(BTeleportSkill);
+        animator.SetTrigger(BTeleportSkill);
     }
 }

@@ -20,6 +20,7 @@ public class BossController : MonoBehaviour
     public Transform player;
     public LayerMask targetLayer;
     public int CurrentPhase => phaseController.CurrentPhase;
+    public bool IsCastingSkill { get; private set; }
 
     void Awake()
     {
@@ -40,7 +41,11 @@ public class BossController : MonoBehaviour
     {
         if (!player) return;
 
-        HandleMovement();
+        if (!IsCastingSkill)
+        {
+            HandleMovement();
+        }
+
         FaceTarget(player.position);
     }
 
@@ -84,6 +89,17 @@ public class BossController : MonoBehaviour
         scale.x = Mathf.Sign(dir.x) * Mathf.Abs(scale.x);
         transform.localScale = scale;
     }
+    public void SetCastingSkill(bool value)
+    {
+        IsCastingSkill = value;
+
+        if (value)
+        {
+            movement.Stop();
+            anim?.SetMoving(false);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (stats == null) return;

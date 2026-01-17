@@ -497,6 +497,9 @@ GameObject:
   - component: {fileID: 219295149}
   - component: {fileID: 219295148}
   - component: {fileID: 219295151}
+  - component: {fileID: 219295152}
+  - component: {fileID: 219295153}
+  - component: {fileID: 219295154}
   m_Layer: 0
   m_Name: Flying Eye
   m_TagString: Untagged
@@ -568,7 +571,7 @@ Transform:
   m_GameObject: {fileID: 219295137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.97, y: -3.03, z: 0}
+  m_LocalPosition: {x: 2.45, y: 7.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -776,7 +779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6ded4e8c29c2e489bf64abfb8ef305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillBehaviours: []
+  skillBehaviours:
+  - {fileID: 219295154}
 --- !u!114 &219295151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,6 +796,63 @@ MonoBehaviour:
   projectilePrefab: {fileID: 9011714753198934013, guid: 0e72d7089c49c1c45abaef0f39ae2210, type: 3}
   firePoint: {fileID: 323772270}
   attackAnimDuration: 0.4
+--- !u!114 &219295152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219295137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bb064ca33da1b47b0d60afc12ff37f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  burstCount: 3
+  projectilePerRing: 16
+  ringRadius: 1.2
+  chargeTime: 0.4
+  intervalBetweenBursts: 0.6
+  projectilePrefab: {fileID: 9011714753198934013, guid: 0e72d7089c49c1c45abaef0f39ae2210, type: 3}
+  projectileSpeed: 3.22
+--- !u!114 &219295153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219295137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 227144f1c92c3c046b299e50cc882e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  dashSpeed: 12
+  stopDistance: 1
+  damage: 25
+  hitRadius: 1.2
+  attackDelay: 0.6
+  retreatDelay: 0.3
+  maxDashTime: 1
+--- !u!114 &219295154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219295137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4033d81c52d6274287ed597efd42363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 2
+  minTeleportDistance: 6
+  skillDamage: 30
+  damageRadius: 1.8
+  skillAnimMaxTime: 1.2
 --- !u!1 &289187556
 GameObject:
   m_ObjectHideFlags: 0

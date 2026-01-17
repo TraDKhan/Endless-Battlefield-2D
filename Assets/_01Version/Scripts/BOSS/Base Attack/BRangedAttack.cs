@@ -42,8 +42,8 @@ public class BRangedAttack : BaseBasicAttack
 
         projectile.transform.position = firePoint.position;
 
-        projectile.Init(
-            CreateProjectileContext(ctx, ctx.Stats.damage),
+        projectile.InitAndFire(
+            CreateProjectileContext(ctx),
             (ctx.Player.position - firePoint.position).normalized,
             ProjectileMoveType.Homing,
             ctx.Player
@@ -58,14 +58,11 @@ public class BRangedAttack : BaseBasicAttack
         public float CritChance;
         public LayerMask TargetLayer;
     }
-    BossProjectileContext CreateProjectileContext(
-        BossContext ctx,
-        int damage
-    )
+    BossProjectileContext CreateProjectileContext(BossContext ctx)
     {
         return new BossProjectileContext
         {
-            Damage = damage,
+            Damage = ctx.Stats.damage,
             Speed = ctx.Stats.projectileSpeed,
             CritChance = 0f,
             TargetLayer = ctx.TargetLayer
