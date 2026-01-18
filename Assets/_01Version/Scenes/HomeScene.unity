@@ -2465,6 +2465,7 @@ GameObject:
   m_Component:
   - component: {fileID: 861959797}
   - component: {fileID: 861959798}
+  - component: {fileID: 861959799}
   m_Layer: 5
   m_Name: Level Right
   m_TagString: Untagged
@@ -2503,6 +2504,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861959796}
   m_CullTransparentMesh: 1
+--- !u!114 &861959799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861959796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6330ede559d065469bd6585bbfadc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelText: {fileID: 821898089}
+  iconImage: {fileID: 948926527}
+  lockImage: {fileID: 1771314856}
 --- !u!1 &867598977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,26 +2603,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871477262}
-  - component: {fileID: 871477261}
+  - component: {fileID: 871477263}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: Game Manager m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &871477261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871477260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650ca448d5756304fb2277e811573df7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &871477262
 Transform:
   m_ObjectHideFlags: 0
@@ -2622,6 +2626,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &871477263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871477260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794924f368f1f1f4cb0e39a98e958316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftSlot: {fileID: 1342586473}
+  centerSlot: {fileID: 1308387763}
+  rightSlot: {fileID: 861959799}
+  playButton: {fileID: 211414468889684646}
+  allLevels:
+  - {fileID: 11400000, guid: f3121cec673318340975f836a5a1f358, type: 2}
+  - {fileID: 11400000, guid: 1393b9f8168650e468ec3531c8905beb, type: 2}
+  - {fileID: 11400000, guid: 6e032c53ca765fb43a9452c07b99c2e6, type: 2}
+  - {fileID: 11400000, guid: 0759a34dd137c5543b3c795e5b6caa60, type: 2}
+  - {fileID: 11400000, guid: ddf56e63f9936224390710001c74463b, type: 2}
+  - {fileID: 11400000, guid: 0f01c2034ac31ae4498903bc0a061dc5, type: 2}
 --- !u!1 &885091386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,6 +3422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1308387760}
   - component: {fileID: 1308387762}
+  - component: {fileID: 1308387763}
   m_Layer: 5
   m_Name: Level Selected
   m_TagString: Untagged
@@ -3433,6 +3461,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1308387759}
   m_CullTransparentMesh: 1
+--- !u!114 &1308387763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308387759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6330ede559d065469bd6585bbfadc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelText: {fileID: 8314518572320517847}
+  iconImage: {fileID: 1132487238}
+  lockImage: {fileID: 1350344212}
 --- !u!1 &1342586470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,6 +3486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1342586471}
   - component: {fileID: 1342586472}
+  - component: {fileID: 1342586473}
   m_Layer: 5
   m_Name: Level Left
   m_TagString: Untagged
@@ -3481,6 +3525,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342586470}
   m_CullTransparentMesh: 1
+--- !u!114 &1342586473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342586470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6330ede559d065469bd6585bbfadc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelText: {fileID: 1215370727}
+  iconImage: {fileID: 1724562546}
+  lockImage: {fileID: 1845680253}
 --- !u!1 &1350344210
 GameObject:
   m_ObjectHideFlags: 0
@@ -8238,7 +8297,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1015.5, y: -50}
-  m_SizeDelta: {x: 0, y: 80}
+  m_SizeDelta: {x: 347, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &791062125989850416
 MonoBehaviour:
