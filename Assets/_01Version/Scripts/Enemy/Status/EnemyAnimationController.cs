@@ -29,7 +29,6 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void PlayAttack()
     {
-        Debug.LogWarning("Anim: Attack");
         animator.ResetTrigger(Attack);
         animator.SetTrigger(Attack);
     }

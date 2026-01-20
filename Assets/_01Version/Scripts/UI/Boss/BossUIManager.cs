@@ -29,7 +29,9 @@ public class BossUIManager : MonoBehaviour
     {
         if (!bars.TryGetValue(boss, out var bar)) return;
 
-        Destroy(bar.gameObject);
+        if (bar != null)
+            Destroy(bar.gameObject);
+
         bars.Remove(boss);
     }
 }

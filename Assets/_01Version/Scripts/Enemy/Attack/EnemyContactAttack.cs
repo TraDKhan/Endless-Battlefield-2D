@@ -4,19 +4,29 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
 {
     private EnemyContext ctx;
 
-    private bool isAttacking;
-    private bool targetInRange;
     private IDamageable currentTarget;
+    private bool isAttacking;
 
-    private float lastDamageTime;
+    private float lastAttackTime;
+
+    void Start()
+    {
+        Collider2D col = GetComponent<Collider2D>();
+
+        if (col != null)
+        {
+            col.isTrigger = true;
+        }
+    }
 
     public void Init(EnemyContext context)
     {
         ctx = context;
     }
 
-    // Có thể bắt đầu 1 đợt attack mới?
-    public bool CanAttack => Time.time >= lastDamageTime + ctx.Stats.attackCooldown;
+    public bool CanAttack =>
+        currentTarget != null &&
+        Time.time >= lastAttackTime + ctx.Stats.attackCooldown;
 
     public float Cooldown => ctx.Stats.attackCooldown;
 
@@ -24,6 +34,8 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
 
     public void StartAttack()
     {
+        if (currentTarget == null) return;
+
         isAttacking = true;
         ctx.Anim?.PlayAttack();
     }
@@ -31,13 +43,11 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
     public void UpdateAttack()
     {
         if (!isAttacking) return;
-        if (!targetInRange) return;
         if (currentTarget == null) return;
+        if (!CanAttack) return;
+        if (!IsTargetInAttackRange()) return;
 
-        if (Time.time < lastDamageTime + ctx.Stats.attackCooldown)
-            return;
-
-        lastDamageTime = Time.time;
+        lastAttackTime = Time.time;
         currentTarget.TakeDamage(ctx.Stats.damage);
     }
 
@@ -48,26 +58,50 @@ public class EnemyContactAttack : MonoBehaviour, IEnemyAttack
 
     #endregion
 
-    #region Trigger Detection ONLY
+    #region Target Detection (Trigger only)
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (((1 << other.gameObject.layer) & ctx.TargetLayer) == 0)
+        if (!IsTargetLayer(other.gameObject.layer))
             return;
 
+        if (currentTarget != null) return;
+
         currentTarget = other.GetComponent<IDamageable>();
-        targetInRange = currentTarget != null;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (((1 << other.gameObject.layer) & ctx.TargetLayer) == 0)
+        if (!IsTargetLayer(other.gameObject.layer))
             return;
 
         if (other.GetComponent<IDamageable>() == currentTarget)
         {
-            targetInRange = false;
             currentTarget = null;
+            StopAttack();
         }
+    }
+
+    #endregion
+
+    #region Helpers
+
+    bool IsTargetLayer(int layer)
+    {
+        return ((1 << layer) & ctx.TargetLayer) != 0;
+    }
+
+    bool IsTargetInAttackRange()
+    {
+        var targetMono = currentTarget as MonoBehaviour;
+        if (targetMono == null) return false;
+
+        float dist = Vector2.Distance(
+            transform.position,
+            targetMono.transform.position
+        );
+
+        return dist <= ctx.Stats.attackRange;
     }
 
     #endregion

@@ -6,7 +6,7 @@ public class PlayerLevelSystem : MonoBehaviour
     public int CurrentLevel { get; private set; } = 1;
     public int CurrentEXP { get; private set; }
 
-    public int ExpToNextLevel => 50 + (CurrentLevel - 1) * 25;
+    public int ExpToNextLevel => 50 + (CurrentLevel - 1) * 50;
 
     // ===== EVENT =====
     public event Action<int, int, int> OnExpChanged; // curExp, nextExp, level

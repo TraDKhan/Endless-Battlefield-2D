@@ -58,7 +58,6 @@ public class BossController : MonoBehaviour
     {
         if (health != null)
             health.OnDeath -= HandleDeath;
-        BossUIManager.Instance.UnregisterBoss(this);
     }
     void HandleDeath()
     {
