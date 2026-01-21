@@ -25,6 +25,11 @@ public class WeaponUpgradeData : UpgradeData
         return upgradeName;
     }
 
+    public override string GetValueText()
+    {
+        return "Unlock Weapon";
+    }
+
     public override string GetDescription()
     {
         return description;

@@ -25,11 +25,17 @@ public class UIUpgradeOption : MonoBehaviour
         if (title != null)
             title.text = data.GetTitle();
 
-        if (description != null)
-            description.text = data.GetDescription();
+        if(typeText != null)
+            typeText.text = data.GetTypeText();
 
         if (levelText != null)
             levelText.text = data.GetLevelText();
+
+        if (valueText != null)
+            valueText.text = data.GetValueText();
+
+        if (description != null)
+            description.text = data.GetDescription();
 
         button.interactable = data.CanApply();
 

@@ -10,11 +10,25 @@ public abstract class UpgradeData : ScriptableObject
     public string description;
 
     public abstract bool CanApply();
+
     public abstract void Apply();
+
+    // ===== GỬI CHO UI ===== \\
+
     public abstract int GetCurrentLevel();
+
     public abstract string GetTitle();
-    public abstract string GetDescription();
+
+    public virtual string GetTypeText()
+    {
+        return $"{upgradeType.ToString()}";
+    }
+
     public virtual string GetLevelText() {
         return $"Lv {GetCurrentLevel()}";
     }
+
+    public abstract string GetValueText();
+
+    public abstract string GetDescription();
 }

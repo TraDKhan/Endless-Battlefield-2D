@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02eefd34bcdea6a468e3140f768cce7f, type: 3}
+  m_Name: WS_UpD Projectile Count
+  m_EditorClassIdentifier: 
+  upgradeName: Projectile
+  icon: {fileID: 21300000, guid: 2cfbfaac39d05433db3befcd19af777e, type: 3}
+  upgradeType: 1
+  description: Increase the number of bullets fired
+  statType: 3
+  valuePerLevel: 1
+  maxLevel: 17

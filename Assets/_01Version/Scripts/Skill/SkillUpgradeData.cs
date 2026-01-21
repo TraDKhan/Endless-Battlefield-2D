@@ -15,14 +15,42 @@ public class SkillUpgradeData : UpgradeData
         int index = Mathf.Clamp(level - 1, 0, levels.Length - 1);
         return levels[index];
     }
+
+    public override string GetTitle()
+    {
+        return upgradeName;
+    }
+
     public override int GetCurrentLevel()
     {
         return UpgradeSystem.Instance.GetSkillLevel(this);
     }
 
-    public override string GetTitle()
+    public override string GetValueText()
     {
-        return upgradeName;
+        int currentLevel = GetCurrentLevel();
+
+        if (currentLevel >= MaxLevel)
+            return "Đã đạt cấp tối đa";
+
+        SkillData current = currentLevel > 0 ? GetLevelData(currentLevel) : null;
+        SkillData next = GetLevelData(currentLevel + 1);
+
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+        void AddChange<T>(string label, T? cur, T nextVal) where T : struct
+        {
+            if (cur == null || !cur.Equals(nextVal))
+                sb.AppendLine($"{label}: {(cur == null ? "" : cur.ToString() + " → ")}{nextVal}");
+        }
+
+        AddChange("Damage", current?.damage, next.damage);
+        AddChange("Cooldown", current?.cooldown, next.cooldown);
+        AddChange("Duration", current?.duration, next.duration);
+        AddChange("Radius", current?.radius, next.radius);
+        AddChange("Lightning", current?.lightningCount, next.lightningCount);
+
+        return sb.ToString();
     }
 
     public override string GetDescription()
@@ -32,6 +60,7 @@ public class SkillUpgradeData : UpgradeData
 
         return $"Nâng cấp {upgradeName} lên Lv {GetCurrentLevel() + 1}";
     }
+
     public override bool CanApply()
     {
         int current = UpgradeSystem.Instance.GetSkillLevel(this);

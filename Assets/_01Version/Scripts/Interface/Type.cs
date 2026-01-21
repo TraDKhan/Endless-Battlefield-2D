@@ -116,3 +116,18 @@ public enum BossSkillType
     Basic,
     Special
 }
+
+public enum StatType
+{
+    // Character
+    MaxHP,
+    MaxMP,
+    Armor,
+    MoveSpeed,
+
+    // Weapon
+    Damage,
+    CritChance,
+    Cooldown,
+    ProjectileSpeed
+}

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 [CreateAssetMenu(menuName = "Upgrade/Weapon Stat")]
 public class WeaponStatUpgradeData : UpgradeData
@@ -14,6 +15,11 @@ public class WeaponStatUpgradeData : UpgradeData
     public override string GetTitle()
     {
         return upgradeName;
+    }
+
+    public override string GetValueText()
+    {
+        return $"{statType.ToString()}: +{valuePerLevel}";
     }
 
     public override string GetDescription()

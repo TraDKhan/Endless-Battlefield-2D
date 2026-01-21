@@ -6,6 +6,7 @@ public class PlayerStatUpgradeData : UpgradeData
     public PlayerStatType statType;
     public float value;
     public int maxLevel;
+
     public override int GetCurrentLevel()
     {
         return UpgradeSystem.Instance.GetPlayerStatLevel(statType);
@@ -14,6 +15,11 @@ public class PlayerStatUpgradeData : UpgradeData
     public override string GetTitle()
     {
         return upgradeName;
+    }
+
+    public override string GetValueText()
+    {
+        return $"{statType.ToString()}: +{value}";
     }
 
     public override string GetDescription()
