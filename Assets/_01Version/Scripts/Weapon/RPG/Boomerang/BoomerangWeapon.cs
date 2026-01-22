@@ -26,7 +26,7 @@ public class BoomerangWeapon : Weapon
     {
         BoomerangProjectile boomerang =
             ObjectPoolManager.Instance
-                .Spawn<BoomerangProjectile>(data.projectilePrefab);
+                .Spawn<BoomerangProjectile>(controller.Data.projectilePrefab);
 
         if (boomerang == null) return;
 

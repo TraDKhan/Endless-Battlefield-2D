@@ -1506,8 +1506,65 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7061738363453199701, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 505301715}
   m_SourcePrefab: {fileID: 100100000, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+--- !u!1 &505301711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7061738363453199701, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+  m_PrefabInstance: {fileID: 505301710}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &505301712 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5020494767623490524, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+  m_PrefabInstance: {fileID: 505301710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505301711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff0492f3e9f3314a810abdb985718c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &505301713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8687697108299402382, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+  m_PrefabInstance: {fileID: 505301710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505301711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56e9e09e6644fe74491b36a39d9a23fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &505301714 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4803458157642007893, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+  m_PrefabInstance: {fileID: 505301710}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505301711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591cde858f395364aa6b3e72eb71ce28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &505301715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505301711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37edf82ae93c1fb4fa92db0519e27ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: bcab7d4d65f995148a4e75aeaefa0bea, type: 2}
+  movement: {fileID: 505301714}
+  health: {fileID: 505301712}
+  energy: {fileID: 505301713}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5494,6 +5551,78 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: weaponSystem
+      value: 
+      objectReference: {fileID: 4319020922550670692}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: upgradePool.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e2c21c42efecbaf4e828b86e22793102, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4530cab98316aed4fb783c50f13d61b6, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b6c860cc1d5b66e49acb1d0c183b6d69, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 07e97e4f1f721564d926a31a964995b5, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 12f4efe603772a54999a1ad56251ccc2, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 19dab9369bc10d34c91a2fd169a2d837, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 304642469ba8fa348bc7e8efe56348f2, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: abccfaf7458bb5e48aa1e7ccb8804d17, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: abccfaf7458bb5e48aa1e7ccb8804d17, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 033c37f9c8845854aacc4ca39963f5af, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4530cab98316aed4fb783c50f13d61b6, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[11]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e9d35ae7fcbb3b47983205969c47519, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[12]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ab2b8a424baa2574c9fbdcf3b31a884e, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[13]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5dccd24ae53fca44e9fa1b50711782d4, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[14]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[15]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7201cdcaa3fb92a4680fe4ab363759d3, type: 2}
     - target: {fileID: 9050156008360397094, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
       propertyPath: m_Name
       value: Upgrade System
@@ -5503,6 +5632,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+--- !u!114 &4319020922550670692 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2864930725065479159, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+  m_PrefabInstance: {fileID: 4319020922550670691}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054f6dee5b2e6c549adc326d9bcf49e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4385654579072308776 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8251070544824958881, guid: 4c58deda9c7981648a534ec366e09865, type: 3}

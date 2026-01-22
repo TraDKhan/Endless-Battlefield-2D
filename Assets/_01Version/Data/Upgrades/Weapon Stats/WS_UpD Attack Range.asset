@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02eefd34bcdea6a468e3140f768cce7f, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a8a5194d9898e4cadc89a2ecd42e85, type: 3}
   m_Name: WS_UpD Attack Range
   m_EditorClassIdentifier: 
-  upgradeName: Range
-  icon: {fileID: 21300000, guid: e27aac8c4ca324a81969d30819093e18, type: 3}
+  upgradeName: Attack Range
+  icon: {fileID: 21300000, guid: c775ca497e33071429bbf28960da4cb9, type: 3}
   upgradeType: 1
-  description: Increase the range of weapons
-  statType: 4
-  valuePerLevel: 1
-  maxLevel: 5
+  description: Weapon Stats Upgrade
+  statType: 7
+  modType: 0
+  valuePerLevel: 10

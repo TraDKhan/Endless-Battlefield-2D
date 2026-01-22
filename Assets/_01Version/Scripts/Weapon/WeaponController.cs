@@ -2,16 +2,48 @@
 
 public class WeaponController : MonoBehaviour
 {
-    public Weapon pistol;
-    public Weapon shotgun;
-    public Weapon laser;
-    public Weapon boomerang;
+    [Header("Data")]
+    [SerializeField] private WeaponData weaponData;
 
-    public void EquipWeapon(WeaponType type)
+    [Header("Systems")]
+    [SerializeField] private WeaponUpgradeSystem upgradeSystem;
+
+    public WeaponStats Stats { get; private set; }
+
+    private Weapon weapon;
+
+    public WeaponData Data => weaponData;
+
+    private void Awake()
     {
-        pistol.gameObject.SetActive(type == WeaponType.Pistol);
-        shotgun.gameObject.SetActive(type == WeaponType.Shotgun);
-        laser.gameObject.SetActive(type == WeaponType.Laser);
-        boomerang.gameObject.SetActive(type == WeaponType.Boomerang);
+        weapon = GetComponent<Weapon>();
+
+        if (upgradeSystem == null)
+            upgradeSystem = FindAnyObjectByType<WeaponUpgradeSystem>();
+
+        // ===== Init Stats =====
+        Stats = new WeaponStats(weaponData);
+        Stats.BindUpgradeSystem(upgradeSystem);
+
+        // ===== Inject =====
+        weapon.Initialize(this);
+
+        // ===== Listen =====
+        if (upgradeSystem != null)
+            upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
+
+        Stats.Recalculate();
+    }
+
+    private void OnDestroy()
+    {
+        if (upgradeSystem != null)
+            upgradeSystem.OnWeaponStatsChanged -= OnWeaponStatsChanged;
+    }
+
+    private void OnWeaponStatsChanged()
+    {
+        Stats.Recalculate();
+        weapon.OnStatsChanged();
     }
 }

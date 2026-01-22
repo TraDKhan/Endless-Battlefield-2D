@@ -2,11 +2,8 @@
 
 public abstract class Weapon : MonoBehaviour
 {
-    public WeaponData data;
-
+    protected WeaponController controller;
     protected WeaponStats stats;
-    protected WeaponUpgradeSystem upgradeSystem;
-    protected WeaponAnimationController animationController;
 
     protected float lastFireTime;
 
@@ -19,31 +16,24 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] protected bool flipSpriteByDirection = true;
 
     protected SpriteRenderer spriteRenderer;
+    protected WeaponAnimationController animationController;
+
     protected virtual void Awake()
     {
         animationController = GetComponent<WeaponAnimationController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    protected virtual void Start()
+
+    // ===== INIT TỪ ROOT =====
+    public virtual void Initialize(WeaponController controller)
     {
-        upgradeSystem = WeaponUpgradeSystem.Instance;
-
-        stats = new WeaponStats(data);
-        stats.BindUpgradeSystem(upgradeSystem);
-
-        if (upgradeSystem != null)
-            upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
+        this.controller = controller;
+        this.stats = controller.Stats;
     }
 
-    protected virtual void OnDestroy()
+    public virtual void OnStatsChanged()
     {
-        if (upgradeSystem != null)
-            upgradeSystem.OnWeaponStatsChanged -= OnWeaponStatsChanged;
-    }
-
-    protected virtual void OnWeaponStatsChanged()
-    {
-        stats.Recalculate();
+        // hook cho subclass nếu cần
     }
 
     protected bool CanFire()
@@ -51,87 +41,69 @@ public abstract class Weapon : MonoBehaviour
         return Time.time >= lastFireTime + stats.Cooldown;
     }
 
-    // ===== Auto fire (survivor) 
     protected virtual void Update()
     {
         if (!CanFire()) return;
 
-        // Kiểm tra có mục tiêu trong tầm
         Transform target = FindNearestEnemy();
         if (target == null) return;
 
         lastFireTime = Time.time;
 
         if (animationController != null)
-        {
             animationController.PlayFire();
-        }
         else
-        {
             OnFireLogic();
-        }
     }
 
-    // ===== Animation Event 
     public void OnFireAnimationEvent()
     {
         OnFireLogic();
     }
+
     protected abstract void OnFireLogic();
 
-    // ===== Target
+    // ===== Target =====
     protected Transform FindNearestEnemy()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
             transform.position,
-            stats.Range,
-            LayerMask.GetMask("Enemy")
+            stats.AttackRange,
+            enemyLayer
         );
 
         float minDistance = float.MaxValue;
         Transform nearest = null;
 
-        foreach (var enemy in enemies)
+        foreach (var e in enemies)
         {
-            float dist = Vector2.Distance(transform.position, enemy.transform.position);
-            if (dist < minDistance)
+            float d = Vector2.Distance(transform.position, e.transform.position);
+            if (d < minDistance)
             {
-                minDistance = dist;
-                nearest = enemy.transform;
+                minDistance = d;
+                nearest = e.transform;
             }
         }
 
         return nearest;
     }
 
-    // ===== Rotation
-    protected void RotateToDirection(Vector2 direction)
+    // ===== Rotation =====
+    protected void RotateToDirection(Vector2 dir)
     {
-        if (!rotateToFireDirection) return;
-        if (direction == Vector2.zero) return;
+        if (!rotateToFireDirection || dir == Vector2.zero) return;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        angle += rotationOffset;
-
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + rotationOffset;
         transform.rotation = Quaternion.Euler(0, 0, angle);
 
         if (flipSpriteByDirection && spriteRenderer != null)
-        {
-            spriteRenderer.flipY = direction.x < 0;
-        }
-    }
-
-    // ===== Gizmos
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats != null ? stats.Range : 1f);
+            spriteRenderer.flipY = dir.x < 0;
     }
 
     protected WeaponContext CreateWeaponContext()
     {
         return new WeaponContext(
-            source: gameObject,
+            source: controller.gameObject,
             firePoint: transform,
             stats: stats,
             targetLayer: enemyLayer,

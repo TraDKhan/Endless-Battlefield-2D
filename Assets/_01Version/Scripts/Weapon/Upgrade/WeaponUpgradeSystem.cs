@@ -8,25 +8,33 @@ public class WeaponUpgradeSystem : MonoBehaviour
 
     public event Action OnWeaponStatsChanged;
 
-    private Dictionary<WeaponStatType, StatUpgrade> statUpgrades
-        = new Dictionary<WeaponStatType, StatUpgrade>();
+    // =========================
+    // INTERNAL DATA
+    // =========================
+    private Dictionary<StatType, StatUpgrade> statUpgrades = new();
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
     }
 
-    // =============================
+    // =========================
     // APPLY UPGRADE
-    // =============================
-    public void ApplyUpgrade(WeaponStatType stat, float valuePerLevel)
+    // =========================
+    public void ApplyUpgrade(StatType stat, float valuePerLevel, StatModType modType)
     {
         if (!statUpgrades.TryGetValue(stat, out var upgrade))
         {
             upgrade = new StatUpgrade
             {
                 level = 0,
-                valuePerLevel = valuePerLevel
+                valuePerLevel = valuePerLevel,
+                modType = modType
             };
         }
 
@@ -36,29 +44,42 @@ public class WeaponUpgradeSystem : MonoBehaviour
         OnWeaponStatsChanged?.Invoke();
     }
 
-    // =============================
-    // QUERY
-    // =============================
-    public float GetWeaponStatBonus(WeaponStatType stat)
+    // =========================
+    // BUILD MODIFIERS
+    // =========================
+    public List<StatModifier> GetAllModifiers()
     {
-        return statUpgrades.TryGetValue(stat, out var upgrade)
-            ? upgrade.Value
-            : 0;
+        List<StatModifier> result = new();
+
+        foreach (var kvp in statUpgrades)
+        {
+            var upgrade = kvp.Value;
+
+            result.Add(new StatModifier
+            {
+                statType = kvp.Key,
+                modType = upgrade.modType,
+                value = upgrade.Value
+            });
+        }
+
+        return result;
     }
 
-    public int GetStatLevel(WeaponStatType stat)
+    // =========================
+    // UI SUPPORT
+    // =========================
+    public int GetStatLevel(StatType stat)
     {
         return statUpgrades.TryGetValue(stat, out var upgrade)
             ? upgrade.level
             : 0;
     }
-}
 
-[System.Serializable]
-public struct StatUpgrade
-{
-    public int level;
-    public float valuePerLevel;
-
-    public float Value => level * valuePerLevel;
+    public float GetStatValue(StatType stat)
+    {
+        return statUpgrades.TryGetValue(stat, out var upgrade)
+            ? upgrade.Value
+            : 0f;
+    }
 }

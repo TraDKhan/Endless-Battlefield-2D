@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerEnergyController : MonoBehaviour
 {
-    public static PlayerEnergyController Instance;
-
     [SerializeField] private int regenAmount = 5;   // mỗi lần hồi bao nhiêu
     [SerializeField] private float regenInterval = 1f; // 1 giây
 
@@ -13,44 +11,22 @@ public class PlayerEnergyController : MonoBehaviour
     private int maxEnergy;
     private float regenTimer;
 
+    private PlayerController player;
     private CharacterStats stats;
 
     public event Action<int, int> OnEnergyChanged;
 
-    private void Awake()
+    // ===== INIT
+    public void Initialize(PlayerController player)
     {
-        Instance = this;
+        this.player = player;
+        stats = player.Stats;
 
-        CharacterStatsController.OnStatsReady += OnStatsReady;
+        ApplyStats(stats);
     }
 
-    private void OnDestroy()
-    {
-        CharacterStatsController.OnStatsReady -= OnStatsReady;
-
-        if (stats != null)
-            stats.OnStatsChanged -= OnStatsChanged;
-    }
-
-    private void Update()
-    {
-        RegenTick();
-    }
-
-
-    private void OnStatsReady(CharacterStats characterStats)
-    {
-        stats = characterStats;
-        stats.OnStatsChanged += OnStatsChanged;
-        ApplyMaxEnergyFromStats();
-    }
-
-    private void OnStatsChanged()
-    {
-        ApplyMaxEnergyFromStats();
-    }
-
-    private void ApplyMaxEnergyFromStats()
+    // ===== APPLY STATS
+    public void ApplyStats(CharacterStats stats)
     {
         int newMaxEnergy = stats.GetMaxEnergy();
 
@@ -61,8 +37,16 @@ public class PlayerEnergyController : MonoBehaviour
         maxEnergy = newMaxEnergy;
         CurrentEnergy = Mathf.RoundToInt(maxEnergy * percent);
 
+        regenTimer = 0f; // reset regen (fix bug nhỏ)
+
         OnEnergyChanged?.Invoke(CurrentEnergy, maxEnergy);
     }
+
+    private void Update()
+    {
+        RegenTick();
+    }
+
     private void RegenTick()
     {
         if (CurrentEnergy >= maxEnergy) return;

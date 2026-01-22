@@ -129,5 +129,12 @@ public enum StatType
     Damage,
     CritChance,
     Cooldown,
+    AttackRange,
+    ProjectileCount,
     ProjectileSpeed
+}
+public enum StatModType
+{
+    Flat,      // +10
+    Percent    // +20%
 }

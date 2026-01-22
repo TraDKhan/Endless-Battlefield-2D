@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02eefd34bcdea6a468e3140f768cce7f, type: 3}
+  m_Script: {fileID: 11500000, guid: f3a8a5194d9898e4cadc89a2ecd42e85, type: 3}
   m_Name: WS_UpD Projectile Count
   m_EditorClassIdentifier: 
-  upgradeName: Projectile
-  icon: {fileID: 21300000, guid: 2cfbfaac39d05433db3befcd19af777e, type: 3}
+  upgradeName: Projectile count
+  icon: {fileID: 21300000, guid: 16a44214b07294f4a9270fce51f7fa85, type: 3}
   upgradeType: 1
-  description: Increase the number of bullets fired
-  statType: 3
-  valuePerLevel: 1
-  maxLevel: 17
+  description: Weapon Stats Upgrade
+  statType: 8
+  modType: 0
+  valuePerLevel: 10

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 901516936127109867}
   - component: {fileID: 7844621608279175628}
   - component: {fileID: 6659284680949439686}
+  - component: {fileID: 933967747242021371}
   m_Layer: 0
   m_Name: Pistol Weapon
   m_TagString: Weapon
@@ -124,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0558c1068fae9f4987f11ccbd10f19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: f593f95014ec16246941d513742cd642, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -146,3 +146,17 @@ MonoBehaviour:
   animator: {fileID: 901516936127109867}
   fireTrigger: Fire
   laserBool: IsLaserFiring
+--- !u!114 &933967747242021371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5757144308714031333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2f9f6ccc39ffa45ae895812d2b63e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: f593f95014ec16246941d513742cd642, type: 2}
+  upgradeSystem: {fileID: 0}

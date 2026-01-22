@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   playerName: SOLDIER
-  baseHealth: 1000
-  baseEnergy: 1000
-  baseArmor: 100
-  baseMoveSpeed: 5
-  startWeapon: 0
+  baseStats:
+  - statType: 0
+    value: 1200
+  - statType: 1
+    value: 1200
+  - statType: 2
+    value: 1000
+  - statType: 3
+    value: 1

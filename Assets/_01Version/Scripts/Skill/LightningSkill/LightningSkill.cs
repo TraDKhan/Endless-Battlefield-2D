@@ -104,7 +104,7 @@ public class LightningSkill : BaseSkill
         if (owner == null)
         {
             owner = GameObject.FindWithTag("Player")?.transform;
-            stats = CharacterStatsController.Instance.Stats;
+            stats = PlayerController.Instance.Stats;
 
             OnUnlock(); // ép mở skill
         }

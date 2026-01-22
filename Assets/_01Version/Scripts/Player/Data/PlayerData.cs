@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player", menuName = "Player/Player Data")]
 public class PlayerData : ScriptableObject
@@ -7,11 +8,19 @@ public class PlayerData : ScriptableObject
     public string playerName;
 
     [Header("Base Stats")]
-    public int baseHealth;
-    public int baseEnergy;
-    public int baseArmor;
-    public float baseMoveSpeed;
+    public List<StatEntry> baseStats;
 
-    [Header("Weapon")]
-    public WeaponType startWeapon;
+    // =========================
+    // BACKWARD COMPATIBILITY
+    // =========================
+    public float GetBaseStat(StatType type)
+    {
+        foreach (var entry in baseStats)
+        {
+            if (entry.statType == type)
+                return entry.value;
+        }
+
+        return 0f;
+    }
 }

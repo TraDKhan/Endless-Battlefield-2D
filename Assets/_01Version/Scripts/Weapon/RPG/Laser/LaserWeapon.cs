@@ -132,9 +132,9 @@ public class LaserWeapon : Weapon
         lineRenderer.SetPosition(0, start);
         lineRenderer.SetPosition(1, end);
     }
-    protected override void OnDestroy()
+
+    private void OnDestroy()
     {
-        base.OnDestroy();
         if (lineRenderer != null)
             lineRenderer.enabled = false;
     }

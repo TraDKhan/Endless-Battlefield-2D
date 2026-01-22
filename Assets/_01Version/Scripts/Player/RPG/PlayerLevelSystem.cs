@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLevelSystem : MonoBehaviour
+public class PlayerLevelSystem : MonoBehaviour, IStatSource
 {
     public int CurrentLevel { get; private set; } = 1;
     public int CurrentEXP { get; private set; }
@@ -11,61 +12,32 @@ public class PlayerLevelSystem : MonoBehaviour
     // ===== EVENT =====
     public event Action<int, int, int> OnExpChanged; // curExp, nextExp, level
     public event Action<int> OnLevelUp;              // newLevel
-    [ContextMenu("ADD LEVEL")]
-    public void AddEXP1()
-    {
-        CurrentEXP += 1000;
-
-        while (true)
-        {
-            int expNeeded = ExpToNextLevel;
-            if (CurrentEXP < expNeeded)
-                break;
-
-            CurrentEXP -= expNeeded;
-            CurrentLevel++;
-
-            OnLevelUp?.Invoke(CurrentLevel);
-        }
-
-        OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
-    }
+    
     public void AddEXP(int value)
     {
         if (value <= 0) return;
 
         CurrentEXP += value;
 
-        while (true)
+        while (CurrentEXP >= ExpToNextLevel)
         {
-            int expNeeded = ExpToNextLevel;
-            if (CurrentEXP < expNeeded)
-                break;
-
-            CurrentEXP -= expNeeded;
+            CurrentEXP -= ExpToNextLevel;
             CurrentLevel++;
-
             OnLevelUp?.Invoke(CurrentLevel);
         }
 
         OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
     }
 
-    [ContextMenu("LEVEL UP")]
-    private void LevelUp()
+    // ===== IStatSource =====
+    public List<StatModifier> GetModifiers()
     {
-        CurrentLevel++;
-
-        OnLevelUp?.Invoke(CurrentLevel);
-        OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
+        return new List<StatModifier>(); // sau này thêm stat theo level
     }
 
-    // ===== API cho CharacterStats =====
-
-    private int bonusHealth;
-    private int bonusArmor;
-    private float bonusMoveSpeed;
-    public int GetBonusHealth() => bonusHealth;
-    public int GetBonusArmor() => bonusArmor;
-    public float GetBonusMoveSpeed() => bonusMoveSpeed;
+    [ContextMenu("ADD EXP")]
+    private void TestADDExp()
+    {
+        AddEXP(1200);
+    }
 }

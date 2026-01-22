@@ -1,90 +1,64 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CharacterStats
 {
-    public int maxHealth;
-    public int maxEnergy;
-    public int armor;
-    public float moveSpeed;
+    private readonly Dictionary<StatType, float> baseStats = new();
+    private readonly Dictionary<StatType, float> finalStats = new();
 
-    private PlayerData playerData;
-
-    private PlayerLevelSystem levelSystem;
-    private PlayerEquipmentController equipmentController;
-    private PlayerBuffController buffController;
-    private UpgradeSystem upgradeSystem;
+    private readonly List<IStatSource> sources = new();
 
     public event Action OnStatsChanged;
 
-    public CharacterStats(
-        PlayerData data,
-        PlayerLevelSystem level,
-        PlayerEquipmentController equipment,
-        PlayerBuffController buff,
-        UpgradeSystem upgrade)
+    public CharacterStats(PlayerData data, params IStatSource[] statSources)
     {
-        playerData = data;
-        levelSystem = level;
-        equipmentController = equipment;
-        buffController = buff;
-        upgradeSystem = upgrade;
+        foreach (var s in statSources)
+            if (s != null) sources.Add(s);
+
+        InitBaseStats(data);
+    }
+
+    private void InitBaseStats(PlayerData data)
+    {
+        foreach (var entry in data.baseStats)
+            baseStats[entry.statType] = entry.value;
     }
 
     public void RecalculateStats()
     {
-        // ===== 1. BASE =====
-        maxHealth = playerData.baseHealth;
-        maxEnergy = playerData.baseEnergy;
-        armor = playerData.baseArmor;
-        moveSpeed = playerData.baseMoveSpeed;
+        finalStats.Clear();
 
-        // ===== 2. LEVEL =====
-        if (levelSystem != null)
-        {
-            maxHealth += levelSystem.GetBonusHealth();
-        }
+        // Copy base
+        foreach (var kv in baseStats)
+            finalStats[kv.Key] = kv.Value;
 
-        // ===== 3. EQUIPMENT =====
-        if (equipmentController != null)
-        {
-            maxHealth += equipmentController.GetEquipHealthBonus();
-            armor += equipmentController.GetEquipArmorBonus();
-            moveSpeed += equipmentController.GetEquipMoveSpeedBonus();
-        }
+        List<StatModifier> allMods = new();
+        foreach (var s in sources)
+            allMods.AddRange(s.GetModifiers());
 
-        // ===== 4. BUFF =====
-        if (buffController != null)
-        {
-            maxHealth += buffController.GetBuffHealthBonus();
-            moveSpeed += buffController.GetBuffMoveSpeedBonus();
-        }
+        ApplyModifiers(allMods);
 
-        // ===== 5. PLAYER UPGRADE =====
-        if (upgradeSystem != null)
-        {
-            maxHealth += Mathf.RoundToInt(
-                upgradeSystem.GetPlayerStatBonus(PlayerStatType.MaxHealth)
-            );
-
-            maxEnergy += Mathf.RoundToInt(
-                upgradeSystem.GetPlayerStatBonus(PlayerStatType.Energy)
-            );
-
-            moveSpeed += upgradeSystem.GetPlayerStatBonus(PlayerStatType.MoveSpeed);
-
-            armor += Mathf.RoundToInt(
-                upgradeSystem.GetPlayerStatBonus(PlayerStatType.Armor)
-            );
-        }
+        foreach (var kv in finalStats)
+            Debug.Log($"FinalStat: {kv.Key} = {kv.Value}");
 
         OnStatsChanged?.Invoke();
     }
 
-    // ===== GETTER =====
-    public int GetMaxHealth() => maxHealth;
-    public float GetMoveSpeed() => moveSpeed;
-    public int GetArmor() => armor;
-    public int GetMaxEnergy() => maxEnergy;
+    private void ApplyModifiers(List<StatModifier> mods)
+    {
+        // Flat trước
+        foreach (var m in mods.Where(m => m.modType == StatModType.Flat))
+            finalStats[m.statType] = GetStat(m.statType) + m.value;
 
+        // Percent sau
+        foreach (var m in mods.Where(m => m.modType == StatModType.Percent))
+            finalStats[m.statType] *= (1 + m.value);
+    }
+
+    public float GetStat(StatType type) => finalStats.TryGetValue(type, out var v) ? v : 0f;
+    public int GetMaxHealth() => Mathf.RoundToInt(GetStat(StatType.MaxHP));
+    public int GetMaxEnergy() => Mathf.RoundToInt(GetStat(StatType.MaxMP));
 }
+

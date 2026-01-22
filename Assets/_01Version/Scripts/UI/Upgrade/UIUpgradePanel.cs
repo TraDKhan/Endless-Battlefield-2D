@@ -49,9 +49,10 @@ public class UIUpgradePanel : MonoBehaviour
 
             optionSlots[i].SetData(
                 upgrade,
+                upgradeSystem,
                 () =>
                 {
-                    UpgradeSystem.Instance.SelectUpgrade(upgrade);
+                    upgradeSystem.SelectUpgrade(upgrade);
                     Hide();
                 }
             );

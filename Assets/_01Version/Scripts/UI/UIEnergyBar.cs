@@ -8,24 +8,29 @@ public class UIEnergyBar : MonoBehaviour
     [SerializeField] private Image fillImage;
     [SerializeField] private TMP_Text energyText;
 
+    private PlayerEnergyController energy;
+
     private void Start()
     {
-        if (PlayerEnergyController.Instance != null)
-        {
-            PlayerEnergyController.Instance.OnEnergyChanged += UpdateUI;
+        var player = PlayerController.Instance;
+        if (player == null) return;
 
-            // update lần đầu
-            UpdateUI(
-                PlayerEnergyController.Instance.CurrentEnergy,
-                GetMaxEnergy()
-            );
-        }
+        energy = player.Energy;
+        if (energy == null) return;
+
+        energy.OnEnergyChanged += UpdateUI;
+
+        // update lần đầu
+        UpdateUI(
+            energy.CurrentEnergy,
+            player.Stats.GetMaxEnergy()
+        );
     }
 
     private void OnDestroy()
     {
-        if (PlayerEnergyController.Instance != null)
-            PlayerEnergyController.Instance.OnEnergyChanged -= UpdateUI;
+        if (energy != null)
+            energy.OnEnergyChanged -= UpdateUI;
     }
 
     private void UpdateUI(int current, int max)
@@ -37,11 +42,5 @@ public class UIEnergyBar : MonoBehaviour
 
         if (energyText != null)
             energyText.text = $"{current} / {max}";
-    }
-
-    private int GetMaxEnergy()
-    {
-        var stats = CharacterStatsController.Instance?.Stats;
-        return stats != null ? stats.GetMaxEnergy() : 0;
     }
 }

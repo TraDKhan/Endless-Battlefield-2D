@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(menuName = "Weapon/Weapon Data")]
 public class WeaponData : ScriptableObject
@@ -7,16 +8,24 @@ public class WeaponData : ScriptableObject
     public string weaponName;
 
     [Header("Base Stats")]
-    public int baseDamage;
-    public float baseCooldown;
-    public float baseCritChance;
-    public int baseProjectileCount;
-    public float baseRange;
-    public float baseProjectileSpeed;
+    public List<StatEntry> baseStats;
 
     [Header("Projectile")]
     public GameObject projectilePrefab;
 
     [Header("Socket")]
     public WeaponSlotType slotType;
+
+    // =========================
+    // BACKWARD SUPPORT
+    // =========================
+    public float GetBaseStat(StatType type)
+    {
+        foreach (var stat in baseStats)
+        {
+            if (stat.statType == type)
+                return stat.value;
+        }
+        return 0f;
+    }
 }

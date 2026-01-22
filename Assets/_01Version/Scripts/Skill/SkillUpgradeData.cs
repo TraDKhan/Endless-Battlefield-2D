@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Text;
+using UnityEngine;
 
-[CreateAssetMenu(menuName = "Upgrade/Skill Upgrade Data")]
+[CreateAssetMenu(menuName = "Upgrade/Skill Data")]
 public class SkillUpgradeData : UpgradeData
 {
     public GameObject skillPrefab;
@@ -16,27 +17,41 @@ public class SkillUpgradeData : UpgradeData
         return levels[index];
     }
 
+    // ======================
+    // LOGIC
+    // ======================
+
+    public override bool CanApply(UpgradeSystem system)
+    {
+        return GetCurrentLevel(system) < MaxLevel;
+    }
+
+    public override void Apply(UpgradeSystem system)
+    {
+        system.ApplySkillUpgrade(this);
+    }
+
     public override string GetTitle()
     {
         return upgradeName;
     }
 
-    public override int GetCurrentLevel()
+    public override int GetCurrentLevel(UpgradeSystem system)
     {
-        return UpgradeSystem.Instance.GetSkillLevel(this);
+        return system.GetSkillLevel(this);
     }
 
-    public override string GetValueText()
+    public override string GetValueText(UpgradeSystem system)
     {
-        int currentLevel = GetCurrentLevel();
+        int currentLevel = GetCurrentLevel(system);
 
         if (currentLevel >= MaxLevel)
-            return "Đã đạt cấp tối đa";
+            return "Level Max";
 
         SkillData current = currentLevel > 0 ? GetLevelData(currentLevel) : null;
         SkillData next = GetLevelData(currentLevel + 1);
 
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        StringBuilder sb = new System.Text.StringBuilder();
 
         void AddChange<T>(string label, T? cur, T nextVal) where T : struct
         {
@@ -55,20 +70,6 @@ public class SkillUpgradeData : UpgradeData
 
     public override string GetDescription()
     {
-        if (GetCurrentLevel() == 0)
-            return description;
-
-        return $"Nâng cấp {upgradeName} lên Lv {GetCurrentLevel() + 1}";
-    }
-
-    public override bool CanApply()
-    {
-        int current = UpgradeSystem.Instance.GetSkillLevel(this);
-        return current < MaxLevel;
-    }
-
-    public override void Apply()
-    {
-        UpgradeSystem.Instance.ApplySkillUpgrade(this);
+        return description;
     }
 }

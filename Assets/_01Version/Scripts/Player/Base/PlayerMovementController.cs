@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovementController : MonoBehaviour, ICharacterModule
 {
     [Header("Dependencies")]
     [SerializeField] private PlayerInputController inputController;
     [SerializeField] private PlayerAnimationController animationController;
-    [SerializeField] private CharacterStatsController statsController;
 
     [Header("Movement")]
     [SerializeField] private float deadZone = 0.01f;
@@ -18,39 +17,27 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private int dashEnergyCost = 20;
 
     private Rigidbody2D rb;
+    private PlayerController owner;
+
     private Vector2 movementInput;
-    private float currentMoveSpeed;
+    private float moveSpeed;
 
-    // Direction
-    private MoveDirection currentDirection = MoveDirection.Down;
-    private MoveDirection lastDirection = MoveDirection.Down;
-
-    // Dash
     private bool isDashing;
     private float dashTimer;
     private Vector2 dashDirection;
+
+    private MoveDirection currentDirection = MoveDirection.Down;
     private Vector2 lastMoveVector = Vector2.down;
 
-    #region Unity
-
-    private void Awake()
+    public void Initialize(PlayerController controller)
     {
+        owner = controller;
         rb = GetComponent<Rigidbody2D>();
-
-        if (statsController == null)
-            statsController = CharacterStatsController.Instance;
     }
 
-    private void OnEnable()
+    public void ApplyStats(CharacterStats stats)
     {
-        CharacterStatsController.OnStatsReady += OnStatsReady;
-    }
-
-    private void OnDisable()
-    {
-        CharacterStatsController.OnStatsReady -= OnStatsReady;
-        if (statsController?.Stats != null)
-            statsController.Stats.OnStatsChanged -= OnStatsChanged;
+        moveSpeed = stats.GetStat(StatType.MoveSpeed);
     }
 
     private void Update()
@@ -69,27 +56,62 @@ public class PlayerMovementController : MonoBehaviour
         else
             Move();
     }
-    #endregion
 
     #region Movement
 
     private void Move()
     {
-        if (currentMoveSpeed <= 0f) return;
+        if (moveSpeed <= 0f) return;
         if (movementInput.sqrMagnitude < deadZone * deadZone) return;
 
-        Vector2 newPos = rb.position +
-                         movementInput.normalized *
-                         currentMoveSpeed *
-                         Time.fixedDeltaTime;
-
-        rb.MovePosition(newPos);
+        rb.MovePosition(
+            rb.position +
+            movementInput.normalized *
+            moveSpeed *
+            Time.fixedDeltaTime
+        );
     }
 
     #endregion
 
-    #region Direction (6 hướng SUVI)
+    #region Dash
 
+    private void TryDash()
+    {
+        if (isDashing) return;
+        if (!inputController.IsDashPressed()) return;
+        if (movementInput.sqrMagnitude < deadZone * deadZone) return;
+        if (!owner.Energy.Consume(dashEnergyCost)) return;
+
+        isDashing = true;
+        dashTimer = dashDuration;
+        dashDirection = DirectionToVector(currentDirection);
+        animationController.SetDash(true);
+    }
+
+    private void DashMove()
+    {
+        dashTimer -= Time.fixedDeltaTime;
+
+        float dashSpeed = dashDistance / dashDuration;
+
+        rb.MovePosition(
+            rb.position +
+            dashDirection *
+            (dashDistance / dashDuration) *
+            Time.fixedDeltaTime
+        );
+
+        if (dashTimer <= 0f)
+        {
+            isDashing = false;
+            animationController.SetDash(false);
+        }
+    }
+
+    #endregion
+
+    #region Direction Helper
     private void UpdateDirection(Vector2 input)
     {
         if (input.sqrMagnitude < deadZone * deadZone)
@@ -125,52 +147,7 @@ public class PlayerMovementController : MonoBehaviour
         }
 
         lastMoveVector = DirectionToVector(currentDirection);
-        lastDirection = currentDirection;
     }
-
-    #endregion
-
-    #region Dash
-
-    private void TryDash()
-    {
-        if (isDashing) return;
-        if (!inputController.IsDashPressed()) return;
-        if (movementInput.sqrMagnitude < deadZone * deadZone) return;
-
-        var energy = PlayerEnergyController.Instance;
-        if (energy == null) return;
-        if (!energy.Consume(dashEnergyCost)) return;
-
-        isDashing = true;
-        dashTimer = dashDuration;
-        dashDirection = DirectionToVector(currentDirection);
-        animationController.SetDash(true);
-    }
-
-    private void DashMove()
-    {
-        dashTimer -= Time.fixedDeltaTime;
-
-        float dashSpeed = dashDistance / dashDuration;
-
-        Vector2 newPos = rb.position +
-                         dashDirection *
-                         dashSpeed *
-                         Time.fixedDeltaTime;
-
-        rb.MovePosition(newPos);
-
-        if (dashTimer <= 0f)
-        {
-            isDashing = false;
-            animationController.SetDash(false);
-        }
-    }
-
-    #endregion
-
-    #region Direction Helper
 
     private Vector2 DirectionToVector(MoveDirection dir)
     {
@@ -200,25 +177,5 @@ public class PlayerMovementController : MonoBehaviour
             lastMoveVector
         );
     }
-    #endregion
-
-    #region Stats
-
-    private void OnStatsReady(CharacterStats stats)
-    {
-        stats.OnStatsChanged += OnStatsChanged;
-        UpdateMoveSpeed();
-    }
-
-    private void OnStatsChanged()
-    {
-        UpdateMoveSpeed();
-    }
-
-    private void UpdateMoveSpeed()
-    {
-        currentMoveSpeed = statsController.Stats.GetMoveSpeed();
-    }
-
     #endregion
 }

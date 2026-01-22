@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11cf478bf038bfe4c87fc2739b6440cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d852ddd5e83c6f4dad0da6cb0cd8c9d, type: 3}
   m_Name: PS_UpD Energy
   m_EditorClassIdentifier: 
-  upgradeName: Max Energy
-  icon: {fileID: 21300000, guid: e048d125abe3745859169fbbbc7ea3fe, type: 3}
+  upgradeName: Energy
+  icon: {fileID: 21300000, guid: f5e66a012d130ae438659882bdbcbf64, type: 3}
   upgradeType: 0
-  description: Increase the character's maximum energy
-  statType: 3
-  value: 100
-  maxLevel: 5
+  description: Player Stats Ugrade
+  statType: 1
+  valuePerLevel: 100
+  modType: 0

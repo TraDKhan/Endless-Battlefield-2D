@@ -2,6 +2,7 @@
 
 public abstract class UpgradeData : ScriptableObject
 {
+    [Header("Info")]
     public string upgradeName;
     public Sprite icon;
     public UpgradeType upgradeType;
@@ -9,26 +10,20 @@ public abstract class UpgradeData : ScriptableObject
     [TextArea]
     public string description;
 
-    public abstract bool CanApply();
+    // ===== LOGIC =====
+    public abstract bool CanApply(UpgradeSystem system);
+    public abstract void Apply(UpgradeSystem system);
 
-    public abstract void Apply();
+    // ===== UI =====
+    public abstract int GetCurrentLevel(UpgradeSystem system);
 
-    // ===== GỬI CHO UI ===== \\
+    public virtual string GetTitle() => upgradeName;
 
-    public abstract int GetCurrentLevel();
+    public virtual string GetTypeText() => upgradeType.ToString();
 
-    public abstract string GetTitle();
+    public virtual string GetLevelText(UpgradeSystem system)
+        => $"Lv {GetCurrentLevel(system)}";
 
-    public virtual string GetTypeText()
-    {
-        return $"{upgradeType.ToString()}";
-    }
-
-    public virtual string GetLevelText() {
-        return $"Lv {GetCurrentLevel()}";
-    }
-
-    public abstract string GetValueText();
-
+    public abstract string GetValueText(UpgradeSystem system);
     public abstract string GetDescription();
 }

@@ -1,0 +1,7 @@
+﻿[System.Serializable]
+public class StatModifier
+{
+    public StatType statType;
+    public StatModType modType;
+    public float value;
+}

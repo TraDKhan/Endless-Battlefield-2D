@@ -1,20 +1,33 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerHealthController : MonoBehaviour, IDamageable
+public class PlayerHealthController : MonoBehaviour, IDamageable, ICharacterModule
 {
     public int CurrentHealth { get; private set; }
     public int MaxHealth { get; private set; }
-
     public bool IsDead => CurrentHealth <= 0;
 
     public event Action<int, int> OnHealthChanged;
     public event Action OnDeath;
 
+    private PlayerController owner;
     private bool initialized;
     private bool deathInvoked;
 
-    #region Init
+    #region ICharacterModule
+
+    public void Initialize(PlayerController controller)
+    {
+        owner = controller;
+    }
+
+    public void ApplyStats(CharacterStats stats)
+    {
+        SetMaxHealth(stats.GetMaxHealth());
+    }
+    #endregion
+
+    #region Health Core
     public void SetMaxHealth(int newMaxHealth)
     {
         if (newMaxHealth <= 0) return;
@@ -26,6 +39,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         {
             CurrentHealth = MaxHealth;
             initialized = true;
+            deathInvoked = false;
         }
         else
         {
@@ -53,7 +67,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         ClampHealth();
         NotifyHealthChanged();
 
-        PopupController.Instance.ShowDamage(damage, transform.position + Vector3.up * 0.5f);
+        ShowDamagePopup(finalDamage);
 
         if (IsDead)
             Die();
@@ -67,7 +81,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         ClampHealth();
         NotifyHealthChanged();
 
-        PopupController.Instance.ShowHeal(amount, transform.position + Vector3.up * 0.5f);
+        ShowHealPopup(amount);
     }
     #endregion
 
@@ -93,6 +107,29 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     }
     #endregion
 
+    #region POPUP (Optional – có thể tách Service sau)
+
+    private void ShowDamagePopup(int value)
+    {
+        if (PopupController.Instance == null) return;
+
+        PopupController.Instance.ShowDamage(
+            value,
+            transform.position + Vector3.up * 0.5f
+        );
+    }
+
+    private void ShowHealPopup(int value)
+    {
+        if (PopupController.Instance == null) return;
+
+        PopupController.Instance.ShowHeal(
+            value,
+            transform.position + Vector3.up * 0.5f
+        );
+    }
+
+    #endregion
 #if UNITY_EDITOR
     [ContextMenu("Test Text popup")]
     private void TestDamage()

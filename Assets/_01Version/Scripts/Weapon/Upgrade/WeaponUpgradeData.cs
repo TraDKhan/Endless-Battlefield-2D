@@ -1,42 +1,46 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Upgrade/Weapon Unlock Data")]
+[CreateAssetMenu(menuName = "Upgrade/Stat Weapon")]
 public class WeaponUpgradeData : UpgradeData
 {
-    public GameObject weaponPrefab;
+    [Header("Stat")]
+    public StatType statType;
+    public StatModType modType;
+    public float valuePerLevel;
 
-    public override bool CanApply()
+    // ======================
+    // LOGIC
+    // ======================
+
+    public override bool CanApply(UpgradeSystem system)
     {
-        return !UpgradeSystem.Instance.HasWeapon(this);
+        return true; // sau này có thể limit
     }
 
-    public override void Apply()
+    public override void Apply(UpgradeSystem system)
     {
-        UpgradeSystem.Instance.UnlockWeapon(this);
+        system.Weapon.ApplyUpgrade(statType, valuePerLevel, modType);
     }
 
-    public override int GetCurrentLevel()
+    // ======================
+    // UI
+    // ======================
+
+    public override int GetCurrentLevel(UpgradeSystem system)
     {
-        return UpgradeSystem.Instance.HasWeapon(this) ? 1 : 0;
+        return system.Weapon.GetStatLevel(statType);
     }
 
-    public override string GetTitle()
+    public override string GetValueText(UpgradeSystem system)
     {
-        return upgradeName;
-    }
+        float value = system.Weapon.GetStatValue(statType);
+        string sign = modType == StatModType.Percent ? "%" : "";
 
-    public override string GetValueText()
-    {
-        return "Unlock Weapon";
+        return $"+{value}{sign}";
     }
 
     public override string GetDescription()
     {
         return description;
-    }
-
-    public override string GetLevelText()
-    {
-        return "Unlock";
     }
 }

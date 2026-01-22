@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-public class UpgradeSystem : MonoBehaviour
+public class UpgradeSystem : MonoBehaviour, IStatSource
 {
     public static UpgradeSystem Instance;
 
     [Header("Upgrade Pool")]
     public List<UpgradeData> upgradePool;
 
+    [Header("Sub Systems")]
+    [SerializeField] private WeaponUpgradeSystem weaponSystem;
+
+    public WeaponUpgradeSystem Weapon => weaponSystem;
+
     public event Action<List<UpgradeData>> OnShowUpgradeUI;
 
     private int pendingLevelUps = 0;
     private bool isChoosingUpgrade = false;
+
+    // ===== PLAYER STAT =====
+    private readonly Dictionary<StatType, StatUpgrade> playerStatUpgrades = new();
 
     private void Awake()
     {
@@ -22,101 +30,92 @@ public class UpgradeSystem : MonoBehaviour
         }
         Instance = this;
     }
+
     private void Start()
     {
         var playerLevelSystem = FindFirstObjectByType<PlayerLevelSystem>();
         if (playerLevelSystem != null)
-        {
             playerLevelSystem.OnLevelUp += OnPlayerLevelUp;
-        }
-    }
-    private void Update()
-    {
-        ShowUpgradeOptions();
     }
 
-    #region CORE
+    private void Update()
+    {
+        TryShowUpgrade();
+    }
+
+    #region LEVEL FLOW
     public void OnPlayerLevelUp(int newLevel)
     {
         pendingLevelUps++;
     }
 
-    private void ShowUpgradeOptions()
+    private void TryShowUpgrade()
     {
-        if (isChoosingUpgrade) return;
-        if (pendingLevelUps <= 0) return;
+        if (isChoosingUpgrade || pendingLevelUps <= 0)
+            return;
 
-        isChoosingUpgrade = true;
         pendingLevelUps--;
+        isChoosingUpgrade = true;
 
         Time.timeScale = 0f;
-        List<UpgradeData> options = RandomUpgrades(3);
-        OnShowUpgradeUI?.Invoke(options);
-    }
-
-    List<UpgradeData> RandomUpgrades(int count)
-    {
-        if (upgradePool == null || upgradePool.Count == 0)
-        {
-            Debug.LogWarning("Upgrade pool is empty or null!");
-            return new List<UpgradeData>();
-        }
-
-        List<UpgradeData> validPool = new List<UpgradeData>();
-
-        foreach (var up in upgradePool)
-        {
-            if (up.CanApply())
-                validPool.Add(up);
-        }
-
-        List<UpgradeData> result = new List<UpgradeData>();
-
-        while (result.Count < count && validPool.Count > 0)
-        {
-            int index = UnityEngine.Random.Range(0, validPool.Count);
-            result.Add(validPool[index]);
-            validPool.RemoveAt(index);
-        }
-
-        return result;
+        OnShowUpgradeUI?.Invoke(GetRandomUpgrades(3));
     }
 
     public void SelectUpgrade(UpgradeData data)
     {
-        data.Apply();
+        if (!data.CanApply(this))
+            return;
+
+        data.Apply(this);
 
         isChoosingUpgrade = false;
         Time.timeScale = 1f;
     }
+
     #endregion
 
     #region PLAYER
-    // ===== PLAYER STAT ===== \\
-    Dictionary<PlayerStatType, int> statLevels = new();
-    public void IncreasePlayerStatLevel(PlayerStatType stat, float value)
+
+    public void ApplyPlayerStatUpgrade(PlayerUpgradeData data)
     {
-        if (!statLevels.ContainsKey(stat))
-            statLevels[stat] = 0;
-
-        statLevels[stat]++;
-
-        CharacterStatsController.Instance.Stats.RecalculateStats();
-    }
-    public float GetPlayerStatBonus(PlayerStatType stat)
-    {
-        int level = GetPlayerStatLevel(stat);
-
-        foreach (var up in upgradePool)
+        if (!playerStatUpgrades.TryGetValue(data.statType, out var runtime))
         {
-            if (up is PlayerStatUpgradeData statUp && statUp.statType == stat)
+            runtime = new StatUpgrade
             {
-                return statUp.value * level;
-            }
+                level = 0,
+                valuePerLevel = data.valuePerLevel,
+                modType = data.modType
+            };
         }
-        return 0f;
+
+        runtime.level++;
+        playerStatUpgrades[data.statType] = runtime;
+        PlayerController.Instance.Stats.RecalculateStats();
     }
-    public int GetPlayerStatLevel(PlayerStatType stat) => statLevels.ContainsKey(stat) ? statLevels[stat] : 0;
+
+    public int GetPlayerStatLevel(StatType stat)
+    {
+        return playerStatUpgrades.TryGetValue(stat, out var up)
+            ? up.level
+            : 0;
+    }
+
+    public List<StatModifier> GetModifiers()
+    {
+        List<StatModifier> result = new();
+
+        foreach (var kv in playerStatUpgrades)
+        {
+            result.Add(new StatModifier
+            {
+                statType = kv.Key,
+                modType = kv.Value.modType,
+                value = kv.Value.Value
+            });
+        }
+
+        return result;
+    }
     #endregion
 
     #region SKILL
@@ -137,8 +136,8 @@ public class UpgradeSystem : MonoBehaviour
         var skill = go.GetComponent<BaseSkill>();
 
         skill.Init(
-            CharacterStatsController.Instance.transform,
-            CharacterStatsController.Instance.Stats
+            PlayerController.Instance.transform,
+            PlayerController.Instance.Stats
         );
 
         skill.OnUnlock();
@@ -157,19 +156,9 @@ public class UpgradeSystem : MonoBehaviour
 
     #region WEAPON
     // ===== WEAPON ===== \\
-    HashSet<WeaponUpgradeData> unlockedWeapons = new();
+    HashSet<UnLockWeaponUpgrade> unlockedWeapons = new();
 
-    //public void UnlockWeapon(WeaponUpgradeData data)
-    //{
-    //    if (unlockedWeapons.Contains(data))
-    //        return;
-
-    //    unlockedWeapons.Add(data);
-
-    //    var weapon = Instantiate(data.weaponPrefab);
-    //    weapon.transform.SetParent(CharacterStatsController.Instance.transform);
-    //}
-    public void UnlockWeapon(WeaponUpgradeData data)
+    public void UnlockWeapon(UnLockWeaponUpgrade data)
     {
         if (unlockedWeapons.Contains(data))
             return;
@@ -178,8 +167,8 @@ public class UpgradeSystem : MonoBehaviour
 
         var weaponGO = Instantiate(data.weaponPrefab);
 
-        var weapon = weaponGO.GetComponent<Weapon>();
-        var weaponData = weapon.data;
+        var controller = weaponGO.GetComponent<WeaponController>();
+        var weaponData = controller.Data;
 
         Transform socket = WeaponSocketController.Instance.GetSocket(weaponData.slotType);
 
@@ -188,11 +177,30 @@ public class UpgradeSystem : MonoBehaviour
         weaponGO.transform.localRotation = Quaternion.identity;
     }
 
-    public bool HasWeapon(WeaponUpgradeData data)
+    public bool HasWeapon(UnLockWeaponUpgrade data)
     {
         return unlockedWeapons.Contains(data);
     }
     #endregion
 
+    #region UTILS
+    private List<UpgradeData> GetRandomUpgrades(int count)
+    {
+        List<UpgradeData> valid = new();
+        foreach (var up in upgradePool)
+            if (up.CanApply(this))
+                valid.Add(up);
+
+        List<UpgradeData> result = new();
+        while (result.Count < count && valid.Count > 0)
+        {
+            int index = UnityEngine.Random.Range(0, valid.Count);
+            result.Add(valid[index]);
+            valid.RemoveAt(index);
+        }
+
+        return result;
+    }
+    #endregion
 }
 

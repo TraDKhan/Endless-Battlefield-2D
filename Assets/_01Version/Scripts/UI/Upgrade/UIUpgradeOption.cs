@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class UIUpgradeOption : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class UIUpgradeOption : MonoBehaviour
     [SerializeField] private Button button;
 
     private UpgradeData data;
+    private UpgradeSystem system;
 
-    public void SetData(UpgradeData upgradeData, System.Action onClick)
+    public void SetData(UpgradeData upgradeData, UpgradeSystem system, Action onClick)
     {
         data = upgradeData;
 
@@ -29,15 +31,15 @@ public class UIUpgradeOption : MonoBehaviour
             typeText.text = data.GetTypeText();
 
         if (levelText != null)
-            levelText.text = data.GetLevelText();
+            levelText.text = data.GetLevelText(system);
 
         if (valueText != null)
-            valueText.text = data.GetValueText();
+            valueText.text = data.GetValueText(system);
 
         if (description != null)
             description.text = data.GetDescription();
 
-        button.interactable = data.CanApply();
+        button.interactable = data.CanApply(system);
 
         BindButton(onClick);
     }

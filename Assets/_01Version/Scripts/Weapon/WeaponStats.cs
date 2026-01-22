@@ -1,48 +1,92 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class WeaponStats
 {
-    public int Damage;
-    public float Cooldown;
-    public float CritChance;
-    public int ProjectileCount;
-    public float Range;
-    public float ProjectileSpeed;
+    // =========================
+    // INTERNAL
+    // =========================
+    private Dictionary<StatType, float> baseStats = new();
+    private Dictionary<StatType, float> finalStats = new();
 
     private WeaponData data;
     private WeaponUpgradeSystem upgrade;
 
+    // =========================
+    // BACKWARD FIELDS (GIỮ LOGIC CŨ)
+    // =========================
+    public int Damage => Mathf.RoundToInt(GetStat(StatType.Damage));
+    public float Cooldown => GetStat(StatType.Cooldown);
+    public float CritChance => GetStat(StatType.CritChance);
+    public int ProjectileCount => Mathf.RoundToInt(GetStat(StatType.ProjectileCount));
+    public float AttackRange => GetStat(StatType.AttackRange);
+    public float ProjectileSpeed => GetStat(StatType.ProjectileSpeed);
+
+    // =========================
+    // CONSTRUCTOR
+    // =========================
     public WeaponStats(WeaponData data)
     {
         this.data = data;
+        InitBaseStats();
     }
+
+    private void InitBaseStats()
+    {
+        baseStats[StatType.Damage] = data.GetBaseStat(StatType.Damage);
+        baseStats[StatType.Cooldown] = data.GetBaseStat(StatType.Cooldown);
+        baseStats[StatType.CritChance] = data.GetBaseStat(StatType.CritChance);
+        baseStats[StatType.ProjectileCount] = data.GetBaseStat(StatType.ProjectileCount);
+        baseStats[StatType.AttackRange] = data.GetBaseStat(StatType.AttackRange);
+        baseStats[StatType.ProjectileSpeed] = data.GetBaseStat(StatType.ProjectileSpeed);
+    }
+
     public void BindUpgradeSystem(WeaponUpgradeSystem upgrade)
     {
         this.upgrade = upgrade;
         Recalculate();
     }
+
+    // =========================
+    // RECALCULATE
+    // =========================
     public void Recalculate()
     {
-        if (data == null) return;
-        if (upgrade == null) return;
+        finalStats = new Dictionary<StatType, float>(baseStats);
 
-        Damage = data.baseDamage
-            + Mathf.RoundToInt(upgrade.GetWeaponStatBonus(WeaponStatType.Damage));
+        ApplyModifiers(upgrade?.GetAllModifiers());
 
-        Cooldown = Mathf.Max(0.05f,
-            data.baseCooldown
-            - upgrade.GetWeaponStatBonus(WeaponStatType.Cooldown));
+        ClampStats();
+    }
 
-        CritChance = data.baseCritChance
-            + upgrade.GetWeaponStatBonus(WeaponStatType.CritChance);
+    private void ApplyModifiers(List<StatModifier> modifiers)
+    {
+        if (modifiers == null) return;
 
-        ProjectileCount = data.baseProjectileCount
-            + Mathf.RoundToInt(upgrade.GetWeaponStatBonus(WeaponStatType.ProjectileCount));
+        foreach (var mod in modifiers)
+        {
+            if (!finalStats.ContainsKey(mod.statType))
+                finalStats[mod.statType] = 0;
 
-        Range = data.baseRange
-            + upgrade.GetWeaponStatBonus(WeaponStatType.Range);
+            if (mod.modType == StatModType.Flat)
+                finalStats[mod.statType] += mod.value;
+            else
+                finalStats[mod.statType] *= (1 + mod.value);
+        }
+    }
 
-        ProjectileSpeed = data.baseProjectileSpeed
-            + upgrade.GetWeaponStatBonus(WeaponStatType.ProjectileSpeed);
+    private void ClampStats()
+    {
+        // cooldown không bao giờ <= 0
+        if (finalStats.ContainsKey(StatType.Cooldown))
+            finalStats[StatType.Cooldown] = Mathf.Max(0.05f, finalStats[StatType.Cooldown]);
+    }
+
+    // =========================
+    // NEW API
+    // =========================
+    public float GetStat(StatType type)
+    {
+        return finalStats.TryGetValue(type, out var v) ? v : 0f;
     }
 }

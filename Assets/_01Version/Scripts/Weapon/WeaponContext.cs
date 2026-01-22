@@ -32,7 +32,7 @@ public struct WeaponContext
         CritChance = stats.CritChance;
         ProjectileSpeed = stats.ProjectileSpeed;
         ProjectileCount = stats.ProjectileCount;
-        Range = stats.Range;
+        Range = stats.AttackRange;
 
         KnockbackForce = knockbackForce;
         TargetLayer = targetLayer;

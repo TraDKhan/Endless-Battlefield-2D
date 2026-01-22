@@ -17,7 +17,7 @@ public class PistolWeapon : Weapon
 
     void SpawnProjectile(Vector2 direction, Transform target)
     {
-        Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(data.projectilePrefab);
+        Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(controller.Data.projectilePrefab);
 
         if (bullet == null) return;
 
