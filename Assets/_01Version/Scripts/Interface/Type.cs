@@ -138,3 +138,9 @@ public enum StatModType
     Flat,      // +10
     Percent    // +20%
 }
+public enum ItemType
+{
+    Equipment,
+    Consumable,
+    Material
+}

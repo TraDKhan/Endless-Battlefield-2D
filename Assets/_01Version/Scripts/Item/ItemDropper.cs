@@ -40,7 +40,7 @@ public class ItemDropper : MonoBehaviour
         }
     }
 
-    private void SpawnItem(ItemData item)
+    private void SpawnItem(ItemData_tamthoi item)
     {
         if (item == null || item.prefab == null) return;
 
@@ -52,7 +52,7 @@ public class ItemDropper : MonoBehaviour
     }
 
     // Optional: roll 1 item theo weight
-    public ItemData RollOneItem()
+    public ItemData_tamthoi RollOneItem()
     {
         if (dropTable == null) return null;
 

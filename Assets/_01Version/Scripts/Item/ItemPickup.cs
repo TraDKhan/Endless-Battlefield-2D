@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-enum ItemType
+enum ItemType_tamtjhoi
 {
     None,
     Heart,
@@ -9,7 +9,7 @@ enum ItemType
 }
 public class ItemPickup : MonoBehaviour
 {
-    [SerializeField] private ItemType itemType;
+    [SerializeField] private ItemType_tamtjhoi itemType;
     [SerializeField] private int value;
 
     [Header("Settings")]
@@ -50,13 +50,13 @@ public class ItemPickup : MonoBehaviour
 
     void OnPickup()
     {
-        if (itemType == ItemType.Heart)
+        if (itemType == ItemType_tamtjhoi.Heart)
         {
             PlayerHealthController playerHealthController = player.GetComponent<PlayerHealthController>();
             if (playerHealthController != null)
                 playerHealthController.Heal(value);
         }                  
-        else if(itemType == ItemType.Exp)
+        else if(itemType == ItemType_tamtjhoi.Exp)
         {
             PlayerLevelSystem levelSystem = player.GetComponent<PlayerLevelSystem>();
 

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public CharacterStats Stats { get; private set; }
 
+
     [Header("Data")]
     [SerializeField] private PlayerData playerData;
 

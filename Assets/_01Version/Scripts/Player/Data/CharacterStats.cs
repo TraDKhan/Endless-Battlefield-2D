@@ -14,10 +14,12 @@ public class CharacterStats
 
     public CharacterStats(PlayerData data, params IStatSource[] statSources)
     {
-        foreach (var s in statSources)
-            if (s != null) sources.Add(s);
-
         InitBaseStats(data);
+
+        foreach (var s in statSources)
+            AddSource(s);
+
+        RecalculateStats();
     }
 
     private void InitBaseStats(PlayerData data)
@@ -25,7 +27,27 @@ public class CharacterStats
         foreach (var entry in data.baseStats)
             baseStats[entry.statType] = entry.value;
     }
+    public void AddSource(IStatSource source)
+    {
+        if (source == null || sources.Contains(source))
+            return;
 
+        sources.Add(source);
+        RecalculateStats();
+    }
+
+    public void RemoveSource(IStatSource source)
+    {
+        if (source == null)
+            return;
+
+        if (sources.Remove(source))
+            RecalculateStats();
+    }
+
+    // ======================
+    // CALCULATION
+    // ======================
     public void RecalculateStats()
     {
         finalStats.Clear();
