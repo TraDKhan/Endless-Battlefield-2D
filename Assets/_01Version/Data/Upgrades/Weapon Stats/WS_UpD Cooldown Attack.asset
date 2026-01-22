@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a8a5194d9898e4cadc89a2ecd42e85, type: 3}
+  m_Script: {fileID: 11500000, guid: e80074b8ecd9e4b46a72cd47ae0740b6, type: 3}
   m_Name: WS_UpD Cooldown Attack
   m_EditorClassIdentifier: 
-  upgradeName: Attack Cooldown
-  icon: {fileID: 6201451030192042776, guid: c0d437ba65bd82b4fab861ac88e7ab44, type: 3}
+  upgradeName: Cooldown
+  icon: {fileID: 21300000, guid: f5e66a012d130ae438659882bdbcbf64, type: 3}
   upgradeType: 1
-  description: Weapon Stats Upgrade
+  description: Weapon Upgrade
   statType: 6
   modType: 0
-  valuePerLevel: 10
+  valuePerLevel: 2

@@ -181,6 +181,12 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
     {
         return unlockedWeapons.Contains(data);
     }
+
+    public void ApplyWeaponStatsUpgrade(WeaponUpgradeData data)
+    {
+        weaponSystem.ApplyUpgrade(data);
+    }
+
     #endregion
 
     #region UTILS

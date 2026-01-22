@@ -19,7 +19,7 @@ public class WeaponUpgradeData : UpgradeData
 
     public override void Apply(UpgradeSystem system)
     {
-        system.Weapon.ApplyUpgrade(statType, valuePerLevel, modType);
+        system.ApplyWeaponStatsUpgrade(this);
     }
 
     // ======================
@@ -30,13 +30,20 @@ public class WeaponUpgradeData : UpgradeData
     {
         return system.Weapon.GetStatLevel(statType);
     }
+    public override string GetLevelText(UpgradeSystem system)
+    {
+        int current = GetCurrentLevel(system) + 1;
+        int next = current + 1;
+
+        return $"Lv{current} → Lv{next}";
+    }
 
     public override string GetValueText(UpgradeSystem system)
     {
-        float value = system.Weapon.GetStatValue(statType);
         string sign = modType == StatModType.Percent ? "%" : "";
 
-        return $"+{value}{sign}";
+        // UI upgrade CHỈ hiển thị giá trị tăng
+        return $"+{valuePerLevel}{sign} {statType.ToString()}";
     }
 
     public override string GetDescription()

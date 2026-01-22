@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   weaponName: Pistol
-  baseDamage: 62
-  baseCooldown: 0.97
-  baseCritChance: 1
-  baseProjectileCount: 1
-  baseRange: 5
-  baseProjectileSpeed: 3
+  baseStats:
+  - statType: 4
+    value: 10
+  - statType: 5
+    value: 10
+  - statType: 6
+    value: 1
+  - statType: 8
+    value: 10
+  - statType: 9
+    value: 1
+  - statType: 7
+    value: 5
   projectilePrefab: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}
   slotType: 1

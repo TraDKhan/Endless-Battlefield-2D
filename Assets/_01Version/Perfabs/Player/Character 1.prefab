@@ -162,8 +162,8 @@ GameObject:
   - component: {fileID: 2112786198638948722}
   - component: {fileID: 1305603668023117432}
   - component: {fileID: 7806542809894926026}
+  - component: {fileID: 3273680918907259611}
   - component: {fileID: 4803458157642007893}
-  - component: {fileID: 4933618080373623075}
   - component: {fileID: 4233705123792441473}
   - component: {fileID: 8805743294613574379}
   - component: {fileID: 1254702132603002885}
@@ -340,6 +340,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &3273680918907259611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061738363453199701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37edf82ae93c1fb4fa92db0519e27ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: bcab7d4d65f995148a4e75aeaefa0bea, type: 2}
+  movement: {fileID: 4803458157642007893}
+  health: {fileID: 5020494767623490524}
+  energy: {fileID: 8687697108299402382}
 --- !u!114 &4803458157642007893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,26 +370,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 4233705123792441473}
   animationController: {fileID: 8805743294613574379}
-  statsController: {fileID: 4933618080373623075}
   deadZone: 0.01
   directionThreshold: 0.35
   dashDistance: 1
   dashDuration: 0.15
   dashEnergyCost: 20
---- !u!114 &4933618080373623075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7061738363453199701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cc9f4517dee704fb39f4531d1d0107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: bcab7d4d65f995148a4e75aeaefa0bea, type: 2}
-  level: {fileID: 1254702132603002885}
 --- !u!114 &4233705123792441473
 MonoBehaviour:
   m_ObjectHideFlags: 0

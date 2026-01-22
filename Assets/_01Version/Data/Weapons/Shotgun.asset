@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   weaponName: Shotgun
-  baseDamage: 1
-  baseCooldown: 1
-  baseCritChance: 1
-  baseProjectileCount: 3
-  baseRange: 3
-  baseProjectileSpeed: 5
+  baseStats:
+  - statType: 4
+    value: 1
+  - statType: 6
+    value: 2
+  - statType: 7
+    value: 3
+  - statType: 9
+    value: 2
+  - statType: 8
+    value: 3
+  - statType: 5
+    value: 0
   projectilePrefab: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}
+  slotType: 0

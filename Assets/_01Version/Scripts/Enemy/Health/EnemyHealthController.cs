@@ -57,4 +57,8 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
     {
         TakeDamage(3000);
     }
+    private void Start()
+    {
+        Init(1000);
+    }
 }

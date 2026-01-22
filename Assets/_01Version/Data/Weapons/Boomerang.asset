@@ -13,11 +13,18 @@ MonoBehaviour:
   m_Name: Boomerang
   m_EditorClassIdentifier: 
   weaponName: Boomerang
-  baseDamage: 10
-  baseCooldown: 2.87
-  baseCritChance: 0.1
-  baseProjectileCount: 1
-  baseRange: 5.99
-  baseProjectileSpeed: 1
+  baseStats:
+  - statType: 4
+    value: 1
+  - statType: 6
+    value: 2
+  - statType: 7
+    value: 3
+  - statType: 9
+    value: 3
+  - statType: 8
+    value: 1
+  - statType: 5
+    value: 0
   projectilePrefab: {fileID: 1979819941540096210, guid: 38e5fe429b760e648a42da238df93ded, type: 3}
   slotType: 0

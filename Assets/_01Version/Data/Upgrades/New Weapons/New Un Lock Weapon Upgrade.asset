@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dca65cff7e36d364d8ca9471c8e8b587, type: 3}
   m_Name: New Un Lock Weapon Upgrade
   m_EditorClassIdentifier: 
-  upgradeName: 
-  icon: {fileID: 0}
-  upgradeType: 0
-  description: 
-  weaponPrefab: {fileID: 0}
+  upgradeName: Pistol Weapon
+  icon: {fileID: -7047504977431989356, guid: b5bb323b3d298d2458146462856e27c3, type: 3}
+  upgradeType: 3
+  description: Unlock new Weapon
+  weaponPrefab: {fileID: 5757144308714031333, guid: f8fd0406a72ffc0468f3406aee99faef, type: 3}

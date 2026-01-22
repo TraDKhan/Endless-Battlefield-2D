@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponStats
@@ -54,12 +55,12 @@ public class WeaponStats
     {
         finalStats = new Dictionary<StatType, float>(baseStats);
 
-        ApplyModifiers(upgrade?.GetAllModifiers());
+        ApplyModifiers(upgrade?.GetModifiers());
 
         ClampStats();
     }
 
-    private void ApplyModifiers(List<StatModifier> modifiers)
+    private void ApplyModifiers(IEnumerable<StatModifier> modifiers)
     {
         if (modifiers == null) return;
 
@@ -73,6 +74,8 @@ public class WeaponStats
             else
                 finalStats[mod.statType] *= (1 + mod.value);
         }
+        //foreach (var kv in finalStats)
+        //    Debug.Log($"FinalStat: {kv.Key} = {kv.Value}");
     }
 
     private void ClampStats()

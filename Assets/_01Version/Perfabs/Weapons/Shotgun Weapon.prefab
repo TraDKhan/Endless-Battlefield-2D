@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7494745635509925787}
   - component: {fileID: 1679917026185728374}
   - component: {fileID: 29863311422611903}
+  - component: {fileID: -4270772121894751998}
   m_Layer: 0
   m_Name: Shotgun Weapon
   m_TagString: Weapon
@@ -124,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d1a3dd796035142befdafd78905778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: ec45f6ee4874f3245bab1a0897887cdd, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -147,3 +147,16 @@ MonoBehaviour:
   animator: {fileID: 7494745635509925787}
   fireTrigger: Fire
   laserBool: IsLaserFiring
+--- !u!114 &-4270772121894751998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7465869266519618458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2f9f6ccc39ffa45ae895812d2b63e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: ec45f6ee4874f3245bab1a0897887cdd, type: 2}

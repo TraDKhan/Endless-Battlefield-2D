@@ -43,6 +43,8 @@ public abstract class Weapon : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (stats == null) return;
+
         if (!CanFire()) return;
 
         Transform target = FindNearestEnemy();
@@ -52,6 +54,7 @@ public abstract class Weapon : MonoBehaviour
 
         if (animationController != null)
             animationController.PlayFire();
+
         else
             OnFireLogic();
     }
@@ -109,5 +112,12 @@ public abstract class Weapon : MonoBehaviour
             targetLayer: enemyLayer,
             knockbackForce: 1f
         );
+    }
+    private void OnDrawGizmosSelected()
+    {
+        if (stats == null) return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stats.AttackRange);
     }
 }

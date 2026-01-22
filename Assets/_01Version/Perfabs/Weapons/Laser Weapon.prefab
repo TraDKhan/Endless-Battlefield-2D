@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9038728202995818325}
   - component: {fileID: 7489133631721960167}
   - component: {fileID: 2243301152410275397}
+  - component: {fileID: 5376837934648030496}
   m_Layer: 0
   m_Name: Laser Weapon
   m_TagString: Weapon
@@ -175,10 +176,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86869010a3c5afe43a0424e37135b43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 14b50e4dab61a934d842cb679c366c2d, type: 2}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  rotateToFireDirection: 1
+  rotationOffset: 0
+  flipSpriteByDirection: 1
   lineRenderer: {fileID: 7489133631721960167}
   laserDuration: 1.5
   tickRate: 0.1
+--- !u!114 &5376837934648030496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207274061179736146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2f9f6ccc39ffa45ae895812d2b63e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: 14b50e4dab61a934d842cb679c366c2d, type: 2}

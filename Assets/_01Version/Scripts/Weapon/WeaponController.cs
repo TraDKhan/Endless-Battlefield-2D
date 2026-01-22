@@ -5,12 +5,10 @@ public class WeaponController : MonoBehaviour
     [Header("Data")]
     [SerializeField] private WeaponData weaponData;
 
-    [Header("Systems")]
-    [SerializeField] private WeaponUpgradeSystem upgradeSystem;
-
     public WeaponStats Stats { get; private set; }
 
     private Weapon weapon;
+    private WeaponUpgradeSystem upgradeSystem;
 
     public WeaponData Data => weaponData;
 
@@ -18,21 +16,28 @@ public class WeaponController : MonoBehaviour
     {
         weapon = GetComponent<Weapon>();
 
-        if (upgradeSystem == null)
-            upgradeSystem = FindAnyObjectByType<WeaponUpgradeSystem>();
-
-        // ===== Init Stats =====
+        // 1. Init stats
         Stats = new WeaponStats(weaponData);
+
+        // 2. Bind upgrade system
+        upgradeSystem = UpgradeSystem.Instance.Weapon;
         Stats.BindUpgradeSystem(upgradeSystem);
 
-        // ===== Inject =====
-        weapon.Initialize(this);
+        // 3. Listen upgrade event
+        upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
 
-        // ===== Listen =====
-        if (upgradeSystem != null)
-            upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
-
+        // 4. First calculate
         Stats.Recalculate();
+
+        weapon.Initialize(this);
+    }
+
+    private void Start()
+    {
+        if (!weaponData.IsValid(out var error))
+        {
+            Debug.LogError($"{weaponData.name}: {error}");
+        }
     }
 
     private void OnDestroy()

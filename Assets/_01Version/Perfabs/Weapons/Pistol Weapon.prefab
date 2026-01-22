@@ -159,4 +159,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: f593f95014ec16246941d513742cd642, type: 2}
-  upgradeSystem: {fileID: 0}

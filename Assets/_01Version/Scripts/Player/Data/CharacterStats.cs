@@ -40,8 +40,8 @@ public class CharacterStats
 
         ApplyModifiers(allMods);
 
-        foreach (var kv in finalStats)
-            Debug.Log($"FinalStat: {kv.Key} = {kv.Value}");
+        //foreach (var kv in finalStats)
+        //    Debug.Log($"FinalStat: {kv.Key} = {kv.Value}");
 
         OnStatsChanged?.Invoke();
     }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WeaponUpgradeSystem : MonoBehaviour
 {
-    public static WeaponUpgradeSystem Instance { get; private set; }
-
     public event Action OnWeaponStatsChanged;
 
     // =========================
@@ -13,57 +11,35 @@ public class WeaponUpgradeSystem : MonoBehaviour
     // =========================
     private Dictionary<StatType, StatUpgrade> statUpgrades = new();
 
-    private void Awake()
+    public void ApplyUpgrade(WeaponUpgradeData data)
     {
-        if (Instance != null)
+        if (!statUpgrades.TryGetValue(data.statType, out var up))
         {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
-    }
-
-    // =========================
-    // APPLY UPGRADE
-    // =========================
-    public void ApplyUpgrade(StatType stat, float valuePerLevel, StatModType modType)
-    {
-        if (!statUpgrades.TryGetValue(stat, out var upgrade))
-        {
-            upgrade = new StatUpgrade
+            up = new StatUpgrade
             {
                 level = 0,
-                valuePerLevel = valuePerLevel,
-                modType = modType
+                valuePerLevel = data.valuePerLevel,
+                modType = data.modType
             };
         }
 
-        upgrade.level++;
-        statUpgrades[stat] = upgrade;
+        up.level++;
+        statUpgrades[data.statType] = up;
 
         OnWeaponStatsChanged?.Invoke();
     }
 
-    // =========================
-    // BUILD MODIFIERS
-    // =========================
-    public List<StatModifier> GetAllModifiers()
+    public IEnumerable<StatModifier> GetModifiers()
     {
-        List<StatModifier> result = new();
-
-        foreach (var kvp in statUpgrades)
+        foreach (var kv in statUpgrades)
         {
-            var upgrade = kvp.Value;
-
-            result.Add(new StatModifier
+            yield return new StatModifier
             {
-                statType = kvp.Key,
-                modType = upgrade.modType,
-                value = upgrade.Value
-            });
+                statType = kv.Key,
+                modType = kv.Value.modType,
+                value = kv.Value.Value
+            };
         }
-
-        return result;
     }
 
     // =========================

@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: Laser
   m_EditorClassIdentifier: 
   weaponName: Laser
-  baseDamage: 100
-  baseCooldown: 1
-  baseCritChance: 1
-  baseProjectileCount: 1
-  baseRange: 5
-  baseProjectileSpeed: 1
+  baseStats:
+  - statType: 4
+    value: 1
+  - statType: 6
+    value: 3
+  - statType: 7
+    value: 3
+  - statType: 9
+    value: 10
+  - statType: 8
+    value: 1
+  - statType: 5
+    value: 0
   projectilePrefab: {fileID: 0}
+  slotType: 0
