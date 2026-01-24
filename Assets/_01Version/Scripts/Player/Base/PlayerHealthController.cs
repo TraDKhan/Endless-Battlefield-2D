@@ -1,69 +1,69 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerHealthController : MonoBehaviour, IDamageable, ICharacterModule
+public class PlayerHealthController : MonoBehaviour, IDamageable
 {
     public int CurrentHealth { get; private set; }
-    public int MaxHealth { get; private set; }
+    public int MaxHealth => stats != null ? stats.MaxHP : 0;
     public bool IsDead => CurrentHealth <= 0;
 
     public event Action<int, int> OnHealthChanged;
     public event Action OnDeath;
 
     private PlayerController owner;
+    private CharacterStats stats;
+
     private bool initialized;
     private bool deathInvoked;
 
-    #region ICharacterModule
+    #region Init
 
     public void Initialize(PlayerController controller)
     {
         owner = controller;
+        stats = controller.CharacterStats;
     }
 
-    public void ApplyStats(CharacterStats stats)
-    {
-        SetMaxHealth(stats.GetMaxHealth());
-    }
     #endregion
 
-    #region Health Core
-    public void SetMaxHealth(int newMaxHealth)
-    {
-        if (newMaxHealth <= 0) return;
+    #region Sync With StatSystem
 
-        int oldMax = MaxHealth;
-        MaxHealth = newMaxHealth;
+    /// <summary>
+    /// Gọi khi StatSystem Recalculate (equip / upgrade)
+    /// </summary>
+    public void RefreshFromStats()
+    {
+        int newMax = MaxHealth;
+        if (newMax <= 0) return;
 
         if (!initialized)
         {
-            CurrentHealth = MaxHealth;
+            CurrentHealth = newMax;
             initialized = true;
             deathInvoked = false;
         }
         else
         {
-            // Giữ % HP
-            float percent = oldMax > 0
-                ? (float)CurrentHealth / oldMax
-                : 1f;
-
-            CurrentHealth = Mathf.RoundToInt(MaxHealth * percent);
+            // giữ % HP
+            float percent = CurrentHealth / (float)Mathf.Max(1, MaxHealth);
+            CurrentHealth = Mathf.RoundToInt(newMax * percent);
         }
 
         ClampHealth();
         NotifyHealthChanged();
     }
+
     #endregion
 
     #region Damage / Heal
-    public void TakeDamage(int damage)
+
+    public void TakeDamage(int rawDamage)
     {
-        if (damage <= 0 || IsDead) return;
+        if (rawDamage <= 0 || IsDead) return;
 
-        int finalDamage = damage; // sau này xử lý armor
+        int finalDamage = CalculateFinalDamage(rawDamage);
 
-        CurrentHealth -= damage;
+        CurrentHealth -= finalDamage;
         ClampHealth();
         NotifyHealthChanged();
 
@@ -83,9 +83,29 @@ public class PlayerHealthController : MonoBehaviour, IDamageable, ICharacterModu
 
         ShowHealPopup(amount);
     }
+
+    #endregion
+
+    #region Damage Formula (Armor-ready)
+
+    private int CalculateFinalDamage(int rawDamage)
+    {
+        float armor = owner.StatSystem.GetStat(
+            StatContext.Character,
+            StatType.Armor
+        );
+
+        // Công thức mẫu (dễ tweak)
+        float reduction = armor / (armor + 100f);
+        float final = rawDamage * (1f - reduction);
+
+        return Mathf.Max(1, Mathf.RoundToInt(final));
+    }
+
     #endregion
 
     #region Death
+
     private void Die()
     {
         if (deathInvoked) return;
@@ -93,9 +113,11 @@ public class PlayerHealthController : MonoBehaviour, IDamageable, ICharacterModu
         deathInvoked = true;
         OnDeath?.Invoke();
     }
+
     #endregion
 
     #region Utils
+
     private void ClampHealth()
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
@@ -105,9 +127,10 @@ public class PlayerHealthController : MonoBehaviour, IDamageable, ICharacterModu
     {
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
     }
+
     #endregion
 
-    #region POPUP (Optional – có thể tách Service sau)
+    #region Popup
 
     private void ShowDamagePopup(int value)
     {
@@ -130,13 +153,4 @@ public class PlayerHealthController : MonoBehaviour, IDamageable, ICharacterModu
     }
 
     #endregion
-#if UNITY_EDITOR
-    [ContextMenu("Test Text popup")]
-    private void TestDamage()
-    {
-        TakeDamage(120);
-        Heal(100);
-    }
-
-#endif
 }

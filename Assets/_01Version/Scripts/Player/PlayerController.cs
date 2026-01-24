@@ -2,26 +2,37 @@
 
 [RequireComponent(
     typeof(PlayerMovementController),
-    typeof(PlayerHealthController)
+    typeof(PlayerHealthController),
+    typeof(PlayerManaController)
 )]
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
 
-    public CharacterStats Stats { get; private set; }
+    // =========================
+    // CORE SYSTEM
+    // =========================
+    public StatSystem StatSystem { get; private set; }
+    public CharacterStats CharacterStats { get; private set; }
     public EquipmentSystem Equipment { get; private set; }
+
 
     [Header("Data")]
     [SerializeField] private PlayerData playerData;
 
+    [Header("Controllers")]
     [SerializeField] private PlayerMovementController movement;
     [SerializeField] private PlayerHealthController health;
-    [SerializeField] private PlayerEnergyController energy;
+    [SerializeField] private PlayerManaController mana;
+    public PlayerManaController Mana => mana;
 
-    public PlayerEnergyController Energy => energy;
 
+    // =========================
+    // LIFECYCLE
+    // =========================
     private void Awake()
     {
+        // ---------- Singleton ----------
         if (Instance != null)
         {
             Destroy(gameObject);
@@ -29,37 +40,57 @@ public class PlayerController : MonoBehaviour
         }
         Instance = this;
 
+        // ---------- Cache ----------
         movement ??= GetComponent<PlayerMovementController>();
         health ??= GetComponent<PlayerHealthController>();
-        energy ??= GetComponent<PlayerEnergyController>();
+        mana ??= GetComponent<PlayerManaController>();
 
-        Stats = new CharacterStats(
-            playerData,
-            GetComponent<PlayerLevelSystem>(),
-            FindAnyObjectByType<UpgradeSystem>()
-        );
-        Equipment = new EquipmentSystem(Stats);
+        // ---------- Init Stat System ----------
+        InitStatSystem();
 
-        Stats.RecalculateStats();
+        // ---------- Init Subsystems ----------
+        Equipment = new EquipmentSystem(StatSystem);
 
+        CharacterStats = new CharacterStats(StatSystem);
+
+        // ---------- Init Controllers ----------
         movement.Initialize(this);
         health.Initialize(this);
-        energy.Initialize(this);
+        mana.Initialize(this);
 
-        OnStatsChanged();
-
-        Stats.OnStatsChanged += OnStatsChanged;
+        ApplyStats();
     }
 
-    private void OnDestroy()
+    // =========================
+    // STAT SYSTEM INIT
+    // =========================
+    private void InitStatSystem()
     {
-        if (Stats != null)
-            Stats.OnStatsChanged -= OnStatsChanged;
+        StatSystem = new StatSystem();
+
+        // Base Character Stats
+        foreach (var entry in playerData.baseStats)
+        {
+            StatSystem.SetBaseStat(
+                StatContext.Character,
+                entry.statType,
+                entry.value
+            );
+        }
+
+        var upgrade = FindAnyObjectByType<UpgradeSystem>();
+        if (upgrade != null)
+            StatSystem.AddSource(upgrade);
+
+        StatSystem.Recalculate();
     }
 
-    private void OnStatsChanged()
+    // =========================
+    // APPLY
+    // =========================
+    public void ApplyStats()
     {
-        movement.ApplyStats(Stats);
-        health.ApplyStats(Stats);
+        health.RefreshFromStats();
+        mana.RefreshFromStats(true);
     }
 }

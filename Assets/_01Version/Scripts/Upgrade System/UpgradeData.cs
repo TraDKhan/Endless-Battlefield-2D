@@ -25,5 +25,5 @@ public abstract class UpgradeData : ScriptableObject
         => $"Lv {GetCurrentLevel(system)}";
 
     public abstract string GetValueText(UpgradeSystem system);
-    public abstract string GetDescription();
+    public virtual string GetDescription() => description;
 }

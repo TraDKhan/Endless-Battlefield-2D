@@ -3,12 +3,11 @@
 [RequireComponent(typeof(CircleCollider2D))]
 public class AreaEffect : MonoBehaviour
 {
-    private CircleCollider2D col;
     private AreaEffectDamage damageLogic;
 
     private void Awake()
     {
-        col = GetComponent<CircleCollider2D>();
+        var col = GetComponent<CircleCollider2D>();
         col.isTrigger = true;
 
         damageLogic = GetComponent<AreaEffectDamage>();

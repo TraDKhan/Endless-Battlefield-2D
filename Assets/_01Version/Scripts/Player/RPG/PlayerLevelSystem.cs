@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLevelSystem : MonoBehaviour, IStatSource
+public class PlayerLevelSystem : MonoBehaviour
 {
     public int CurrentLevel { get; private set; } = 1;
     public int CurrentEXP { get; private set; }
@@ -11,7 +11,7 @@ public class PlayerLevelSystem : MonoBehaviour, IStatSource
 
     // ===== EVENT =====
     public event Action<int, int, int> OnExpChanged; // curExp, nextExp, level
-    public event Action<int> OnLevelUp;              // newLevel
+    public event Action<int> OnLevelUp;
     
     public void AddEXP(int value)
     {
@@ -27,17 +27,5 @@ public class PlayerLevelSystem : MonoBehaviour, IStatSource
         }
 
         OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
-    }
-
-    // ===== IStatSource =====
-    public List<StatModifier> GetModifiers()
-    {
-        return new List<StatModifier>(); // sau này thêm stat theo level
-    }
-
-    [ContextMenu("ADD EXP")]
-    private void TestADDExp()
-    {
-        AddEXP(1200);
     }
 }

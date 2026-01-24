@@ -24,7 +24,7 @@ public class UIItemDetail : MonoBehaviour
     public Button equipButton;
     public Button unequipButton;
 
-    private InventoryItem inventoryItem;
+    private InventorySlot inventoryItem;
     private ItemData itemData;
     private ItemDetailContext context;
 
@@ -39,7 +39,7 @@ public class UIItemDetail : MonoBehaviour
     // =========================
     // SHOW FROM INVENTORY
     // =========================
-    public void Show(InventoryItem item)
+    public void Show(InventorySlot item)
     {
         context = ItemDetailContext.Inventory;
         inventoryItem = item;

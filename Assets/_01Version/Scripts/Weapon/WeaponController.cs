@@ -6,29 +6,25 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private WeaponData weaponData;
 
     public WeaponStats Stats { get; private set; }
+    public WeaponData Data => weaponData;
 
     private Weapon weapon;
-    private WeaponUpgradeSystem upgradeSystem;
-
-    public WeaponData Data => weaponData;
+    private StatSystem statSystem;
 
     private void Awake()
     {
         weapon = GetComponent<Weapon>();
 
-        // 1. Init stats
-        Stats = new WeaponStats(weaponData);
+        // 1. Weapon có StatSystem RIÊNG
+        statSystem = new StatSystem();
 
-        // 2. Bind upgrade system
-        upgradeSystem = UpgradeSystem.Instance.Weapon;
-        Stats.BindUpgradeSystem(upgradeSystem);
+        // 2. Init base weapon stats
+        InitBaseWeaponStats();
 
-        // 3. Listen upgrade event
-        upgradeSystem.OnWeaponStatsChanged += OnWeaponStatsChanged;
+        // 3. Init stats wrapper
+        Stats = new WeaponStats(statSystem);
 
-        // 4. First calculate
-        Stats.Recalculate();
-
+        // 4. Init weapon logic
         weapon.Initialize(this);
     }
 
@@ -40,15 +36,35 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    // =========================
+    // BASE STAT
+    // =========================
+    private void InitBaseWeaponStats()
     {
-        if (upgradeSystem != null)
-            upgradeSystem.OnWeaponStatsChanged -= OnWeaponStatsChanged;
+        foreach (var stat in weaponData.baseStats)
+        {
+            statSystem.SetBaseStat(
+                StatContext.Weapon,
+                stat.statType,
+                stat.value
+            );
+        }
+
+        statSystem.Recalculate();
     }
 
-    private void OnWeaponStatsChanged()
+    // =========================
+    // EXPOSE (Optional)
+    // =========================
+    public void AddStatSource(IStatSource source)
     {
-        Stats.Recalculate();
+        statSystem.AddSource(source);
+        weapon.OnStatsChanged();
+    }
+
+    public void RemoveStatSource(IStatSource source)
+    {
+        statSystem.RemoveSource(source);
         weapon.OnStatsChanged();
     }
 }

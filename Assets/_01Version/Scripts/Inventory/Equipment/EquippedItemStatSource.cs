@@ -1,34 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public class EquippedItemStatSource : IStatSource
 {
-    private ItemData data;
-    private List<StatModifier> modifiers = new();
-
-    public ItemData Data => data;
+    private readonly List<StatModifier> mods;
 
     public EquippedItemStatSource(ItemData data)
     {
-        if (data.itemType != ItemType.Equipment)
-            throw new System.ArgumentException(
-                $"Item {data.name} is not Equipment"
-            );
-
-        this.data = data;
-
-        foreach (var s in data.stats)
+        mods = data.stats.Select(s => new StatModifier
         {
-            modifiers.Add(new StatModifier
-            {
-                statType = s.statType,
-                value = s.value,
-                modType = s.modType
-            });
-        }
+            statType = s.statType,
+            value = s.value,
+            modType = s.modType,
+            context = s.context
+        }).ToList();
     }
 
-    public List<StatModifier> GetModifiers()
-    {
-        return modifiers;
-    }
+    public IEnumerable<StatModifier> GetModifiers() => mods;
 }

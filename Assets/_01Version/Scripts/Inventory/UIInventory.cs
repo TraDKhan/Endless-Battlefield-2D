@@ -2,11 +2,11 @@
 
 public class InventoryUI : MonoBehaviour
 {
-    public Inventory inventory;
+    public InventorySystem inventory;
     public Transform content;
     public UIInventorySlot slotPrefab;
 
-    void Start()
+    private void OnEnable()
     {
         Refresh();
     }
@@ -16,18 +16,10 @@ public class InventoryUI : MonoBehaviour
         foreach (Transform child in content)
             Destroy(child.gameObject);
 
-        bool isFirst = true;
-
-        foreach (var item in inventory.items)
+        foreach (var slot in inventory.slots)
         {
-            var slot = Instantiate(slotPrefab, content);
-            slot.SetItem(item);
-
-            if (isFirst)
-            {
-                UIItemDetail.Instance.Show(item);
-                isFirst = false;
-            }
+            var uiSlot = Instantiate(slotPrefab, content);
+            uiSlot.SetSlot(slot);
         }
     }
 }

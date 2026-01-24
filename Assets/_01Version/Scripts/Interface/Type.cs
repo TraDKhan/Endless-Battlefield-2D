@@ -116,10 +116,12 @@ public enum BossSkillType
     Basic,
     Special
 }
-public enum StatCategory
+
+public enum StatContext
 {
     Character,
-    Weapon
+    Weapon, 
+    Skill
 }
 
 public enum StatType
@@ -136,8 +138,13 @@ public enum StatType
     Cooldown,
     AttackRange,
     ProjectileCount,
-    ProjectileSpeed
+    ProjectileSpeed,
+
+    //Skill
+    Duration,
+    LightningCount
 }
+
 public enum StatModType
 {
     Flat,      // +10

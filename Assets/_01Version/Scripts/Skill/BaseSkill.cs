@@ -1,22 +1,26 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine;
 
 public abstract class BaseSkill : MonoBehaviour, ISkill
 {
     [SerializeField] protected SkillUpgradeData upgradeData;
 
-    public SkillUpgradeData UpgradeData => upgradeData;
-    public int Level { get; protected set; }
-
     protected Transform owner;
-    protected CharacterStats stats;
+    protected SkillStats skillStats;
+
+    public int Level { get; private set; }
+    public SkillUpgradeData UpgradeData => upgradeData;
 
     // =========================
     // INIT
     // =========================
-    public virtual void Init(Transform ownerTransform, CharacterStats characterStats)
+    public virtual void Init(Transform ownerTransform)
     {
         owner = ownerTransform;
-        stats = characterStats;
+        skillStats = new SkillStats();
+
+        transform.SetParent(owner);
+        transform.localPosition = Vector3.zero;
     }
 
     // =========================
@@ -34,8 +38,12 @@ public abstract class BaseSkill : MonoBehaviour, ISkill
         ApplyLevelData();
     }
 
-    // =========================
-    // CORE
-    // =========================
-    protected abstract void ApplyLevelData();
+    protected virtual void ApplyLevelData()
+    {
+        var data = upgradeData.GetLevelData(Level);
+        skillStats.ApplySkillData(data);
+        OnStatsApplied();
+    }
+
+    protected abstract void OnStatsApplied();
 }

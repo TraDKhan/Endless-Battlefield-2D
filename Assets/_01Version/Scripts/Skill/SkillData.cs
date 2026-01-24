@@ -1,14 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
 
 [System.Serializable]
 public class SkillData
 {
-    [Header("Base")]
-    public int damage;
-    public float cooldown;
-    public float duration;
-    public float radius;
-
-    [Header("Lightning")]
-    public int lightningCount;   // SỐ TIA SÉT
+    public List<StatEntry> baseStats;
+    public float GetStat(StatType type)
+    {
+        var entry = baseStats.Find(s => s.statType == type);
+        return entry != null ? entry.value : 0f;
+    }
 }

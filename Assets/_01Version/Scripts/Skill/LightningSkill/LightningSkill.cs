@@ -33,16 +33,14 @@ public class LightningSkill : BaseSkill
     }
 
     // =========================
-    // LEVEL DATA
+    // STATS APPLY
     // =========================
-    protected override void ApplyLevelData()
+    protected override void OnStatsApplied()
     {
-        var data = UpgradeData.GetLevelData(Level);
-
-        damage = data.damage;
-        strikes = data.lightningCount;
-        radius = data.radius;
-        cooldown = data.cooldown;
+        damage = skillStats.GetInt(StatType.Damage);
+        strikes = skillStats.GetInt(StatType.LightningCount);
+        radius = skillStats.GetStat(StatType.AttackRange);
+        cooldown = skillStats.GetStat(StatType.Cooldown);
 
         cooldownTimer = cooldown;
     }
@@ -62,25 +60,20 @@ public class LightningSkill : BaseSkill
 
         for (int i = 0; i < strikes; i++)
         {
-            Collider2D target = enemies[Random.Range(0, enemies.Length)];
+            var target = enemies[Random.Range(0, enemies.Length)];
 
             SpawnLightningFX(target.transform.position);
 
             var hp = target.GetComponent<EnemyHealthController>();
             if (hp == null) continue;
 
-            int finalDamage = damage;
-
-            // Có thể mở rộng crit / buff tại đây
-            hp.TakeDamage(finalDamage);
+            hp.TakeDamage(damage);
         }
     }
 
-    private void SpawnLightningFX(Vector3 targetPos)
+    private void SpawnLightningFX(Vector3 pos)
     {
-        Debug.Log("Spawm");
-
-        var fx = Instantiate(lightningEffectPrefab, targetPos, Quaternion.identity);
+        var fx = Instantiate(lightningEffectPrefab, pos, Quaternion.identity);
 
         var effect = fx.GetComponent<LightningEffect>();
         if (effect != null)
@@ -99,15 +92,4 @@ public class LightningSkill : BaseSkill
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(owner.position, radius);
     }
-    private void Start()
-    {
-        if (owner == null)
-        {
-            owner = GameObject.FindWithTag("Player")?.transform;
-            stats = PlayerController.Instance.Stats;
-
-            OnUnlock(); // ép mở skill
-        }
-    }
-
 }

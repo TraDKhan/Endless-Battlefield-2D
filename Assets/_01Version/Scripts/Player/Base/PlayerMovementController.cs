@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovementController : MonoBehaviour, ICharacterModule
+public class PlayerMovementController : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private PlayerInputController inputController;
@@ -17,10 +17,10 @@ public class PlayerMovementController : MonoBehaviour, ICharacterModule
     [SerializeField] private int dashEnergyCost = 20;
 
     private Rigidbody2D rb;
+    private CharacterStats stats;
     private PlayerController owner;
 
     private Vector2 movementInput;
-    private float moveSpeed;
 
     private bool isDashing;
     private float dashTimer;
@@ -33,11 +33,7 @@ public class PlayerMovementController : MonoBehaviour, ICharacterModule
     {
         owner = controller;
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    public void ApplyStats(CharacterStats stats)
-    {
-        moveSpeed = stats.GetStat(StatType.MoveSpeed);
+        stats = controller.CharacterStats;
     }
 
     private void Update()
@@ -61,6 +57,7 @@ public class PlayerMovementController : MonoBehaviour, ICharacterModule
 
     private void Move()
     {
+        float moveSpeed = stats.MoveSpeed;
         if (moveSpeed <= 0f) return;
         if (movementInput.sqrMagnitude < deadZone * deadZone) return;
 
@@ -81,7 +78,7 @@ public class PlayerMovementController : MonoBehaviour, ICharacterModule
         if (isDashing) return;
         if (!inputController.IsDashPressed()) return;
         if (movementInput.sqrMagnitude < deadZone * deadZone) return;
-        if (!owner.Energy.Consume(dashEnergyCost)) return;
+        if (!owner.Mana.Consume(dashEnergyCost)) return;
 
         isDashing = true;
         dashTimer = dashDuration;

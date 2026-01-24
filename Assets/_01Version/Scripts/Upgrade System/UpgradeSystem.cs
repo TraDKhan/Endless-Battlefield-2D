@@ -11,15 +11,30 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
     [Header("Sub Systems")]
     [SerializeField] private WeaponUpgradeSystem weaponSystem;
 
-    public WeaponUpgradeSystem Weapon => weaponSystem;
-
+    // =====================
+    // Action
+    // =====================
     public event Action<List<UpgradeData>> OnShowUpgradeUI;
 
-    private int pendingLevelUps = 0;
-    private bool isChoosingUpgrade = false;
+    private int pendingLevelUps;
+    private bool isChoosingUpgrade;
 
-    // ===== PLAYER STAT =====
+    // =========================
+    // PLAYER STAT
+    // =========================
     private readonly Dictionary<StatType, StatUpgrade> playerStatUpgrades = new();
+
+    // =========================
+    // SKILL
+    // =========================
+    private readonly List<BaseSkill> skills = new();
+
+    // =========================
+    // WEAPON
+    // =========================
+    private readonly HashSet<UnLockWeaponUpgrade> unlockedWeapons = new();
+
+    public WeaponUpgradeSystem Weapon => weaponSystem;
 
     private void Awake()
     {
@@ -44,7 +59,10 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
     }
 
     #region LEVEL FLOW
-    public void OnPlayerLevelUp(int newLevel)
+    // =========================
+    // LEVEL FLOW
+    // =========================
+    private void OnPlayerLevelUp(int newLevel)
     {
         pendingLevelUps++;
     }
@@ -71,11 +89,12 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
         isChoosingUpgrade = false;
         Time.timeScale = 1f;
     }
-
     #endregion
 
     #region PLAYER
-
+    // =========================
+    // PLAYER STAT
+    // =========================
     public void ApplyPlayerStatUpgrade(PlayerUpgradeData data)
     {
         if (!playerStatUpgrades.TryGetValue(data.statType, out var runtime))
@@ -90,7 +109,6 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
 
         runtime.level++;
         playerStatUpgrades[data.statType] = runtime;
-        PlayerController.Instance.Stats.RecalculateStats();
     }
 
     public int GetPlayerStatLevel(StatType stat)
@@ -100,27 +118,28 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
             : 0;
     }
 
-    public List<StatModifier> GetModifiers()
+    // =========================
+    // IStatSource
+    // =========================
+    public IEnumerable<StatModifier> GetModifiers()
     {
-        List<StatModifier> result = new();
-
         foreach (var kv in playerStatUpgrades)
         {
-            result.Add(new StatModifier
+            yield return new StatModifier
             {
                 statType = kv.Key,
+                value = kv.Value.Value,
                 modType = kv.Value.modType,
-                value = kv.Value.Value
-            });
+                context = StatContext.Character
+            };
         }
-
-        return result;
     }
     #endregion
 
     #region SKILL
-    // ===== SKILL ===== \\
-    List<BaseSkill> skills = new();
+    // =========================
+    // SKILL
+    // =========================
     public void ApplySkillUpgrade(SkillUpgradeData data)
     {
         foreach (var s in skills)
@@ -135,10 +154,7 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
         var go = Instantiate(data.skillPrefab);
         var skill = go.GetComponent<BaseSkill>();
 
-        skill.Init(
-            PlayerController.Instance.transform,
-            PlayerController.Instance.Stats
-        );
+        skill.Init(PlayerController.Instance.transform);
 
         skill.OnUnlock();
         skills.Add(skill);
@@ -156,21 +172,20 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
 
     #region WEAPON
     // ===== WEAPON ===== \\
-    HashSet<UnLockWeaponUpgrade> unlockedWeapons = new();
-
+    // =========================
+    // WEAPON
+    // =========================
     public void UnlockWeapon(UnLockWeaponUpgrade data)
     {
-        if (unlockedWeapons.Contains(data))
+        if (!unlockedWeapons.Add(data))
             return;
 
-        unlockedWeapons.Add(data);
-
         var weaponGO = Instantiate(data.weaponPrefab);
-
         var controller = weaponGO.GetComponent<WeaponController>();
         var weaponData = controller.Data;
 
-        Transform socket = WeaponSocketController.Instance.GetSocket(weaponData.slotType);
+        Transform socket =
+            WeaponSocketController.Instance.GetSocket(weaponData.slotType);
 
         weaponGO.transform.SetParent(socket);
         weaponGO.transform.localPosition = Vector3.zero;
@@ -186,7 +201,6 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
     {
         weaponSystem.ApplyUpgrade(data);
     }
-
     #endregion
 
     #region UTILS

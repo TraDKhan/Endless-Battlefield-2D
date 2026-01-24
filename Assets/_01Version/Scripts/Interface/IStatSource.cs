@@ -2,5 +2,5 @@
 
 public interface IStatSource
 {
-    List<StatModifier> GetModifiers();
+    IEnumerable<StatModifier> GetModifiers();
 }

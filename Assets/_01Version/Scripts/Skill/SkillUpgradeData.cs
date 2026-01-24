@@ -17,59 +17,34 @@ public class SkillUpgradeData : UpgradeData
         return levels[index];
     }
 
-    // ======================
-    // LOGIC
-    // ======================
-
     public override bool CanApply(UpgradeSystem system)
-    {
-        return GetCurrentLevel(system) < MaxLevel;
-    }
+        => GetCurrentLevel(system) < MaxLevel;
 
     public override void Apply(UpgradeSystem system)
-    {
-        system.ApplySkillUpgrade(this);
-    }
-
-    public override string GetTitle()
-    {
-        return upgradeName;
-    }
+        => system.ApplySkillUpgrade(this);
 
     public override int GetCurrentLevel(UpgradeSystem system)
-    {
-        return system.GetSkillLevel(this);
-    }
+        => system.GetSkillLevel(this);
 
     public override string GetValueText(UpgradeSystem system)
     {
-        int currentLevel = GetCurrentLevel(system);
+        int level = GetCurrentLevel(system);
 
-        if (currentLevel >= MaxLevel)
+        if (level >= MaxLevel)
             return "Level Max";
 
-        SkillData current = currentLevel > 0 ? GetLevelData(currentLevel) : null;
-        SkillData next = GetLevelData(currentLevel + 1);
+        SkillData cur = level > 0 ? GetLevelData(level) : null;
+        SkillData next = GetLevelData(level + 1);
 
-        StringBuilder sb = new System.Text.StringBuilder();
+        StringBuilder sb = new();
 
-        void AddChange<T>(string label, T? cur, T nextVal) where T : struct
+        foreach (var stat in next.baseStats)
         {
-            if (cur == null || !cur.Equals(nextVal))
-                sb.AppendLine($"{label}: {(cur == null ? "" : cur.ToString() + " → ")}{nextVal}");
+            float curVal = cur?.GetStat(stat.statType) ?? 0;
+            if (!Mathf.Approximately(curVal, stat.value))
+                sb.AppendLine($"{stat.statType}: {curVal} → {stat.value}");
         }
 
-        AddChange("Damage", current?.damage, next.damage);
-        AddChange("Cooldown", current?.cooldown, next.cooldown);
-        AddChange("Duration", current?.duration, next.duration);
-        AddChange("Radius", current?.radius, next.radius);
-        AddChange("Lightning", current?.lightningCount, next.lightningCount);
-
         return sb.ToString();
-    }
-
-    public override string GetDescription()
-    {
-        return description;
     }
 }
