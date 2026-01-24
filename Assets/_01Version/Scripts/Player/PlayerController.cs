@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
 
     public CharacterStats Stats { get; private set; }
-
+    public EquipmentSystem Equipment { get; private set; }
 
     [Header("Data")]
     [SerializeField] private PlayerData playerData;
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<PlayerLevelSystem>(),
             FindAnyObjectByType<UpgradeSystem>()
         );
+        Equipment = new EquipmentSystem(Stats);
 
         Stats.RecalculateStats();
 

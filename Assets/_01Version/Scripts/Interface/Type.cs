@@ -116,6 +116,11 @@ public enum BossSkillType
     Basic,
     Special
 }
+public enum StatCategory
+{
+    Character,
+    Weapon
+}
 
 public enum StatType
 {

@@ -21,9 +21,12 @@ MonoBehaviour:
   stats:
   - statType: 0
     value: 10
+    modType: 0
   - statType: 1
     value: 10
+    modType: 0
   - statType: 2
     value: 10
+    modType: 0
   stackable: 1
   maxStack: 1

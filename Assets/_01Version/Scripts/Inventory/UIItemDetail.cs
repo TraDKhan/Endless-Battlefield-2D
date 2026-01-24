@@ -4,6 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ItemDetailContext
+{
+    Inventory,
+    Equipped
+}
+
 public class UIItemDetail : MonoBehaviour
 {
     public static UIItemDetail Instance { get; private set; }
@@ -14,30 +20,87 @@ public class UIItemDetail : MonoBehaviour
     public TMP_Text descriptionText;
     public TMP_Text statsText;
 
+    [Header("Buttons")]
+    public Button equipButton;
+    public Button unequipButton;
+
+    private InventoryItem inventoryItem;
+    private ItemData itemData;
+    private ItemDetailContext context;
+
     void Awake()
     {
         Instance = this;
+
+        equipButton.onClick.AddListener(OnEquip);
+        unequipButton.onClick.AddListener(OnUnequip);
     }
 
+    // =========================
+    // SHOW FROM INVENTORY
+    // =========================
     public void Show(InventoryItem item)
     {
-        icon.sprite = item.data.icon;
-        nameText.text = item.data.itemName;
-        descriptionText.text = item.data.description;
+        context = ItemDetailContext.Inventory;
+        inventoryItem = item;
+        itemData = item.data;
 
-        statsText.text = BuildStatText(item.data.stats);
-        Debug.Log(statsText.text);
+        BindUI(itemData);
+        RefreshButtons();
+    }
+
+    // =========================
+    // SHOW FROM HERO SLOT
+    // =========================
+    public void ShowEquipped(ItemData data)
+    {
+        context = ItemDetailContext.Equipped;
+        itemData = data;
+        inventoryItem = null;
+
+        BindUI(itemData);
+        RefreshButtons();
+    }
+
+    void BindUI(ItemData data)
+    {
+        icon.sprite = data.icon;
+        nameText.text = data.itemName;
+        descriptionText.text = data.description;
+        statsText.text = BuildStatText(data.stats);
     }
 
     string BuildStatText(List<StatEntry> stats)
     {
         StringBuilder sb = new StringBuilder();
-
         foreach (var stat in stats)
-        {
             sb.AppendLine($"{stat.statType}: +{stat.value}");
-        }
-
         return sb.ToString();
+    }
+
+    void RefreshButtons()
+    {
+        bool isEquipment = itemData.itemType == ItemType.Equipment;
+
+        equipButton.gameObject.SetActive(
+            isEquipment && context == ItemDetailContext.Inventory
+        );
+
+        unequipButton.gameObject.SetActive(
+            isEquipment && context == ItemDetailContext.Equipped
+        );
+    }
+
+    public void OnEquip()
+    {
+        if (inventoryItem == null) return;
+        if (itemData.itemType != ItemType.Equipment) return;
+
+        PlayerController.Instance.Equipment.Equip(itemData);
+    }
+
+    public void OnUnequip()
+    {
+        PlayerController.Instance.Equipment.Unequip(itemData.equipmentSlot);
     }
 }

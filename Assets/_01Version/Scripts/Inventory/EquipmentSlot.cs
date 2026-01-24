@@ -1,5 +1,6 @@
 ﻿public enum EquipmentSlot
 {
+    None,
     Head,
     Chest,
     Legs,

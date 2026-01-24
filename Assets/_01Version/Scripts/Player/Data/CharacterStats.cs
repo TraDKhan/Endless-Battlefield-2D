@@ -62,8 +62,8 @@ public class CharacterStats
 
         ApplyModifiers(allMods);
 
-        //foreach (var kv in finalStats)
-        //    Debug.Log($"FinalStat: {kv.Key} = {kv.Value}");
+        foreach (var kv in finalStats)
+            Debug.Log($"FinalStat: {kv.Key} = {kv.Value}");
 
         OnStatsChanged?.Invoke();
     }
@@ -83,4 +83,3 @@ public class CharacterStats
     public int GetMaxHealth() => Mathf.RoundToInt(GetStat(StatType.MaxHP));
     public int GetMaxEnergy() => Mathf.RoundToInt(GetStat(StatType.MaxMP));
 }
-

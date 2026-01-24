@@ -3,4 +3,5 @@ public class StatEntry
 {
     public StatType statType;
     public float value;
+    public StatModType modType;
 }
