@@ -5,27 +5,71 @@ using UnityEngine.UI;
 
 public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
 {
-    public Image icon;
-    public TMP_Text quantityText;
+    [Header("UI")]
+    [SerializeField] private Image icon;
+    [SerializeField] private TMP_Text quantityText;
 
-    private InventorySlot slot;
+    private InventorySlot boundSlot;
 
-    public void SetSlot(InventorySlot slot)
+    // =========================
+    // BIND
+    // =========================
+    public void Bind(InventorySlot slot)
     {
-        this.slot = slot;
+        boundSlot = slot;
 
-        var item = slot.item;
+        if (slot == null || slot.Item == null)
+        {
+            Clear();
+            return;
+        }
 
-        icon.sprite = item.data.icon;
+        var item = slot.Item;
+
+        icon.sprite = item.Data.icon;
         icon.enabled = true;
 
-        quantityText.text = item.data.stackable && item.quantity > 1
-            ? item.quantity.ToString()
-            : "";
+        if (ShouldShowQuantity(item))
+        {
+            quantityText.gameObject.SetActive(true);
+            quantityText.text = item.quantity.ToString();
+        }
+        else
+        {
+            quantityText.gameObject.SetActive(false);
+        }
     }
 
+    // =========================
+    // CLEAR
+    // =========================
+    private void Clear()
+    {
+        boundSlot = null;
+
+        icon.sprite = null;
+        icon.enabled = false;
+
+        quantityText.gameObject.SetActive(false);
+    }
+
+    // =========================
+    // HELPERS
+    // =========================
+    private bool ShouldShowQuantity(ItemInstance item)
+    {
+        return item.IsStackable && item.quantity > 1;
+    }
+
+    // =========================
+    // INPUT
+    // =========================
     public void OnPointerClick(PointerEventData eventData)
     {
-        UIItemDetail.Instance.Show(slot);
+        if (boundSlot == null || boundSlot.Item == null)
+            return;
+
+        // Có thể mở rộng: right-click / double-click
+        UIItemDetail.Instance?.Show(boundSlot);
     }
 }

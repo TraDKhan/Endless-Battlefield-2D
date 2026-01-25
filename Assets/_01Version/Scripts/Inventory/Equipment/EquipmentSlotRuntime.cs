@@ -8,7 +8,7 @@ public class EquipmentSlotRuntime
 
     public bool IsEmpty => equippedItem == null;
 
-    public ItemData Item => equippedItem?.Data;
+    //public ItemData Item => equippedItem?.Data;
 
     public void Equip(EquippedItemStatSource source)
     {

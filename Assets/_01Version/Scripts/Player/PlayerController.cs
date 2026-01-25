@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         InitStatSystem();
 
         // ---------- Init Subsystems ----------
-        Equipment = new EquipmentSystem(StatSystem);
+        //Equipment = new EquipmentSystem(StatSystem);
 
         CharacterStats = new CharacterStats(StatSystem);
 

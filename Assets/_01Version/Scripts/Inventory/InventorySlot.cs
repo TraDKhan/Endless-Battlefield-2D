@@ -1,12 +1,17 @@
 ﻿[System.Serializable]
 public class InventorySlot
 {
-    public ItemInstance item;
+    public ItemInstance Item { get; private set; }
+
+    public bool IsEmpty => Item == null;
 
     public InventorySlot(ItemInstance item)
     {
-        this.item = item;
+        Item = item;
     }
 
-    public bool IsEmpty => item == null;
+    public void Clear()
+    {
+        Item = null;
+    }
 }

@@ -5,101 +5,101 @@ using UnityEngine;
 
 public class EquipmentSystem
 {
-    private readonly Dictionary<EquipmentSlot, EquipmentSlotRuntime> slots;
-    private readonly StatSystem statSystem;
+    //private readonly Dictionary<EquipmentSlot, EquipmentSlotRuntime> slots;
+    //private readonly StatSystem statSystem;
 
-    public event Action OnEquipmentChanged;
+    //public event Action OnEquipmentChanged;
 
-    // =========================
-    // CONSTRUCTOR
-    // =========================
-    public EquipmentSystem(StatSystem statSystem)
-    {
-        this.statSystem = statSystem;
+    //// =========================
+    //// CONSTRUCTOR
+    //// =========================
+    //public EquipmentSystem(StatSystem statSystem)
+    //{
+    //    this.statSystem = statSystem;
 
-        slots = Enum.GetValues(typeof(EquipmentSlot))
-            .Cast<EquipmentSlot>()
-            .ToDictionary(
-                s => s,
-                s => new EquipmentSlotRuntime { slotType = s }
-            );
-    }
+    //    slots = Enum.GetValues(typeof(EquipmentSlot))
+    //        .Cast<EquipmentSlot>()
+    //        .ToDictionary(
+    //            s => s,
+    //            s => new EquipmentSlotRuntime { slotType = s }
+    //        );
+    //}
 
-    // =========================
-    // QUERY
-    // =========================
-    public ItemData GetItem(EquipmentSlot slot)
-    {
-        return slots[slot].Item;
-    }
+    //// =========================
+    //// QUERY
+    //// =========================
+    //public ItemData GetItem(EquipmentSlot slot)
+    //{
+    //    return slots[slot].Item;
+    //}
 
-    public EquipmentSlotRuntime GetSlot(EquipmentSlot slot)
-    {
-        return slots[slot];
-    }
+    //public EquipmentSlotRuntime GetSlot(EquipmentSlot slot)
+    //{
+    //    return slots[slot];
+    //}
 
-    public bool IsEquipped(ItemData item)
-    {
-        if (item == null || item.itemType != ItemType.Equipment)
-            return false;
+    //public bool IsEquipped(ItemData item)
+    //{
+    //    if (item == null || item.itemType != ItemType.Equipment)
+    //        return false;
 
-        var slot = item.equipmentSlot;
-        return slots.TryGetValue(slot, out var s) && s.Item == item;
-    }
+    //    var slot = item.equipmentSlot;
+    //    return slots.TryGetValue(slot, out var s) && s.Item == item;
+    //}
 
-    /// =========================
-    // EQUIP
-    // =========================
-    public void Equip(ItemData item)
-    {
-        if (item == null) return;
+    ///// =========================
+    //// EQUIP
+    //// =========================
+    //public void Equip(ItemData item)
+    //{
+    //    if (item == null) return;
 
-        if (item.itemType != ItemType.Equipment)
-        {
-            Debug.LogWarning(
-                $"Item {item.name} is not Equipment, cannot equip!"
-            );
-            return;
-        }
+    //    if (item.itemType != ItemType.Equipment)
+    //    {
+    //        Debug.LogWarning(
+    //            $"Item {item.name} is not Equipment, cannot equip!"
+    //        );
+    //        return;
+    //    }
 
-        var slotType = item.equipmentSlot;
+    //    var slotType = item.equipmentSlot;
 
-        if (!slots.TryGetValue(slotType, out var slot))
-        {
-            Debug.LogWarning(
-                $"Slot {slotType} not found for item {item.name}"
-            );
-            return;
-        }
+    //    if (!slots.TryGetValue(slotType, out var slot))
+    //    {
+    //        Debug.LogWarning(
+    //            $"Slot {slotType} not found for item {item.name}"
+    //        );
+    //        return;
+    //    }
 
-        // ---------- Unequip cũ ----------
-        if (!slot.IsEmpty)
-        {
-            statSystem.RemoveSource(slot.equippedItem);
-            slot.Unequip();
-        }
+    //    // ---------- Unequip cũ ----------
+    //    if (!slot.IsEmpty)
+    //    {
+    //        statSystem.RemoveSource(slot.equippedItem);
+    //        slot.Unequip();
+    //    }
 
-        // ---------- Equip mới ----------
-        var source = new EquippedItemStatSource(item);
-        slot.Equip(source);
-        statSystem.AddSource(source);
+    //    // ---------- Equip mới ----------
+    //    var source = new EquippedItemStatSource(item);
+    //    slot.Equip(source);
+    //    statSystem.AddSource(source);
 
-        OnEquipmentChanged?.Invoke();
-    }
+    //    OnEquipmentChanged?.Invoke();
+    //}
 
-    // =========================
-    // UNEQUIP
-    // =========================
-    public void Unequip(EquipmentSlot slotType)
-    {
-        if (!slots.TryGetValue(slotType, out var slot))
-            return;
+    //// =========================
+    //// UNEQUIP
+    //// =========================
+    //public void Unequip(EquipmentSlot slotType)
+    //{
+    //    if (!slots.TryGetValue(slotType, out var slot))
+    //        return;
 
-        if (slot.IsEmpty) return;
+    //    if (slot.IsEmpty) return;
 
-        statSystem.RemoveSource(slot.equippedItem);
-        slot.Unequip();
+    //    statSystem.RemoveSource(slot.equippedItem);
+    //    slot.Unequip();
 
-        OnEquipmentChanged?.Invoke();
-    }
+    //    OnEquipmentChanged?.Invoke();
+    //}
 }

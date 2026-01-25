@@ -4,103 +4,161 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum ItemDetailContext
-{
-    Inventory,
-    Equipped
-}
-
 public class UIItemDetail : MonoBehaviour
 {
     public static UIItemDetail Instance { get; private set; }
 
     [Header("UI")]
-    public Image icon;
-    public TMP_Text nameText;
-    public TMP_Text descriptionText;
-    public TMP_Text statsText;
+    [SerializeField] private Image icon;
+    [SerializeField] private TMP_Text nameText;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private TMP_Text statsText;
 
     [Header("Buttons")]
-    public Button equipButton;
-    public Button unequipButton;
+    [SerializeField] private Button equipButton;
+    [SerializeField] private Button unequipButton;
 
-    private InventorySlot inventoryItem;
+    // =========================
+    // STATE
+    // =========================
+    private InventorySlot inventorySlot;
+    private ItemInstance itemInstance;
     private ItemData itemData;
-    private ItemDetailContext context;
 
-    void Awake()
+    // =========================
+    // UNITY
+    // =========================
+    private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
 
-        equipButton.onClick.AddListener(OnEquip);
-        unequipButton.onClick.AddListener(OnUnequip);
+        equipButton.onClick.AddListener(OnEquipClicked);
+        unequipButton.onClick.AddListener(OnUnequipClicked);
     }
 
     // =========================
-    // SHOW FROM INVENTORY
+    // PUBLIC API
     // =========================
-    public void Show(InventorySlot item)
-    {
-        context = ItemDetailContext.Inventory;
-        inventoryItem = item;
-        itemData = item.data;
 
-        BindUI(itemData);
+    /// <summary>
+    /// Show item from inventory slot
+    /// </summary>
+    public void Show(InventorySlot slot)
+    {
+        if (slot == null || slot.Item == null) return;
+
+        inventorySlot = slot;
+        itemInstance = slot.Item;
+        itemData = itemInstance.Data;
+
+        BindUI();
         RefreshButtons();
     }
 
-    // =========================
-    // SHOW FROM HERO SLOT
-    // =========================
-    public void ShowEquipped(ItemData data)
+    /// <summary>
+    /// Show item already equipped (no inventory slot)
+    /// </summary>
+    public void ShowEquipped(ItemInstance equippedItem)
     {
-        context = ItemDetailContext.Equipped;
-        itemData = data;
-        inventoryItem = null;
+        if (equippedItem == null) return;
 
-        BindUI(itemData);
+        inventorySlot = null;
+        itemInstance = equippedItem;
+        itemData = equippedItem.Data;
+
+        BindUI();
         RefreshButtons();
     }
-
-    void BindUI(ItemData data)
+    public void Clear()
     {
-        icon.sprite = data.icon;
-        nameText.text = data.itemName;
-        descriptionText.text = data.description;
-        statsText.text = BuildStatText(data.stats);
+        icon.enabled = false;
+        nameText.text = string.Empty;
+        descriptionText.text = string.Empty;
+        statsText.text = string.Empty;
+
+        equipButton.gameObject.SetActive(false);
+        unequipButton.gameObject.SetActive(false);
+
+        inventorySlot = null;
+        itemInstance = null;
+        itemData = null;
+        //gameObject.SetActive(false);
     }
 
-    string BuildStatText(List<StatEntry> stats)
+    // =========================
+    // UI
+    // =========================
+    private void BindUI()
     {
+        if (itemData == null) return;
+
+        icon.sprite = itemData.icon;
+        icon.enabled = true;
+
+        nameText.text = itemData.itemName;
+        descriptionText.text = itemData.description;
+
+        statsText.text = BuildStatText(itemData.stats);
+    }
+
+    private void RefreshButtons()
+    {
+        if (itemData == null || itemData.itemType != ItemType.Equipment)
+        {
+            equipButton.gameObject.SetActive(false);
+            unequipButton.gameObject.SetActive(false);
+            return;
+        }
+
+        // Có slot inventory → chưa equip
+        bool fromInventory = inventorySlot != null;
+
+        equipButton.gameObject.SetActive(fromInventory);
+        unequipButton.gameObject.SetActive(!fromInventory);
+    }
+
+    // =========================
+    // BUTTON EVENTS
+    // =========================
+    private void OnEquipClicked()
+    {
+        if (inventorySlot == null)
+            return;
+
+        Debug.Log($"Equip: {itemData.itemName}");
+
+        // Sau này gọi:
+        // EquipmentSystem.Instance.Equip(inventorySlot);
+    }
+
+    private void OnUnequipClicked()
+    {
+        if (itemInstance == null)
+            return;
+
+        Debug.Log($"Unequip: {itemData.itemName}");
+
+        // EquipmentSystem.Instance.Unequip(itemInstance);
+    }
+
+    // =========================
+    // HELPERS
+    // =========================
+    private string BuildStatText(List<StatEntry> stats)
+    {
+        if (stats == null || stats.Count == 0)
+            return string.Empty;
+
         StringBuilder sb = new StringBuilder();
         foreach (var stat in stats)
             sb.AppendLine($"{stat.statType}: +{stat.value}");
+
         return sb.ToString();
-    }
-
-    void RefreshButtons()
-    {
-        bool isEquipment = itemData.itemType == ItemType.Equipment;
-
-        equipButton.gameObject.SetActive(
-            isEquipment && context == ItemDetailContext.Inventory
-        );
-
-        unequipButton.gameObject.SetActive(
-            isEquipment && context == ItemDetailContext.Equipped
-        );
-    }
-
-    public void OnEquip()
-    {
-        if (inventoryItem == null) return;
-        if (itemData.itemType != ItemType.Equipment) return;
-
-        PlayerController.Instance.Equipment.Equip(itemData);
-    }
-
-    public void OnUnequip()
-    {
-        PlayerController.Instance.Equipment.Unequip(itemData.equipmentSlot);
     }
 }

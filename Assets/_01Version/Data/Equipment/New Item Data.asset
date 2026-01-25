@@ -14,28 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   itemName: slot 0
-  description: Item data
   icon: {fileID: 21300000, guid: 91b787d8dd4c22547a097661d27d0135, type: 3}
-  itemType: 1
-  equipmentSlot: 0
+  itemType: 0
+  description: Item data
   stats:
-  - statType: 0
-    value: 10
-    modType: 0
   - statType: 1
     value: 10
-    modType: 0
-  - statType: 2
-    value: 10
-    modType: 0
-  - statType: 3
-    value: 11
-    modType: 0
-  - statType: 6
-    value: 112
-    modType: 0
-  - statType: 8
-    value: 120
     modType: 0
   stackable: 0
   maxStack: 1

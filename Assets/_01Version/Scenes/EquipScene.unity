@@ -380,8 +380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f0a02fe42ed014f975eff92fb44577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotType: 2
-  icon: {fileID: 1846564207}
 --- !u!1 &154647262
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,25 +3719,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f7cd448c91901478eac8a0164c180c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
+  maxSlots: 30
+  slots: []
+  debugItems:
   - data: {fileID: 11400000, guid: 00c905f4319e9c744aad22643502ceab, type: 2}
-    quantity: 2
+    amount: 1
   - data: {fileID: 11400000, guid: 7e5356affcca17d4bbfa1970d5bcd8ed, type: 2}
-    quantity: 2
+    amount: 2
   - data: {fileID: 11400000, guid: 39a3e85eb01cd9045899db7282c5c773, type: 2}
-    quantity: 2
+    amount: 3
   - data: {fileID: 11400000, guid: 6b44cea38ef54e74e84f056edd7d9ac0, type: 2}
-    quantity: 2
-  - data: {fileID: 11400000, guid: 12c2cb4da1e580e4a9c5a74ec8f350d2, type: 2}
-    quantity: 2
-  - data: {fileID: 11400000, guid: 07f5482618906a844951aceba7282ee4, type: 2}
-    quantity: 2
-  - data: {fileID: 11400000, guid: ca5c428f2ded11c4ebdf5db2c0d7215a, type: 2}
-    quantity: 2
-  - data: {fileID: 11400000, guid: 15534df14072401428d2cc42a8e0243c, type: 2}
-    quantity: 2
-  - data: {fileID: 11400000, guid: f51aa1cf5b6eefe4896417695ffb2f08, type: 2}
-    quantity: 2
+    amount: 7
 --- !u!1 &911703570
 GameObject:
   m_ObjectHideFlags: 0
@@ -4243,8 +4233,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f0a02fe42ed014f975eff92fb44577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotType: 0
-  icon: {fileID: 1339525984}
 --- !u!1 &1056921578
 GameObject:
   m_ObjectHideFlags: 0
@@ -6336,8 +6324,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f0a02fe42ed014f975eff92fb44577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotType: 4
-  icon: {fileID: 115916082}
 --- !u!1 &1367201236
 GameObject:
   m_ObjectHideFlags: 0
@@ -8791,8 +8777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f0a02fe42ed014f975eff92fb44577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotType: 1
-  icon: {fileID: 1056921580}
 --- !u!1 &2055399825
 GameObject:
   m_ObjectHideFlags: 0
