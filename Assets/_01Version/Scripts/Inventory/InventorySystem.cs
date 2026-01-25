@@ -120,6 +120,22 @@ public class InventorySystem : MonoBehaviour
         if (slots.Remove(slot))
             NotifyChanged();
     }
+    public int RemoveFromSlot(InventorySlot slot, int amount)
+    {
+        if (slot == null || slot.Item == null || amount <= 0)
+            return 0;
+
+        int removed = Mathf.Min(slot.Item.quantity, amount);
+        slot.Item.quantity -= removed;
+
+        if (slot.Item.quantity <= 0)
+            slots.Remove(slot);
+
+        if (removed > 0)
+            NotifyChanged();
+
+        return removed;
+    }
 
     public int RemoveItem(ItemInstance item, int amount)
     {
@@ -142,6 +158,27 @@ public class InventorySystem : MonoBehaviour
 
             if (slotItem.quantity <= 0)
                 slots.RemoveAt(i);
+        }
+
+        if (removed > 0)
+            NotifyChanged();
+
+        return removed;
+    }
+    public int RemoveAll(ItemData data)
+    {
+        if (data == null)
+            return 0;
+
+        int removed = 0;
+
+        for (int i = slots.Count - 1; i >= 0; i--)
+        {
+            if (slots[i].Item.Data != data)
+                continue;
+
+            removed += slots[i].Item.quantity;
+            slots.RemoveAt(i);
         }
 
         if (removed > 0)

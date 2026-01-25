@@ -38,8 +38,8 @@ public class UIItemDetail : MonoBehaviour
 
         Instance = this;
 
-        equipButton.onClick.AddListener(OnEquipClicked);
-        unequipButton.onClick.AddListener(OnUnequipClicked);
+        equipButton.onClick.AddListener(OnEquip);
+        unequipButton.onClick.AddListener(OnUnequip);
     }
 
     // =========================
@@ -126,7 +126,7 @@ public class UIItemDetail : MonoBehaviour
     // =========================
     // BUTTON EVENTS
     // =========================
-    private void OnEquipClicked()
+    private void OnEquip()
     {
         if (inventorySlot == null)
             return;
@@ -137,7 +137,7 @@ public class UIItemDetail : MonoBehaviour
         // EquipmentSystem.Instance.Equip(inventorySlot);
     }
 
-    private void OnUnequipClicked()
+    private void OnUnequip()
     {
         if (itemInstance == null)
             return;

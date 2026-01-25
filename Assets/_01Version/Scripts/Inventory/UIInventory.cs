@@ -11,6 +11,7 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private UIInventorySlot slotPrefab;
 
     private readonly List<UIInventorySlot> uiSlots = new();
+    private UIInventorySlot selectedUISlot;
     private bool hasAutoSelected = false;
 
     private void Awake()
@@ -53,7 +54,7 @@ public class UIInventory : MonoBehaviour
             if (i < slots.Count)
             {
                 uiSlots[i].gameObject.SetActive(true);
-                uiSlots[i].Bind(slots[i]);
+                uiSlots[i].Bind(slots[i], this);
             }
             else
             {
@@ -64,11 +65,12 @@ public class UIInventory : MonoBehaviour
         if (slots.Count == 0)
         {
             hasAutoSelected = false;
+            selectedUISlot = null;
             UIItemDetail.Instance?.Clear();
         }
 
 
-        AutoShowFirstSlot(slots);
+        AutoSelectFirst(slots);
     }
 
     // =========================
@@ -91,7 +93,7 @@ public class UIInventory : MonoBehaviour
             Destroy(content.GetChild(i).gameObject);
         }
     }
-    private void AutoShowFirstSlot(IReadOnlyList<InventorySlot> slots)
+    private void AutoSelectFirst(IReadOnlyList<InventorySlot> slots)
     {
         if (hasAutoSelected)
             return;
@@ -99,12 +101,21 @@ public class UIInventory : MonoBehaviour
         if (slots == null || slots.Count == 0)
             return;
 
-        var firstSlot = slots[0];
-        if (firstSlot == null || firstSlot.Item == null)
-            return;
-
-        UIItemDetail.Instance?.Show(firstSlot);
+        SelectSlot(uiSlots[0], slots[0]);
         hasAutoSelected = true;
     }
 
+    public void SelectSlot(UIInventorySlot uiSlot, InventorySlot slot)
+    {
+        if (selectedUISlot == uiSlot)
+            return;
+
+        if (selectedUISlot != null)
+            selectedUISlot.SetSelected(false);
+
+        selectedUISlot = uiSlot;
+        selectedUISlot.SetSelected(true);
+
+        UIItemDetail.Instance?.Show(slot);
+    }
 }

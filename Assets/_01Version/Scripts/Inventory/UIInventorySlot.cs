@@ -8,14 +8,17 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     [Header("UI")]
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text quantityText;
+    [SerializeField] private GameObject highlight; // 👈 thêm
 
     private InventorySlot boundSlot;
+    private UIInventory owner;
 
     // =========================
     // BIND
     // =========================
-    public void Bind(InventorySlot slot)
+    public void Bind(InventorySlot slot, UIInventory owner)
     {
+        this.owner = owner;
         boundSlot = slot;
 
         if (slot == null || slot.Item == null)
@@ -29,7 +32,7 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
         icon.sprite = item.Data.icon;
         icon.enabled = true;
 
-        if (ShouldShowQuantity(item))
+        if (item.IsStackable && item.quantity > 1)
         {
             quantityText.gameObject.SetActive(true);
             quantityText.text = item.quantity.ToString();
@@ -38,6 +41,17 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
         {
             quantityText.gameObject.SetActive(false);
         }
+
+        SetSelected(false);
+    }
+
+    // =========================
+    // SELECTION
+    // =========================
+    public void SetSelected(bool selected)
+    {
+        if (highlight != null)
+            highlight.SetActive(selected);
     }
 
     // =========================
@@ -46,19 +60,9 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     private void Clear()
     {
         boundSlot = null;
-
-        icon.sprite = null;
         icon.enabled = false;
-
         quantityText.gameObject.SetActive(false);
-    }
-
-    // =========================
-    // HELPERS
-    // =========================
-    private bool ShouldShowQuantity(ItemInstance item)
-    {
-        return item.IsStackable && item.quantity > 1;
+        SetSelected(false);
     }
 
     // =========================
@@ -66,10 +70,9 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     // =========================
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (boundSlot == null || boundSlot.Item == null)
+        if (boundSlot == null)
             return;
 
-        // Có thể mở rộng: right-click / double-click
-        UIItemDetail.Instance?.Show(boundSlot);
+        owner?.SelectSlot(this, boundSlot);
     }
 }
