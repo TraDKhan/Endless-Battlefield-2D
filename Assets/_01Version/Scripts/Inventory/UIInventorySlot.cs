@@ -8,7 +8,7 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     [Header("UI")]
     [SerializeField] private Image icon;
     [SerializeField] private TMP_Text quantityText;
-    [SerializeField] private GameObject highlight; // 👈 thêm
+    [SerializeField] private GameObject highlight;
 
     private InventorySlot boundSlot;
     private UIInventory owner;

@@ -4,6 +4,7 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class UIItemDetail : MonoBehaviour
 {
@@ -131,13 +132,14 @@ public class UIItemDetail : MonoBehaviour
     // =========================
     private void OnEquip()
     {
-        if (inventorySlot == null)
+        if (inventorySlot == null || itemInstance == null)
             return;
 
-        Debug.Log($"Equip: {itemData.itemName}");
+        bool success = PlayerController.Instance.TryEquip(itemInstance);
+        if (!success)
+            return;
 
-        // Sau này gọi:
-        // EquipmentSystem.Instance.Equip(inventorySlot);
+        Clear();
     }
 
     private void OnUnequip()
@@ -145,9 +147,8 @@ public class UIItemDetail : MonoBehaviour
         if (itemInstance == null)
             return;
 
-        Debug.Log($"Unequip: {itemData.itemName}");
-
-        // EquipmentSystem.Instance.Unequip(itemInstance);
+        PlayerController.Instance.TryUnequip(itemData.equipSlot);
+        Clear();
     }
 
     private void OnRemove()

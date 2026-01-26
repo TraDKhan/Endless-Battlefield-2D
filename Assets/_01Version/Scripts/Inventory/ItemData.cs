@@ -14,6 +14,9 @@ public class ItemData : ScriptableObject
     [Header("Type")]
     public ItemType itemType;
 
+    [Header("Equipment")]
+    public EquipmentSlotType equipSlot;
+
     [TextArea]
     public string description;
 

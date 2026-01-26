@@ -76,6 +76,7 @@ public class UIRemoveItemPopup : MonoBehaviour
         if (!int.TryParse(amountInput.text, out int amount))
             return;
 
+        amount = Mathf.Clamp(amount, 1, slot.Item.quantity);
         inventory.RemoveFromSlot(slot, amount);
         Finish();
     }

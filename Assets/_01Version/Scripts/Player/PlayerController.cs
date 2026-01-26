@@ -14,8 +14,7 @@ public class PlayerController : MonoBehaviour
     // =========================
     public StatSystem StatSystem { get; private set; }
     public CharacterStats CharacterStats { get; private set; }
-    public EquipmentSystem Equipment { get; private set; }
-
+    public EquipSystem EquipSystem { get; private set; }
 
     [Header("Data")]
     [SerializeField] private PlayerData playerData;
@@ -48,8 +47,8 @@ public class PlayerController : MonoBehaviour
         // ---------- Init Stat System ----------
         InitStatSystem();
 
-        // ---------- Init Subsystems ----------
-        //Equipment = new EquipmentSystem(StatSystem);
+        // ---------- Init Equip system ----------
+        InitEquipSystem();
 
         CharacterStats = new CharacterStats(StatSystem);
 
@@ -84,6 +83,23 @@ public class PlayerController : MonoBehaviour
 
         StatSystem.Recalculate();
     }
+    private void InitEquipSystem()
+    {
+        EquipSystem = new EquipSystem(
+            StatSystem,
+            new[]
+            {
+            EquipmentSlotType.Helmet,
+            EquipmentSlotType.Armor,
+            EquipmentSlotType.Weapon,
+            EquipmentSlotType.Ring,
+            EquipmentSlotType.Amulet
+            }
+        );
+
+        // Khi equip đổi → stat đổi → apply lại
+        EquipSystem.OnEquipmentChanged += ApplyStats;
+    }
 
     // =========================
     // APPLY
@@ -93,4 +109,37 @@ public class PlayerController : MonoBehaviour
         health.RefreshFromStats();
         mana.RefreshFromStats(true);
     }
+    //
+    public bool TryEquip(ItemInstance item)
+    {
+        if (item == null || !item.IsEquipment)
+            return false;
+
+        // 1️⃣ Equip
+        ItemInstance oldItem = EquipSystem.Equip(item);
+
+        // Nếu equip thất bại
+        if (EquipSystem.GetEquippedItem(item.Data.equipSlot) != item)
+            return false;
+
+        // 2️⃣ Remove item khỏi inventory
+        InventorySystem.Instance.RemoveExact(item);
+
+        // 3️⃣ Trả item cũ về inventory
+        if (oldItem != null)
+            InventorySystem.Instance.AddItem(oldItem);
+
+        return true;
+    }
+
+    public bool TryUnequip(EquipmentSlotType slotType)
+    {
+        ItemInstance item = EquipSystem.Unequip(slotType);
+        if (item == null)
+            return false;
+
+        InventorySystem.Instance.AddItem(item);
+        return true;
+    }
+
 }

@@ -156,3 +156,11 @@ public enum ItemType
     Consumable,
     Material
 }
+public enum EquipmentSlotType
+{
+    Helmet,
+    Armor,
+    Weapon,
+    Ring,
+    Amulet
+}

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
@@ -196,6 +197,19 @@ public class InventorySystem : MonoBehaviour
             NotifyChanged();
 
         return removed;
+    }
+    public bool RemoveExact(ItemInstance instance)
+    {
+        if (instance == null)
+            return false;
+
+        var slot = slots.FirstOrDefault(s => s.Item == instance);
+        if (slot == null)
+            return false;
+
+        slots.Remove(slot);
+        NotifyChanged();
+        return true;
     }
 
     // =========================

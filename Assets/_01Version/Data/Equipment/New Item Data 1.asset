@@ -16,16 +16,20 @@ MonoBehaviour:
   itemName: slot 1
   icon: {fileID: 21300000, guid: f5e66a012d130ae438659882bdbcbf64, type: 3}
   itemType: 0
+  equipSlot: 1
   description: Item data
   stats:
   - statType: 0
     value: 11
     modType: 0
+    context: 0
   - statType: 1
     value: 22
     modType: 0
+    context: 0
   - statType: 2
     value: 33
     modType: 0
+    context: 0
   stackable: 0
   maxStack: 5
