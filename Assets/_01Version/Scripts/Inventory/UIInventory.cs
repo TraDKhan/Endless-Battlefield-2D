@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -20,6 +21,10 @@ public class UIInventory : MonoBehaviour
     {
         ClearContentChildren();
     }
+    private void Start()
+    {
+        Refresh();
+    }
 
     // =========================
     // LIFECYCLE
@@ -33,7 +38,6 @@ public class UIInventory : MonoBehaviour
         }
 
         inventory.OnInventoryChanged += Refresh;
-        Refresh();
     }
 
     private void OnDisable()
@@ -73,9 +77,14 @@ public class UIInventory : MonoBehaviour
 
         if (selectedSlot != null && !slots.Contains(selectedSlot))
         {
+            if (selectedUISlot != null)
+                selectedUISlot.SetSelected(false);
+
             selectedSlot = null;
             selectedUISlot = null;
             hasAutoSelected = false;
+
+            UIItemDetail.Instance?.Clear();
         }
 
         AutoSelectFirst(slots);
@@ -109,14 +118,29 @@ public class UIInventory : MonoBehaviour
         if (slots == null || slots.Count == 0)
             return;
 
+        StartCoroutine(DelayedSelect(slots));
+    }
+
+    private IEnumerator DelayedSelect(IReadOnlyList<InventorySlot> slots)
+    {
+        yield return null; // ⏱ đợi 1 frame để UIItemDetail Awake xong
+
+        if (selectedSlot != null)
+            yield break;
+
         SelectSlot(uiSlots[0], slots[0]);
     }
 
 
+
     public void SelectSlot(UIInventorySlot uiSlot, InventorySlot slot)
     {
+        // Nếu slot giống nhau → vẫn cần show lại detail
         if (selectedSlot == slot)
+        {
+            UIItemDetail.Instance?.Show(slot);
             return;
+        }
 
         if (selectedUISlot != null)
             selectedUISlot.SetSelected(false);
@@ -127,5 +151,6 @@ public class UIInventory : MonoBehaviour
         selectedUISlot.SetSelected(true);
         UIItemDetail.Instance?.Show(slot);
     }
+
 
 }

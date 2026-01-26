@@ -21,6 +21,11 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
         this.owner = owner;
         boundSlot = slot;
 
+        icon.enabled = false;
+        icon.sprite = null;
+        quantityText.gameObject.SetActive(false);
+        quantityText.text = string.Empty;
+
         if (slot == null || slot.Item == null)
         {
             Clear();
@@ -37,12 +42,8 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
             quantityText.text = item.quantity.ToString();
             quantityText.gameObject.SetActive(true);
         }
-        else
-        {
-            quantityText.gameObject.SetActive(false);
-            quantityText.text = string.Empty;
-        }
     }
+
 
 
     // =========================

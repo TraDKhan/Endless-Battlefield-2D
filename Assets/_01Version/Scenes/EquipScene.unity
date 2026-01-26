@@ -4393,7 +4393,7 @@ MonoBehaviour:
   slots: []
   debugItems:
   - data: {fileID: 11400000, guid: 00c905f4319e9c744aad22643502ceab, type: 2}
-    amount: 20
+    amount: 2
   - data: {fileID: 11400000, guid: 7e5356affcca17d4bbfa1970d5bcd8ed, type: 2}
     amount: 2
   - data: {fileID: 11400000, guid: 39a3e85eb01cd9045899db7282c5c773, type: 2}
