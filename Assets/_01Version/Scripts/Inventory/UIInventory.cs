@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIInventory : MonoBehaviour
@@ -12,6 +13,7 @@ public class UIInventory : MonoBehaviour
 
     private readonly List<UIInventorySlot> uiSlots = new();
     private UIInventorySlot selectedUISlot;
+    private InventorySlot selectedSlot;
     private bool hasAutoSelected = false;
 
     private void Awake()
@@ -69,6 +71,12 @@ public class UIInventory : MonoBehaviour
             UIItemDetail.Instance?.Clear();
         }
 
+        if (selectedSlot != null && !slots.Contains(selectedSlot))
+        {
+            selectedSlot = null;
+            selectedUISlot = null;
+            hasAutoSelected = false;
+        }
 
         AutoSelectFirst(slots);
     }
@@ -95,27 +103,29 @@ public class UIInventory : MonoBehaviour
     }
     private void AutoSelectFirst(IReadOnlyList<InventorySlot> slots)
     {
-        if (hasAutoSelected)
+        if (selectedSlot != null)
             return;
 
         if (slots == null || slots.Count == 0)
             return;
 
         SelectSlot(uiSlots[0], slots[0]);
-        hasAutoSelected = true;
     }
+
 
     public void SelectSlot(UIInventorySlot uiSlot, InventorySlot slot)
     {
-        if (selectedUISlot == uiSlot)
+        if (selectedSlot == slot)
             return;
 
         if (selectedUISlot != null)
             selectedUISlot.SetSelected(false);
 
         selectedUISlot = uiSlot;
-        selectedUISlot.SetSelected(true);
+        selectedSlot = slot;
 
+        selectedUISlot.SetSelected(true);
         UIItemDetail.Instance?.Show(slot);
     }
+
 }

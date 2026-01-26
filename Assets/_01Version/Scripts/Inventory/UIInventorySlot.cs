@@ -34,16 +34,16 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
 
         if (item.IsStackable && item.quantity > 1)
         {
-            quantityText.gameObject.SetActive(true);
             quantityText.text = item.quantity.ToString();
+            quantityText.gameObject.SetActive(true);
         }
         else
         {
             quantityText.gameObject.SetActive(false);
+            quantityText.text = string.Empty;
         }
-
-        SetSelected(false);
     }
+
 
     // =========================
     // SELECTION
@@ -60,10 +60,16 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     private void Clear()
     {
         boundSlot = null;
+
+        icon.sprite = null;
         icon.enabled = false;
+
+        quantityText.text = string.Empty;
         quantityText.gameObject.SetActive(false);
+
         SetSelected(false);
     }
+
 
     // =========================
     // INPUT

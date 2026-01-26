@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventorySystem : MonoBehaviour
 {
+    public static InventorySystem Instance;
     [Header("Config")]
     [SerializeField] private int maxSlots = 30;
 
@@ -16,6 +17,16 @@ public class InventorySystem : MonoBehaviour
 
     public bool IsFull => slots.Count >= maxSlots;
     public int FreeSlots => maxSlots - slots.Count;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     // =========================
     // ADD (ENTRY)

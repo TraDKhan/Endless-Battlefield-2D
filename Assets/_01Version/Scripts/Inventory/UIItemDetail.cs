@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class UIItemDetail : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button equipButton;
     [SerializeField] private Button unequipButton;
+    [SerializeField] private Button removeButton;
 
     // =========================
     // STATE
@@ -40,6 +42,7 @@ public class UIItemDetail : MonoBehaviour
 
         equipButton.onClick.AddListener(OnEquip);
         unequipButton.onClick.AddListener(OnUnequip);
+        removeButton.onClick.AddListener(OnRemove);
     }
 
     // =========================
@@ -147,6 +150,16 @@ public class UIItemDetail : MonoBehaviour
         // EquipmentSystem.Instance.Unequip(itemInstance);
     }
 
+    private void OnRemove()
+    {
+        if (inventorySlot == null)
+            return;
+
+        UIRemoveItemPopup.Instance.Show(
+            inventorySlot,
+            InventorySystem.Instance // hoặc reference inject
+        );
+    }
     // =========================
     // HELPERS
     // =========================

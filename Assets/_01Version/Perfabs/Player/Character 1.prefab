@@ -355,7 +355,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: bcab7d4d65f995148a4e75aeaefa0bea, type: 2}
   movement: {fileID: 4803458157642007893}
   health: {fileID: 5020494767623490524}
-  energy: {fileID: 8687697108299402382}
+  mana: {fileID: 8687697108299402382}
 --- !u!114 &4803458157642007893
 MonoBehaviour:
   m_ObjectHideFlags: 0
