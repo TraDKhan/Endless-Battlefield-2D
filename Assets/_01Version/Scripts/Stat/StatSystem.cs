@@ -59,7 +59,6 @@ public class StatSystem
 
             ApplyModifiers(finalStats[group.Key], group.ToList());
         }
-        Debug.Log("Call Statsystem");
         Clamp();
     }
 

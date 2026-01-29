@@ -28,4 +28,10 @@ public class PlayerLevelSystem : MonoBehaviour
 
         OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
     }
+
+    [ContextMenu("Add Exp")]
+    public void test()
+    {
+        AddEXP(1000);
+    }
 }
