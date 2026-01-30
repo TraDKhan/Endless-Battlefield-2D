@@ -12,7 +12,6 @@ public class UIRemoveItemPopup : MonoBehaviour
 
     [Header("Buttons")]
     [SerializeField] private Button removeAllButton;
-    [SerializeField] private Button removeOneButton;
     [SerializeField] private Button removeAmountButton;
     [SerializeField] private Button cancelButton;
 
@@ -25,11 +24,27 @@ public class UIRemoveItemPopup : MonoBehaviour
         gameObject.SetActive(false);
 
         removeAllButton.onClick.AddListener(RemoveAll);
-        removeOneButton.onClick.AddListener(RemoveOne);
         removeAmountButton.onClick.AddListener(RemoveAmount);
         cancelButton.onClick.AddListener(Hide);
     }
 
+    //public void Show(InventorySlot slot, InventorySystem inventory)
+    //{
+    //    if (slot == null || slot.Item == null)
+    //        return;
+
+    //    this.slot = slot;
+    //    this.inventory = inventory;
+
+    //    bool isStackable = slot.Item.IsStackable;
+
+    //    removeAmountButton.gameObject.SetActive(isStackable);
+
+    //    titleText.text = $"Remove {slot.Item.Data.itemName}";
+    //    amountInput.text = "1";
+
+    //    gameObject.SetActive(true);
+    //}
     public void Show(InventorySlot slot, InventorySystem inventory)
     {
         if (slot == null || slot.Item == null)
@@ -38,17 +53,31 @@ public class UIRemoveItemPopup : MonoBehaviour
         this.slot = slot;
         this.inventory = inventory;
 
-        bool isStackable = slot.Item.IsStackable;
+        int quantity = slot.Item.quantity;
 
-        removeOneButton.gameObject.SetActive(isStackable);
-        removeAmountButton.gameObject.SetActive(isStackable);
+        if (quantity == 1)
+        {
+            // Gọi UIConfirm thay vì popup nhập số lượng
+            UIConfirmPopup.Instance.Show(
+                $"Remove {slot.Item.Data.itemName}?",
+                () =>
+                {
+                     inventory.RemoveSlot(slot);
+                }
+            );
+            return;
+        }
+
+        // Nếu số lượng > 1 thì hiển thị popup nhập số lượng
+        removeAmountButton.gameObject.SetActive(true);
+        removeAllButton.gameObject.SetActive(true);
+        cancelButton.gameObject.SetActive(true);
 
         titleText.text = $"Remove {slot.Item.Data.itemName}";
         amountInput.text = "1";
 
         gameObject.SetActive(true);
     }
-
     private void Hide()
     {
         slot = null;
@@ -65,12 +94,6 @@ public class UIRemoveItemPopup : MonoBehaviour
         Finish();
     }
 
-    private void RemoveOne()
-    {
-        inventory.RemoveFromSlot(slot, 1);
-        Finish();
-    }
-
     private void RemoveAmount()
     {
         if (!int.TryParse(amountInput.text, out int amount))
@@ -84,6 +107,5 @@ public class UIRemoveItemPopup : MonoBehaviour
     private void Finish()
     {
         Hide();
-        UIItemDetail.Instance.Clear();
     }
 }

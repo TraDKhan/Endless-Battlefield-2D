@@ -4,7 +4,6 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class UIItemDetail : MonoBehaviour
 {
@@ -79,6 +78,7 @@ public class UIItemDetail : MonoBehaviour
         BindUI();
         RefreshButtons();
     }
+
     public void Clear()
     {
         icon.enabled = false;
@@ -92,7 +92,7 @@ public class UIItemDetail : MonoBehaviour
         inventorySlot = null;
         itemInstance = null;
         itemData = null;
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     // =========================
@@ -138,8 +138,6 @@ public class UIItemDetail : MonoBehaviour
         bool success = PlayerController.Instance.TryEquip(itemInstance);
         if (!success)
             return;
-
-        Clear();
     }
 
     private void OnUnequip()
@@ -148,7 +146,6 @@ public class UIItemDetail : MonoBehaviour
             return;
 
         PlayerController.Instance.TryUnequip(itemData.equipSlot);
-        Clear();
     }
 
     private void OnRemove()
@@ -158,9 +155,10 @@ public class UIItemDetail : MonoBehaviour
 
         UIRemoveItemPopup.Instance.Show(
             inventorySlot,
-            InventorySystem.Instance // hoặc reference inject
+            InventorySystem.Instance
         );
     }
+
     // =========================
     // HELPERS
     // =========================

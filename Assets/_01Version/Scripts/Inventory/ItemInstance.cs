@@ -39,7 +39,8 @@ public class ItemInstance
     {
         if (other == null) return false;
 
-        if (Data != other.Data) return false;
+        if (Data.itemID != other.Data.itemID) return false;
+
         if (!IsStackable) return false;
 
         if (upgradeLevel != other.upgradeLevel) return false;

@@ -15,20 +15,17 @@ public class UIInventory : MonoBehaviour
     private readonly List<UIInventorySlot> uiSlots = new();
     private UIInventorySlot selectedUISlot;
     private InventorySlot selectedSlot;
-    private bool hasAutoSelected = false;
 
     private void Awake()
     {
         ClearContentChildren();
     }
+
     private void Start()
     {
         Refresh();
     }
 
-    // =========================
-    // LIFECYCLE
-    // =========================
     private void OnEnable()
     {
         if (inventory == null)
@@ -46,9 +43,6 @@ public class UIInventory : MonoBehaviour
             inventory.OnInventoryChanged -= Refresh;
     }
 
-    // =========================
-    // REFRESH
-    // =========================
     public void Refresh()
     {
         var slots = inventory.Slots;
@@ -70,9 +64,9 @@ public class UIInventory : MonoBehaviour
 
         if (slots.Count == 0)
         {
-            hasAutoSelected = false;
             selectedUISlot = null;
             UIItemDetail.Instance?.Clear();
+            return;
         }
 
         if (selectedSlot != null && !slots.Contains(selectedSlot))
@@ -82,17 +76,19 @@ public class UIInventory : MonoBehaviour
 
             selectedSlot = null;
             selectedUISlot = null;
-            hasAutoSelected = false;
 
-            UIItemDetail.Instance?.Clear();
+            //UIItemDetail.Instance?.Clear();
         }
 
         AutoSelectFirst(slots);
+
+        if (selectedSlot != null && slots.Contains(selectedSlot))
+        {
+            UIItemDetail.Instance?.Show(selectedSlot);
+        }
+
     }
 
-    // =========================
-    // INTERNAL
-    // =========================
     private void EnsureUISlotCount(int count)
     {
         while (uiSlots.Count < count)
@@ -110,6 +106,7 @@ public class UIInventory : MonoBehaviour
             Destroy(content.GetChild(i).gameObject);
         }
     }
+
     private void AutoSelectFirst(IReadOnlyList<InventorySlot> slots)
     {
         if (selectedSlot != null)
@@ -123,7 +120,7 @@ public class UIInventory : MonoBehaviour
 
     private IEnumerator DelayedSelect(IReadOnlyList<InventorySlot> slots)
     {
-        yield return null; // ⏱ đợi 1 frame để UIItemDetail Awake xong
+        yield return null;
 
         if (selectedSlot != null)
             yield break;
@@ -131,11 +128,8 @@ public class UIInventory : MonoBehaviour
         SelectSlot(uiSlots[0], slots[0]);
     }
 
-
-
     public void SelectSlot(UIInventorySlot uiSlot, InventorySlot slot)
     {
-        // Nếu slot giống nhau → vẫn cần show lại detail
         if (selectedSlot == slot)
         {
             UIItemDetail.Instance?.Show(slot);
@@ -151,6 +145,4 @@ public class UIInventory : MonoBehaviour
         selectedUISlot.SetSelected(true);
         UIItemDetail.Instance?.Show(slot);
     }
-
-
 }

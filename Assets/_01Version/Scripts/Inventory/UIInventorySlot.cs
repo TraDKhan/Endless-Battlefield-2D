@@ -44,8 +44,6 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
         }
     }
 
-
-
     // =========================
     // SELECTION
     // =========================
@@ -61,6 +59,7 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
     private void Clear()
     {
         boundSlot = null;
+        owner = null;
 
         icon.sprite = null;
         icon.enabled = false;
@@ -71,10 +70,6 @@ public class UIInventorySlot : MonoBehaviour, IPointerClickHandler
         SetSelected(false);
     }
 
-
-    // =========================
-    // INPUT
-    // =========================
     public void OnPointerClick(PointerEventData eventData)
     {
         if (boundSlot == null)

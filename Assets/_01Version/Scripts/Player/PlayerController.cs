@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     // =========================
     public StatSystem StatSystem { get; private set; }
     public CharacterStats CharacterStats { get; private set; }
-    public EquipSystem EquipSystem { get; private set; }
+    public EquipmentSystem EquipSystem { get; private set; }
 
     [Header("Data")]
     [SerializeField] private PlayerData playerData;
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
     }
     private void InitEquipSystem()
     {
-        EquipSystem = new EquipSystem(
+        EquipSystem = new EquipmentSystem(
             StatSystem,
             new[]
             {

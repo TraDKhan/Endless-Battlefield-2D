@@ -6,7 +6,7 @@ public class UIEquipment : MonoBehaviour
     [Header("Predefined Slots")]
     [SerializeField] private List<UIEquipmentSlot> slots;
 
-    private EquipSystem equipSystem;
+    private EquipmentSystem equipSystem;
     private UIEquipmentSlot selectedSlot;
 
     private void Awake()
@@ -54,7 +54,5 @@ public class UIEquipment : MonoBehaviour
 
         if (slot.Item != null)
             UIItemDetail.Instance.ShowEquipped(slot.Item);
-        else
-            UIItemDetail.Instance.Clear();
     }
 }

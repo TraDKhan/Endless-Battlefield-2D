@@ -59,10 +59,9 @@ public class InventorySystem : MonoBehaviour
 
         return added;
     }
-
-    // =========================
-    // NON STACKABLE
-    // =========================
+    /// <summary>
+    /// Thêm không cộng dồn slot
+    /// </summary>
     private int AddNonStackable(ItemInstance item, ref bool changed)
     {
         int added = 0;
@@ -78,14 +77,13 @@ public class InventorySystem : MonoBehaviour
         return added;
     }
 
-    // =========================
-    // STACKABLE
-    // =========================
+    /// <summary>
+    /// Thêm có cộng dồn
+    /// </summary>
     private int AddStackable(ItemInstance item, ref bool changed)
     {
         int added = 0;
 
-        // 1️⃣ Fill existing slots
         foreach (var slot in slots)
         {
             if (item.quantity <= 0)
@@ -107,7 +105,6 @@ public class InventorySystem : MonoBehaviour
             changed = true;
         }
 
-        // 2️⃣ Create new slots
         while (item.quantity > 0 && !IsFull)
         {
             int stackAmount = Mathf.Min(item.quantity, item.MaxStack);
@@ -132,6 +129,7 @@ public class InventorySystem : MonoBehaviour
         if (slots.Remove(slot))
             NotifyChanged();
     }
+
     public int RemoveFromSlot(InventorySlot slot, int amount)
     {
         if (slot == null || slot.Item == null || amount <= 0)
@@ -149,55 +147,6 @@ public class InventorySystem : MonoBehaviour
         return removed;
     }
 
-    public int RemoveItem(ItemInstance item, int amount)
-    {
-        if (item == null || amount <= 0)
-            return 0;
-
-        int removed = 0;
-
-        for (int i = slots.Count - 1; i >= 0 && amount > 0; i--)
-        {
-            var slotItem = slots[i].Item;
-            if (!slotItem.CanStackWith(item))
-                continue;
-
-            int remove = Mathf.Min(slotItem.quantity, amount);
-            slotItem.quantity -= remove;
-
-            removed += remove;
-            amount -= remove;
-
-            if (slotItem.quantity <= 0)
-                slots.RemoveAt(i);
-        }
-
-        if (removed > 0)
-            NotifyChanged();
-
-        return removed;
-    }
-    public int RemoveAll(ItemData data)
-    {
-        if (data == null)
-            return 0;
-
-        int removed = 0;
-
-        for (int i = slots.Count - 1; i >= 0; i--)
-        {
-            if (slots[i].Item.Data != data)
-                continue;
-
-            removed += slots[i].Item.quantity;
-            slots.RemoveAt(i);
-        }
-
-        if (removed > 0)
-            NotifyChanged();
-
-        return removed;
-    }
     public bool RemoveExact(ItemInstance instance)
     {
         if (instance == null)
@@ -220,11 +169,7 @@ public class InventorySystem : MonoBehaviour
         OnInventoryChanged?.Invoke();
     }
 
-    ////
-    /// <summary>
-    /// 
-    /// </summary>
-    /// 
+
 #if UNITY_EDITOR
     [System.Serializable]
     public struct DebugItem

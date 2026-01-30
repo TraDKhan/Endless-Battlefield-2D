@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EquipSystem : IStatSource
+public class EquipmentSystem : IStatSource
 {
     private readonly List<EquipmentSlot> slots;
     private readonly StatSystem statSystem;
 
     public event Action OnEquipmentChanged;
 
-    public EquipSystem(
+    public EquipmentSystem(
         StatSystem statSystem,
         IEnumerable<EquipmentSlotType> slotTypes)
     {
