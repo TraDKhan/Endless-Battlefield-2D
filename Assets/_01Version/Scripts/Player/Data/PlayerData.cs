@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Dữ liệu gốc của nhân vật
+/// </summary>
 [CreateAssetMenu(fileName = "New Player", menuName = "Player/Player Data")]
 public class PlayerData : ScriptableObject
 {
@@ -8,19 +10,15 @@ public class PlayerData : ScriptableObject
     public string playerName;
 
     [Header("Base Stats")]
-    public List<StatEntry> baseStats;
+    public List<CStatEntry> baseStats;
 
-    // =========================
-    // BACKWARD COMPATIBILITY
-    // =========================
-    public float GetBaseStat(StatType type)
+    public float GetBaseStat(CharacterStatType type)
     {
         foreach (var entry in baseStats)
         {
             if (entry.statType == type)
                 return entry.value;
         }
-
         return 0f;
     }
 }

@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Item/Item Data")]
 public class ItemData : ScriptableObject
 {
     [Header("Identity")]
@@ -14,17 +12,10 @@ public class ItemData : ScriptableObject
     [Header("Type")]
     public ItemType itemType;
 
-    [Header("Equipment")]
-    public EquipmentSlotType equipSlot;
-
     [TextArea]
     public string description;
-
-    [Header("Stats")]
-    public List<StatEntry> stats;
 
     [Header("Stack")]
     public bool stackable = false;
     public int maxStack = 1;
 }
-

@@ -9,27 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37e52a0ad0c762d41ad169f94003233a, type: 3}
-  m_Name: New Item Data 1
+  m_Script: {fileID: 11500000, guid: 60557b791dd73e943ad3cecf54720297, type: 3}
+  m_Name: New Equipment Item Data 1
   m_EditorClassIdentifier: 
-  itemID: 1
-  itemName: slot 1
+  itemID: 002
+  itemName: E2
   icon: {fileID: 21300000, guid: f5e66a012d130ae438659882bdbcbf64, type: 3}
   itemType: 0
-  equipSlot: 1
-  description: Item data
-  stats:
-  - statType: 0
-    value: 11
-    modType: 0
-    context: 0
-  - statType: 1
-    value: 22
-    modType: 0
-    context: 0
-  - statType: 2
-    value: 33
-    modType: 0
-    context: 0
+  description: BBBB
   stackable: 0
-  maxStack: 5
+  maxStack: 1
+  slot: 4
+  playerStats: []
+  weaponStats: []
+  upgradeScaling:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

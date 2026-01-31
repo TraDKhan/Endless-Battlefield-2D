@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-public class UpgradeSystem : MonoBehaviour, IStatSource
+public class UpgradeSystem : MonoBehaviour
 {
     public static UpgradeSystem Instance;
 
@@ -10,32 +10,19 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
 
     [Header("Sub Systems")]
     [SerializeField] private WeaponUpgradeSystem weaponSystem;
-
-    // =====================
-    // Action
-    // =====================
-    public event Action<List<UpgradeData>> OnShowUpgradeUI;
+    [SerializeField] private PlayerUpgradeSystem playerSystem;
 
     private int pendingLevelUps;
     private bool isChoosingUpgrade;
 
-    // =========================
-    // PLAYER STAT
-    // =========================
-    private readonly Dictionary<StatType, StatUpgrade> playerStatUpgrades = new();
-
-    // =========================
-    // SKILL
-    // =========================
     private readonly List<BaseSkill> skills = new();
 
-    // =========================
-    // WEAPON
-    // =========================
     private readonly HashSet<UnLockWeaponUpgrade> unlockedWeapons = new();
 
     public WeaponUpgradeSystem Weapon => weaponSystem;
+    public PlayerUpgradeSystem Player => playerSystem;
 
+    public event Action<List<UpgradeData>> OnShowUpgradeUI;
     private void Awake()
     {
         if (Instance != null)
@@ -91,51 +78,6 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
     }
     #endregion
 
-    #region PLAYER
-    // =========================
-    // PLAYER STAT
-    // =========================
-    public void ApplyPlayerStatUpgrade(PlayerUpgradeData data)
-    {
-        if (!playerStatUpgrades.TryGetValue(data.statType, out var runtime))
-        {
-            runtime = new StatUpgrade
-            {
-                level = 0,
-                valuePerLevel = data.valuePerLevel,
-                modType = data.modType
-            };
-        }
-
-        runtime.level++;
-        playerStatUpgrades[data.statType] = runtime;
-    }
-
-    public int GetPlayerStatLevel(StatType stat)
-    {
-        return playerStatUpgrades.TryGetValue(stat, out var up)
-            ? up.level
-            : 0;
-    }
-
-    // =========================
-    // IStatSource
-    // =========================
-    public IEnumerable<StatModifier> GetModifiers()
-    {
-        foreach (var kv in playerStatUpgrades)
-        {
-            yield return new StatModifier
-            {
-                statType = kv.Key,
-                value = kv.Value.Value,
-                modType = kv.Value.modType,
-                context = StatContext.Character
-            };
-        }
-    }
-    #endregion
-
     #region SKILL
     // =========================
     // SKILL
@@ -184,8 +126,7 @@ public class UpgradeSystem : MonoBehaviour, IStatSource
         var controller = weaponGO.GetComponent<WeaponController>();
         var weaponData = controller.Data;
 
-        Transform socket =
-            WeaponSocketController.Instance.GetSocket(weaponData.slotType);
+        Transform socket = WeaponSocketController.Instance.GetSocket(weaponData.slotType);
 
         weaponGO.transform.SetParent(socket);
         weaponGO.transform.localPosition = Vector3.zero;

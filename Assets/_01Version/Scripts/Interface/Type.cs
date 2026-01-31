@@ -1,13 +1,9 @@
 ﻿#region PLAYER
 // ===== Player Stat ===== \\
-public enum PlayerStatType
-{
-    MaxHealth,
-    Armor,
-    MoveSpeed,
-    Energy
-}
+
 // ===== Player Movement ====== \\
+using System;
+
 public enum MoveDirection
 {
     Up = 0,
@@ -77,15 +73,6 @@ public enum ProjectileMode
 
 #region WEAPON
 // ===== stats ===== \\
-public enum WeaponStatType
-{
-    Damage,
-    Cooldown,
-    CritChance,
-    ProjectileCount,
-    Range,
-    ProjectileSpeed
-}
 
 // ===== type ===== \\
 public enum WeaponType
@@ -109,53 +96,60 @@ public enum ProjectileMoveType
     Straight,
     Homing
 }
-
-// ===== BOSS
-public enum BossSkillType
+public enum CharacterStatType 
 {
-    Basic,
-    Special
-}
-
-public enum StatContext
-{
-    Character,
-    Weapon, 
-    Skill
-}
-
-public enum StatType
-{
-    // Character
     MaxHP,
     MaxMP,
     Armor,
-    MoveSpeed,
+    MoveSpeed
+}
+[Serializable]
+public class CStatEntry
+{
+    public CharacterStatType statType;
+    public float value;
+}
 
-    // Weapon
+public enum WeaponStatType
+{
+    Damage,
+    CritChance,
+    Cooldown,
+    AttackRange,
+    ProjectileCount,
+    ProjectileSpeed
+}
+[Serializable]
+public class WStatEntry
+{
+    public WeaponStatType statType;
+    public float value;
+}
+
+public enum SkillStatType
+{
     Damage,
     CritChance,
     Cooldown,
     AttackRange,
     ProjectileCount,
     ProjectileSpeed,
-
-    //Skill
     Duration,
     LightningCount
 }
-
-public enum StatModType
+public class SKStatEntry
 {
-    Flat,      // +10
-    Percent    // +20%
+    public SkillStatType statType;
+    public float value;
 }
+
 public enum ItemType
 {
     Equipment,
     Consumable,
     Material
 }
+
 public enum EquipmentSlotType
 {
     Helmet,

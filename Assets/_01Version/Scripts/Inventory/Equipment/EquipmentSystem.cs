@@ -3,121 +3,100 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EquipmentSystem : IStatSource
+public class EquipmentSystem : MonoBehaviour
 {
-    private readonly List<EquipmentSlot> slots;
-    private readonly StatSystem statSystem;
+    public static EquipmentSystem Instance;
+
+    [SerializeField] private List<EquipmentSlot> slots = new();
+
+    public IReadOnlyList<EquipmentSlot> Slots => slots;
 
     public event Action OnEquipmentChanged;
 
-    public EquipmentSystem(
-        StatSystem statSystem,
-        IEnumerable<EquipmentSlotType> slotTypes)
+    private void Awake()
     {
-        this.statSystem = statSystem;
 
-        slots = slotTypes
-            .Select(t => new EquipmentSlot { slotType = t })
-            .ToList();
 
-        statSystem.AddSource(this);
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
+        InitSlots();
     }
 
-    // =========================
-    // EQUIP (SWAP SAFE)
-    // =========================
-    public ItemInstance Equip(ItemInstance item)
+    private void InitSlots()
     {
-        if (item == null || !item.IsEquipment)
-            return null;
-
-        if (item.quantity != 1)
+        slots.Clear();
+        foreach (EquipmentSlotType type in Enum.GetValues(typeof(EquipmentSlotType)))
         {
-            Debug.LogError("Equipment must have quantity = 1");
-            return null;
+            slots.Add(new EquipmentSlot(type));
+        }
+    }
+
+    public bool Equip(ItemInstance instance)
+    {
+        if (instance == null)
+        {
+            Debug.LogError("Equip failed: instance null");
+            return false;
         }
 
-        var slot = GetSlot(item.Data.equipSlot);
-        if (slot == null)
-            return null;
+        if (!instance.IsEquipment)
+        {
+            Debug.LogError("Equip failed: not equipment");
+            return false;
+        }
+        var data = instance.Data as EquipmentItemData;
+        if (data == null)
+        {
+            Debug.LogError("Equip failed: Data is not EquipmentItemData");
+            return false;
+        }
 
-        ItemInstance oldItem = slot.item;
-        slot.item = item;
+        Debug.Log("Equip success path: " + data.itemName + " -> " + data.slot);
 
-        statSystem.Recalculate();
+        if (instance == null) return false;
+        if (!instance.IsEquipment) return false;
+
+        var equipData = instance.Data as EquipmentItemData;
+        if (equipData == null) return false;
+
+        var slot = slots.FirstOrDefault(s => s.slotType == equipData.slot);
+
+        if (slot == null) return false;
+
+        // remove khỏi inventory
+        InventorySystem.Instance.RemoveExact(instance);
+
+        // swap nếu slot đã có đồ
+        ItemInstance oldItem = slot.Equip(instance);
+
+        Debug.Log($"After Equip, slot {slot.slotType} has item: " +
+            (slot.Item == null ? "NULL" : slot.Item.Data.itemName));
+
+
+        if (oldItem != null)
+        {
+            InventorySystem.Instance.AddItem(oldItem);
+        }
+
         OnEquipmentChanged?.Invoke();
-
-        return oldItem;
+        return true;
     }
 
-    // =========================
-    // UNEQUIP
-    // =========================
-    public ItemInstance Unequip(EquipmentSlotType slotType)
+    public bool Unequip(EquipmentSlotType slotType)
     {
-        var slot = GetSlot(slotType);
+        var slot = slots.Find(s => s.slotType == slotType);
         if (slot == null || slot.IsEmpty)
-            return null;
+            return false;
 
-        ItemInstance item = slot.item;
-        slot.item = null;
+        var item = slot.Unequip();
+        InventorySystem.Instance.AddItem(item);
 
-        statSystem.Recalculate();
         OnEquipmentChanged?.Invoke();
-
-        return item;
-    }
-
-    // =========================
-    // QUERY
-    // =========================
-    public ItemInstance GetEquippedItem(EquipmentSlotType slotType)
-    {
-        return GetSlot(slotType)?.item;
-    }
-
-    public IReadOnlyList<EquipmentSlot> GetAllSlots() => slots;
-
-    // =========================
-    // IStatSource
-    // =========================
-    public IEnumerable<StatModifier> GetModifiers()
-    {
-        foreach (var slot in slots)
-        {
-            if (slot.item == null)
-                continue;
-
-            foreach (var mod in BuildModifiers(slot.item))
-                yield return mod;
-        }
-    }
-
-    // =========================
-    // INTERNAL
-    // =========================
-    private EquipmentSlot GetSlot(EquipmentSlotType type)
-    {
-        return slots.FirstOrDefault(s => s.slotType == type);
-    }
-
-    private IEnumerable<StatModifier> BuildModifiers(ItemInstance item)
-    {
-        foreach (var stat in item.Data.stats)
-            yield return CreateModifier(stat);
-
-        foreach (var stat in item.bonusStats)
-            yield return CreateModifier(stat);
-    }
-
-    private StatModifier CreateModifier(StatEntry stat)
-    {
-        return new StatModifier
-        {
-            statType = stat.statType,
-            value = stat.value,
-            modType = stat.modType,
-            context = stat.context // 👈 khuyến nghị dùng context từ data
-        };
+        return true;
     }
 }

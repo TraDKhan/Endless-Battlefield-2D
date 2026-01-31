@@ -1,7 +1,6 @@
-﻿public class StatModifier
+﻿[System.Serializable]
+public class StatModifier<TStat>
 {
-    public StatType statType;
+    public TStat statType;
     public float value;
-    public StatModType modType;
-    public StatContext context;
 }

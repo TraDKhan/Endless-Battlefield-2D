@@ -37,10 +37,10 @@ public class LightningSkill : BaseSkill
     // =========================
     protected override void OnStatsApplied()
     {
-        damage = skillStats.GetInt(StatType.Damage);
-        strikes = skillStats.GetInt(StatType.LightningCount);
-        radius = skillStats.GetStat(StatType.AttackRange);
-        cooldown = skillStats.GetStat(StatType.Cooldown);
+        damage = skillStats.GetInt(SkillStatType.Damage);
+        strikes = skillStats.GetInt(SkillStatType.LightningCount);
+        radius = skillStats.GetStat(SkillStatType.AttackRange);
+        cooldown = skillStats.GetStat(SkillStatType.Cooldown);
 
         cooldownTimer = cooldown;
     }

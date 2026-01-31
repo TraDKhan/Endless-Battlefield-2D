@@ -17,24 +17,34 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private int dashEnergyCost = 20;
 
     private Rigidbody2D rb;
-    private CharacterStats stats;
     private PlayerController owner;
+    private CharacterStatSystem stats;
 
     private Vector2 movementInput;
 
     private bool isDashing;
     private float dashTimer;
     private Vector2 dashDirection;
+    private float dashSpeed;
 
     private MoveDirection currentDirection = MoveDirection.Down;
     private Vector2 lastMoveVector = Vector2.down;
 
+    #region Init
+
     public void Initialize(PlayerController controller)
     {
         owner = controller;
+        stats = controller.StatSystem;
+
         rb = GetComponent<Rigidbody2D>();
-        stats = controller.CharacterStats;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+        dashSpeed = dashDistance / dashDuration;
     }
+
+    #endregion
 
     private void Update()
     {
@@ -57,7 +67,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Move()
     {
-        float moveSpeed = stats.MoveSpeed;
+        float moveSpeed = stats.GetStat(CharacterStatType.MoveSpeed);
         if (moveSpeed <= 0f) return;
         if (movementInput.sqrMagnitude < deadZone * deadZone) return;
 
@@ -82,33 +92,35 @@ public class PlayerMovementController : MonoBehaviour
 
         isDashing = true;
         dashTimer = dashDuration;
-        dashDirection = DirectionToVector(currentDirection);
-        animationController.SetDash(true);
+
+        // Ưu tiên input thực tế
+        dashDirection = movementInput.normalized;
+
+        animationController?.SetDash(true);
     }
 
     private void DashMove()
     {
         dashTimer -= Time.fixedDeltaTime;
 
-        float dashSpeed = dashDistance / dashDuration;
-
         rb.MovePosition(
             rb.position +
             dashDirection *
-            (dashDistance / dashDuration) *
+            dashSpeed *
             Time.fixedDeltaTime
         );
 
         if (dashTimer <= 0f)
         {
             isDashing = false;
-            animationController.SetDash(false);
+            animationController?.SetDash(false);
         }
     }
 
     #endregion
 
     #region Direction Helper
+
     private void UpdateDirection(Vector2 input)
     {
         if (input.sqrMagnitude < deadZone * deadZone)
@@ -117,7 +129,6 @@ public class PlayerMovementController : MonoBehaviour
         float x = input.x;
         float y = input.y;
 
-        // ===== NỬA TRÊN =====
         if (y > directionThreshold)
         {
             if (x > directionThreshold)
@@ -127,7 +138,6 @@ public class PlayerMovementController : MonoBehaviour
             else
                 currentDirection = MoveDirection.Up;
         }
-        // ===== NỬA DƯỚI =====
         else if (y < -directionThreshold)
         {
             if (x > directionThreshold)
@@ -139,7 +149,6 @@ public class PlayerMovementController : MonoBehaviour
         }
         else
         {
-            // Gần trục ngang → giữ hướng cũ (tránh rung)
             return;
         }
 
@@ -163,6 +172,7 @@ public class PlayerMovementController : MonoBehaviour
     #endregion
 
     #region Animation
+
     private void UpdateAnimation()
     {
         if (animationController == null) return;
@@ -174,5 +184,6 @@ public class PlayerMovementController : MonoBehaviour
             lastMoveVector
         );
     }
+
     #endregion
 }

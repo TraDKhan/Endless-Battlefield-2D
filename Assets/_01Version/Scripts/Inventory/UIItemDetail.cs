@@ -108,7 +108,7 @@ public class UIItemDetail : MonoBehaviour
         nameText.text = itemData.itemName;
         descriptionText.text = itemData.description;
 
-        statsText.text = BuildStatText(itemData.stats);
+        //statsText.text = BuildStatText(itemData.stats);
     }
 
     private void RefreshButtons()
@@ -135,17 +135,26 @@ public class UIItemDetail : MonoBehaviour
         if (inventorySlot == null || itemInstance == null)
             return;
 
-        bool success = PlayerController.Instance.TryEquip(itemInstance);
-        if (!success)
+        if (EquipmentSystem.Instance == null)
+        {
+            Debug.LogError("EquipmentSystem.Instance is NULL");
             return;
-    }
+        }
 
+        Debug.Log("Try equip: " + itemInstance.Data.itemName);
+
+        EquipmentSystem.Instance.Equip(itemInstance);
+    }
     private void OnUnequip()
     {
-        if (itemInstance == null)
+        if (itemInstance == null || itemData == null)
             return;
 
-        PlayerController.Instance.TryUnequip(itemData.equipSlot);
+        var equipData = itemData as EquipmentItemData;
+        if (equipData == null)
+            return;
+
+        EquipmentSystem.Instance.Unequip(equipData.slot);
     }
 
     private void OnRemove()
@@ -162,15 +171,15 @@ public class UIItemDetail : MonoBehaviour
     // =========================
     // HELPERS
     // =========================
-    private string BuildStatText(List<StatEntry> stats)
-    {
-        if (stats == null || stats.Count == 0)
-            return string.Empty;
+    //private string BuildStatText(List<StatEntry> stats)
+    //{
+    //    if (stats == null || stats.Count == 0)
+    //        return string.Empty;
 
-        StringBuilder sb = new StringBuilder();
-        foreach (var stat in stats)
-            sb.AppendLine($"{stat.statType}: +{stat.value}");
+    //    StringBuilder sb = new StringBuilder();
+    //    foreach (var stat in stats)
+    //        sb.AppendLine($"{stat.statType}: +{stat.value}");
 
-        return sb.ToString();
-    }
+    //    return sb.ToString();
+    //}
 }

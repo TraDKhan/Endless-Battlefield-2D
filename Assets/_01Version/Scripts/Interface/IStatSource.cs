@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public interface IStatSource
+public interface IStatSource<TStat>
 {
-    IEnumerable<StatModifier> GetModifiers();
+    IEnumerable<StatModifier<TStat>> GetModifiers();
 }

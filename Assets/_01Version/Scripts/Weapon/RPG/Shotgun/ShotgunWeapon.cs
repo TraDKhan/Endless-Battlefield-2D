@@ -37,7 +37,7 @@ public class ShotgunWeapon : Weapon
     // ===== Spawmn 
     void SpawnProjectile(Vector2 direction)
     {
-        Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(controller.Data.projectilePrefab);
+        Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(controller.Data.weaponPrefab);
 
         if (bullet == null) return;
 

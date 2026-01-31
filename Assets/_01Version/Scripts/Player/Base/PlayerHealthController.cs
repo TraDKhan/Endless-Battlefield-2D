@@ -4,14 +4,14 @@ using UnityEngine;
 public class PlayerHealthController : MonoBehaviour, IDamageable
 {
     public int CurrentHealth { get; private set; }
-    public int MaxHealth => stats != null ? stats.MaxHP : 0;
+    public int MaxHealth { get; private set; }
     public bool IsDead => CurrentHealth <= 0;
 
     public event Action<int, int> OnHealthChanged;
     public event Action OnDeath;
 
     private PlayerController owner;
-    private CharacterStats stats;
+    private CharacterStatSystem stats;
 
     private bool initialized;
     private bool deathInvoked;
@@ -21,32 +21,34 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     public void Initialize(PlayerController controller)
     {
         owner = controller;
-        stats = controller.CharacterStats;
+        stats = controller.StatSystem;
     }
 
     #endregion
 
     #region Sync With StatSystem
 
-    /// <summary>
-    /// Gọi khi StatSystem Recalculate (equip / upgrade)
-    /// </summary>
     public void RefreshFromStats()
     {
-        int newMax = MaxHealth;
-        if (newMax <= 0) return;
+        int newMax = Mathf.RoundToInt(
+            stats.GetStat(CharacterStatType.MaxHP)
+        );
+
+        if (newMax <= 0)
+            newMax = 1; // failsafe
 
         if (!initialized)
         {
-            CurrentHealth = newMax;
+            MaxHealth = newMax;
+            CurrentHealth = MaxHealth;
             initialized = true;
             deathInvoked = false;
         }
         else
         {
-            // giữ % HP
             float percent = CurrentHealth / (float)Mathf.Max(1, MaxHealth);
-            CurrentHealth = Mathf.RoundToInt(newMax * percent);
+            MaxHealth = newMax;
+            CurrentHealth = Mathf.RoundToInt(MaxHealth * percent);
         }
 
         ClampHealth();
@@ -90,12 +92,8 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
 
     private int CalculateFinalDamage(int rawDamage)
     {
-        float armor = owner.StatSystem.GetStat(
-            StatContext.Character,
-            StatType.Armor
-        );
+        float armor = stats.GetStat(CharacterStatType.Armor);
 
-        // Công thức mẫu (dễ tweak)
         float reduction = armor / (armor + 100f);
         float final = rawDamage * (1f - reduction);
 

@@ -154,6 +154,11 @@ public class InventorySystem : MonoBehaviour
 
         var slot = slots.FirstOrDefault(s => s.Item == instance);
         if (slot == null)
+        {
+            Debug.LogError("RemoveExact FAILED: instance not found in inventory");
+            return false;
+        }
+        if (slot == null)
             return false;
 
         slots.Remove(slot);

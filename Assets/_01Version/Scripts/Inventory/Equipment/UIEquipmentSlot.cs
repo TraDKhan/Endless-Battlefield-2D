@@ -1,4 +1,4 @@
-﻿using TMPro;
+﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,62 +9,62 @@ public class UIEquipmentSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] private EquipmentSlotType slotType;
 
     [Header("UI")]
-    [SerializeField] private Image icon;
-    [SerializeField] private TMP_Text emptyLabel;
-    [SerializeField] private GameObject highlight;
+    [SerializeField] private Image iconImage;
 
-    private ItemInstance item;
-    private UIEquipment owner;
-
-    // =========================
-    // INIT
-    // =========================
-    public void Init(UIEquipment owner)
+    private void Awake()
     {
-        this.owner = owner;
-        Refresh(null);
+        Clear();
     }
 
-    // =========================
-    // REFRESH
-    // =========================
-    public void Refresh(ItemInstance newItem)
+    private void OnEnable()
     {
-        item = newItem;
-
-        if (item == null)
+        // Đảm bảo EquipmentSystem đã khởi tạo trước khi đăng ký sự kiện
+        if (EquipmentSystem.Instance != null)
         {
-            icon.enabled = false;
-            icon.sprite = null;
-
-            if (emptyLabel != null)
-                emptyLabel.gameObject.SetActive(true);
+            EquipmentSystem.Instance.OnEquipmentChanged += Refresh;
+            Refresh();
         }
         else
         {
-            icon.sprite = item.Data.icon;
-            icon.enabled = true;
-
-            if (emptyLabel != null)
-                emptyLabel.gameObject.SetActive(false);
+            Clear();
         }
-
-        SetSelected(false);
     }
 
-    // =========================
-    // ACCESS
-    // =========================
-    public EquipmentSlotType SlotType => slotType;
-    public ItemInstance Item => item;
-
-    // =========================
-    // SELECTION
-    // =========================
-    public void SetSelected(bool selected)
+    private void OnDisable()
     {
-        if (highlight != null)
-            highlight.SetActive(selected);
+        if (EquipmentSystem.Instance != null)
+            EquipmentSystem.Instance.OnEquipmentChanged -= Refresh;
+    }
+
+    public void Refresh()
+    {
+        if (EquipmentSystem.Instance == null)
+        {
+            Clear();
+            return;
+        }
+
+        var slot = EquipmentSystem.Instance.Slots
+            .FirstOrDefault(s => s.slotType == slotType);
+
+        Debug.Log($"UI Slot {slotType} item: " +
+            (slot == null || slot.Item == null ? "NULL" : slot.Item.Data.itemName));
+
+        if (slot == null || slot.IsEmpty)
+        {
+            Clear();
+            return;
+        }
+
+        var itemData = slot.Item.Data;
+        iconImage.sprite = itemData.icon;
+        iconImage.enabled = true;
+    }
+
+    private void Clear()
+    {
+        iconImage.sprite = null;
+        iconImage.enabled = false;
     }
 
     // =========================
@@ -72,6 +72,16 @@ public class UIEquipmentSlot : MonoBehaviour, IPointerClickHandler
     // =========================
     public void OnPointerClick(PointerEventData eventData)
     {
-        owner?.SelectSlot(this);
+        if (EquipmentSystem.Instance == null)
+            return;
+
+        var slot = EquipmentSystem.Instance.Slots
+            .FirstOrDefault(s => s.slotType == slotType);
+
+        if (slot == null || slot.IsEmpty)
+            return;
+
+        // Show item detail
+        UIItemDetail.Instance?.ShowEquipped(slot.Item);
     }
 }

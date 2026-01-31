@@ -40,7 +40,7 @@ public class SkillUpgradeData : UpgradeData
 
         foreach (var stat in next.baseStats)
         {
-            float curVal = cur?.GetStat(stat.statType) ?? 0;
+            float curVal = cur?.GetBaseStat(stat.statType) ?? 0;
             if (!Mathf.Approximately(curVal, stat.value))
                 sb.AppendLine($"{stat.statType}: {curVal} → {stat.value}");
         }

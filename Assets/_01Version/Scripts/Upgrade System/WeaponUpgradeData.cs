@@ -4,8 +4,7 @@
 public class WeaponUpgradeData : UpgradeData
 {
     [Header("Stat")]
-    public StatType statType;
-    public StatModType modType;
+    public WeaponStatType statType;
     public float valuePerLevel;
 
     // ======================
@@ -14,7 +13,7 @@ public class WeaponUpgradeData : UpgradeData
 
     public override bool CanApply(UpgradeSystem system)
     {
-        return true; // sau này có thể limit
+        return true;
     }
 
     public override void Apply(UpgradeSystem system)
@@ -28,8 +27,9 @@ public class WeaponUpgradeData : UpgradeData
 
     public override int GetCurrentLevel(UpgradeSystem system)
     {
-        return system.Weapon.GetStatLevel(statType);
+        return system.Weapon.GetLevel(statType);
     }
+
     public override string GetLevelText(UpgradeSystem system)
     {
         int current = GetCurrentLevel(system) + 1;
@@ -40,10 +40,7 @@ public class WeaponUpgradeData : UpgradeData
 
     public override string GetValueText(UpgradeSystem system)
     {
-        string sign = modType == StatModType.Percent ? "%" : "";
-
-        // UI upgrade CHỈ hiển thị giá trị tăng
-        return $"+{valuePerLevel}{sign} {statType.ToString()}";
+        return $"+{valuePerLevel} {statType.ToString()}";
     }
 
     public override string GetDescription()

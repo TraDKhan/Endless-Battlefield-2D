@@ -3,10 +3,16 @@
 [System.Serializable]
 public class SkillData
 {
-    public List<StatEntry> baseStats;
-    public float GetStat(StatType type)
+    public string skillName;
+    public List<SKStatEntry> baseStats;
+
+    public float GetBaseStat(SkillStatType type)
     {
-        var entry = baseStats.Find(s => s.statType == type);
-        return entry != null ? entry.value : 0f;
+        foreach (var entry in baseStats)
+        {
+            if (entry.statType == type)
+                return entry.value;
+        }
+        return 0f;
     }
 }

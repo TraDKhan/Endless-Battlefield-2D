@@ -8,22 +8,22 @@ public class PlayerManaController : MonoBehaviour
     [SerializeField] private float regenInterval = 1f;
 
     public int CurrentMP { get; private set; }
-    public int MaxMP => stats != null ? stats.MaxMP : 0;
+    public int MaxMP { get; private set; }
 
-    public event Action<int, int> OnMPChanged;
+    private PlayerController owner;
+    private CharacterStatSystem stats;
 
-    private CharacterStats stats;
     private float regenTimer;
-
     private bool initialized;
 
+    public event Action<int, int> OnMPChanged;
     #region Init
 
     public void Initialize(PlayerController controller)
     {
-        stats = controller.CharacterStats;
+        owner = controller;
+        stats = controller.StatSystem;
     }
-
     #endregion
 
     #region Sync With StatSystem
@@ -33,28 +33,33 @@ public class PlayerManaController : MonoBehaviour
     /// </summary>
     public void RefreshFromStats(bool keepPercent = true)
     {
-        int newMax = MaxMP;
-        if (newMax <= 0) return;
+        int newMax = Mathf.RoundToInt(
+            stats.GetStat(CharacterStatType.MaxMP)
+        );
+
+        if (newMax <= 0)
+            newMax = 1; // failsafe
 
         if (!initialized)
         {
-            CurrentMP = newMax;
+            MaxMP = newMax;
+            CurrentMP = MaxMP;
             initialized = true;
         }
         else
         {
             float percent = keepPercent
-                ? CurrentMP / (float)Mathf.Max(1, newMax)
+                ? CurrentMP / (float)Mathf.Max(1, MaxMP)
                 : 1f;
 
-            CurrentMP = Mathf.RoundToInt(newMax * percent);
+            MaxMP = newMax;
+            CurrentMP = Mathf.RoundToInt(MaxMP * percent);
         }
 
         Clamp();
         regenTimer = 0f;
         Notify();
     }
-
     #endregion
 
     #region Update

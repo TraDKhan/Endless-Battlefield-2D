@@ -3,9 +3,8 @@
 [CreateAssetMenu(menuName = "Upgrade/Player Upgrade")]
 public class PlayerUpgradeData : UpgradeData
 {
-    public StatType statType;
+    public CharacterStatType statType;
     public float valuePerLevel;
-    public StatModType modType = StatModType.Flat;
 
     public override bool CanApply(UpgradeSystem system)
     {
@@ -14,21 +13,19 @@ public class PlayerUpgradeData : UpgradeData
 
     public override void Apply(UpgradeSystem system)
     {
-        system.ApplyPlayerStatUpgrade(this);
+        system.Player.Apply(this);
     }
 
     public override int GetCurrentLevel(UpgradeSystem system)
     {
-        return system.GetPlayerStatLevel(statType);
+        return system.Player.GetLevel(statType);
     }
 
     public override string GetValueText(UpgradeSystem system)
     {
         int nextLevel = GetCurrentLevel(system) + 1;
         float value = nextLevel * valuePerLevel;
-
-        string sign = modType == StatModType.Percent ? "%" : "";
-        return $"+{value}{sign} {statType}";
+        return $"+{value} {statType}";
     }
 
     public override string GetDescription()

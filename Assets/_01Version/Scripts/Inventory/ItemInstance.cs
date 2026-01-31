@@ -6,9 +6,7 @@ public class ItemInstance
     public ItemData Data { get; private set; }
     public int quantity;
 
-    // Equipment runtime
     public int upgradeLevel;
-    public List<StatEntry> bonusStats;
 
     public ItemInstance(ItemData data, int quantity = 1)
     {
@@ -16,14 +14,11 @@ public class ItemInstance
         this.quantity = quantity;
 
         upgradeLevel = 0;
-        bonusStats = new();
     }
 
-    // =========================
-    // HELPERS
-    // =========================
     public bool IsStackable => Data.stackable;
-    public bool IsEquipment => Data.itemType == ItemType.Equipment;
+    public bool IsEquipment => Data is EquipmentItemData;
+
     public int MaxStack => Data.maxStack;
 
     public ItemInstance Clone(int newQuantity)
@@ -31,7 +26,6 @@ public class ItemInstance
         return new ItemInstance(Data, newQuantity)
         {
             upgradeLevel = upgradeLevel,
-            bonusStats = new List<StatEntry>(bonusStats)
         };
     }
 
@@ -44,15 +38,6 @@ public class ItemInstance
         if (!IsStackable) return false;
 
         if (upgradeLevel != other.upgradeLevel) return false;
-
-        if (bonusStats.Count != other.bonusStats.Count)
-            return false;
-
-        for (int i = 0; i < bonusStats.Count; i++)
-        {
-            if (!bonusStats[i].Equals(other.bonusStats[i]))
-                return false;
-        }
 
         return true;
     }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SkillStats
 {
-    private readonly Dictionary<StatType, float> stats = new();
+    private readonly Dictionary<SkillStatType, float> stats = new();
 
     public void ApplySkillData(SkillData data)
     {
@@ -14,9 +14,9 @@ public class SkillStats
             stats[s.statType] = s.value;
     }
 
-    public float GetStat(StatType type)
+    public float GetStat(SkillStatType type)
         => stats.TryGetValue(type, out var v) ? v : 0f;
 
-    public int GetInt(StatType type)
+    public int GetInt(SkillStatType type)
         => Mathf.RoundToInt(GetStat(type));
 }

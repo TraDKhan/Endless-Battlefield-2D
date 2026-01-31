@@ -54,10 +54,10 @@ public class AreaSkill : BaseSkill
     // =========================
     private void SpawnEffect()
     {
-        int damage = skillStats.GetInt(StatType.Damage);
-        float radius = skillStats.GetStat(StatType.AttackRange);
-        float duration = skillStats.GetStat(StatType.Duration);
-        float cooldown = skillStats.GetStat(StatType.Cooldown);
+        int damage = skillStats.GetInt(SkillStatType.Damage);
+        float radius = skillStats.GetStat(SkillStatType.AttackRange);
+        float duration = skillStats.GetStat(SkillStatType.Duration);
+        float cooldown = skillStats.GetStat(SkillStatType.Cooldown);
 
         activeEffect = Instantiate(areaEffectPrefab, owner);
         activeEffect.transform.localPosition = Vector3.zero;
