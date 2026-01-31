@@ -42,4 +42,25 @@ public class WeaponController : MonoBehaviour
         StatSystem.RemoveSource(source);
         weapon.OnStatsChanged();
     }
+    private void OnEnable()
+    {
+        EquipmentSystem.Instance.OnEquipped += OnEquipped;
+    }
+    private void OnEquipped(ItemInstance item)
+    {
+        Debug.Log("=== BEFORE EQUIP ===");
+        LogAllStats();
+        if (item.Data is IStatSource<WeaponStatType> source)
+            StatSystem.AddSource(source);
+        Debug.Log("=== AFTER EQUIP ===");
+        LogAllStats();
+    }
+    private void LogAllStats()
+    {
+        foreach (WeaponStatType stat in System.Enum.GetValues(typeof(WeaponStatType)))
+        {
+            Debug.Log($"{stat}: {StatSystem.GetStat(stat)}");
+        }
+    }
+
 }

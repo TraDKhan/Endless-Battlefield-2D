@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class EquipmentSystem : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class EquipmentSystem : MonoBehaviour
     public IReadOnlyList<EquipmentSlot> Slots => slots;
 
     public event Action OnEquipmentChanged;
+    public event Action<ItemInstance> OnEquipped;
+    public event Action<ItemInstance> OnUnequipped;
 
     private void Awake()
     {
@@ -38,26 +41,6 @@ public class EquipmentSystem : MonoBehaviour
 
     public bool Equip(ItemInstance instance)
     {
-        if (instance == null)
-        {
-            Debug.LogError("Equip failed: instance null");
-            return false;
-        }
-
-        if (!instance.IsEquipment)
-        {
-            Debug.LogError("Equip failed: not equipment");
-            return false;
-        }
-        var data = instance.Data as EquipmentItemData;
-        if (data == null)
-        {
-            Debug.LogError("Equip failed: Data is not EquipmentItemData");
-            return false;
-        }
-
-        Debug.Log("Equip success path: " + data.itemName + " -> " + data.slot);
-
         if (instance == null) return false;
         if (!instance.IsEquipment) return false;
 
@@ -74,15 +57,13 @@ public class EquipmentSystem : MonoBehaviour
         // swap nếu slot đã có đồ
         ItemInstance oldItem = slot.Equip(instance);
 
-        Debug.Log($"After Equip, slot {slot.slotType} has item: " +
-            (slot.Item == null ? "NULL" : slot.Item.Data.itemName));
-
-
         if (oldItem != null)
         {
             InventorySystem.Instance.AddItem(oldItem);
         }
 
+        slot.Equip(instance);
+        OnEquipped?.Invoke(instance);
         OnEquipmentChanged?.Invoke();
         return true;
     }

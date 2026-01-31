@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -66,6 +67,30 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Gọi khi equip / buff / upgrade
     /// </summary>
+    /// 
+    private void OnEnable()
+    {
+        EquipmentSystem.Instance.OnEquipped += OnEquipped;
+        EquipmentSystem.Instance.OnUnequipped += OnUnequipped;
+    }
+
+    private void OnEquipped(ItemInstance item)
+    {
+        Debug.Log("=== BEFORE EQUIP ===");
+        LogAllStats();
+        if (item.Data is IStatSource<CharacterStatType> source)
+            StatSystem.AddSource(source);
+        Debug.Log("=== AFTER EQUIP ===");
+        LogAllStats();
+    }
+
+    private void OnUnequipped(ItemInstance item)
+    {
+        if (item.Data is IStatSource<CharacterStatType> source)
+            StatSystem.RemoveSource(source);
+    }
+
+
     public void RecalculateStats()
     {
         if (!initialized) return;
@@ -73,4 +98,13 @@ public class PlayerController : MonoBehaviour
         StatSystem.Recalculate();
         ApplyStats();
     }
+
+    private void LogAllStats()
+    {
+        foreach (CharacterStatType stat in System.Enum.GetValues(typeof(CharacterStatType)))
+        {
+            Debug.Log($"{stat}: {StatSystem.GetStat(stat)}");
+        }
+    }
+
 }

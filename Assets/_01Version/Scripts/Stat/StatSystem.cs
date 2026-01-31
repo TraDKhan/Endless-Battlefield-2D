@@ -43,8 +43,10 @@ public class StatSystem<TStat> where TStat : System.Enum
         // 2. Apply all modifiers as flat
         foreach (var source in sources)
         {
+            //Debug.Log($"Apply Source: {source}");
             foreach (var mod in source.GetModifiers())
             {
+                //Debug.Log($"  + {mod.statType} = {mod.value}");
                 if (finalStats.ContainsKey(mod.statType))
                     finalStats[mod.statType] += mod.value;
                 else

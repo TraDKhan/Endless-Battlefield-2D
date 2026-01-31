@@ -20,11 +20,7 @@ MonoBehaviour:
   stackable: 0
   maxStack: 1
   slot: 4
-  playerStats: []
+  playerStats:
+  - statType: 0
+    value: 10
   weaponStats: []
-  upgradeScaling:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
