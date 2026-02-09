@@ -48,21 +48,19 @@ public class EquipmentSystem : MonoBehaviour
         if (equipData == null) return false;
 
         var slot = slots.FirstOrDefault(s => s.slotType == equipData.slot);
-
         if (slot == null) return false;
 
         // remove khỏi inventory
         InventorySystem.Instance.RemoveExact(instance);
 
-        // swap nếu slot đã có đồ
+        // swap
         ItemInstance oldItem = slot.Equip(instance);
-
         if (oldItem != null)
         {
             InventorySystem.Instance.AddItem(oldItem);
+            OnUnequipped?.Invoke(oldItem);
         }
 
-        slot.Equip(instance);
         OnEquipped?.Invoke(instance);
         OnEquipmentChanged?.Invoke();
         return true;
@@ -75,8 +73,10 @@ public class EquipmentSystem : MonoBehaviour
             return false;
 
         var item = slot.Unequip();
+
         InventorySystem.Instance.AddItem(item);
 
+        OnUnequipped?.Invoke(item);
         OnEquipmentChanged?.Invoke();
         return true;
     }

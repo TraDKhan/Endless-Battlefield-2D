@@ -19,6 +19,7 @@ public class AreaSkill : BaseSkill
         if (owner == null)
         {
             owner = GameObject.FindWithTag("Player")?.transform;
+            Init(owner);
 
             OnUnlock(); // ép mở skill
         }

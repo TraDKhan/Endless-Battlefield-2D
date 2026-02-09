@@ -135,8 +135,10 @@ public enum SkillStatType
     ProjectileCount,
     ProjectileSpeed,
     Duration,
-    LightningCount
+    LightningCount,
+    RotateSpeed
 }
+[Serializable]
 public class SKStatEntry
 {
     public SkillStatType statType;

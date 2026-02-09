@@ -16,8 +16,10 @@ public class UIEquipmentSlot : MonoBehaviour, IPointerClickHandler
         Clear();
     }
 
-    private void OnEnable()
+    private void Start()
     {
+        Debug.Log($"[UIEquipmentSlot] Enabled slotType = {slotType}");
+
         // Đảm bảo EquipmentSystem đã khởi tạo trước khi đăng ký sự kiện
         if (EquipmentSystem.Instance != null)
         {
@@ -44,11 +46,7 @@ public class UIEquipmentSlot : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        var slot = EquipmentSystem.Instance.Slots
-            .FirstOrDefault(s => s.slotType == slotType);
-
-        Debug.Log($"UI Slot {slotType} item: " +
-            (slot == null || slot.Item == null ? "NULL" : slot.Item.Data.itemName));
+        var slot = EquipmentSystem.Instance.Slots.FirstOrDefault(s => s.slotType == slotType);
 
         if (slot == null || slot.IsEmpty)
         {

@@ -11,7 +11,7 @@ public class WeaponData : ScriptableObject
     public List<WStatEntry> baseStats = new();
 
     [Header("weapon")]
-    public GameObject weaponPrefab;
+    public GameObject projectilePrefab;
 
     [Header("Socket")]
     public WeaponSlotType slotType;

@@ -19,7 +19,7 @@ public class EquipmentSlot
 
         ItemInstance oldItem = Item;
         Item = newItem;
-        return oldItem; // trả lại item cũ để swap
+        return oldItem;
     }
 
     public ItemInstance Unequip()

@@ -204,7 +204,6 @@ public class EnemySpawnerController : MonoBehaviour
 
         indicator.Play(position, () =>
         {
-            Debug.Log("SpawnIndicator callback fired");
             spawnAction?.Invoke(prefab, position);
             done = true;
         });

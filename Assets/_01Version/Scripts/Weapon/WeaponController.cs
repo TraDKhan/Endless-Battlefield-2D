@@ -44,7 +44,8 @@ public class WeaponController : MonoBehaviour
     }
     private void OnEnable()
     {
-        EquipmentSystem.Instance.OnEquipped += OnEquipped;
+        if(EquipmentSystem.Instance != null) 
+            EquipmentSystem.Instance.OnEquipped += OnEquipped;
     }
     private void OnEquipped(ItemInstance item)
     {

@@ -3,7 +3,6 @@
 [System.Serializable]
 public class SkillData
 {
-    public string skillName;
     public List<SKStatEntry> baseStats;
 
     public float GetBaseStat(SkillStatType type)

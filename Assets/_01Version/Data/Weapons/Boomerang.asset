@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Boomerang
   baseStats:
-  - statType: 4
+  - statType: 0
     value: 1
-  - statType: 6
+  - statType: 1
     value: 2
-  - statType: 7
+  - statType: 2
     value: 3
-  - statType: 9
+  - statType: 3
     value: 3
-  - statType: 8
+  - statType: 4
     value: 1
   - statType: 5
     value: 0
-  projectilePrefab: {fileID: 1979819941540096210, guid: 38e5fe429b760e648a42da238df93ded, type: 3}
+  weaponPrefab: {fileID: 0}
   slotType: 0

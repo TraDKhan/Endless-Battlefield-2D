@@ -20,6 +20,15 @@ public class LightningSkill : BaseSkill
     // =========================
     // UPDATE
     // =========================
+    private void Start()
+    {
+        if (owner == null)
+        {
+            owner = GameObject.FindWithTag("Player")?.transform;
+
+            OnUnlock(); // ép mở skill
+        }
+    }
     private void Update()
     {
         if (Level <= 0 || owner == null) return;

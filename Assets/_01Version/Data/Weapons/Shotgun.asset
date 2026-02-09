@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Shotgun
   baseStats:
-  - statType: 4
+  - statType: 0
     value: 1
-  - statType: 6
+  - statType: 1
     value: 2
-  - statType: 7
+  - statType: 2
     value: 3
-  - statType: 9
+  - statType: 3
     value: 2
-  - statType: 8
+  - statType: 4
     value: 3
   - statType: 5
-    value: 0
+    value: 3
   projectilePrefab: {fileID: 2480542894489494438, guid: 3868255dc6c8b914886814718a58b734, type: 3}
   slotType: 0

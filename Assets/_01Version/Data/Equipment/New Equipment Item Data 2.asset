@@ -19,12 +19,8 @@ MonoBehaviour:
   description: CCCC
   stackable: 0
   maxStack: 1
-  slot: 2
-  playerStats: []
+  slot: 1
+  playerStats:
+  - statType: 0
+    value: 111
   weaponStats: []
-  upgradeScaling:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4

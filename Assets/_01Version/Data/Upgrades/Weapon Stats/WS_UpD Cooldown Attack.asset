@@ -16,6 +16,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: f5e66a012d130ae438659882bdbcbf64, type: 3}
   upgradeType: 1
   description: Weapon Upgrade
-  statType: 6
-  modType: 0
+  statType: 2
   valuePerLevel: 2

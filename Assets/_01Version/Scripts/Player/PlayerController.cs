@@ -70,8 +70,11 @@ public class PlayerController : MonoBehaviour
     /// 
     private void OnEnable()
     {
-        EquipmentSystem.Instance.OnEquipped += OnEquipped;
-        EquipmentSystem.Instance.OnUnequipped += OnUnequipped;
+        if (EquipmentSystem.Instance != null)
+        {
+            EquipmentSystem.Instance.OnEquipped += OnEquipped;
+            EquipmentSystem.Instance.OnUnequipped += OnUnequipped;
+        }
     }
 
     private void OnEquipped(ItemInstance item)
