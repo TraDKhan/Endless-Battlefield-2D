@@ -1,9 +1,8 @@
-﻿#region PLAYER
-// ===== Player Stat ===== \\
+﻿using System;
+
+#region PLAYER
 
 // ===== Player Movement ====== \\
-using System;
-
 public enum MoveDirection
 {
     Up = 0,
@@ -47,15 +46,6 @@ public enum EnemyAttackType
     Ranged
 }
 
-// ===== state ===== \\
-public enum EnemyStateType
-{
-    Idle,
-    Chase,
-    Attack,
-    Reposition,
-    Dead
-}
 public enum EnemyStateID
 {
     Idle,
@@ -72,17 +62,6 @@ public enum ProjectileMode
 #endregion
 
 #region WEAPON
-// ===== stats ===== \\
-
-// ===== type ===== \\
-public enum WeaponType
-{
-    Pistol,
-    Shotgun,
-    Laser,
-    Boomerang
-}
-
 // ===== socket ===== \\
 public enum WeaponSlotType
 {
@@ -96,13 +75,14 @@ public enum ProjectileMoveType
     Straight,
     Homing
 }
+
 public enum CharacterStatType 
 {
     MaxHP,
-    MaxMP,
     Armor,
     MoveSpeed
 }
+
 [Serializable]
 public class CStatEntry
 {
@@ -119,6 +99,7 @@ public enum WeaponStatType
     ProjectileCount,
     ProjectileSpeed
 }
+
 [Serializable]
 public class WStatEntry
 {
@@ -138,6 +119,7 @@ public enum SkillStatType
     LightningCount,
     RotateSpeed
 }
+
 [Serializable]
 public class SKStatEntry
 {

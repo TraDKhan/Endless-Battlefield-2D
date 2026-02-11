@@ -16,13 +16,7 @@ MonoBehaviour:
   baseStats:
   - statType: 0
     value: 1200
-    modType: 0
   - statType: 1
     value: 1200
-    modType: 0
   - statType: 2
-    value: 1000
-    modType: 0
-  - statType: 3
-    value: 1.61
-    modType: 0
+    value: 2

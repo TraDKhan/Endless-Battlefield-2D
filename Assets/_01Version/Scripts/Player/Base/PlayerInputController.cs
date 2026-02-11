@@ -13,7 +13,6 @@ public class PlayerInputController : MonoBehaviour
     {
 #if UNITY_STANDALONE || UNITY_EDITOR
         ReadKeyboardInput();
-        ReadKeyboardDash();
 #endif
 
 #if UNITY_ANDROID || UNITY_IOS
@@ -29,27 +28,6 @@ public class PlayerInputController : MonoBehaviour
 
         if (movement.magnitude > 1f)
             movement.Normalize();
-    }
-
-    // ----- Dash 
-    private void ReadKeyboardDash()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Space");
-            dashPressed = true;
-        }
-    }
-    public void OnDashButtonPressed()
-    {
-        dashPressed = true;
-    }
-    public bool IsDashPressed()
-    {
-        if (!dashPressed) return false;
-
-        dashPressed = false; // reset sau khi đọc
-        return true;
     }
 
     // Mobile

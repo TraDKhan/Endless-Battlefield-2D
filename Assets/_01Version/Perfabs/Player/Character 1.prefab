@@ -167,9 +167,7 @@ GameObject:
   - component: {fileID: 4233705123792441473}
   - component: {fileID: 8805743294613574379}
   - component: {fileID: 1254702132603002885}
-  - component: {fileID: 8687697108299402382}
   - component: {fileID: 5020494767623490524}
-  - component: {fileID: 4753805396862610238}
   - component: {fileID: 2351441895952689743}
   - component: {fileID: 3211721895992312980}
   - component: {fileID: 211381670128725054}
@@ -355,7 +353,6 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: bcab7d4d65f995148a4e75aeaefa0bea, type: 2}
   movement: {fileID: 4803458157642007893}
   health: {fileID: 5020494767623490524}
-  mana: {fileID: 8687697108299402382}
 --- !u!114 &4803458157642007893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,9 +369,6 @@ MonoBehaviour:
   animationController: {fileID: 8805743294613574379}
   deadZone: 0.01
   directionThreshold: 0.35
-  dashDistance: 1
-  dashDuration: 0.15
-  dashEnergyCost: 20
 --- !u!114 &4233705123792441473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,20 +407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c56578acaa2b54c8f90f33499a0ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8687697108299402382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7061738363453199701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e9e09e6644fe74491b36a39d9a23fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regenAmount: 5
-  regenInterval: 1
 --- !u!114 &5020494767623490524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,20 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff0492f3e9f3314a810abdb985718c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4753805396862610238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7061738363453199701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e9e09e6644fe74491b36a39d9a23fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regenAmount: 5
-  regenInterval: 1
 --- !u!114 &2351441895952689743
 MonoBehaviour:
   m_ObjectHideFlags: 0

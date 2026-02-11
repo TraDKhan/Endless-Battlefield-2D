@@ -13,11 +13,8 @@ public class PlayerController : MonoBehaviour
     [Header("Controllers")]
     [SerializeField] private PlayerMovementController movement;
     [SerializeField] private PlayerHealthController health;
-    [SerializeField] private PlayerManaController mana;
 
     private bool initialized;
-
-    public PlayerManaController Mana => mana;
 
     private void Awake()
     {
@@ -30,7 +27,6 @@ public class PlayerController : MonoBehaviour
 
         movement ??= GetComponent<PlayerMovementController>();
         health ??= GetComponent<PlayerHealthController>();
-        mana ??= GetComponent<PlayerManaController>();
 
         InitializeStats();          //Stats trước
         InitializeControllers();    //Controller sau
@@ -55,13 +51,11 @@ public class PlayerController : MonoBehaviour
     {
         movement.Initialize(this);
         health.Initialize(this);
-        mana.Initialize(this);
     }
 
     public void ApplyStats()
     {
         health.RefreshFromStats();
-        mana.RefreshFromStats(true);
     }
 
     /// <summary>
