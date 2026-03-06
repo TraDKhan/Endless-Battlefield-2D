@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class LaserWeapon : Weapon
+public class LaserWeapon : WeaponBase
 {
     [Header("Laser Visual")]
     [SerializeField] private LineRenderer lineRenderer;

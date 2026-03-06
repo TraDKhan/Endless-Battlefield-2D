@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
-
     public CharacterStatSystem StatSystem { get; private set; }
 
     [Header("Data")]
@@ -13,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [Header("Controllers")]
     [SerializeField] private PlayerMovementController movement;
     [SerializeField] private PlayerHealthController health;
+    [SerializeField] private PlayerAnimationController anim;
+
+    public PlayerAnimationController Anim => anim;
 
     private bool initialized;
 
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
 
         movement ??= GetComponent<PlayerMovementController>();
         health ??= GetComponent<PlayerHealthController>();
+        anim ??= GetComponent<PlayerAnimationController>();
 
         InitializeStats();          //Stats trước
         InitializeControllers();    //Controller sau
@@ -103,5 +106,9 @@ public class PlayerController : MonoBehaviour
             Debug.Log($"{stat}: {StatSystem.GetStat(stat)}");
         }
     }
-
+    public void OnDes()
+    {
+        Time.timeScale = 0f;
+        Destroy(gameObject);
+    }
 }

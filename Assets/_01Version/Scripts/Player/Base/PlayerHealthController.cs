@@ -10,7 +10,6 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     public event Action<int, int> OnHealthChanged;
     public event Action OnDeath;
 
-    private PlayerController owner;
     private CharacterStatSystem stats;
 
     private bool initialized;
@@ -20,7 +19,6 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
 
     public void Initialize(PlayerController controller)
     {
-        owner = controller;
         stats = controller.StatSystem;
     }
 
@@ -103,13 +101,16 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     #endregion
 
     #region Death
-
+    [ContextMenu ("Die")]
+    public void TestDie() => Die();
     private void Die()
     {
         if (deathInvoked) return;
 
         deathInvoked = true;
         OnDeath?.Invoke();
+        Debug.Log("Player Die");
+        PlayerController.Instance.Anim?.PlayDeath();
     }
 
     #endregion

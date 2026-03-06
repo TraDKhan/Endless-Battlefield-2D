@@ -15,7 +15,16 @@ public class WeaponData : ScriptableObject
 
     [Header("Socket")]
     public WeaponSlotType slotType;
-
+    public WeaponData()
+    {
+        baseStats = new List<WStatEntry>
+        {
+            new WStatEntry { statType = WeaponStatType.Damage, value = 10f },
+            new WStatEntry { statType = WeaponStatType.Cooldown, value = 1f },
+            new WStatEntry { statType = WeaponStatType.AttackRange, value = 5f },
+            new WStatEntry { statType = WeaponStatType.CritChance, value = 0.1f }
+        };
+    }
     public float GetBaseStat(WeaponStatType type)
     {
         foreach (var entry in baseStats)

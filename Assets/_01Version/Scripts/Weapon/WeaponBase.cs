@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class WeaponBase : MonoBehaviour
 {
     protected WeaponController controller;
     protected WeaponStats stats;

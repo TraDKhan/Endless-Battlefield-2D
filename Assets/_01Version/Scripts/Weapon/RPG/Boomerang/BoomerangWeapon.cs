@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BoomerangWeapon : Weapon
+public class BoomerangWeapon : WeaponBase
 {
     protected override void OnFireLogic()
     {

@@ -17,6 +17,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip gameWinClip;
     public AudioClip gameLoseClip;
 
+    [Header ("VFX sounds")]
+    public AudioClip cooldownClip;
+    public AudioClip shotClip;
+
     private float musicVolume = 1f;
     private float sfxVolume = 1f;
 
@@ -96,7 +100,8 @@ public class AudioManager : MonoBehaviour
     public void PlayPickUpItem() => PlaySFX(pickUpItemClip);
     public void PlayGameWin() => PlaySFX(gameWinClip);
     public void PlayGameLose() => PlaySFX(gameLoseClip);
-
+    public void PlayCooldown() => PlaySFX(cooldownClip);
+    public void PlayShoot() => PlaySFX(shotClip);
     // ------------------ VOLUME ------------------
     public void SetMusicVolume(float volume)
     {

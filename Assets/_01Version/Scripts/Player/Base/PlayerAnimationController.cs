@@ -17,11 +17,6 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetFloat("MoveY", lastMoveDir.y);
     }
 
-    public void SetDash(bool isDashing)
-    {
-        animator.SetBool("IsDashing", isDashing);
-    }
-
     public void PlayHit()
     {
         animator.SetTrigger("Hit");
@@ -29,6 +24,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void PlayDeath()
     {
+        Debug.Log("Gọi aniamtion");
         animator.SetTrigger("Death");
     }
 }

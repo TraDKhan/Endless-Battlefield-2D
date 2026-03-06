@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PistolWeapon : Weapon
+public class PistolWeapon : WeaponBase
 {
     protected override void OnFireLogic()
     {
@@ -17,6 +17,7 @@ public class PistolWeapon : Weapon
     void SpawnProjectile(Vector2 direction, Transform target)
     {
         Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(controller.Data.projectilePrefab);
+        AudioManager.Instance?.PlayShoot();
 
         if (bullet == null)
         {

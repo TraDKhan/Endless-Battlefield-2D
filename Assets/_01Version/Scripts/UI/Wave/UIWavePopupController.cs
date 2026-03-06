@@ -51,6 +51,7 @@ public class UIWavePopupController : MonoBehaviour
         yield return currentView.PlayTitleIn();
         yield return new WaitForSeconds(titleHoldTime);
         yield return currentView.PlayTitleOut();
+        AudioManager.Instance.PlayCooldown();
         yield return currentView.PlayCountdown(countdownTime);
 
         waveEventChannel?.OnWaveStart?.Invoke();

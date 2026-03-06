@@ -9,11 +9,11 @@ public class WeaponController : MonoBehaviour
     public WeaponStats Stats { get; private set; }
     public WeaponStatSystem StatSystem { get; private set; }
 
-    private Weapon weapon;
+    private WeaponBase weapon;
 
     private void Awake()
     {
-        weapon = GetComponent<Weapon>();
+        weapon = GetComponent<WeaponBase>();
 
         StatSystem = new WeaponStatSystem();
 

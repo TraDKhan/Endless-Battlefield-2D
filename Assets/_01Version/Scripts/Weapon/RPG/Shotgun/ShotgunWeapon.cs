@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShotgunWeapon : Weapon
+public class ShotgunWeapon : WeaponBase
 {
     [Header("Shotgun")]
     [SerializeField] private float spreadAngle = 30f;
