@@ -13,12 +13,12 @@ public class PlayerUpgradeData : UpgradeData
 
     public override void Apply(UpgradeSystem system)
     {
-        system.Player.Apply(this);
+        system.PlayerSystem.Apply(this);
     }
 
     public override int GetCurrentLevel(UpgradeSystem system)
     {
-        return system.Player.GetLevel(statType);
+        return system.PlayerSystem.GetLevel(statType);
     }
 
     public override string GetValueText(UpgradeSystem system)

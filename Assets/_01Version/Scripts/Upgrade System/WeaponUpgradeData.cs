@@ -18,7 +18,8 @@ public class WeaponUpgradeData : UpgradeData
 
     public override void Apply(UpgradeSystem system)
     {
-        system.ApplyWeaponStatsUpgrade(this);
+        Debug.Log("Weapon Stat");
+        system.WeaponSystem.Apply(this);
     }
 
     // ======================
@@ -27,7 +28,7 @@ public class WeaponUpgradeData : UpgradeData
 
     public override int GetCurrentLevel(UpgradeSystem system)
     {
-        return system.Weapon.GetLevel(statType);
+        return system.WeaponSystem.GetLevel(statType);
     }
 
     public override string GetLevelText(UpgradeSystem system)

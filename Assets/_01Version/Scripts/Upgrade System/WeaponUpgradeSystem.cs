@@ -5,12 +5,9 @@ public class WeaponUpgradeSystem : MonoBehaviour, IStatSource<WeaponStatType>
 {
     private readonly Dictionary<WeaponStatType, StatUpgrade> upgrades = new();
 
-    // =========================
-    // APPLY UPGRADE
-    // =========================
-    public void ApplyUpgrade(WeaponUpgradeData data)
+    public void Apply(WeaponUpgradeData data)
     {
-        if (!upgrades.TryGetValue(data.statType, out var up))
+        if(!upgrades.TryGetValue(data.statType, out var up))
         {
             up = new StatUpgrade
             {
@@ -21,7 +18,22 @@ public class WeaponUpgradeSystem : MonoBehaviour, IStatSource<WeaponStatType>
 
         up.level++;
         upgrades[data.statType] = up;
+
+        WeaponController.Instance.AddStatSource(this);
+        WeaponController.Instance.StatSystem.Recalculate();
+        WeaponController.Instance.WeaponBase.OnStatsChanged();
     }
+
+    /* Todo: áp dụng chỉ số cho toàn bộ vũ khí
+    private void NotifyWeapons()
+    {
+        foreach (var weapon in FindObjectsByType<WeaponController>(FindObjectsSortMode.None))
+        {
+            weapon.StatSystem.Recalculate();
+            weapon.OnStatsChanged();
+        }
+    }
+    */
 
     // =========================
     // IStatSource
@@ -30,6 +42,7 @@ public class WeaponUpgradeSystem : MonoBehaviour, IStatSource<WeaponStatType>
     {
         foreach (var kv in upgrades)
         {
+            Debug.Log($"Weapon Upgrade {kv.Key} = {kv.Value.Value}");
             yield return new StatModifier<WeaponStatType>
             {
                 statType = kv.Key,

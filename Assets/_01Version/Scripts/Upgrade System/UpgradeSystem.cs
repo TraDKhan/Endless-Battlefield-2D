@@ -19,8 +19,8 @@ public class UpgradeSystem : MonoBehaviour
 
     private readonly HashSet<UnLockWeaponUpgrade> unlockedWeapons = new();
 
-    public WeaponUpgradeSystem Weapon => weaponSystem;
-    public PlayerUpgradeSystem Player => playerSystem;
+    public WeaponUpgradeSystem WeaponSystem => weaponSystem;
+    public PlayerUpgradeSystem PlayerSystem => playerSystem;
 
     public event Action<List<UpgradeData>> OnShowUpgradeUI;
     private void Awake()
@@ -38,6 +38,11 @@ public class UpgradeSystem : MonoBehaviour
         var playerLevelSystem = FindFirstObjectByType<PlayerLevelSystem>();
         if (playerLevelSystem != null)
             playerLevelSystem.OnLevelUp += OnPlayerLevelUp;
+
+        //đăng ký cập nhật stats
+        var player = PlayerController.Instance;
+        if (player != null)
+            player.StatSystem.AddSource(playerSystem);
     }
 
     private void Update()
@@ -136,11 +141,6 @@ public class UpgradeSystem : MonoBehaviour
     public bool HasWeapon(UnLockWeaponUpgrade data)
     {
         return unlockedWeapons.Contains(data);
-    }
-
-    public void ApplyWeaponStatsUpgrade(WeaponUpgradeData data)
-    {
-        weaponSystem.ApplyUpgrade(data);
     }
     #endregion
 

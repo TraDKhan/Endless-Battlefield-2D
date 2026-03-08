@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Hero_Health
   m_EditorClassIdentifier: 
   upgradeName: Health
-  icon: {fileID: 21300000, guid: ae6072c860f3f8845837a36faab0cb65, type: 3}
+  icon: {fileID: 21300000, guid: 9bf2a25defba8417baf7208f5013181c, type: 3}
   upgradeType: 0
   description: Player Stats Ugrade
   statType: 0
   valuePerLevel: 100
-  modType: 0

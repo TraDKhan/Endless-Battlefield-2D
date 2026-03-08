@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class PlayerUpgradeSystem : IStatSource<CharacterStatType>
+public class PlayerUpgradeSystem : MonoBehaviour, IStatSource<CharacterStatType>
 {
     private readonly Dictionary<CharacterStatType, StatUpgrade> upgrades = new();
 
@@ -17,12 +18,14 @@ public class PlayerUpgradeSystem : IStatSource<CharacterStatType>
 
         up.level++;
         upgrades[data.statType] = up;
+        PlayerController.Instance.RecalculateStats();
     }
 
     public IEnumerable<StatModifier<CharacterStatType>> GetModifiers()
     {
         foreach (var kv in upgrades)
         {
+            Debug.Log($"Upgrade {kv.Key} = {kv.Value.Value}");
             yield return new StatModifier<CharacterStatType>
             {
                 statType = kv.Key,

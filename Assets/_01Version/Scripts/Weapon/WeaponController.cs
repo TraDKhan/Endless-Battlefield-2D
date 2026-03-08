@@ -2,6 +2,7 @@
 
 public class WeaponController : MonoBehaviour
 {
+    public static WeaponController Instance;
     [Header("Data")]
     [SerializeField] private WeaponData weaponData;
 
@@ -10,9 +11,12 @@ public class WeaponController : MonoBehaviour
     public WeaponStatSystem StatSystem { get; private set; }
 
     private WeaponBase weapon;
+    public WeaponBase WeaponBase => weapon;
 
     private void Awake()
     {
+        //todo: tối ưu singleton
+        Instance = this;
         weapon = GetComponent<WeaponBase>();
 
         StatSystem = new WeaponStatSystem();
@@ -23,6 +27,7 @@ public class WeaponController : MonoBehaviour
 
         weapon.Initialize(this);
     }
+
     private void InitBaseStats()
     {
         foreach (var entry in weaponData.baseStats)
