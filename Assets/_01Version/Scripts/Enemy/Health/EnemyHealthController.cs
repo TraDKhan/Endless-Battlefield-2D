@@ -27,18 +27,19 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isCirt = false)
     {
-        if (isDead || damage <= 0)
-            return;
+        if (isDead || damage <= 0) return;
 
+        //phát audio
         AudioManager.Instance?.PlayEnemyHit();
+
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-        PopupController.Instance.ShowDamage(damage, transform.position + Vector3.up * 0.5f);
+        PopupController.Instance.ShowDamage(damage, transform.position + Vector3.up * 0.5f, isCirt);
 
         if (currentHealth == 0)
             Die();
@@ -60,6 +61,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
     }
     private void Start()
     {
-        Init(1000);
+        Init(10000);
     }
 }

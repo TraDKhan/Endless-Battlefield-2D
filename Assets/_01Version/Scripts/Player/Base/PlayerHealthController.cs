@@ -57,7 +57,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
 
     #region Damage / Heal
 
-    public void TakeDamage(int rawDamage)
+    public void TakeDamage(int rawDamage, bool isCrit = false)
     {
         if (rawDamage <= 0 || IsDead) return;
 

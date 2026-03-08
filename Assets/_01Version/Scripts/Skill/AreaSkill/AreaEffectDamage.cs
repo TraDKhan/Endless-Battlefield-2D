@@ -6,16 +6,18 @@ public class AreaEffectDamage : MonoBehaviour
     private int damage;
     private float tickInterval;
     private float timer;
+    private float cirtChance;
 
     private readonly HashSet<EnemyHealthController> targets = new();
     private readonly List<EnemyHealthController> toAdd = new();
     private readonly List<EnemyHealthController> toRemove = new();
 
-    public void Init(int dmg, float tick)
+    public void Init(int dmg, float tick, float cirt)
     {
         damage = dmg;
         tickInterval = tick;
         timer = tickInterval;
+        cirtChance = cirt;
     }
 
     private void Update()
@@ -34,7 +36,17 @@ public class AreaEffectDamage : MonoBehaviour
         if (timer > 0f) return;
 
         foreach (var t in targets)
-            t.TakeDamage(damage);
+        {
+            bool isCrit = Random.value < cirtChance;
+            Debug.Log(cirtChance + ": " + isCrit);
+            float finalDamage = damage;
+
+            if (isCrit)
+                finalDamage *= 1.5f;
+
+            t.TakeDamage((int)finalDamage, isCrit);
+
+        }
 
         timer = tickInterval;
     }

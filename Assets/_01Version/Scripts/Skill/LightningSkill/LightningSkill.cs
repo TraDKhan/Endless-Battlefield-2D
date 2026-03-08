@@ -14,6 +14,7 @@ public class LightningSkill : BaseSkill
 
     // ===== Cached per level =====
     private int damage;
+
     private int strikes;
     private float radius;
     private float cooldown;
@@ -75,10 +76,6 @@ public class LightningSkill : BaseSkill
             AudioManager.Instance?.PlayCastLighning();
             SpawnLightningFX(target.transform.position);
             yield return new WaitForSeconds(0.2f);
-            //var hp = target.GetComponent<EnemyHealthController>();
-            //if (hp == null) continue;
-
-            //hp.TakeDamage(damage);
         }
     }
 

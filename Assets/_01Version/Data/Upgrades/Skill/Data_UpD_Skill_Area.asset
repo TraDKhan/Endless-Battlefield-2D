@@ -28,6 +28,8 @@ MonoBehaviour:
       value: 2
     - statType: 6
       value: 2
+    - statType: 1
+      value: 0.5
   - baseStats:
     - statType: 0
       value: 30

@@ -13,9 +13,9 @@ public class AreaEffect : MonoBehaviour
         damageLogic = GetComponent<AreaEffectDamage>();
     }
 
-    public void Init(int damage, float tickInterval)
+    public void Init(int damage, float tickInterval, float cirtChane)
     {
-        damageLogic.Init(damage, tickInterval);
+        damageLogic.Init(damage, tickInterval, cirtChane);
     }
 
     public void SetScale(float diameter)

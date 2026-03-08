@@ -15,16 +15,14 @@ MonoBehaviour:
   weaponName: Laser
   baseStats:
   - statType: 0
-    value: 1
+    value: 20
   - statType: 1
-    value: 3
+    value: 0.5
   - statType: 2
     value: 3
   - statType: 3
-    value: 10
+    value: 5
   - statType: 4
     value: 1
-  - statType: 5
-    value: 0
-  weaponPrefab: {fileID: 0}
+  projectilePrefab: {fileID: 0}
   slotType: 0

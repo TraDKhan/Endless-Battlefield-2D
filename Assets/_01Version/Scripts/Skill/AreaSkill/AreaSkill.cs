@@ -10,6 +10,7 @@ public class AreaSkill : BaseSkill
     private AreaEffect activeEffect;
     private float cooldownTimer;
     private float lifeTimer;
+    private float cirtChane;
 
     // ===================
     // DEBUG
@@ -59,11 +60,12 @@ public class AreaSkill : BaseSkill
         float radius = skillStats.GetStat(SkillStatType.AttackRange);
         float duration = skillStats.GetStat(SkillStatType.Duration);
         float cooldown = skillStats.GetStat(SkillStatType.Cooldown);
+        float cirtChane = skillStats.GetStat(SkillStatType.CritChance);
 
         activeEffect = Instantiate(areaEffectPrefab, owner);
         activeEffect.transform.localPosition = Vector3.zero;
 
-        activeEffect.Init(damage, tickInterval);
+        activeEffect.Init(damage, tickInterval, cirtChane);
 
         float diameter = radius * 2f;
         activeEffect.SetScale(diameter);

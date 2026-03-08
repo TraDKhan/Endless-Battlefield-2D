@@ -135,11 +135,13 @@ public class Bullet : MonoBehaviour, IPoolable
     void ApplyDamage(IDamageable target)
     {
         bool isCrit = Random.value < ctx.CritChance;
-        float finalDamage = isCrit
-            ? ctx.Damage * 1.5f
-            : ctx.Damage;
 
-        target.TakeDamage((int)finalDamage);
+        float finalDamage = ctx.Damage;
+
+        if (isCrit)
+            finalDamage *= 1.5f;
+
+        target.TakeDamage((int)finalDamage, isCrit);
     }
     #endregion
     // ===== UTIL ===== \\

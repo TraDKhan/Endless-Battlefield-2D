@@ -123,7 +123,7 @@ public class LaserWeapon : WeaponBase
                 ? damagePerTick * 1.5f
                 : damagePerTick;
 
-            target.TakeDamage(Mathf.RoundToInt(finalDamage));
+            target.TakeDamage(Mathf.RoundToInt(finalDamage), isCrit);
         }
     }
     // ===== VISUAL
