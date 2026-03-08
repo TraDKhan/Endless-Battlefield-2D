@@ -20,6 +20,10 @@ public class AudioManager : MonoBehaviour
     [Header ("VFX sounds")]
     public AudioClip cooldownClip;
     public AudioClip shotClip;
+    [SerializeField] private AudioClip bmHit;
+    [SerializeField] private AudioClip bmSpwn;
+    [SerializeField] private AudioClip enemyHit;
+    [SerializeField] private AudioClip castLightning;
 
     private float musicVolume = 1f;
     private float sfxVolume = 1f;
@@ -102,6 +106,10 @@ public class AudioManager : MonoBehaviour
     public void PlayGameLose() => PlaySFX(gameLoseClip);
     public void PlayCooldown() => PlaySFX(cooldownClip);
     public void PlayShoot() => PlaySFX(shotClip);
+    public void PlayBommerangeHit() => PlaySFX(bmHit);
+    public void PlayBoomerangSpawm() => PlaySFX(bmSpwn);
+    public void PlayEnemyHit() => PlaySFX(enemyHit);
+    public void PlayCastLighning() => PlaySFX(castLightning);
     // ------------------ VOLUME ------------------
     public void SetMusicVolume(float volume)
     {

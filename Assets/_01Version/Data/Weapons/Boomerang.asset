@@ -25,6 +25,6 @@ MonoBehaviour:
   - statType: 4
     value: 1
   - statType: 5
-    value: 0
-  weaponPrefab: {fileID: 0}
+    value: 2
+  projectilePrefab: {fileID: 1443051900127349426, guid: 51bcbf4c158c4d942987df0a8385e5ae, type: 3}
   slotType: 0

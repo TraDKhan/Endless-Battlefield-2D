@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80074b8ecd9e4b46a72cd47ae0740b6, type: 3}
+  m_Name: Data_UpD_Weapon_Damage
+  m_EditorClassIdentifier: 
+  upgradeName: Damage
+  icon: {fileID: -3164809056393425246, guid: 988d16f0b1a8c7d4eb74ae1f00516a16, type: 3}
+  upgradeType: 1
+  description: Weapon Upgrade
+  statType: 0
+  valuePerLevel: 111

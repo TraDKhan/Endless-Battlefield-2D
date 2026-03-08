@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class LightningSkill : BaseSkill
 {
@@ -36,7 +37,7 @@ public class LightningSkill : BaseSkill
         cooldownTimer -= Time.deltaTime;
         if (cooldownTimer <= 0f)
         {
-            CastLightning();
+            StartCoroutine(CastLightning());
             cooldownTimer = cooldown;
         }
     }
@@ -57,7 +58,7 @@ public class LightningSkill : BaseSkill
     // =========================
     // CORE LOGIC
     // =========================
-    private void CastLightning()
+    private IEnumerator CastLightning()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
             owner.position,
@@ -65,18 +66,19 @@ public class LightningSkill : BaseSkill
             enemyLayer
         );
 
-        if (enemies.Length == 0) return;
+        if (enemies.Length == 0) yield break;
 
         for (int i = 0; i < strikes; i++)
         {
             var target = enemies[Random.Range(0, enemies.Length)];
 
+            AudioManager.Instance?.PlayCastLighning();
             SpawnLightningFX(target.transform.position);
+            yield return new WaitForSeconds(0.2f);
+            //var hp = target.GetComponent<EnemyHealthController>();
+            //if (hp == null) continue;
 
-            var hp = target.GetComponent<EnemyHealthController>();
-            if (hp == null) continue;
-
-            hp.TakeDamage(damage);
+            //hp.TakeDamage(damage);
         }
     }
 

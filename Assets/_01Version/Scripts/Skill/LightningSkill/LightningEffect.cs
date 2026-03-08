@@ -14,18 +14,30 @@ public class LightningEffect : MonoBehaviour
     // GỌI TỪ ANIMATION EVENT
     public void DealDamage()
     {
-        Collider2D hit = Physics2D.OverlapCircle(
-            transform.position,
-            0.6f,
-            enemyLayer
-        );
+        //Collider2D hit = Physics2D.OverlapCircle(
+        //    transform.position,
+        //    0.6f,
+        //    enemyLayer
+        //);
 
-        if (hit == null) return;
+        //if (hit == null) return;
 
-        var hp = hit.GetComponent<EnemyHealthController>();
-        if (hp != null)
+        //var hp = hit.GetComponent<EnemyHealthController>();
+        //if (hp != null)
+        //{
+        //    hp.TakeDamage(damage);
+        //}
+        Collider2D[] hits = Physics2D.OverlapCircleAll(
+    transform.position,
+    0.6f,
+    enemyLayer
+);
+
+        foreach (var hit in hits)
         {
-            hp.TakeDamage(damage);
+            var hp = hit.GetComponent<EnemyHealthController>();
+            if (hp != null)
+                hp.TakeDamage(damage);
         }
     }
 

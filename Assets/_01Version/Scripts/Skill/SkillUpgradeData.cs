@@ -26,6 +26,12 @@ public class SkillUpgradeData : UpgradeData
     public override int GetCurrentLevel(UpgradeSystem system)
         => system.GetSkillLevel(this);
 
+    public override string GetLevelText(UpgradeSystem system)
+    {
+        if (GetCurrentLevel(system) == 0) return "Unlock Skill";
+        else 
+            return $"Level {GetCurrentLevel(system).ToString()}";
+    }
     public override string GetValueText(UpgradeSystem system)
     {
         int level = GetCurrentLevel(system);

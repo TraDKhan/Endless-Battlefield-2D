@@ -32,6 +32,7 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         if (isDead || damage <= 0)
             return;
 
+        AudioManager.Instance?.PlayEnemyHit();
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
 

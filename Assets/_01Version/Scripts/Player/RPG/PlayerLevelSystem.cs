@@ -32,6 +32,12 @@ public class PlayerLevelSystem : MonoBehaviour
     [ContextMenu("Add Exp")]
     public void test()
     {
-        AddEXP(1000);
+        AddEXP(250);
+    }
+    [ContextMenu("Level UP")]
+    public void testlevelup()
+    {
+        CurrentLevel++;
+        OnLevelUp?.Invoke(CurrentLevel);
     }
 }

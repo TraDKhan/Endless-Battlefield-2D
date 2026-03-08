@@ -26,34 +26,36 @@ public class OrbitalSkill : BaseSkill
         float speed = skillStats.GetStat(SkillStatType.RotateSpeed);
         float damage = skillStats.GetStat(SkillStatType.Damage);
 
-        SyncOrbCount(targetCount, radius, speed, damage);
+        SyncOrbCount(targetCount);
+        UpdateOrbStats(radius, speed, damage);
         RecalculateAngles();
     }
 
-    private void SyncOrbCount(int count, float radius, float speed, float damage)
+    private void SyncOrbCount(int count)
     {
-        // Spawn thêm
+        // Spawn thêm orb
         while (orbs.Count < count)
         {
-            var orbObj = Instantiate(orbPrefab);
-            orbObj.transform.SetParent(transform);
+            GameObject orbObj = Instantiate(orbPrefab, transform);
+            OrbProjectile orb = orbObj.GetComponent<OrbProjectile>();
 
-            var orb = orbObj.GetComponent<OrbProjectile>();
             orbs.Add(orb);
-
-            orb.Init(owner, radius, speed, 0f, damage);
         }
 
-        // Xóa bớt (nếu có debuff)
+        // Xóa bớt orb
         while (orbs.Count > count)
         {
             Destroy(orbs[^1].gameObject);
             orbs.RemoveAt(orbs.Count - 1);
         }
+    }
 
-        // Update stat
+    private void UpdateOrbStats(float radius, float speed, float damage)
+    {
         foreach (var orb in orbs)
-            orb.Init(owner, radius, speed, 0f, damage);
+        {
+            orb.SetStats(owner, radius, speed, damage);
+        }
     }
 
     private void RecalculateAngles()
@@ -64,13 +66,9 @@ public class OrbitalSkill : BaseSkill
         float step = 360f / count;
 
         for (int i = 0; i < count; i++)
-            orbs[i].Init(
-                owner,                          
-                skillStats.
-                GetStat(SkillStatType.AttackRange),                          
-                skillStats.GetStat(SkillStatType.RotateSpeed),                          
-                step * i,                          
-                skillStats.GetStat(SkillStatType.Damage)
-            );
+        {
+            float angle = step * i;
+            orbs[i].SetAngle(angle);
+        }
     }
 }

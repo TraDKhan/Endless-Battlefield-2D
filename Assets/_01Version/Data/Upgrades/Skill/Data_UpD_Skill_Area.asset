@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0966424efb1e0f49a01391fcd8c4fc9, type: 3}
+  m_Name: Data_UpD_Skill_Area
+  m_EditorClassIdentifier: 
+  upgradeName: Area Skill
+  icon: {fileID: -321360291, guid: a5b76d47f390b98468d12355e4fdf68f, type: 3}
+  upgradeType: 2
+  description: Creates a zone around the character, dealing continuous damage to
+    targets within that zone
+  skillPrefab: {fileID: 3262302093279694285, guid: d3cdca581c199594791e50b0108da9f9, type: 3}
+  levels:
+  - baseStats:
+    - statType: 0
+      value: 20
+    - statType: 2
+      value: 2
+    - statType: 3
+      value: 2
+    - statType: 6
+      value: 2
+  - baseStats:
+    - statType: 0
+      value: 30
+    - statType: 2
+      value: 1
+    - statType: 3
+      value: 4
+    - statType: 6
+      value: 5

@@ -154,6 +154,7 @@ public class BoomerangProjectile : MonoBehaviour, IPoolable
             ? ctx.Damage * 1.5f
             : ctx.Damage;
 
+        AudioManager.Instance.PlayBommerangeHit();
         target.TakeDamage(Mathf.RoundToInt(damage));
 
         if (target is IKnockbackable kb)

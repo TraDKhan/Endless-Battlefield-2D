@@ -24,6 +24,7 @@ public class BoomerangWeapon : WeaponBase
     // ===== SPAWN
     void SpawnBoomerang(WeaponContext ctx, Vector3 direction)
     {
+        AudioManager.Instance.PlayBoomerangSpawm();
         BoomerangProjectile boomerang =
             ObjectPoolManager.Instance
                 .Spawn<BoomerangProjectile>(controller.Data.projectilePrefab);

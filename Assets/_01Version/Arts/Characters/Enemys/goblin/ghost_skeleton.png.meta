@@ -1,0 +1,1742 @@
+fileFormatVersion: 2
+guid: fcc2925cfa9f4394ba53dfdda086d877
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -938316628726244444
+    second: ghost_skeleton_0
+  - first:
+      213: -3981451559106070601
+    second: ghost_skeleton_1
+  - first:
+      213: 8079776104276405358
+    second: ghost_skeleton_2
+  - first:
+      213: -2840611640505587544
+    second: ghost_skeleton_3
+  - first:
+      213: -5166713539535876448
+    second: ghost_skeleton_4
+  - first:
+      213: 7300722926838993032
+    second: ghost_skeleton_5
+  - first:
+      213: -4686773710382474720
+    second: ghost_skeleton_6
+  - first:
+      213: 5368665769178456949
+    second: ghost_skeleton_7
+  - first:
+      213: 944883411080848195
+    second: ghost_skeleton_8
+  - first:
+      213: 9182965406324122372
+    second: ghost_skeleton_9
+  - first:
+      213: -4563953392610632887
+    second: ghost_skeleton_10
+  - first:
+      213: -4860510833210205582
+    second: ghost_skeleton_11
+  - first:
+      213: -3545211216198723639
+    second: ghost_skeleton_12
+  - first:
+      213: -863079534463222385
+    second: ghost_skeleton_13
+  - first:
+      213: 4756692239656496432
+    second: ghost_skeleton_14
+  - first:
+      213: -5120387556354141226
+    second: ghost_skeleton_15
+  - first:
+      213: -8829012986166303704
+    second: ghost_skeleton_16
+  - first:
+      213: 580925781081912328
+    second: ghost_skeleton_17
+  - first:
+      213: -2496693049946503157
+    second: ghost_skeleton_18
+  - first:
+      213: -1409694589733183270
+    second: ghost_skeleton_19
+  - first:
+      213: -5949501962450434494
+    second: ghost_skeleton_20
+  - first:
+      213: 496621212870753991
+    second: ghost_skeleton_21
+  - first:
+      213: -6218480173245029036
+    second: ghost_skeleton_22
+  - first:
+      213: -522872482364616437
+    second: ghost_skeleton_23
+  - first:
+      213: -7488531629782410754
+    second: ghost_skeleton_24
+  - first:
+      213: -6264703959667784267
+    second: ghost_skeleton_25
+  - first:
+      213: 1290198456124695809
+    second: ghost_skeleton_26
+  - first:
+      213: -5220830082047411863
+    second: ghost_skeleton_27
+  - first:
+      213: -4174075478474037212
+    second: ghost_skeleton_28
+  - first:
+      213: -5720266974508429771
+    second: ghost_skeleton_29
+  - first:
+      213: 833933107809500469
+    second: ghost_skeleton_30
+  - first:
+      213: 8694418144486408421
+    second: ghost_skeleton_31
+  - first:
+      213: 7992174445259775434
+    second: ghost_skeleton_32
+  - first:
+      213: 4673473070296064550
+    second: ghost_skeleton_33
+  - first:
+      213: -85947350827316861
+    second: ghost_skeleton_34
+  - first:
+      213: 3603006815518619915
+    second: ghost_skeleton_35
+  - first:
+      213: 8870986986957512837
+    second: ghost_skeleton_36
+  - first:
+      213: -5208473439787146392
+    second: ghost_skeleton_37
+  - first:
+      213: 1922372125184365095
+    second: ghost_skeleton_38
+  - first:
+      213: -5068780375326245013
+    second: ghost_skeleton_39
+  - first:
+      213: -7810956142003050944
+    second: ghost_skeleton_40
+  - first:
+      213: 4620341424310014192
+    second: ghost_skeleton_41
+  - first:
+      213: 8133602383145007644
+    second: ghost_skeleton_42
+  - first:
+      213: -7538398820307825892
+    second: ghost_skeleton_43
+  - first:
+      213: -4186694732416498619
+    second: ghost_skeleton_44
+  - first:
+      213: -8126397428195325444
+    second: ghost_skeleton_45
+  - first:
+      213: 2037263005527585319
+    second: ghost_skeleton_46
+  - first:
+      213: 924017889304006552
+    second: ghost_skeleton_47
+  - first:
+      213: 4318075071844792735
+    second: ghost_skeleton_48
+  - first:
+      213: -6312525586649142434
+    second: ghost_skeleton_49
+  - first:
+      213: 6389505599903532627
+    second: ghost_skeleton_50
+  - first:
+      213: -6939871648202001270
+    second: ghost_skeleton_51
+  - first:
+      213: -4771900008199952640
+    second: ghost_skeleton_52
+  - first:
+      213: 8254555686098231634
+    second: ghost_skeleton_53
+  - first:
+      213: -2944543218154402519
+    second: ghost_skeleton_54
+  - first:
+      213: -6418037490997440268
+    second: ghost_skeleton_55
+  - first:
+      213: -6478910561961407208
+    second: ghost_skeleton_56
+  - first:
+      213: -1929775986236972743
+    second: ghost_skeleton_57
+  - first:
+      213: -400508864611566405
+    second: ghost_skeleton_58
+  - first:
+      213: -3706531662451249381
+    second: ghost_skeleton_59
+  - first:
+      213: 2880294487402285891
+    second: ghost_skeleton_60
+  - first:
+      213: 8588741438284754934
+    second: ghost_skeleton_61
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ghost_skeleton_0
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 716
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ab1ee16ffd6af2f0800000000000000
+      internalID: -938316628726244444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 716
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b7be01d6ea0fb8c0800000000000000
+      internalID: -3981451559106070601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_2
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 716
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6ca510fe81212070800000000000000
+      internalID: 8079776104276405358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 716
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a823de53ce1498d0800000000000000
+      internalID: -2840611640505587544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_4
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 716
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ae43c309652c48b0800000000000000
+      internalID: -5166713539535876448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_5
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 716
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 880d9c132d0615560800000000000000
+      internalID: 7300722926838993032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_6
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 716
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02a530a542c35feb0800000000000000
+      internalID: -4686773710382474720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_7
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 716
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5736ea99215518a40800000000000000
+      internalID: 5368665769178456949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_8
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 604
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34322a7c476ec1d00800000000000000
+      internalID: 944883411080848195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_9
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 604
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40366a43262707f70800000000000000
+      internalID: 9182965406324122372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_10
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 604
+        width: 24
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94b110ef19499a0c0800000000000000
+      internalID: -4563953392610632887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_11
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 611
+        width: 33
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27a5197362ffb8cb0800000000000000
+      internalID: -4860510833210205582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_12
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 604
+        width: 20
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c79eb4ae21eccec0800000000000000
+      internalID: -3545211216198723639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_13
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 604
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8df8677cb9b504f0800000000000000
+      internalID: -863079534463222385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_14
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 600
+        width: 32
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03d2592d36a230240800000000000000
+      internalID: 4756692239656496432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_15
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 601
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d35e2f75aab0f8b0800000000000000
+      internalID: -5120387556354141226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_16
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 604
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8242f3a977b097580800000000000000
+      internalID: -8829012986166303704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_17
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 492
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 804f0468becdf0800800000000000000
+      internalID: 580925781081912328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_18
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 492
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0880cc26e6f95dd0800000000000000
+      internalID: -2496693049946503157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_19
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 492
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad0e9215d32cf6ce0800000000000000
+      internalID: -1409694589733183270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_20
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 492
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24607a9ac7f1f6da0800000000000000
+      internalID: -5949501962450434494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_21
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 493
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ceb515ac5a54e600800000000000000
+      internalID: 496621212870753991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_22
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 499
+        width: 25
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 455abe6ba3583b9a0800000000000000
+      internalID: -6218480173245029036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_23
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 490
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0194d16f326eb8f0800000000000000
+      internalID: -522872482364616437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_24
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 490
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef9da8d9824631890800000000000000
+      internalID: -7488531629782410754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_25
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 378
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b5c405c0fc4f09a0800000000000000
+      internalID: -6264703959667784267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_26
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 377
+        width: 28
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 105e11bf8a4b7e110800000000000000
+      internalID: 1290198456124695809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_27
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 378
+        width: 32
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 969f3e693b2eb87b0800000000000000
+      internalID: -5220830082047411863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_28
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 378
+        width: 36
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 428e2efa774b216c0800000000000000
+      internalID: -4174075478474037212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_29
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 377
+        width: 37
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53ec6047e778d90b0800000000000000
+      internalID: -5720266974508429771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_30
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 377
+        width: 35
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53d3c614eb9b29b00800000000000000
+      internalID: 833933107809500469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_31
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 378
+        width: 32
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e0c2d6cc37c8a870800000000000000
+      internalID: 8694418144486408421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_32
+      rect:
+        serializedVersion: 2
+        x: 813
+        y: 379
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acdd9a84058e9ee60800000000000000
+      internalID: 7992174445259775434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_33
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 270
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 622e95e0ff28bd040800000000000000
+      internalID: 4673473070296064550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_34
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 271
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3894d8cf657aecef0800000000000000
+      internalID: -85947350827316861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_35
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 279
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b097c42fb93700230800000000000000
+      internalID: 3603006815518619915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_36
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 274
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58027b40aa31c1b70800000000000000
+      internalID: 8870986986957512837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_37
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 269
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8632e6f8009c7b7b0800000000000000
+      internalID: -5208473439787146392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_38
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 268
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7221abf3343adaa10800000000000000
+      internalID: 1922372125184365095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_39
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 268
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6f353caa1318a9b0800000000000000
+      internalID: -5068780375326245013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_40
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 268
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 046a0c7e5c8e99390800000000000000
+      internalID: -7810956142003050944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_41
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 156
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f05509bb00ce1040800000000000000
+      internalID: 4620341424310014192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_42
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 156
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1af0a7164c50e070800000000000000
+      internalID: 8133602383145007644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_43
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 156
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1b045c863a326790800000000000000
+      internalID: -7538398820307825892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_44
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 156
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 544c05ba25fd5e5c0800000000000000
+      internalID: -4186694732416498619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_45
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 156
+        width: 12
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf905c4389c393f80800000000000000
+      internalID: -8126397428195325444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_46
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 159
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 722348ed8efc54c10800000000000000
+      internalID: 2037263005527585319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_47
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 155
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89f421aef55c2dc00800000000000000
+      internalID: 924017889304006552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_48
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 149
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9937c25662eceb30800000000000000
+      internalID: 4318075071844792735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_49
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 52
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5ba6349c676568a0800000000000000
+      internalID: -6312525586649142434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_50
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 34
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3568e947d751ca850800000000000000
+      internalID: 6389505599903532627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_51
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 61
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a847d16418f90bf90800000000000000
+      internalID: -6939871648202001270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_52
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 56
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 007ee83a93ec6cdb0800000000000000
+      internalID: -4771900008199952640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_53
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 42
+        width: 12
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 251e09879a21e8270800000000000000
+      internalID: 8254555686098231634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_54
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 60
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92d0f104b81e227d0800000000000000
+      internalID: -2944543218154402519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_55
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 61
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f055f9f7ec8ee6a0800000000000000
+      internalID: -6418037490997440268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_56
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 38
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81d83ceab294616a0800000000000000
+      internalID: -6478910561961407208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_57
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 49
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 931244407fe0835e0800000000000000
+      internalID: -1929775986236972743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_58
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 44
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbcbe634f4b117af0800000000000000
+      internalID: -400508864611566405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_59
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 45
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1feade4711cf8cc0800000000000000
+      internalID: -3706531662451249381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_60
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 31
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34b012a639cd8f720800000000000000
+      internalID: 2880294487402285891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghost_skeleton_61
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 35
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ffe3a045d6513770800000000000000
+      internalID: 8588741438284754934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ghost_skeleton_0: -938316628726244444
+      ghost_skeleton_1: -3981451559106070601
+      ghost_skeleton_10: -4563953392610632887
+      ghost_skeleton_11: -4860510833210205582
+      ghost_skeleton_12: -3545211216198723639
+      ghost_skeleton_13: -863079534463222385
+      ghost_skeleton_14: 4756692239656496432
+      ghost_skeleton_15: -5120387556354141226
+      ghost_skeleton_16: -8829012986166303704
+      ghost_skeleton_17: 580925781081912328
+      ghost_skeleton_18: -2496693049946503157
+      ghost_skeleton_19: -1409694589733183270
+      ghost_skeleton_2: 8079776104276405358
+      ghost_skeleton_20: -5949501962450434494
+      ghost_skeleton_21: 496621212870753991
+      ghost_skeleton_22: -6218480173245029036
+      ghost_skeleton_23: -522872482364616437
+      ghost_skeleton_24: -7488531629782410754
+      ghost_skeleton_25: -6264703959667784267
+      ghost_skeleton_26: 1290198456124695809
+      ghost_skeleton_27: -5220830082047411863
+      ghost_skeleton_28: -4174075478474037212
+      ghost_skeleton_29: -5720266974508429771
+      ghost_skeleton_3: -2840611640505587544
+      ghost_skeleton_30: 833933107809500469
+      ghost_skeleton_31: 8694418144486408421
+      ghost_skeleton_32: 7992174445259775434
+      ghost_skeleton_33: 4673473070296064550
+      ghost_skeleton_34: -85947350827316861
+      ghost_skeleton_35: 3603006815518619915
+      ghost_skeleton_36: 8870986986957512837
+      ghost_skeleton_37: -5208473439787146392
+      ghost_skeleton_38: 1922372125184365095
+      ghost_skeleton_39: -5068780375326245013
+      ghost_skeleton_4: -5166713539535876448
+      ghost_skeleton_40: -7810956142003050944
+      ghost_skeleton_41: 4620341424310014192
+      ghost_skeleton_42: 8133602383145007644
+      ghost_skeleton_43: -7538398820307825892
+      ghost_skeleton_44: -4186694732416498619
+      ghost_skeleton_45: -8126397428195325444
+      ghost_skeleton_46: 2037263005527585319
+      ghost_skeleton_47: 924017889304006552
+      ghost_skeleton_48: 4318075071844792735
+      ghost_skeleton_49: -6312525586649142434
+      ghost_skeleton_5: 7300722926838993032
+      ghost_skeleton_50: 6389505599903532627
+      ghost_skeleton_51: -6939871648202001270
+      ghost_skeleton_52: -4771900008199952640
+      ghost_skeleton_53: 8254555686098231634
+      ghost_skeleton_54: -2944543218154402519
+      ghost_skeleton_55: -6418037490997440268
+      ghost_skeleton_56: -6478910561961407208
+      ghost_skeleton_57: -1929775986236972743
+      ghost_skeleton_58: -400508864611566405
+      ghost_skeleton_59: -3706531662451249381
+      ghost_skeleton_6: -4686773710382474720
+      ghost_skeleton_60: 2880294487402285891
+      ghost_skeleton_61: 8588741438284754934
+      ghost_skeleton_7: 5368665769178456949
+      ghost_skeleton_8: 944883411080848195
+      ghost_skeleton_9: 9182965406324122372
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
