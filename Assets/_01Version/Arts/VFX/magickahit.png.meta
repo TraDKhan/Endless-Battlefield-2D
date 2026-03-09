@@ -1,0 +1,1284 @@
+fileFormatVersion: 2
+guid: ae75f4c82ac199c46aa62d90994e8e30
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5858119513195541268
+    second: magickahit_0
+  - first:
+      213: -3140101850041033762
+    second: magickahit_1
+  - first:
+      213: -4391502614465979087
+    second: magickahit_2
+  - first:
+      213: 4621379702528702464
+    second: magickahit_3
+  - first:
+      213: -1186275857890555110
+    second: magickahit_4
+  - first:
+      213: -7810980242428741598
+    second: magickahit_5
+  - first:
+      213: 1392710176129338645
+    second: magickahit_6
+  - first:
+      213: 857631852670048118
+    second: magickahit_7
+  - first:
+      213: 5396014856118857970
+    second: magickahit_8
+  - first:
+      213: 5860785002402978622
+    second: magickahit_9
+  - first:
+      213: -5997201045800715499
+    second: magickahit_10
+  - first:
+      213: -1382687655016607447
+    second: magickahit_11
+  - first:
+      213: 7474483553029977389
+    second: magickahit_12
+  - first:
+      213: 3201643666402371532
+    second: magickahit_13
+  - first:
+      213: -7245466082205461548
+    second: magickahit_14
+  - first:
+      213: -6803605157404269224
+    second: magickahit_15
+  - first:
+      213: -3851233008176874452
+    second: magickahit_16
+  - first:
+      213: -7634502043221288876
+    second: magickahit_17
+  - first:
+      213: 6350158754477387608
+    second: magickahit_18
+  - first:
+      213: -889926769940742841
+    second: magickahit_19
+  - first:
+      213: 381472199236544725
+    second: magickahit_20
+  - first:
+      213: -6004363673290888836
+    second: magickahit_21
+  - first:
+      213: -3563086923773364435
+    second: magickahit_22
+  - first:
+      213: 2545072712330568612
+    second: magickahit_23
+  - first:
+      213: -1805745865233719104
+    second: magickahit_24
+  - first:
+      213: 5407163867576025618
+    second: magickahit_25
+  - first:
+      213: 7518122648888825018
+    second: magickahit_26
+  - first:
+      213: 7112714849913170879
+    second: magickahit_27
+  - first:
+      213: 918946474841495225
+    second: magickahit_28
+  - first:
+      213: 8873554689438749231
+    second: magickahit_29
+  - first:
+      213: -5130438049742957611
+    second: magickahit_30
+  - first:
+      213: 7522147643060828999
+    second: magickahit_31
+  - first:
+      213: -8649112065835884334
+    second: magickahit_32
+  - first:
+      213: 7691947392627332872
+    second: magickahit_33
+  - first:
+      213: 2045878654364518349
+    second: magickahit_34
+  - first:
+      213: 2689704007891758673
+    second: magickahit_35
+  - first:
+      213: 571630674634426995
+    second: magickahit_36
+  - first:
+      213: -7811605756601452825
+    second: magickahit_37
+  - first:
+      213: -7955826370161365842
+    second: magickahit_38
+  - first:
+      213: -8790200759405792191
+    second: magickahit_39
+  - first:
+      213: 8451942200861215948
+    second: magickahit_40
+  - first:
+      213: 1870933546002045492
+    second: magickahit_41
+  - first:
+      213: 494582529824163960
+    second: magickahit_42
+  - first:
+      213: -6633993429642354605
+    second: magickahit_43
+  - first:
+      213: 5306129158153163296
+    second: magickahit_44
+  - first:
+      213: 2447581073137239054
+    second: magickahit_45
+  - first:
+      213: -6193255485288786372
+    second: magickahit_46
+  - first:
+      213: -3413266344210891643
+    second: magickahit_47
+  - first:
+      213: 3903754111439621068
+    second: magickahit_48
+  - first:
+      213: 1735126747901799414
+    second: magickahit_49
+  - first:
+      213: -257317558836151187
+    second: magickahit_50
+  - first:
+      213: 2496993559896823031
+    second: magickahit_51
+  - first:
+      213: -5247913664415513665
+    second: magickahit_52
+  - first:
+      213: 72118731674960151
+    second: magickahit_53
+  - first:
+      213: -6251507908692484115
+    second: magickahit_54
+  - first:
+      213: 904072470039198331
+    second: magickahit_55
+  - first:
+      213: 6057846163395173557
+    second: magickahit_56
+  - first:
+      213: -3763715076118114789
+    second: magickahit_57
+  - first:
+      213: 2887108999342184703
+    second: magickahit_58
+  - first:
+      213: 2958599793809490102
+    second: magickahit_59
+  - first:
+      213: 4308881576719079700
+    second: magickahit_60
+  - first:
+      213: -619511979917590274
+    second: magickahit_61
+  - first:
+      213: -4858302269360569167
+    second: magickahit_62
+  - first:
+      213: -2385776650556828363
+    second: magickahit_63
+  - first:
+      213: -1534457948502175350
+    second: magickahit_64
+  - first:
+      213: -8907870377771824565
+    second: magickahit_65
+  - first:
+      213: 3212844116551518041
+    second: magickahit_66
+  - first:
+      213: 5547204054468876639
+    second: magickahit_67
+  - first:
+      213: 975075710523556935
+    second: magickahit_68
+  - first:
+      213: -2989576769111293471
+    second: magickahit_69
+  - first:
+      213: 7648018705898466299
+    second: magickahit_70
+  - first:
+      213: -1006424794488918396
+    second: magickahit_71
+  - first:
+      213: 3821825530104567827
+    second: magickahit_72
+  - first:
+      213: -821710763884318750
+    second: magickahit_73
+  - first:
+      213: -8463244943900869644
+    second: magickahit_74
+  - first:
+      213: -4722345297038145473
+    second: magickahit_75
+  - first:
+      213: -8951844758040209043
+    second: magickahit_76
+  - first:
+      213: -4722196935383837116
+    second: magickahit_77
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: magickahit_0
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 413fdcbd8a83c4150800000000000000
+      internalID: 5858119513195541268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edbd1cd110e1c64d0800000000000000
+      internalID: -3140101850041033762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_2
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13d5e8aa3af3e03c0800000000000000
+      internalID: -4391502614465979087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_3
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0087c65ba50722040800000000000000
+      internalID: 4621379702528702464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_4
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1bcfc47460898fe0800000000000000
+      internalID: -1186275857890555110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 600
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 228b0769ad2d99390800000000000000
+      internalID: -7810980242428741598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51dc24bb686e35310800000000000000
+      internalID: 1392710176129338645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_7
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 677557640abe6eb00800000000000000
+      internalID: 857631852670048118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_8
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f0f1bd1cee72ea40800000000000000
+      internalID: 5396014856118857970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_9
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3b9a2d68e0b55150800000000000000
+      internalID: 5860785002402978622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_10
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51b72726c69a5cca0800000000000000
+      internalID: -5997201045800715499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_11
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 921da6f47e4bfcce0800000000000000
+      internalID: -1382687655016607447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_12
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 500
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d25f9d1a033bab760800000000000000
+      internalID: 7474483553029977389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc7ea4993f58e6c20800000000000000
+      internalID: 3201643666402371532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_14
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d390028cfee27b90800000000000000
+      internalID: -7245466082205461548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_15
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85527e8082db491a0800000000000000
+      internalID: -6803605157404269224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_16
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2cbb58dbfbad8ac0800000000000000
+      internalID: -3851233008176874452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_17
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4581dcc47dccc0690800000000000000
+      internalID: -7634502043221288876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_18
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85f26fb1ebb402850800000000000000
+      internalID: 6350158754477387608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_19
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 400
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d3299515856a3f0800000000000000
+      internalID: -889926769940742841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d86e2fa1f24b4500800000000000000
+      internalID: 381472199236544725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_21
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c79ac373d073caca0800000000000000
+      internalID: -6004363673290888836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_22
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2736a4225f5d8ec0800000000000000
+      internalID: -3563086923773364435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_23
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a3e002c52ae15320800000000000000
+      internalID: 2545072712330568612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_24
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c02d1ce3b3b0f6e0800000000000000
+      internalID: -1805745865233719104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_25
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2124231a3ea1a0b40800000000000000
+      internalID: 5407163867576025618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_26
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 300
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab456d867bcb55860800000000000000
+      internalID: 7518122648888825018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbb68b1a87075b260800000000000000
+      internalID: 7112714849913170879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_28
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b6568833f0c0cc00800000000000000
+      internalID: 918946474841495225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_29
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f229ff6d9f2352b70800000000000000
+      internalID: 8873554689438749231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_30
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d35ce6a6c50dc8b0800000000000000
+      internalID: -5130438049742957611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_31
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74bbea46d69046860800000000000000
+      internalID: 7522147643060828999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_32
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d0ae4da66e28f780800000000000000
+      internalID: -8649112065835884334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_33
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 200
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8075b8066694fba60800000000000000
+      internalID: 7691947392627332872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc783feebcb646c10800000000000000
+      internalID: 2045878654364518349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_35
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15e25556b8fb35520800000000000000
+      internalID: 2689704007891758673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_36
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37a4d48e117dee700800000000000000
+      internalID: 571630674634426995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_37
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e6bf58b3f9979390800000000000000
+      internalID: -7811605756601452825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_38
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaca8df611a379190800000000000000
+      internalID: -7955826370161365842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: magickahit_39
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 144bf375bfee20680800000000000000
+      internalID: -8790200759405792191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: bcb42875a46c5b346bcbe00f7a6feba1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      magickahit_0: 5858119513195541268
+      magickahit_1: -3140101850041033762
+      magickahit_10: -5997201045800715499
+      magickahit_11: -1382687655016607447
+      magickahit_12: 7474483553029977389
+      magickahit_13: 3201643666402371532
+      magickahit_14: -7245466082205461548
+      magickahit_15: -6803605157404269224
+      magickahit_16: -3851233008176874452
+      magickahit_17: -7634502043221288876
+      magickahit_18: 6350158754477387608
+      magickahit_19: -889926769940742841
+      magickahit_2: -4391502614465979087
+      magickahit_20: 381472199236544725
+      magickahit_21: -6004363673290888836
+      magickahit_22: -3563086923773364435
+      magickahit_23: 2545072712330568612
+      magickahit_24: -1805745865233719104
+      magickahit_25: 5407163867576025618
+      magickahit_26: 7518122648888825018
+      magickahit_27: 7112714849913170879
+      magickahit_28: 918946474841495225
+      magickahit_29: 8873554689438749231
+      magickahit_3: 4621379702528702464
+      magickahit_30: -5130438049742957611
+      magickahit_31: 7522147643060828999
+      magickahit_32: -8649112065835884334
+      magickahit_33: 7691947392627332872
+      magickahit_34: 2045878654364518349
+      magickahit_35: 2689704007891758673
+      magickahit_36: 571630674634426995
+      magickahit_37: -7811605756601452825
+      magickahit_38: -7955826370161365842
+      magickahit_39: -8790200759405792191
+      magickahit_4: -1186275857890555110
+      magickahit_5: -7810980242428741598
+      magickahit_6: 1392710176129338645
+      magickahit_7: 857631852670048118
+      magickahit_8: 5396014856118857970
+      magickahit_9: 5860785002402978622
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

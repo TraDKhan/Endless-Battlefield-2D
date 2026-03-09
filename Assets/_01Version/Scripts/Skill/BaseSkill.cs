@@ -14,9 +14,10 @@ public abstract class BaseSkill : MonoBehaviour, ISkill
     // =========================
     // INIT
     // =========================
-    public virtual void Init(Transform ownerTransform)
+    public virtual void Init(Transform _owner)
     {
-        owner = ownerTransform;
+        owner = _owner;
+
         skillStats = new SkillStats();
 
         transform.SetParent(owner);
