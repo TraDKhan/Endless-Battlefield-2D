@@ -280,6 +280,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11695956}
   m_CullTransparentMesh: 1
+--- !u!1 &19196652 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7061738363453199701, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+  m_PrefabInstance: {fileID: 505301710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &20398845 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4706562054549027597, guid: 96269e479b5b67942a5ae5911026d8a8, type: 3}
@@ -1126,7 +1131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5757144308714031333, guid: f8fd0406a72ffc0468f3406aee99faef, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1645,7 +1650,10 @@ PrefabInstance:
     - {fileID: 8687697108299402382, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7061738363453199701, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1004930608}
   m_SourcePrefab: {fileID: 100100000, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
 --- !u!1 &519420028
 GameObject:
@@ -2467,12 +2475,29 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8805743294613574379, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
   m_PrefabInstance: {fileID: 505301710}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 19196652}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 201dea6249dfa894199dd615868e7d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1004930608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19196652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d528a957efeb241a9a3ae9bca9714a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanRadius: 5
+  itemLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  scanInterval: 0.2
 --- !u!114 &1010758163 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7687373017314476484, guid: 4c58deda9c7981648a534ec366e09865, type: 3}
@@ -5321,7 +5346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1988505648
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Slime Drop Table
   m_EditorClassIdentifier: 
   drops:
-  - item: {fileID: 11400000, guid: cf5107b5bd4f2a9478180dee43beb479, type: 2}
-    dropChance: 15
+  - itemPrefab: {fileID: 6698914895533268769, guid: 15551664562fcb44284fcebc04645379, type: 3}
+    dropChance: 1
     amount: 1
-  - item: {fileID: 11400000, guid: 9314ee1bb163a3a4f9be035ba616307f, type: 2}
+  - itemPrefab: {fileID: 8047185763220562195, guid: 21f25d28f03399245b726983ba388a5a, type: 3}
     dropChance: 100
-    amount: 5
+    amount: 1

@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 2817949505077281578}
   - component: {fileID: 6141674462577890050}
   - component: {fileID: 4727804138860205082}
-  - component: {fileID: 3545203687028982239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,23 +147,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3545203687028982239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3023589061997311626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be96a20cbebcf5e49943a25fd67f3981, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemType: 3
-  value: 0
-  detectRadius: 3
-  moveSpeed: 5
-  pickupDistance: 0.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 256
