@@ -7,7 +7,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour, IPoolable
 {
     [Header("Pool")]
-    [SerializeField] public PoolIdentity Identity { get; set; }
+    public PoolIdentity Identity { get; set; }
 
     [Header("Stats")]
     public EnemyStats stats;
