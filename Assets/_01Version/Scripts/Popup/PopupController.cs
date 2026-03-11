@@ -52,4 +52,22 @@ public class PopupController : MonoBehaviour
         popup.transform.position = worldPos + GetRandomOffset();
         popup.Play(amount, Color.green);
     }
+
+    public void ShowEXP(int amount, Vector3 worldPos)
+    {
+        var popup = ObjectPoolManager.Instance
+            .Spawn<TextPopup>(healPopupPrefab);
+
+        popup.transform.position = worldPos + GetRandomOffset();
+        popup.Play(amount, Color.blue);
+    }
+
+    public void ShowCoin(int amount, Vector3 worldPos)
+    {
+        var popup = ObjectPoolManager.Instance
+            .Spawn<TextPopup>(healPopupPrefab);
+
+        popup.transform.position = worldPos + GetRandomOffset();
+        popup.Play(amount, Color.yellow);
+    }
 }

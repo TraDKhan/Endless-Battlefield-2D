@@ -22,7 +22,7 @@ public class BossController : MonoBehaviour
     public int CurrentPhase => phaseController.CurrentPhase;
     public EnemyHealthController Health => health;
     public bool IsCastingSkill { get; private set; }
-    public event System.Action<BossController> OnBossDead;
+    public event Action<BossController> OnBossDead;
 
     void Awake()
     {
@@ -61,13 +61,10 @@ public class BossController : MonoBehaviour
     }
     void HandleDeath()
     {
-        // 1️⃣ Báo cho Spawner
         OnBossDead?.Invoke(this);
 
-        // 2️⃣ Gỡ UI
         BossUIManager.Instance.UnregisterBoss(this);
 
-        // 3️⃣ Hủy boss
         Destroy(gameObject);
     }
     void HandleMovement()

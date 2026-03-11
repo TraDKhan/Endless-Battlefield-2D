@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class PlayerLevelSystem : MonoBehaviour
+public class PlayerLevelSystem
 {
     public int CurrentLevel { get; private set; } = 1;
     public int CurrentEXP { get; private set; }
@@ -26,17 +26,5 @@ public class PlayerLevelSystem : MonoBehaviour
         }
 
         OnExpChanged?.Invoke(CurrentEXP, ExpToNextLevel, CurrentLevel);
-    }
-
-    [ContextMenu("Add Exp")]
-    public void test()
-    {
-        AddEXP(250);
-    }
-    [ContextMenu("Level UP")]
-    public void testlevelup()
-    {
-        CurrentLevel++;
-        OnLevelUp?.Invoke(CurrentLevel);
     }
 }

@@ -15,11 +15,8 @@ GameObject:
   - component: {fileID: 7674241969549309064}
   - component: {fileID: 3345547826426779065}
   - component: {fileID: 4033685715839169065}
-  - component: {fileID: 3371789029723131495}
   - component: {fileID: 7988919862105985925}
   - component: {fileID: 8423151147987771576}
-  - component: {fileID: 8293811364327471905}
-  - component: {fileID: 5235361576867143864}
   m_Layer: 8
   m_Name: Soldier
   m_TagString: Player
@@ -45,6 +42,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5234137535686122503
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -63,6 +61,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -84,9 +84,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -7978735674136817684, guid: 0cf53c1b710c0e441a78d10be6147aa2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -96,7 +98,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1219997378612840564
 Animator:
@@ -220,26 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputController: {fileID: 3345547826426779065}
   animationController: {fileID: 7988919862105985925}
-  statsController: {fileID: 3371789029723131495}
   deadZone: 0.01
   directionThreshold: 0.35
-  dashDistance: 3
-  dashDuration: 0.15
-  dashEnergyCost: 20
---- !u!114 &3371789029723131495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097362956862803510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19cc9f4517dee704fb39f4531d1d0107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: bcab7d4d65f995148a4e75aeaefa0bea, type: 2}
-  level: {fileID: 8293811364327471905}
 --- !u!114 &7988919862105985925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,33 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff0492f3e9f3314a810abdb985718c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDead: 0
---- !u!114 &8293811364327471905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097362956862803510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72c56578acaa2b54c8f90f33499a0ea5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5235361576867143864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6097362956862803510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e9e09e6644fe74491b36a39d9a23fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regenAmount: 5
-  regenInterval: 1
 --- !u!1001 &5404508785543992205
 PrefabInstance:
   m_ObjectHideFlags: 0

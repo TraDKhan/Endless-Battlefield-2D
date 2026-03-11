@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
     public CharacterStatSystem StatSystem { get; private set; }
+    public PlayerLevelSystem LevelSystem { get; private set; }
 
     [Header("Data")]
     [SerializeField] private PlayerData playerData;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerAnimationController anim;
 
     public PlayerAnimationController Anim => anim;
+    public PlayerHealthController Health => health;
 
     private bool initialized;
 
@@ -26,6 +28,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Instance = this;
+
+        LevelSystem = new PlayerLevelSystem();
 
         movement ??= GetComponent<PlayerMovementController>();
         health ??= GetComponent<PlayerHealthController>();

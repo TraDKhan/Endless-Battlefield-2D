@@ -12,7 +12,7 @@ public class UIExpBar : MonoBehaviour
 
     private void Start()
     {
-        levelSystem = FindAnyObjectByType<PlayerLevelSystem>();
+        levelSystem = PlayerController.Instance?.LevelSystem;
 
         if (levelSystem == null)
         {

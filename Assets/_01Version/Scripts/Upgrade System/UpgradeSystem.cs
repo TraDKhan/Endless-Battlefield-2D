@@ -35,7 +35,7 @@ public class UpgradeSystem : MonoBehaviour
 
     private void Start()
     {
-        var playerLevelSystem = FindFirstObjectByType<PlayerLevelSystem>();
+        var playerLevelSystem = PlayerController.Instance.LevelSystem;
         if (playerLevelSystem != null)
             playerLevelSystem.OnLevelUp += OnPlayerLevelUp;
 
