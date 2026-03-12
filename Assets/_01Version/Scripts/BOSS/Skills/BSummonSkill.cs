@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class BSummonSkill : BaseBossSkill
 {
-    public override string SkillID => "Summon";
-
     [Header("Summon")]
-    [SerializeField] private GameObject summonObjectPrefab;
-    [SerializeField] private int baseCount = 3;
-    [SerializeField] private float radius = 2.5f;
+    [SerializeField] GameObject summonObjectPrefab;
+    [SerializeField] int baseCount = 3;
+    [SerializeField] float radius = 2.5f;
 
     [Header("Phase Requirement")]
     [SerializeField] int minPhase = 2;
@@ -17,26 +15,34 @@ public class BSummonSkill : BaseBossSkill
     [SerializeField] float summonAnimDuration = 0.6f;
 
     // ===== STATE =====
-    private int lastSummonedPhase = -1;
-    private int summonTimes = 0;
+    int lastSummonedPhase = -1;
+    int summonTimes = 0;
 
-    public override bool CanExecute(BossContext ctx)
+    // =========================
+    // CONDITION
+    // =========================
+    protected override bool CheckCondition(BossContext ctx)
     {
-        if (!base.CanExecute(ctx)) return false;
+        if (ctx.boss == null)
+            return false;
 
         int phase = ctx.boss.CurrentPhase;
 
-        if (phase < minPhase) return false;
+        if (phase < minPhase)
+            return false;
 
         // đã summon trong phase này rồi → không cho dùng lại
-        if (lastSummonedPhase == phase) return false;
+        if (lastSummonedPhase == phase)
+            return false;
 
         return true;
     }
 
-    protected override IEnumerator OnExecute(BossContext ctx)
+    // =========================
+    // EXECUTE
+    // =========================
+    protected override IEnumerator PerformSkill(BossContext ctx)
     {
-        // đánh dấu đã summon ở phase hiện tại
         lastSummonedPhase = ctx.boss.CurrentPhase;
         summonTimes++;
 
@@ -53,9 +59,10 @@ public class BSummonSkill : BaseBossSkill
         for (int i = 0; i < summonCount; i++)
         {
             Vector2 offset = Random.insideUnitCircle.normalized * radius;
-            Vector2 spawnPos = (Vector2)ctx.boss.transform.position + offset;
+            Vector2 spawnPos =
+                (Vector2)ctx.boss.transform.position + offset;
 
-            Object.Instantiate(
+            Instantiate(
                 summonObjectPrefab,
                 spawnPos,
                 Quaternion.identity
@@ -65,7 +72,8 @@ public class BSummonSkill : BaseBossSkill
         }
     }
 
-    private int CalculateSummonCount()
+    // =========================
+    int CalculateSummonCount()
     {
         return baseCount + summonTimes * 2;
     }

@@ -49,14 +49,11 @@ GameObject:
   - component: {fileID: 5104850226766720962}
   - component: {fileID: 591945148608938524}
   - component: {fileID: 8292718431172589670}
-  - component: {fileID: 5219827385492257961}
-  - component: {fileID: 3706286692936162655}
   - component: {fileID: 315756946383652116}
   - component: {fileID: 6352512650227813286}
   - component: {fileID: 2751935218859217079}
   - component: {fileID: 5840207545791473773}
   - component: {fileID: 6147594455337205408}
-  - component: {fileID: 3670558614995713025}
   m_Layer: 0
   m_Name: Flying Eye
   m_TagString: Untagged
@@ -82,6 +79,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1177776440790988216
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -100,6 +98,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -121,9 +121,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1250123013
   m_SortingLayer: 6
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -4795363162621231457, guid: 9a8ca02529b63394bbecb6482ddb001a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,7 +135,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &936182999084629357
 Animator:
@@ -238,7 +239,6 @@ MonoBehaviour:
   movement: {fileID: 5104850226766720962}
   anim: {fileID: 591945148608938524}
   health: {fileID: 8292718431172589670}
-  bossUI: {fileID: 0}
   player: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -299,33 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 454a8b35e60f99945b16c10a0634f20c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5219827385492257961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7946809018737046302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6ded4e8c29c2e489bf64abfb8ef305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillBehaviours:
-  - {fileID: 2751935218859217079}
-  - {fileID: 5840207545791473773}
---- !u!114 &3706286692936162655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7946809018737046302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31117625a44f896438734b57fd27311e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &315756946383652116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,10 +311,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05b0b695c253894ebc229e7acdb7d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thinkInterval: 0.3
-  postSkillRecovery: 3
-  maxBasicAttackBetweenSkills: 2
-  postBasicDelay: 0.2
+  skillBehaviours:
+  - {fileID: 6147594455337205408}
+  - {fileID: 5840207545791473773}
+  - {fileID: 2751935218859217079}
 --- !u!114 &6352512650227813286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,15 +387,3 @@ MonoBehaviour:
   skillDamage: 30
   damageRadius: 1.8
   skillAnimMaxTime: 1.2
---- !u!114 &3670558614995713025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7946809018737046302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab62428bf3886114886915d6a8ed1f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

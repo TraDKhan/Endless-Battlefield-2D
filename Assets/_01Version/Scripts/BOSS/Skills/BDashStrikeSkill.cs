@@ -3,28 +3,50 @@ using UnityEngine;
 
 public class BDashStrikeSkill : BaseBossSkill
 {
-    public override string SkillID => "DashStrike";
-
     [Header("Dash")]
-    [SerializeField] private float dashSpeed = 14f;
-    [SerializeField] private float stopDistance = 0.3f;
+    [SerializeField] float dashSpeed = 14f;
+    [SerializeField] float stopDistance = 0.3f;
 
     [Header("Hit")]
-    [SerializeField] private int damage = 30;
-    [SerializeField] private float hitRadius = 1.2f;
+    [SerializeField] int damage = 30;
+    [SerializeField] float hitRadius = 1.2f;
 
     [Header("Timing")]
-    [SerializeField] private float attackDelay = 0.1f;   // delay sau khi tới đích
-    [SerializeField] private float retreatDelay = 0.15f;
+    [SerializeField] float attackDelay = 0.1f;
+    [SerializeField] float retreatDelay = 0.15f;
 
     [Header("Safety")]
-    [SerializeField] private float maxDashTime = 1.2f;
+    [SerializeField] float maxDashTime = 1.2f;
 
-    private Vector2 safePosition;
-    private bool damageApplied;
+    Vector2 safePosition;
+    bool damageApplied;
 
     // =========================
-    protected override IEnumerator OnExecute(BossContext ctx)
+    // CONDITION
+    // =========================
+
+    protected override bool CheckCondition(BossContext ctx)
+    {
+        if (ctx.Player == null)
+            return false;
+
+        float dist = Vector2.Distance(
+            ctx.boss.transform.position,
+            ctx.Player.position
+        );
+
+        // Chỉ dash khi player hơi xa
+        if (dist < ctx.Stats.attackRange + 0.5f)
+            return false;
+
+        return true;
+    }
+
+    // =========================
+    // EXECUTE
+    // =========================
+
+    protected override IEnumerator PerformSkill(BossContext ctx)
     {
         if (ctx.Player == null)
             yield break;
@@ -32,30 +54,33 @@ public class BDashStrikeSkill : BaseBossSkill
         ctx.boss.SetCastingSkill(true);
         damageApplied = false;
 
-        // Cache vị trí an toàn
-        safePosition = ctx.boss.transform.position;
+        // Lưu vị trí ban đầu
+        safePosition = ctx.boss.transform.position / 2;
 
-        // DASH TỚI PLAYER (KHÔNG ANIM)
+        // DASH TỚI PLAYER
         yield return DashTo(ctx, ctx.Player.position);
 
         // TỚI ĐÍCH → PLAY ANIM
-        ctx.Movement.Stop();
-        ctx.Anim.PlaySkill1();
+        ctx.Movement?.Stop();
+        ctx.Anim?.PlaySkill1();
 
         yield return new WaitForSeconds(attackDelay);
 
-        // 4️⃣ HIT
+        // APPLY DAMAGE
         ApplyDamage(ctx);
 
         yield return new WaitForSeconds(retreatDelay);
 
-        // 5️⃣ DASH BACK
+        // DASH BACK
         yield return DashTo(ctx, safePosition);
 
         ctx.boss.SetCastingSkill(false);
     }
 
     // =========================
+    // DASH LOGIC
+    // =========================
+
     IEnumerator DashTo(BossContext ctx, Vector2 target)
     {
         float timer = 0f;
@@ -63,17 +88,23 @@ public class BDashStrikeSkill : BaseBossSkill
         while (Vector2.Distance(ctx.boss.transform.position, target) > stopDistance)
         {
             timer += Time.deltaTime;
+
             if (timer > maxDashTime)
                 break;
 
-            ctx.Movement.MoveTowards(target, dashSpeed);
+            ctx.Movement?.MoveTowards(target, dashSpeed);
+
             yield return null;
         }
 
-        ctx.Movement.Stop();
+        ctx.Movement?.Stop();
+        //ctx.boss.transform.position = target;
     }
 
     // =========================
+    // DAMAGE
+    // =========================
+
     void ApplyDamage(BossContext ctx)
     {
         if (damageApplied)
@@ -89,14 +120,15 @@ public class BDashStrikeSkill : BaseBossSkill
 
         foreach (var hit in hits)
         {
-            hit.GetComponent<IDamageable>()?.TakeDamage(damage);
+            hit.GetComponent<IDamageable>()
+                ?.TakeDamage(damage);
         }
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, hitRadius);
     }
 #endif

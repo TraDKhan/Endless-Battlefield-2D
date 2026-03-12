@@ -2657,6 +2657,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023510766}
   m_CullTransparentMesh: 1
+--- !u!1001 &1039046762
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.960966
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.0738654
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1398573007751345146, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922181083909124111, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_Name
+      value: Undead Executioner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922181083909124111, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fe212a0d63c6b534b8173c22f23c0dca, type: 3}
 --- !u!1 &1066888802
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,17 +4409,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 111871338b7591f408b0cdcd6422227d, type: 3}
---- !u!114 &1527425170 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5840207545791473773, guid: 72c81b349881b0444a9d11fc14902fe9, type: 3}
-  m_PrefabInstance: {fileID: 1692359546}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 227144f1c92c3c046b299e50cc882e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1567415759
 GameObject:
   m_ObjectHideFlags: 0
@@ -4808,14 +4858,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5219827385492257961, guid: 72c81b349881b0444a9d11fc14902fe9, type: 3}
-      propertyPath: skillBehaviours.Array.size
-      value: 2
+    - target: {fileID: 6147594455337205408, guid: 72c81b349881b0444a9d11fc14902fe9, type: 3}
+      propertyPath: isRangedBoss
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5219827385492257961, guid: 72c81b349881b0444a9d11fc14902fe9, type: 3}
-      propertyPath: 'skillBehaviours.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1527425170}
     - target: {fileID: 7946809018737046302, guid: 72c81b349881b0444a9d11fc14902fe9, type: 3}
       propertyPath: m_Name
       value: Flying Eye
@@ -7232,3 +7278,4 @@ SceneRoots:
   - {fileID: 1864729414}
   - {fileID: 6182422165019765508}
   - {fileID: 1692359546}
+  - {fileID: 1039046762}

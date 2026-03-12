@@ -19,12 +19,8 @@ GameObject:
   - component: {fileID: 7467287588666627191}
   - component: {fileID: 6958159352126188720}
   - component: {fileID: 8383265252480925253}
-  - component: {fileID: 5348775025888948695}
-  - component: {fileID: 8187050960509854037}
-  - component: {fileID: 2861832159436310452}
   - component: {fileID: 7630998862362209663}
   - component: {fileID: 5861366026229297086}
-  - component: {fileID: 9163289569608601665}
   m_Layer: 0
   m_Name: Undead Executioner
   m_TagString: Untagged
@@ -49,6 +45,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8326874585477201575
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -67,6 +64,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -88,9 +87,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1250123013
   m_SortingLayer: 6
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 8793639957104055765, guid: 62faac9ae44e32a478b96cc67502ec8e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,7 +101,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &789074259085590620
 Rigidbody2D:
@@ -205,7 +205,6 @@ MonoBehaviour:
   movement: {fileID: 6234398581258737722}
   anim: {fileID: 6958159352126188720}
   health: {fileID: 7467287588666627191}
-  bossUI: {fileID: 0}
   player: {fileID: 0}
   targetLayer:
     serializedVersion: 2
@@ -278,54 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05b0b695c253894ebc229e7acdb7d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thinkInterval: 0.3
-  postSkillRecovery: 1
-  maxBasicAttackBetweenSkills: 2
-  postBasicDelay: 0.2
---- !u!114 &5348775025888948695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922181083909124111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d6ded4e8c29c2e489bf64abfb8ef305, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   skillBehaviours:
-  - {fileID: 2861832159436310452}
   - {fileID: 5861366026229297086}
---- !u!114 &8187050960509854037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922181083909124111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31117625a44f896438734b57fd27311e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2861832159436310452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922181083909124111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ffd44942d9bcc40ad4db23a67264a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cooldown: 3
-  minTeleportDistance: 6
-  skillDamage: 30
-  damageRadius: 2.5
-  skillAnimMaxTime: 1.2
 --- !u!114 &7630998862362209663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,15 +311,3 @@ MonoBehaviour:
   radius: 2.5
   minPhase: 2
   summonAnimDuration: 0.6
---- !u!114 &9163289569608601665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922181083909124111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab62428bf3886114886915d6a8ed1f16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

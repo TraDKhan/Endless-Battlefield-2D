@@ -3,27 +3,37 @@ using UnityEngine;
 
 public abstract class BaseBossSkill : MonoBehaviour, IBossSkill
 {
-    [Header("Cooldown")]
-    [SerializeField] protected float cooldown = 2f;
+    [SerializeField] float cooldown = 5f;
 
-    protected float lastUseTime = -999f;
-
-    public abstract string SkillID { get; }
+    float cooldownTimer;
 
     public float Cooldown => cooldown;
+    public bool IsOnCooldown => cooldownTimer > 0;
 
-    public bool IsOnCooldown => Time.time < lastUseTime + cooldown;
-
-    public virtual bool CanExecute(BossContext ctx)
+    protected virtual void Update()
     {
-        return !IsOnCooldown;
+        if (cooldownTimer > 0)
+            cooldownTimer -= Time.deltaTime;
+    }
+
+    public bool CanUse(BossContext ctx)
+    {
+        if (IsOnCooldown)
+            return false;
+
+        return CheckCondition(ctx);
+    }
+
+    protected virtual bool CheckCondition(BossContext ctx)
+    {
+        return true;
     }
 
     public IEnumerator Execute(BossContext ctx)
     {
-        lastUseTime = Time.time;
-        yield return OnExecute(ctx);
+        cooldownTimer = cooldown;
+        yield return PerformSkill(ctx);
     }
 
-    protected abstract IEnumerator OnExecute(BossContext ctx);
+    protected abstract IEnumerator PerformSkill(BossContext ctx);
 }

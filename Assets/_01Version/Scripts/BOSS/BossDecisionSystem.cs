@@ -35,7 +35,7 @@ public class BossDecisionSystem : MonoBehaviour
 
         foreach (var skill in skills)
         {
-            if (skill.CanExecute(ctx))
+            if (skill.CanUse(ctx))
             {
                 validSkills.Add(skill);
             }

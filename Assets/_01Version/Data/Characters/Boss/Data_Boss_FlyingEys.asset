@@ -19,5 +19,5 @@ MonoBehaviour:
   attackCooldown: 2
   projectileMode: 0
   projectileSpeed: 3
-  attackRange: 10.17
+  attackRange: 6.73
   personalSpace: 1.5

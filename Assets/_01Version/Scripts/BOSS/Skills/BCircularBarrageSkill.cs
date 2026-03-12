@@ -5,8 +5,6 @@ using static BRangedAttack;
 
 public class BCircularBarrageSkill : BaseBossSkill
 {
-    public override string SkillID => "CircularBarrage";
-
     [Header("Burst Settings")]
     [SerializeField] int burstCount = 3;
     [SerializeField] int projectilePerRing = 16;
@@ -21,28 +19,49 @@ public class BCircularBarrageSkill : BaseBossSkill
     [SerializeField] float projectileSpeed = 6f;
 
     // =========================
-    public override bool CanExecute(BossContext ctx)
+    // CONDITION
+    // =========================
+
+    protected override bool CheckCondition(BossContext ctx)
     {
-        if (!base.CanExecute(ctx))
+        if (ctx.Player == null)
+            return false;
+
+        float dist = Vector2.Distance(
+            ctx.boss.transform.position,
+            ctx.Player.position
+        );
+
+        // Skill này nên dùng khi player không quá gần
+        if (dist < ctx.Stats.attackRange + 1.5f)
             return false;
 
         return true;
     }
 
-    protected override IEnumerator OnExecute(BossContext ctx)
+    // =========================
+    // EXECUTE
+    // =========================
+
+    protected override IEnumerator PerformSkill(BossContext ctx)
     {
         ctx.boss.SetCastingSkill(true);
 
+        ctx.Movement?.Stop();
         ctx.Anim?.PlaySkill1();
 
         for (int burst = 0; burst < burstCount; burst++)
         {
-            var ring = SpawnIdleRing(ctx);
+            List<BossProjectile> ring = SpawnIdleRing(ctx);
 
+            // charge trước khi bắn
             yield return new WaitForSeconds(chargeTime);
 
             foreach (var proj in ring)
-                proj.Fire();
+            {
+                if (proj != null)
+                    proj.Fire();
+            }
 
             if (burst < burstCount - 1)
                 yield return new WaitForSeconds(intervalBetweenBursts);
@@ -52,6 +71,9 @@ public class BCircularBarrageSkill : BaseBossSkill
     }
 
     // =========================
+    // SPAWN PROJECTILE RING
+    // =========================
+
     List<BossProjectile> SpawnIdleRing(BossContext ctx)
     {
         List<BossProjectile> result = new();
@@ -61,6 +83,7 @@ public class BCircularBarrageSkill : BaseBossSkill
         for (int i = 0; i < projectilePerRing; i++)
         {
             float angle = angleStep * i * Mathf.Deg2Rad;
+
             Vector2 dir = new Vector2(
                 Mathf.Cos(angle),
                 Mathf.Sin(angle)
@@ -73,6 +96,9 @@ public class BCircularBarrageSkill : BaseBossSkill
             BossProjectile proj =
                 ObjectPoolManager.Instance
                     .Spawn<BossProjectile>(projectilePrefab);
+
+            if (proj == null)
+                continue;
 
             proj.transform.position = spawnPos;
 
@@ -89,6 +115,9 @@ public class BCircularBarrageSkill : BaseBossSkill
     }
 
     // =========================
+    // PROJECTILE CONTEXT
+    // =========================
+
     BossProjectileContext CreateProjectileContext(BossContext ctx)
     {
         return new BossProjectileContext
