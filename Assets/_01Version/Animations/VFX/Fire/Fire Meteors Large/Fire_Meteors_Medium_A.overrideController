@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Fire_Meteors_Medium_A
+  m_Controller: {fileID: 9100000, guid: da99d6fd93cb5d84ab5e93acb0693b84, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 5bc3508f8be67e1408d2a5e6953cb93f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b8c6b3f6f0fac7e4f88c1f2370c7dfb8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 45703e9e3a7647049b3f81d1c8ade749, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 059e3b93fb388f343894dc5fce1a2f18, type: 2}

@@ -116,7 +116,7 @@ public class BossProjectile : MonoBehaviour, IPoolable
         ctx = context;
         moveDir = direction.normalized;
         moveType = type;
-        homingTarget = (type == ProjectileMoveType.Homing) ? target : null;
+        homingTarget = (type == ProjectileMoveType.Straight) ? target : null;
 
         state = ProjectileState.Idle;
         RotateToDirection(moveDir);

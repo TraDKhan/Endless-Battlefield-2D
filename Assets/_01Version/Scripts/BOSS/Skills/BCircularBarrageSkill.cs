@@ -78,11 +78,12 @@ public class BCircularBarrageSkill : BaseBossSkill
     {
         List<BossProjectile> result = new();
 
+        float angleOffsetDeg = Random.Range(15f, 30f);
         float angleStep = 360f / projectilePerRing;
 
         for (int i = 0; i < projectilePerRing; i++)
         {
-            float angle = angleStep * i * Mathf.Deg2Rad;
+            float angle = (angleStep * i + angleOffsetDeg) * Mathf.Deg2Rad;
 
             Vector2 dir = new Vector2(
                 Mathf.Cos(angle),

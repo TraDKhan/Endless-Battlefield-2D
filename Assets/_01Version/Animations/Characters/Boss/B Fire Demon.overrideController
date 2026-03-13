@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: B Fire Demon
+  m_Controller: {fileID: 9100000, guid: edac67bbd19fe2b47b65dd20c3acd76d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2470563c2395a9a448271be19f3d2374, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d9645920be0799c4cab662a2ac40ab01, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 68aa679dc508ac741bce54d69a181408, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d9645920be0799c4cab662a2ac40ab01, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: a69361e55a7636f4c8bd75465a5a7789, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d9645920be0799c4cab662a2ac40ab01, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 209b42901ffb4284581eaecb5798facf, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 0e3a70185545ee546a0777850c13cc1c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 513eb57900dc96341a0b9cf2d30a9978, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3d6545780df295b489832b99c76f227f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 83f1ed55c9afcc944811666ee2d113b8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4c73b2a7b8e65ea4181c0909d29bcfd0, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0f63f38e9cfec3c41aa9a3986bb52c84, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3ea29519289a4004fa5e883cfc6eaa4a, type: 2}

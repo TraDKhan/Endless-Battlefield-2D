@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: a35b3815f926330428f55f7f1b00a700
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2824872560470061636
+    second: warning_icons_grid_01_0
+  - first:
+      213: -3828872702927614405
+    second: warning_icons_grid_01_1
+  - first:
+      213: 1356237644437278492
+    second: warning_icons_grid_01_2
+  - first:
+      213: -4818642362499223297
+    second: warning_icons_grid_01_3
+  - first:
+      213: -3909781512172213132
+    second: warning_icons_grid_01_4
+  - first:
+      213: -1965100489736565694
+    second: warning_icons_grid_01_5
+  - first:
+      213: 8148639459745380127
+    second: warning_icons_grid_01_6
+  - first:
+      213: 3323110205086557931
+    second: warning_icons_grid_01_7
+  - first:
+      213: -3431795636344329586
+    second: warning_icons_grid_01_8
+  - first:
+      213: 5410286039587642141
+    second: warning_icons_grid_01_9
+  - first:
+      213: -8234347775262598699
+    second: warning_icons_grid_01_10
+  - first:
+      213: 1082576045467229754
+    second: warning_icons_grid_01_11
+  - first:
+      213: -440723633985360775
+    second: warning_icons_grid_01_12
+  - first:
+      213: 3462535319239966944
+    second: warning_icons_grid_01_13
+  - first:
+      213: 3013338698670446077
+    second: warning_icons_grid_01_14
+  - first:
+      213: -1808486409633100404
+    second: warning_icons_grid_01_15
+  - first:
+      213: -6748501931980583238
+    second: warning_icons_grid_01_16
+  - first:
+      213: -5396465992912923648
+    second: warning_icons_grid_01_17
+  - first:
+      213: -8897750544280372692
+    second: warning_icons_grid_01_18
+  - first:
+      213: 1990457270551744067
+    second: warning_icons_grid_01_19
+  - first:
+      213: 812768735449125034
+    second: warning_icons_grid_01_20
+  - first:
+      213: 7527847679811998774
+    second: warning_icons_grid_01_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 600
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: warning_icons_grid_01_0
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 563
+        width: 138
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 442f09e70a6f33720800000000000000
+      internalID: 2824872560470061636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_1
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 564
+        width: 137
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3e4fcb109c1ddac0800000000000000
+      internalID: -3828872702927614405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_2
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 563
+        width: 139
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1f42b3b3f252d210800000000000000
+      internalID: 1356237644437278492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_3
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 563
+        width: 139
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff0b5933d4eb02db0800000000000000
+      internalID: -4818642362499223297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_4
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 563
+        width: 139
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47ce599fd6aadb9c0800000000000000
+      internalID: -3909781512172213132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_5
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 563
+        width: 138
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24c4e41248f8ab4e0800000000000000
+      internalID: -1965100489736565694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_6
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 310
+        width: 114
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f17bad05a68c51170800000000000000
+      internalID: 8148639459745380127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_7
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 310
+        width: 119
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6e8abff1f0e1e20800000000000000
+      internalID: 3323110205086557931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_8
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 310
+        width: 122
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8ae5f91d00df50d0800000000000000
+      internalID: -3431795636344329586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_9
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 310
+        width: 122
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1b50e2fc72351b40800000000000000
+      internalID: 5410286039587642141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_10
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 395
+        width: 35
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9d17a6358b9bd80800000000000000
+      internalID: -8234347775262598699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_11
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 411
+        width: 40
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3edb687d25160f00800000000000000
+      internalID: 1082576045467229754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_12
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 395
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97cee20a03c32e9f0800000000000000
+      internalID: -440723633985360775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_13
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 310
+        width: 138
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e0ca8d07856d0030800000000000000
+      internalID: 3462535319239966944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_14
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 317
+        width: 8
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df59032c49781d920800000000000000
+      internalID: 3013338698670446077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_15
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 310
+        width: 121
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8d82b43137f6e6e0800000000000000
+      internalID: -1808486409633100404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_16
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 79
+        width: 124
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abe824a7f318852a0800000000000000
+      internalID: -6748501931980583238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_17
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 79
+        width: 126
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00413f965c6eb15b0800000000000000
+      internalID: -5396465992912923648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_18
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 79
+        width: 125
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2a3124b507d48480800000000000000
+      internalID: -8897750544280372692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_19
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 79
+        width: 127
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34e84d777568f9b10800000000000000
+      internalID: 1990457270551744067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_20
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 79
+        width: 125
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa01df0dbd8874b00800000000000000
+      internalID: 812768735449125034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning_icons_grid_01_21
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 79
+        width: 125
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 634517e9499487860800000000000000
+      internalID: 7527847679811998774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      warning_icons_grid_01_0: 2824872560470061636
+      warning_icons_grid_01_1: -3828872702927614405
+      warning_icons_grid_01_10: -8234347775262598699
+      warning_icons_grid_01_11: 1082576045467229754
+      warning_icons_grid_01_12: -440723633985360775
+      warning_icons_grid_01_13: 3462535319239966944
+      warning_icons_grid_01_14: 3013338698670446077
+      warning_icons_grid_01_15: -1808486409633100404
+      warning_icons_grid_01_16: -6748501931980583238
+      warning_icons_grid_01_17: -5396465992912923648
+      warning_icons_grid_01_18: -8897750544280372692
+      warning_icons_grid_01_19: 1990457270551744067
+      warning_icons_grid_01_2: 1356237644437278492
+      warning_icons_grid_01_20: 812768735449125034
+      warning_icons_grid_01_21: 7527847679811998774
+      warning_icons_grid_01_3: -4818642362499223297
+      warning_icons_grid_01_4: -3909781512172213132
+      warning_icons_grid_01_5: -1965100489736565694
+      warning_icons_grid_01_6: 8148639459745380127
+      warning_icons_grid_01_7: 3323110205086557931
+      warning_icons_grid_01_8: -3431795636344329586
+      warning_icons_grid_01_9: 5410286039587642141
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
