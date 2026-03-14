@@ -2,6 +2,7 @@
 
 public class EnemyAnimationController : MonoBehaviour
 {
+    //todo: sửa lại tên các trigger cho phù hợp với từng loại skill, tránh trường hợp skill của boss lại dùng chung trigger với skill của enemy thường
     [SerializeField] private Animator animator;
 
     static readonly int IsMoving = Animator.StringToHash("IsMoving");

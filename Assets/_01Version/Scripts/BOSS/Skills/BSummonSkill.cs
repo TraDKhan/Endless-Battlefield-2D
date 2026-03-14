@@ -18,6 +18,9 @@ public class BSummonSkill : BaseBossSkill
     int lastSummonedPhase = -1;
     int summonTimes = 0;
 
+    bool spawnTriggered;
+    bool skillFinished;
+    BossContext cachedCtx;
     // =========================
     // CONDITION
     // =========================
@@ -38,30 +41,67 @@ public class BSummonSkill : BaseBossSkill
         return true;
     }
 
-    // =========================
-    // EXECUTE
-    // =========================
     protected override IEnumerator PerformSkill(BossContext ctx)
     {
+        cachedCtx = ctx;
+
+        spawnTriggered = false;
+        skillFinished = false;
+
         lastSummonedPhase = ctx.boss.CurrentPhase;
         summonTimes++;
 
-        ctx.Movement?.Stop();
-        ctx.Anim?.SetMoving(false);
+        ctx.boss.SetCastingSkill(true);
 
         // PLAY ANIMATION
         ctx.Anim?.PlaySkill2();
 
-        yield return new WaitForSeconds(summonAnimDuration);
+        float timer = 0f;
+
+        while (!skillFinished && timer < summonAnimDuration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    public override void OnAnimationEvent(BossAnimEvent animEvent)
+    {
+        switch (animEvent)
+        {
+            case BossAnimEvent.Spawn:
+                SpawnSummons();
+                break;
+
+            case BossAnimEvent.End:
+                skillFinished = true;
+                cachedCtx.boss.SetCastingSkill(false);
+                break;
+        }
+    }
+
+    void SpawnSummons()
+    {
+        if (spawnTriggered || cachedCtx == null)
+            return;
+
+        spawnTriggered = true;
 
         int summonCount = CalculateSummonCount();
 
+        StartCoroutine(SpawnRoutine(summonCount));
+    }
+
+    IEnumerator SpawnRoutine(int summonCount)
+    {
         for (int i = 0; i < summonCount; i++)
         {
-            Vector2 offset = Random.insideUnitCircle.normalized * radius;
-            Vector2 spawnPos =
-                (Vector2)ctx.boss.transform.position + offset;
+            Vector2 offset =
+                Random.insideUnitCircle.normalized * radius;
 
+            Vector2 spawnPos = (Vector2)cachedCtx.boss.transform.position + offset;
+
+            //todo: chuyển thành object pool sau
             Instantiate(
                 summonObjectPrefab,
                 spawnPos,

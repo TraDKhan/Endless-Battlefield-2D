@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class BossBrain : MonoBehaviour
 {
-    [SerializeField] List<MonoBehaviour> skillBehaviours;
+    BossContext context;
 
     IBossSkill[] skills;
     IBasicAttack basicAttack;
 
-    BossContext context;
-
+    IBossSkill currentSkill;
     bool busy;
     float thinkTimer;
 
@@ -23,17 +22,9 @@ public class BossBrain : MonoBehaviour
             boss = GetComponent<BossController>()
         };
 
-        basicAttack = GetComponent<IBasicAttack>();
+        basicAttack = GetComponentInChildren<IBasicAttack>();
 
-        List<IBossSkill> list = new();
-
-        foreach (var m in skillBehaviours)
-        {
-            if (m is IBossSkill s)
-                list.Add(s);
-        }
-
-        skills = list.ToArray();
+        skills = GetComponentsInChildren<IBossSkill>();
     }
 
     void Update()
@@ -77,7 +68,11 @@ public class BossBrain : MonoBehaviour
     IEnumerator RunSkill(IBossSkill skill)
     {
         busy = true;
+        currentSkill = skill;
+
         yield return skill.Execute(context);
+
+        currentSkill = null;
         busy = false;
     }
 
@@ -86,5 +81,10 @@ public class BossBrain : MonoBehaviour
         busy = true;
         yield return basicAttack.Attack(context);
         busy = false;
+    }
+
+    public void Anim_RouteEvent(BossAnimEvent animEvent)
+    {
+        currentSkill?.OnAnimationEvent(animEvent);
     }
 }

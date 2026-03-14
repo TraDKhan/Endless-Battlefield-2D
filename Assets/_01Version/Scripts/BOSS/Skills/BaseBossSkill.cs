@@ -36,4 +36,5 @@ public abstract class BaseBossSkill : MonoBehaviour, IBossSkill
     }
 
     protected abstract IEnumerator PerformSkill(BossContext ctx);
+    public virtual void OnAnimationEvent(BossAnimEvent animEvent) { }
 }

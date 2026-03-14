@@ -142,3 +142,11 @@ public enum EquipmentSlotType
     Ring,
     Amulet
 }
+
+public enum BossAnimEvent
+{
+    Hit,
+    Spawn,
+    Dash,
+    End
+}

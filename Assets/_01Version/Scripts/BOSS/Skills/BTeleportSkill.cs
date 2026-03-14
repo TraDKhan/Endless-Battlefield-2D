@@ -47,9 +47,7 @@ public class BTeleportSkill : BaseBossSkill
         damageApplied = false;
         skillFinished = false;
 
-        // STOP MOVEMENT
-        ctx.Movement?.Stop();
-        ctx.Anim?.SetMoving(false);
+        ctx.boss.SetCastingSkill(true);
 
         // TELEPORT
         Vector2 dir = (ctx.Player.position - ctx.boss.transform.position).normalized;
@@ -77,6 +75,8 @@ public class BTeleportSkill : BaseBossSkill
         {
             yield return new WaitForSeconds(repositionDelay);
 
+            ctx.boss.SetCastingSkill(false);
+
             Vector2 target = GetRangedPosition(ctx);
 
             yield return MoveTo(ctx, target);
@@ -91,6 +91,9 @@ public class BTeleportSkill : BaseBossSkill
                 melee.EmpowerNextHits(2);
             }
         }
+
+        yield return new WaitForSeconds(2f);
+        ctx.boss.SetCastingSkill(false);
     }
 
     // =========================
@@ -107,6 +110,7 @@ public class BTeleportSkill : BaseBossSkill
 
         return (Vector2)ctx.Player.position + offset;
     }
+
     // =========================
     IEnumerator MoveTo(BossContext ctx, Vector2 target)
     {
@@ -127,7 +131,22 @@ public class BTeleportSkill : BaseBossSkill
 
         ctx.Movement?.Stop();
     }
-    public void AnimEvent_ApplyTeleportSkillDamage()
+
+    public override void OnAnimationEvent(BossAnimEvent animEvent)
+    {
+        switch (animEvent)
+        {
+            case BossAnimEvent.Hit:
+                ApplyTeleportDamage();
+                break;
+
+            case BossAnimEvent.End:
+                skillFinished = true;
+                break;
+        }
+    }
+
+    void ApplyTeleportDamage()
     {
         if (damageApplied || cachedCtx == null)
             return;
@@ -145,10 +164,6 @@ public class BTeleportSkill : BaseBossSkill
             hit.GetComponent<IDamageable>()
                 ?.TakeDamage(skillDamage);
         }
-    }
-    public void AnimEvent_FinishSkill()
-    {
-        skillFinished = true;
     }
 
 #if UNITY_EDITOR

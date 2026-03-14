@@ -7,4 +7,5 @@ public interface IBossSkill
 
     bool CanUse(BossContext ctx);
     IEnumerator Execute(BossContext ctx);
+    void OnAnimationEvent(BossAnimEvent animEvent);
 }
