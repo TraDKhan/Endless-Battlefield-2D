@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7544979766755089249}
   - component: {fileID: 7859536830428045322}
   - component: {fileID: -1305570394357092223}
+  - component: {fileID: 3570184736679208972}
   m_Layer: 0
   m_Name: Projectile_Fire
   m_TagString: Untagged
@@ -167,3 +168,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Meteor
   fallSpeed: 12
   cooldown: 1
+  damage: 10
+  damageRadius: 0.18
+--- !u!114 &3570184736679208972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354595784268089341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoolIdentity
+  poolKey: Projectile_Fire

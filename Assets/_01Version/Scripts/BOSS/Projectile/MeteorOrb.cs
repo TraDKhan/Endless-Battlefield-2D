@@ -59,7 +59,7 @@ public class MeteorOrb : MonoBehaviour, IPoolable
     }
 
     //gọi từ animation event
-    void DealDamageToExplode()
+    void Anim_DealDamageToExplode()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(
             transform.position,
@@ -76,7 +76,7 @@ public class MeteorOrb : MonoBehaviour, IPoolable
     }
 
     // gọi từ animation event
-    public void OnExplosionEnd()
+    public void Anim_OnExplosionEnd()
     {
         ObjectPoolManager.Instance.Despawn(this);
     }
@@ -89,6 +89,8 @@ public class MeteorOrb : MonoBehaviour, IPoolable
 
         animator.ResetTrigger("On");
         //animator.Play("Flying", 0, 0f);
+        transform.localScale = Vector3.one;
+        transform.rotation = Quaternion.identity;
     }
 
     public void OnDespawn()

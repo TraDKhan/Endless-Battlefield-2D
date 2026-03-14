@@ -16,6 +16,16 @@ public class BMeteorRainSkill : BaseBossSkill
     protected override IEnumerator PerformSkill(BossContext ctx)
     {
         Transform player = ctx.Player;
+        ctx.boss.SetCastingSkill(true);
+
+        float distance = Vector3.Distance(ctx.boss.transform.position, player.position);
+        float attackRange = ctx.Stats.attackRange;
+
+        if (distance < attackRange)
+        {
+            ctx.boss.SetCastingSkill(false);
+            yield break;
+        }
 
         for (int i = 0; i < meteorCount; i++)
         {
@@ -29,26 +39,21 @@ public class BMeteorRainSkill : BaseBossSkill
                 SpawnMeteor(targetPos);
             });
 
+            CameraShake.Instance.Shake(0.2f, 0.1f);
+
             yield return new WaitForSeconds(spawnDelay);
         }
+
+        ctx.boss.SetCastingSkill(false);
     }
 
-    void SpawnMeteor(Vector3 playerPos)
+    void SpawnMeteor(Vector3 targetPos)
     {
-        // chọn điểm rơi trên mặt đất
-        Vector2 offset = Random.insideUnitCircle * spawnRadius;
-
-        Vector3 targetPos = new Vector3(
-            playerPos.x + offset.x,
-            playerPos.y + offset.y,
-            0
-        );
-
-        // spawn trên trời ngay phía trên điểm rơi
         Vector3 spawnPos = targetPos + Vector3.up * spawnHeight;
 
-        GameObject meteor = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+        Boss_Projectile_Meteor meteor = ObjectPoolManager.Instance.Spawn<Boss_Projectile_Meteor>(meteorPrefab);
 
-        meteor.GetComponent<Boss_Projectile_Meteor>().Init(targetPos);
+        meteor.transform.position = spawnPos;
+        meteor.Init(targetPos);
     }
 }

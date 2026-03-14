@@ -9,7 +9,7 @@ AnimatorController:
   m_Name: Fire_Meteors
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Off
+  - m_Name: On
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -115,7 +115,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Off
+    m_ConditionEvent: On
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 566028750563853709}

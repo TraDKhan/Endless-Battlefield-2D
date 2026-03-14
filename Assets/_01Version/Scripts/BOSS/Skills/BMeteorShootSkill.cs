@@ -9,8 +9,8 @@ public class BMeteorShootSkill : BaseBossSkill
 
     [Header("Spawn")]
     [SerializeField] int pointCount = 10;
-    [SerializeField] GameObject meteorPrefab;
     [SerializeField] float moveSpeed = 10f;
+    [SerializeField] List<GameObject> meteorPrefabs;
 
     [Header("Warning")]
     [SerializeField] GameObject warningPrefab;
@@ -41,15 +41,17 @@ public class BMeteorShootSkill : BaseBossSkill
         }
 
         yield return new WaitForSeconds(warningDuration);
-
+        
         // Spawn meteor
         for (int i = 0; i < startPoints.Count; i++)
         {
-            MeteorOrb meteor = ObjectPoolManager.Instance.Spawn<MeteorOrb>(meteorPrefab);
+            GameObject perfab = meteorPrefabs[Random.Range(0, meteorPrefabs.Count)];
+
+            MeteorOrb meteor = ObjectPoolManager.Instance.Spawn<MeteorOrb>(perfab);
 
             meteor.transform.position = startPoints[i];
             meteor.Init(endPoints[i], moveSpeed);
-
+            CameraShake.Instance.Shake(0.2f, 0.1f);
             yield return new WaitForSeconds(0.1f);
         }
 

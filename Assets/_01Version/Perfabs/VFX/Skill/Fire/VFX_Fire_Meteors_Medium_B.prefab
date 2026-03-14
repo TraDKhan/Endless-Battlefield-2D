@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8431555196529009460}
   - component: {fileID: 5485463596588463322}
   - component: {fileID: 912826769512431102}
+  - component: {fileID: 2824440629196281402}
+  - component: {fileID: 8388675272214719257}
   m_Layer: 0
   m_Name: VFX_Fire_Meteors_Medium_B
   m_TagString: Untagged
@@ -85,7 +87,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: fd3ce75a4fd8ae647befa37e26a21e77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.16, y: 0.16}
@@ -149,5 +151,36 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.105
+  m_Offset: {x: -0.06591964, y: -0.086202115}
+  m_Radius: 0.105000705
+--- !u!114 &2824440629196281402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409491718501349491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoolIdentity
+  poolKey: VFX_Fire_Meteors_Medium_B
+--- !u!114 &8388675272214719257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3409491718501349491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3442bbf652ab0c442bab07f6ae8cf5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeteorOrb
+  explodeDistance: 0.1
+  damageRadius: 1.2
+  damage: 40
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 256

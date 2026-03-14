@@ -15,8 +15,8 @@ MonoBehaviour:
   playerName: SOLDIER
   baseStats:
   - statType: 0
-    value: 100
+    value: 1000
   - statType: 1
-    value: 1200
+    value: 0
   - statType: 2
     value: 2
