@@ -115,4 +115,11 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 0f;
         Destroy(gameObject);
     }
+
+    [ContextMenu("Test Add EXP")]
+
+    private void TestAddEXP()
+    {
+        LevelSystem.AddEXP(150);
+    }
 }

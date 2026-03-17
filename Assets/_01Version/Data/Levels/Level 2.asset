@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   levelIndex: 1
-  icon: {fileID: -5225540622116197949, guid: 073ea13734b998a429f61ef4bff5d97c, type: 3}
+  icon: {fileID: 960074116, guid: f662c1f293639ad4a99ae8a3cb2e512f, type: 3}
   isUnlocked: 1
   gameplaySceneName: GameScene

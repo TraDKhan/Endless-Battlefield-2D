@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Weapon
   - Skill
+  - Special
   layers:
   - Default
   - TransparentFX

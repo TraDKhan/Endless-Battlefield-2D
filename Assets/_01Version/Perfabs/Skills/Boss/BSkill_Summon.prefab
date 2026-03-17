@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7420651448178948602}
   m_Layer: 0
   m_Name: BSkill_Summon
-  m_TagString: Untagged
+  m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 2
-  summonObjectPrefab: {fileID: 2484597863641456937, guid: 2539b9943265efa49b60e65f4ee8d3e6, type: 3}
+  summonPrefab: {fileID: 2484597863641456937, guid: 2539b9943265efa49b60e65f4ee8d3e6, type: 3}
   baseCount: 3
   radius: 2.5
   minPhase: 2

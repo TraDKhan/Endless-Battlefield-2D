@@ -101,8 +101,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     #endregion
 
     #region Death
-    [ContextMenu ("Die")]
-    public void TestDie() => Die();
+
     private void Die()
     {
         if (deathInvoked) return;
@@ -110,6 +109,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         deathInvoked = true;
         OnDeath?.Invoke();
         Debug.Log("Player Die");
+        //tối ưu singleton truyền từ controller vào init để tránh gọi Instance nhiều lần
         PlayerController.Instance.Anim?.PlayDeath();
     }
 
@@ -152,4 +152,9 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     }
 
     #endregion
+
+    [ContextMenu("Die")]
+    public void TestDie() => Die();
+    [ContextMenu ("Take 10 Damage")]
+    public void TestDamage() => TakeDamage(10);
 }

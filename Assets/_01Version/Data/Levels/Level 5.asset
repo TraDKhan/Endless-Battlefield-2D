@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Level 5
   m_EditorClassIdentifier: 
   levelIndex: 4
-  icon: {fileID: -2276259661975475453, guid: d8eced977496dad4fbadb30e2ba68f31, type: 3}
+  icon: {fileID: -1426424102, guid: f662c1f293639ad4a99ae8a3cb2e512f, type: 3}
   isUnlocked: 0
   gameplaySceneName: GameScene

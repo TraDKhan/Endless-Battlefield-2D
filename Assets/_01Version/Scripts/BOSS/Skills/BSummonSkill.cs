@@ -4,7 +4,7 @@ using UnityEngine;
 public class BSummonSkill : BaseBossSkill
 {
     [Header("Summon")]
-    [SerializeField] GameObject summonObjectPrefab;
+    [SerializeField] GameObject summonPrefab;
     [SerializeField] int baseCount = 3;
     [SerializeField] float radius = 2.5f;
 
@@ -96,17 +96,12 @@ public class BSummonSkill : BaseBossSkill
     {
         for (int i = 0; i < summonCount; i++)
         {
-            Vector2 offset =
-                Random.insideUnitCircle.normalized * radius;
+            Vector2 offset = Random.insideUnitCircle.normalized * radius;
 
             Vector2 spawnPos = (Vector2)cachedCtx.boss.transform.position + offset;
 
-            //todo: chuyển thành object pool sau
-            Instantiate(
-                summonObjectPrefab,
-                spawnPos,
-                Quaternion.identity
-            );
+            EnemyController enemy = ObjectPoolManager.Instance.Spawn<EnemyController>(summonPrefab);
+            enemy.transform.position = spawnPos;
 
             yield return new WaitForSeconds(0.15f);
         }

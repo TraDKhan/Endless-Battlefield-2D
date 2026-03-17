@@ -5,6 +5,7 @@ public class UpgradeSystem : MonoBehaviour
 {
     public static UpgradeSystem Instance;
 
+
     [Header("Upgrade Pool")]
     public List<UpgradeData> upgradePool;
 
@@ -19,6 +20,10 @@ public class UpgradeSystem : MonoBehaviour
 
     private readonly HashSet<UnLockWeaponUpgrade> unlockedWeapons = new();
 
+    //sửa lại không cho WeaponSystem và PlayerSystem là public để có thể truy cập từ UpgradeData,
+    // truyển init cho các logic cấp thấp hơn như SkillUpgradeData, WeaponUpgradeData, PlayerUpgradeData
+    // để tránh việc các UpgradeData có thể truy cập trực tiếp vào WeaponSystem và Player
+    // khởi tạo trong class cấp thấp và gắn nó thông qua init 
     public WeaponUpgradeSystem WeaponSystem => weaponSystem;
     public PlayerUpgradeSystem PlayerSystem => playerSystem;
 
@@ -68,6 +73,7 @@ public class UpgradeSystem : MonoBehaviour
         isChoosingUpgrade = true;
 
         Time.timeScale = 0f;
+        Debug.Log(OnShowUpgradeUI?.GetInvocationList().Length);
         OnShowUpgradeUI?.Invoke(GetRandomUpgrades(3));
     }
 

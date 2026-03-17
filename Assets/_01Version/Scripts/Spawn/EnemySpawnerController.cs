@@ -50,6 +50,7 @@ public class EnemySpawnerController : MonoBehaviour
 
             if (wave is EnemyWaveData enemyWave)
                 yield return SpawnEnemyWave(enemyWave);
+
             else if (wave is BossWaveData bossWave)
                 yield return SpawnBossWave(bossWave);
 

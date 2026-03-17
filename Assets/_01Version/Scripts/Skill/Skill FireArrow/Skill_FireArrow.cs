@@ -1,25 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Skill_FireArrow : BaseSkill
 {
     [Header("Fire Arrow")]
-    [SerializeField] private GameObject firerArrow;
+    [SerializeField] private GameObject fireArrowPrefab;
 
     [Header("Enemy Targer")]
     [SerializeField] private LayerMask enemyLayer;
-
-    private readonly List<Projectile_FireArrow> arrows = new();
 
     private float cooldownTimer;
     private int damage;
     private int quantity;
     private float cooldown;
     [SerializeField] private float moveSpeed = 2f;
+
     //Todo: tỉ lệ chí mạng làm sau khi đồng bộ với vũ khí
-    private float cirtChane;
+    private float cirtChance;
+    private readonly List<Projectile_FireArrow> arrowBuffer = new();
+    private bool isWaitingForTarget = false;
+
     private void Start()
     {
         if (owner == null)
@@ -34,6 +37,7 @@ public class Skill_FireArrow : BaseSkill
     private void Update()
     {
         if (owner == null) return;
+        if (isWaitingForTarget) return;
 
         cooldownTimer -= Time.deltaTime;
 
@@ -50,12 +54,16 @@ public class Skill_FireArrow : BaseSkill
         quantity = skillStats.GetInt(SkillStatType.ProjectileCount);
         cooldown = skillStats.GetStat(SkillStatType.Cooldown);
 
-        cooldownTimer = cooldown;  
+        cooldownTimer = cooldown;
     }
 
     private void Spawn_FireArrow()
     {
-        arrows.Clear();
+        arrowBuffer.Clear();
+
+        if (quantity <= 0) return;
+
+        isWaitingForTarget = true;
 
         float step = 360f / quantity;
 
@@ -63,45 +71,80 @@ public class Skill_FireArrow : BaseSkill
         {
             float angle = step * i;
 
-            GameObject obj = Instantiate(firerArrow, owner.position, Quaternion.identity);
+            var arrow = ObjectPoolManager.Instance.Spawn<Projectile_FireArrow>(fireArrowPrefab);
 
-            var arrow = obj.GetComponent<Projectile_FireArrow>();
-
+            arrow.transform.position = owner.position; // ❗ thiếu cái này
             arrow.Int(owner, damage, moveSpeed);
             arrow.SetAngle(angle);
 
-            arrows.Add(arrow);
+            arrowBuffer.Add(arrow);
         }
 
-        StartCoroutine(ReleaseArrows());
+        //tránh
+        //Coroutine cũ bị mất dữ liệu
+        //Arrow launch sai / thiếu / bug random
+        var arrowsCopy = new List<Projectile_FireArrow>(arrowBuffer);
+        StartCoroutine(ReleaseArrows(arrowsCopy));
     }
-    private IEnumerator ReleaseArrows()
+
+    private IEnumerator ReleaseArrows(List<Projectile_FireArrow> arrows)
     {
         yield return new WaitForSeconds(0.8f);
+        List<Transform> enemies = null;
+
+        while (true)
+        {
+            enemies = GetEnemies();
+
+            if (enemies.Count > 0)
+                break;
+
+            yield return null;
+        }
 
         foreach (var arrow in arrows)
         {
-            Transform target = FindRandomEnemy();
+            if (arrow == null) continue;
+
+            Transform target = null;
+
+            if (enemies.Count > 0)
+            {
+                int index = Random.Range(0, enemies.Count);
+                target = enemies[index];
+            }
 
             Vector2 dir;
 
-            if (target != null)
-                dir = (target.position - arrow.transform.position).normalized;
-            else
+            if (target == null || !target.gameObject.activeInHierarchy)
+            {
                 dir = Random.insideUnitCircle.normalized;
+            }
+            else
+            {
+                dir = (target.position - arrow.transform.position).normalized;
+            }
 
+            yield return new WaitForSeconds(0.05f);
             arrow.Launch(dir);
         }
+        isWaitingForTarget = false;
     }
-    private Transform FindRandomEnemy()
+
+    private List<Transform> GetEnemies()
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(owner.position, 8f, enemyLayer);
 
-        if (hits.Length == 0)
-            return null;
+        List<Transform> result = new List<Transform>(hits.Length);
 
-        int index = Random.Range(0, hits.Length);
+        foreach (var hit in hits)
+        {
+            if (hit != null && hit.gameObject.activeInHierarchy)
+            {
+                result.Add(hit.transform);
+            }
+        }
 
-        return hits[index].transform;
+        return result;
     }
 }

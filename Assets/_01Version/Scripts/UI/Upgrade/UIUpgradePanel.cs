@@ -21,12 +21,24 @@ public class UIUpgradePanel : MonoBehaviour
         Hide();
     }
 
-    private void OnDestroy()
+    //private void OnDestroy()
+    //{
+    //    if (upgradeSystem != null)
+    //        upgradeSystem.OnShowUpgradeUI -= Show;
+    //}
+    private void OnEnable()
+    {
+        upgradeSystem = UpgradeSystem.Instance;
+
+        if (upgradeSystem != null)
+            upgradeSystem.OnShowUpgradeUI += Show;
+    }
+
+    private void OnDisable()
     {
         if (upgradeSystem != null)
             upgradeSystem.OnShowUpgradeUI -= Show;
     }
-
     // =========================
     // SHOW
     // =========================

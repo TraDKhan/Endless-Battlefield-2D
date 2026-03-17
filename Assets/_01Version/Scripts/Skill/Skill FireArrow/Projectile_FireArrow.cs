@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
-public class Projectile_FireArrow : MonoBehaviour
+[RequireComponent(typeof(PoolIdentity))]
+public class Projectile_FireArrow : MonoBehaviour, IPoolable
 {
+    public PoolIdentity Identity { get; set; }
+
     private Transform owner;
     private float damage;
     private float speed;
-
     private float angle;
 
     private bool isOrbit = true;
     private Vector2 moveDir;
 
     private Animator animator;
-
+    private float cooldown = 15f;
+    private float cooldownTimer;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -23,6 +27,10 @@ public class Projectile_FireArrow : MonoBehaviour
         owner = _owner;
         damage = _damage;
         speed = _speed;
+
+        isOrbit = true;
+        moveDir = Vector2.zero;
+        cooldownTimer = cooldown;
     }
 
     public void SetAngle(float _angle)
@@ -36,6 +44,7 @@ public class Projectile_FireArrow : MonoBehaviour
         moveDir = dir;
 
         // Trigger animation Fly
+        //to do: kiểm tra co hiệu ứng bay hay chưa
         if (animator != null)
             animator.SetTrigger("Launch");
     }
@@ -70,6 +79,8 @@ public class Projectile_FireArrow : MonoBehaviour
 
         // xoay mũi tên theo hướng bay
         transform.right = moveDir;
+        cooldownTimer -= Time.deltaTime;
+        if(cooldownTimer < 0 ) Despawn();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,6 +92,29 @@ public class Projectile_FireArrow : MonoBehaviour
             dmg.TakeDamage((int)damage);
         }
 
-        Destroy(gameObject);
+        Despawn();
+    }
+    // ================= POOL =================
+    public void OnSpawn()
+    {
+        gameObject.SetActive(true);
+        if (animator != null)
+        {
+            animator.Rebind();
+            animator.Update(0f);
+        }
+    }
+
+    public void OnDespawn()
+    {
+        // reset trạng thái
+        owner = null;
+        moveDir = Vector2.zero;
+        isOrbit = true;
+    }
+
+    private void Despawn()
+    {
+        ObjectPoolManager.Instance.Despawn(this);
     }
 }

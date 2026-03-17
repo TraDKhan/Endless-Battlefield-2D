@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2454261218152818556}
   - component: {fileID: 2864930725065479159}
+  - component: {fileID: 5653415350120273423}
   - component: {fileID: 7294377847777010205}
   m_Layer: 0
   m_Name: Upgrade System
@@ -45,6 +46,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054f6dee5b2e6c549adc326d9bcf49e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5653415350120273423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9050156008360397094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b13202f82588e41982a8e54190992f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7294377847777010205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,19 +71,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePool:
+  - {fileID: 11400000, guid: 9018aeab833b3bb4c9f97a59651262da, type: 2}
   - {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
   - {fileID: 11400000, guid: 7201cdcaa3fb92a4680fe4ab363759d3, type: 2}
-  - {fileID: 11400000, guid: 4530cab98316aed4fb783c50f13d61b6, type: 2}
-  - {fileID: 11400000, guid: 0e9d35ae7fcbb3b47983205969c47519, type: 2}
-  - {fileID: 11400000, guid: ab2b8a424baa2574c9fbdcf3b31a884e, type: 2}
-  - {fileID: 11400000, guid: 5dccd24ae53fca44e9fa1b50711782d4, type: 2}
-  - {fileID: 11400000, guid: e2c21c42efecbaf4e828b86e22793102, type: 2}
-  - {fileID: 11400000, guid: 0fc45cbb00861d3479526840756d7482, type: 2}
-  - {fileID: 11400000, guid: b6c860cc1d5b66e49acb1d0c183b6d69, type: 2}
-  - {fileID: 11400000, guid: 07e97e4f1f721564d926a31a964995b5, type: 2}
-  - {fileID: 11400000, guid: 12f4efe603772a54999a1ad56251ccc2, type: 2}
-  - {fileID: 11400000, guid: 19dab9369bc10d34c91a2fd169a2d837, type: 2}
-  - {fileID: 11400000, guid: 304642469ba8fa348bc7e8efe56348f2, type: 2}
-  - {fileID: 11400000, guid: abccfaf7458bb5e48aa1e7ccb8804d17, type: 2}
-  - {fileID: 11400000, guid: e5edce700752ab04fb86bb36e90c2460, type: 2}
-  - {fileID: 11400000, guid: 033c37f9c8845854aacc4ca39963f5af, type: 2}
+  - {fileID: 11400000, guid: 9702abc2de448904c809d04798a45897, type: 2}
+  weaponSystem: {fileID: 2864930725065479159}
+  playerSystem: {fileID: 5653415350120273423}

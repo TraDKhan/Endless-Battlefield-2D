@@ -81,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1042873421
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8334651344603559088, guid: e0f4293e689b1b44b8b894dc577243d8, type: 3}
@@ -170,6 +170,7 @@ MonoBehaviour:
   cooldown: 1
   damage: 10
   damageRadius: 0.18
+  damageInterval: 0.3
 --- !u!114 &3570184736679208972
 MonoBehaviour:
   m_ObjectHideFlags: 0
