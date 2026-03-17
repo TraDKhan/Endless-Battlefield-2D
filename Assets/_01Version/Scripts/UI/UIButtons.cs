@@ -20,7 +20,7 @@ public class UIButtons : MonoBehaviour
     private void Awake()
     {
         SetActiveFalse();
-        BindAllButtons();
+        //BindAllButtons();
     }
     private void Start()
     {
