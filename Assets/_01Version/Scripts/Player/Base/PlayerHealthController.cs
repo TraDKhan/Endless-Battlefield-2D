@@ -107,8 +107,10 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         if (deathInvoked) return;
 
         deathInvoked = true;
+
         OnDeath?.Invoke();
-        Debug.Log("Player Die");
+        GameManager.Instance?.Handle_GameLose();
+
         //tối ưu singleton truyền từ controller vào init để tránh gọi Instance nhiều lần
         PlayerController.Instance.Anim?.PlayDeath();
     }

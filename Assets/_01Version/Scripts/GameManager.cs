@@ -1,14 +1,25 @@
+﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager Instance { get; private set; }
+
+    private int _EnemyKilled;
+    
+    private float _Time;
+
+    //to do: Sau chuyển thành sruct để thay thế 2 biến int, float
+    // tối ưu bắn kết quả một lần duy nhất
+    public event Action<int, float> GameWin;
+    public event Action<int, float> GameLose;
 
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -16,4 +27,39 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Update()
+    {
+        _Time += Time.deltaTime;
+    }
+    
+    public void Handle_GameWin()
+    {
+        Debug.Log("Game Win!");
+        GameWin?.Invoke(_EnemyKilled, _Time);
+    }
+
+    public void Handle_GameLose()
+    {
+        Debug.Log("Game Lose!");
+        GameLose?.Invoke(_EnemyKilled, _Time);
+    }
+
+    public void AddEnemyKill()
+    {
+        _EnemyKilled++;
+        Debug.Log($"Enemy killed. Total: {_EnemyKilled}");
+    }
+
+    public void Handle_RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Handle_BackHomeGame()
+    {
+        SceneManager.LoadScene("HomeScene");
+    }
+
+    public void Handle_NextLevel() { }
 }

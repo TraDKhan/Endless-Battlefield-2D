@@ -59,6 +59,8 @@ public class EnemySpawnerController : MonoBehaviour
         }
 
         Debug.Log("[Spawner] All waves completed!");
+        yield return new WaitForSeconds(1.5f);
+        GameManager.Instance?.Handle_GameWin();
     }
 
     IEnumerator WaitForWaveStart()
@@ -164,6 +166,7 @@ public class EnemySpawnerController : MonoBehaviour
             .GetComponent<BossController>();
 
         enemiesAlive++;
+        boss.OnBossDead += HandleBossDead;
     }
 
     #endregion

@@ -52,6 +52,8 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         isDead = true;
         Debug.Log($"{gameObject.name} DIE");
         OnDeath?.Invoke();
+
+        GameManager.Instance?.AddEnemyKill();
     }
 
     [ContextMenu("Damage")]

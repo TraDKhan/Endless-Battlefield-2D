@@ -6,6 +6,7 @@ public class UIButtons : MonoBehaviour
     [Header("PANEL")]
     public GameObject _settingPanel;
     public GameObject _pausePanel;
+
     [Header("BUTTONs")]
     public Button _pauseButton;
     public Button _resumeButton;
@@ -19,6 +20,7 @@ public class UIButtons : MonoBehaviour
     private void Awake()
     {
         SetActiveFalse();
+        BindAllButtons();
     }
     private void Start()
     {
@@ -32,6 +34,25 @@ public class UIButtons : MonoBehaviour
         _resetGame.onClick.AddListener(() => OnResetGame()); 
         _exitButton.onClick.AddListener(() => OnExitButton());
     }
+
+    void BindAllButtons()
+    {
+        Button[] buttons = Object.FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (Button btn in buttons)
+        {
+            btn.onClick.RemoveListener(PlayClickSound); // tránh add trùng
+            btn.onClick.AddListener(PlayClickSound);
+        }
+    }
+
+    void PlayClickSound()
+    {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance?.PlayClickButton(); // hoặc tạo riêng clickClip
+        }
+    }
+
     public void SetActiveFalse()
     {
         _settingPanel?.SetActive(false);
@@ -53,14 +74,14 @@ public class UIButtons : MonoBehaviour
     {
         SetActiveFalse();
         Time .timeScale = 1.0f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.Handle_RestartGame();
     }
 
     public void OnQuitGameButton()
     {
         SetActiveFalse();
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("HomeScene");
+        GameManager.Instance.Handle_BackHomeGame();
     }
 
     public void OnSettingButton()
