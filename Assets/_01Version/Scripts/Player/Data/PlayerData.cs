@@ -7,7 +7,11 @@ using UnityEngine;
 public class PlayerData : ScriptableObject
 {
     [Header("Info")]
+    public int id;
     public string playerName;
+
+    [Header("Prefab")]
+    public GameObject prefab;
 
     [Header("Base Stats")]
     public List<CStatEntry> baseStats;

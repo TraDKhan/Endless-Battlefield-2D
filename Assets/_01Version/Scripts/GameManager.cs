@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
     public void Handle_RestartGame()
     {
+        Time.timeScale = 1f; // Đảm bảo thời gian được reset về bình thường
+        ResetData();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -62,4 +64,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void Handle_NextLevel() { }
+
+    private void ResetData()
+    {
+        _EnemyKilled = 0;
+        _Time = 0;
+    }
 }

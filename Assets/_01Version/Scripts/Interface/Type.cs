@@ -150,3 +150,16 @@ public enum BossAnimEvent
     Dash,
     End
 }
+
+public enum GameResultType
+{
+    Win,
+    Lose,
+}
+public enum UIState
+{
+    None,
+    Lose,
+    Reward,   // 🔥 thay cho Win
+    Result
+}
