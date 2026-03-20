@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71fe1a44bdc4a974e806211917134a50, type: 3}
   m_Name: Data_Hero_Soldier 1
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
+  icon: {fileID: 21300000, guid: 89ad473388d024546afc5b856cf744b5, type: 3}
   playerName: SOLDIER
-  prefab: {fileID: 5936689346566019665, guid: f80f90d951d8121449a765182a661838, type: 3}
+  prefab: {fileID: 7061738363453199701, guid: 27bb65d636c0126468a3807647408899, type: 3}
+  weaponPrefab: {fileID: 0}
   baseStats:
   - statType: 0
-    value: 10000
+    value: 4000
   - statType: 1
     value: 0
   - statType: 2
-    value: 2
+    value: 5

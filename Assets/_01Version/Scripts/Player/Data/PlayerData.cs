@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 /// <summary>
 /// Dữ liệu gốc của nhân vật
 /// </summary>
@@ -8,10 +9,12 @@ public class PlayerData : ScriptableObject
 {
     [Header("Info")]
     public int id;
+    public Sprite icon;
     public string playerName;
 
     [Header("Prefab")]
     public GameObject prefab;
+    public GameObject weaponPrefab;
 
     [Header("Base Stats")]
     public List<CStatEntry> baseStats;

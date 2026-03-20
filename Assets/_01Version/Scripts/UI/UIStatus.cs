@@ -15,35 +15,57 @@ public class UIStatus : MonoBehaviour
     private PlayerLevelSystem levelSystem;
     private PlayerHealthController playerHealth;
 
-    private void Start()
+    //to do init từ player controller
+    //private void Start()
+    //{
+    //    levelSystem = PlayerController.Instance?.LevelSystem;
+    //    playerHealth = PlayerController.Instance?.Health;
+
+    //    if (TimeController.Instance != null)
+    //        TimeController.Instance.OnTimeChanged += UpdateTime;
+
+    //    if (levelSystem == null)
+    //    {
+    //        Debug.LogError("UI PlayerLevelSystem not found!");
+    //        return;
+    //    }
+
+    //    if (playerHealth == null)
+    //    {
+    //        Debug.LogError("UI PlayerHealthController not found!");
+    //        return;
+    //    }
+
+    //    levelSystem.OnExpChanged += UpdateExpBar;
+    //    levelSystem.OnLevelUp += UpdateLevel;
+
+    //    playerHealth.OnHealthChanged += UpdateHealth;
+
+    //    coinValue = CurrencyManager.Instance.GetCoins();
+    //    coinText.text = coinValue.ToString();
+
+    //    // Hiển thị lần đầu
+    //    UpdateTime();
+    //    UpdateExpBar(levelSystem.CurrentEXP, levelSystem.ExpToNextLevel, levelSystem.CurrentLevel);
+    //    UpdateLevel(levelSystem.CurrentLevel);
+    //    UpdateHealth(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+    //}
+    public void Init(PlayerLevelSystem levelSystem, PlayerHealthController playerHealth)
     {
-        levelSystem = PlayerController.Instance?.LevelSystem;
-        playerHealth = PlayerController.Instance?.Health;
+        this.levelSystem = levelSystem;
+        this.playerHealth = playerHealth;
+
+        levelSystem.OnExpChanged += UpdateExpBar;
+        levelSystem.OnLevelUp += UpdateLevel;
+        playerHealth.OnHealthChanged += UpdateHealth;
 
         if (TimeController.Instance != null)
             TimeController.Instance.OnTimeChanged += UpdateTime;
 
-        if (levelSystem == null)
-        {
-            Debug.LogError("UI PlayerLevelSystem not found!");
-            return;
-        }
-
-        if (playerHealth == null)
-        {
-            Debug.LogError("UI PlayerHealthController not found!");
-            return;
-        }
-
-        levelSystem.OnExpChanged += UpdateExpBar;
-        levelSystem.OnLevelUp += UpdateLevel;
-
-        playerHealth.OnHealthChanged += UpdateHealth;
-
         coinValue = CurrencyManager.Instance.GetCoins();
         coinText.text = coinValue.ToString();
 
-        // Hiển thị lần đầu
+        // Init UI lần đầu
         UpdateTime();
         UpdateExpBar(levelSystem.CurrentEXP, levelSystem.ExpToNextLevel, levelSystem.CurrentLevel);
         UpdateLevel(levelSystem.CurrentLevel);

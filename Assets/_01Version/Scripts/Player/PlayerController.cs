@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting.Antlr3.Runtime.Misc;
+﻿using System;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,10 +16,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerHealthController health;
     [SerializeField] private PlayerAnimationController anim;
 
+    [Header("UI Status")]
+    [SerializeField] private UIStatus uiStatus;
+
     public PlayerAnimationController Anim => anim;
     public PlayerHealthController Health => health;
 
     private bool initialized;
+    public static event Action<PlayerController> OnPlayerReady;
 
     private void Awake()
     {
@@ -40,6 +45,14 @@ public class PlayerController : MonoBehaviour
 
         ApplyStats();               //Sync cuối
         initialized = true;
+    }
+
+    private void Start()
+    {
+        OnPlayerReady?.Invoke(this);
+
+        uiStatus ??= FindFirstObjectByType<UIStatus>();
+        uiStatus.Init(LevelSystem, health);
     }
 
     private void InitializeStats()

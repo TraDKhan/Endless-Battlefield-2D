@@ -97,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625429364494464968, guid: d444e22090b02c7419ac8210ac95fc3c, type: 3}
       propertyPath: allWaves.Array.size
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2625429364494464968, guid: d444e22090b02c7419ac8210ac95fc3c, type: 3}
       propertyPath: 'allWaves.Array.data[0]'
@@ -187,10 +187,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2887154585259558217, guid: e2dde6a4a36cb91458989c808048a7a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3832702901946646451, guid: e2dde6a4a36cb91458989c808048a7a5, type: 3}
-      propertyPath: m_ColliderPaths.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8355955509023341723, guid: e2dde6a4a36cb91458989c808048a7a5, type: 3}

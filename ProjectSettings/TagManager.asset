@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Skill
   - Special
+  - BoundingShape
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Item
   - Player
   - Obstacle
-  - 
+  - Bounding
   - 
   - 
   - 

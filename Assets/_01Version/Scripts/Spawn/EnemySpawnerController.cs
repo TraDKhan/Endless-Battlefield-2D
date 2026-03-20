@@ -25,12 +25,28 @@ public class EnemySpawnerController : MonoBehaviour
 
     #region UNITY
 
-    void Start()
-    {
-        if (player == null)
-            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+    //void Start()
+    //{
+    //    if (player == null)
+    //        player = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-        StartCoroutine(WaveLoop());
+    //    StartCoroutine(WaveLoop());
+    //}
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerReady += SetPlayer;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerReady -= SetPlayer;
+    }
+
+    private void SetPlayer(PlayerController playerController)
+    {
+        player = playerController.transform;
+
+        StartCoroutine(WaveLoop()); // start sau khi có player
     }
 
     #endregion
@@ -184,6 +200,7 @@ public class EnemySpawnerController : MonoBehaviour
             return;
         }
 
+        //enemy.SetTarget(player);
         if (enemy == null) return;
 
         enemy.transform.SetPositionAndRotation(position, Quaternion.identity);

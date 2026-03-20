@@ -9,6 +9,11 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 movement;
     private bool dashPressed;
 
+    private void Start()
+    {
+        joystick = FindFirstObjectByType<Joystick>();
+    }
+
     private void Update()
     {
 #if UNITY_STANDALONE || UNITY_EDITOR

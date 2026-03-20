@@ -8,6 +8,7 @@ public class EnemyChaseState : IEnemyState
     {
         ctx = context;
     }
+
     public void Enter()
     {
         ctx.Anim.SetMoving(true);

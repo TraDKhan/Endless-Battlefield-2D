@@ -6,7 +6,7 @@ public class EnemyContext
     public EnemyStats Stats { get; }
     public EnemyMovement Movement { get; }
     public EnemyAnimationController Anim { get; }
-    public Transform Target { get; }
+    public Transform Target => Controller.target; // 🔥 FIX
     public LayerMask TargetLayer { get; }
 
     public EnemyContext(EnemyController controller)
@@ -15,7 +15,7 @@ public class EnemyContext
         Stats = controller.stats;
         Movement = controller.movement;
         Anim = controller.anim;
-        Target = controller.target;
+        //Target = controller.target;
         TargetLayer = controller.targetLayer;
     }
 }

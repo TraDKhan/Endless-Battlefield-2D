@@ -46,7 +46,7 @@ public class EnemyController : MonoBehaviour, IPoolable
         rb.gravityScale = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
 
-        target = GameObject.FindGameObjectWithTag("Player")?.transform;
+        //target = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         context = new EnemyContext(this);
 
@@ -59,11 +59,6 @@ public class EnemyController : MonoBehaviour, IPoolable
         deadState = new EnemyDeadState(context);
 
         health.OnDeath += HandleDeath;
-    }
-
-    private void Start()
-    {
-        ChangeState(EnemyStateID.Chase);
     }
 
     void Update()
@@ -82,6 +77,7 @@ public class EnemyController : MonoBehaviour, IPoolable
         isAlive = true;
 
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
+        Debug.Log($"Enemy spawned with target: {target?.name}");
 
         health.Init(stats.maxHealth);
         rb.linearVelocity = Vector2.zero;
@@ -128,6 +124,7 @@ public class EnemyController : MonoBehaviour, IPoolable
                 ChangeState(deadState);
                 break;
         }
+        Debug.Log($"Enemy state changed to: {id}");
     }
     void ChangeState(IEnemyState newState)
     {
