@@ -14,9 +14,9 @@ public class Item_ExpOrb : PooledItem
     {
         if (PopupController.Instance == null) return;
 
-        PopupController.Instance.ShowEXP(
-            value,
-            transform.position + Vector3.up * 0.5f
+        PopupController.Instance.ShowExp(
+            transform.position + Vector3.up * 0.5f,
+            value            
         );
     }
 }

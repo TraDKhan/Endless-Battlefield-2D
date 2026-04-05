@@ -13,8 +13,8 @@ public class Item_Coin : PooledItem
             CurrencyManager.Instance.AddCoins(value);
 
             PopupController.Instance?.ShowCoin(
-                value,
-                transform.position + Vector3.up * 0.5f
+                transform.position + Vector3.up * 0.5f,
+                value
             );
         }
     }

@@ -39,7 +39,10 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-        PopupController.Instance.ShowDamage(damage, transform.position + Vector3.up * 0.5f, isCirt);
+        if(isCirt)
+            PopupController.Instance.ShowCirtDamage(transform.position + Vector3.up * 0.5f, damage);
+        else
+            PopupController.Instance.ShowDamage(transform.position + Vector3.up * 0.5f, damage);
 
         if (currentHealth == 0)
             Die();

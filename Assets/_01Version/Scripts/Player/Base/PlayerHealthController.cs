@@ -137,9 +137,8 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
     {
         if (PopupController.Instance == null) return;
 
-        PopupController.Instance.ShowDamage(
-            value,
-            transform.position + Vector3.up * 0.5f
+        PopupController.Instance.ShowDamage( 
+            transform.position + Vector3.up * 0.5f, value
         );
     }
 
@@ -148,8 +147,8 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         if (PopupController.Instance == null) return;
 
         PopupController.Instance.ShowHeal(
-            value,
-            transform.position + Vector3.up * 0.5f
+            transform.position + Vector3.up * 0.5f,
+            value
         );
     }
 
