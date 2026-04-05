@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_UpD_UnLock_Laser
   m_EditorClassIdentifier: 
   upgradeName: Laser Weapon
-  icon: {fileID: -3706531662451249381, guid: f5dfb4524acf4994c94c2e79faccf598, type: 3}
+  icon: {fileID: 21300000, guid: 00afc9d3156a943adb743c340c8ce751, type: 3}
   upgradeType: 3
   description: Unlock new Weapon
   weaponPrefab: {fileID: 7207274061179736146, guid: d992d204177f69b4fb087bc7adeea3e8, type: 3}

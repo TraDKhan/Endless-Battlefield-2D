@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Data_Boss_FireDemon
   m_EditorClassIdentifier: 
   enemyType: 2
-  maxHealth: 100
-  moveSpeed: 2.5
-  damage: 22
+  maxHealth: 1000
+  moveSpeed: 2.9
+  damage: 100
   attackCooldown: 2
   projectileMode: 0
   projectileSpeed: 3

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Data_Boss_FlyingEys
   m_EditorClassIdentifier: 
   enemyType: 2
-  maxHealth: 100
+  maxHealth: 2000
   moveSpeed: 2.5
-  damage: 1
+  damage: 100
   attackCooldown: 2
   projectileMode: 0
   projectileSpeed: 3

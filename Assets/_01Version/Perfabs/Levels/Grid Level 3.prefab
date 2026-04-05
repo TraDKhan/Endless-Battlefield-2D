@@ -53799,7 +53799,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6290680822772424351}
   - component: {fileID: 8786482500310975836}
-  - component: {fileID: 3468776975910264954}
   m_Layer: 0
   m_Name: Grid Level 3
   m_TagString: Untagged
@@ -53840,19 +53839,6 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
---- !u!114 &3468776975910264954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362398063296647062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fdd1b481cdc07340954d655e42deebc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelIndex: 3
 --- !u!1 &8552786921567462027
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Weapon_ProjectileSpeed
   m_EditorClassIdentifier: 
   upgradeName: Speed
-  icon: {fileID: 21300000, guid: c775ca497e33071429bbf28960da4cb9, type: 3}
+  icon: {fileID: 21300000, guid: 28b6beaccbd83427db7eadac1be5c009, type: 3}
   upgradeType: 1
-  description: Weapon Upgrade
+  description: Increase the bullet's speed.
   statType: 5
   valuePerLevel: 1

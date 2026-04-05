@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponName: Laser
   baseStats:
   - statType: 0
-    value: 20
+    value: 1000
   - statType: 1
     value: 0.5
   - statType: 2

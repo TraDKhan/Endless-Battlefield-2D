@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class LevelSlotUI : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private TextMeshProUGUI levelText;
+    [SerializeField] private GameObject gameObjectLock;
     [SerializeField] private Image iconImage;
-    [SerializeField] private Image lockImage;
 
     private LevelData level;
     private System.Action<LevelSlotUI> onClicked;
@@ -21,7 +21,9 @@ public class LevelSlotUI : MonoBehaviour, IPointerClickHandler
 
         levelText.text = $"Level {data.levelIndex}";
         iconImage.sprite = data.icon;
-        lockImage.gameObject.SetActive(!data.isUnlocked);
+
+        bool unlocked = LevelProgress.IsUnlocked(data.levelIndex);
+        gameObjectLock.gameObject.SetActive(!unlocked);
     }
 
     public void Show(bool show)
@@ -31,6 +33,9 @@ public class LevelSlotUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        //if (!LevelProgress.IsUnlocked(level.levelIndex))
+        //    return;
+
         onClicked?.Invoke(this);
     }
 }

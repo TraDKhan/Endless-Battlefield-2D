@@ -18,9 +18,17 @@ public class LevelManager : MonoBehaviour
     {
         int selected = SelectedLevelRuntime.SelectedLevelIndex;
 
+        bool found = false;
+
         foreach (var level in levels)
         {
-            level.gameObject.SetActive(level.levelIndex == selected);
+            bool active = level.levelIndex == selected;
+            level.gameObject.SetActive(active);
+
+            if (active) found = true;
         }
+
+        if (!found)
+            Debug.LogError("Level not found: " + selected);
     }
 }

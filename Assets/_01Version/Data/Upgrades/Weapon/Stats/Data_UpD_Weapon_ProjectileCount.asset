@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Weapon_ProjectileCount
   m_EditorClassIdentifier: 
   upgradeName: Count
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8303ed44d53204867b86f9ed5d6338cf, type: 3}
   upgradeType: 1
-  description: Weapon Upgrade
+  description: Increase the number of rounds fired by the weapon.
   statType: 4
   valuePerLevel: 1

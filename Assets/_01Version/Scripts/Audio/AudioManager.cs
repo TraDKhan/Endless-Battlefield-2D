@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip enemyHit;
     [SerializeField] private AudioClip castLightning;
     [SerializeField] private AudioClip clickButton;
+    [SerializeField] private AudioClip levelUp;
 
     private float musicVolume = 1f;
     private float sfxVolume = 1f;
@@ -112,6 +113,8 @@ public class AudioManager : MonoBehaviour
     public void PlayEnemyHit() => PlaySFX(enemyHit);
     public void PlayCastLighning() => PlaySFX(castLightning);
     public void PlayClickButton() => PlaySFX(clickButton);
+
+    public void PlayLevelUp() => PlaySFX(levelUp);
     // ------------------ VOLUME ------------------
     public void SetMusicVolume(float volume)
     {

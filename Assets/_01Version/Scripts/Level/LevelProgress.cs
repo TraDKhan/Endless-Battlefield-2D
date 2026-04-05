@@ -6,7 +6,7 @@ public static class LevelProgress
 
     public static int GetUnlockedLevel()
     {
-        return PlayerPrefs.GetInt(KEY, 1);
+        return PlayerPrefs.GetInt(KEY, 0);
     }
 
     public static void UnlockNextLevel(int currentLevel)
@@ -23,5 +23,10 @@ public static class LevelProgress
     public static bool IsUnlocked(int levelIndex)
     {
         return levelIndex <= GetUnlockedLevel();
+    }
+
+    public static void ResetProgress()
+    {
+        PlayerPrefs.DeleteKey(KEY);
     }
 }

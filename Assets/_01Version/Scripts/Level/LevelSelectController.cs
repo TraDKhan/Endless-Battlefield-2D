@@ -29,7 +29,7 @@ public class LevelSelectController : MonoBehaviour
     int GetFirstUnlockedIndex()
     {
         for (int i = 0; i < allLevels.Count; i++)
-            if (allLevels[i].isUnlocked)
+            if (LevelProgress.IsUnlocked(allLevels[i].levelIndex))
                 return i;
         return 0;
     }
@@ -51,7 +51,7 @@ public class LevelSelectController : MonoBehaviour
         else
             rightSlot.Show(false);
 
-        playButton.interactable = allLevels[currentIndex].isUnlocked;
+        playButton.interactable = LevelProgress.IsUnlocked(allLevels[currentIndex].levelIndex);
     }
 
     void Bind(LevelSlotUI slot, int index)
@@ -71,7 +71,7 @@ public class LevelSelectController : MonoBehaviour
 
     void OnPlayClicked()
     {
-        if (!allLevels[currentIndex].isUnlocked)
+        if (!LevelProgress.IsUnlocked(allLevels[currentIndex].levelIndex))
             return;
 
         SelectedLevelRuntime.SelectedLevelIndex =

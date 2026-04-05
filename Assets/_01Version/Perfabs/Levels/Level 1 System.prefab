@@ -96,17 +96,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2625429364494464968, guid: d444e22090b02c7419ac8210ac95fc3c, type: 3}
+      propertyPath: spawnInterval
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625429364494464968, guid: d444e22090b02c7419ac8210ac95fc3c, type: 3}
       propertyPath: allWaves.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2625429364494464968, guid: d444e22090b02c7419ac8210ac95fc3c, type: 3}
       propertyPath: 'allWaves.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: ff41d5eff9eb8ff418650e63ce1da4e8, type: 2}
+      objectReference: {fileID: 11400000, guid: ff0a1e7e51e067e4e85671d0b04cdf4f, type: 2}
     - target: {fileID: 2625429364494464968, guid: d444e22090b02c7419ac8210ac95fc3c, type: 3}
       propertyPath: 'allWaves.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 751e9641551443a43ac0909b46b26d7c, type: 2}
+      objectReference: {fileID: 11400000, guid: 09f40581e0525ba47ae8bf5ef468df8f, type: 2}
     - target: {fileID: 2625429364494464968, guid: d444e22090b02c7419ac8210ac95fc3c, type: 3}
       propertyPath: 'allWaves.Array.data[2]'
       value: 

@@ -51,7 +51,7 @@ public class BMeteorShootSkill : BaseBossSkill
 
             meteor.transform.position = startPoints[i];
             meteor.Init(endPoints[i], moveSpeed);
-            CameraShake.Instance.Shake(0.2f, 0.1f);
+            CameraShakeImpulse.Instance.Shake();
             yield return new WaitForSeconds(0.1f);
         }
 

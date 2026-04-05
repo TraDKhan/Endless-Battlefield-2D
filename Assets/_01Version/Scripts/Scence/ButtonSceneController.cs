@@ -12,4 +12,9 @@ public class ButtonSceneController : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ResetProgress()
+    {
+        LevelProgress.ResetProgress();
+    }
 }

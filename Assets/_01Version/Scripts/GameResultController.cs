@@ -176,6 +176,7 @@ public class GameResultController : MonoBehaviour
     {
         Debug.Log("Next Level");
         ResumeGame();
+        GameManager.Instance.Handle_NextLevel();
     }
 
     // ================= TIME =================

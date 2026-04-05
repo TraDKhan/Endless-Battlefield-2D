@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 6958159352126188720}
   - component: {fileID: 8383265252480925253}
   - component: {fileID: 7630998862362209663}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Undead Executioner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

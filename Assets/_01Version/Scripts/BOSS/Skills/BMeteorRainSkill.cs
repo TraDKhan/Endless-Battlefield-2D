@@ -39,7 +39,7 @@ public class BMeteorRainSkill : BaseBossSkill
                 SpawnMeteor(targetPos);
             });
 
-            CameraShake.Instance.Shake(0.2f, 0.1f);
+            CameraShakeImpulse.Instance.Shake();
 
             yield return new WaitForSeconds(spawnDelay);
         }

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Data_UpD_Weapon_Crit
   m_EditorClassIdentifier: 
   upgradeName: Cirt
-  icon: {fileID: 21300000, guid: ae6072c860f3f8845837a36faab0cb65, type: 3}
+  icon: {fileID: 21300000, guid: 5f397877149774160b8eb022db01681c, type: 3}
   upgradeType: 1
-  description: Weapon Upgrade
+  description: Increases the critical hit chance of weapons. Critical hits deal 1.5
+    times the base damage.
   statType: 1
   valuePerLevel: 111

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Weapon_Damage
   m_EditorClassIdentifier: 
   upgradeName: Damage
-  icon: {fileID: -3164809056393425246, guid: 988d16f0b1a8c7d4eb74ae1f00516a16, type: 3}
+  icon: {fileID: 21300000, guid: 0490990f7406b45fba4db7667e82cba4, type: 3}
   upgradeType: 1
-  description: Weapon Upgrade
+  description: Increase weapon damage
   statType: 0
   valuePerLevel: 111

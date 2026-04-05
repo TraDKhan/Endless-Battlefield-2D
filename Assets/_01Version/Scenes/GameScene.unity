@@ -431,7 +431,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
@@ -558,18 +557,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c45fe13b1837ba24e91d84e1eeac1fe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +600,7 @@ GameObject:
   - component: {fileID: 652926408}
   - component: {fileID: 652926407}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Hero Spawmer System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1040,6 +1027,7 @@ GameObject:
   - component: {fileID: 1937058530}
   - component: {fileID: 1937058529}
   - component: {fileID: 1937058532}
+  - component: {fileID: 1937058533}
   m_Layer: 0
   m_Name: CM Vcam
   m_TagString: Untagged
@@ -1065,7 +1053,7 @@ MonoBehaviour:
     ScreenPosition: {x: 0, y: 0}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.34, y: 0.36}
+      Size: {x: 0.48, y: 0.22}
     HardLimits:
       Enabled: 0
       Size: {x: 3, y: 0.84}
@@ -1156,6 +1144,30 @@ MonoBehaviour:
     MaxWindowSize: 2
     Padding: 2.2
   m_LegacyMaxWindowSize: -2
+--- !u!114 &1937058533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937058528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseListener
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  SignalCombinationMode: 0
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!4 &1973005500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2521398837687059072, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
@@ -1172,6 +1184,104 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &2043503483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2043503485}
+  - component: {fileID: 2043503484}
+  - component: {fileID: 2043503486}
+  m_Layer: 0
+  m_Name: Camera Shake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2043503484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043503483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.05
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0.2, y: -0.4, z: 0}
+--- !u!4 &2043503485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043503483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2043503486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043503483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45fe13b1837ba24e91d84e1eeac1fe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
 --- !u!114 &2071590965 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7245008845291585907, guid: 38250017c3758f7409fa8aa8ca778ac4, type: 3}
@@ -1465,6 +1575,54 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: allWaves.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: da6a40d0ed8626d4293b207c4432059d, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ff0a1e7e51e067e4e85671d0b04cdf4f, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f68eb3294bbd5374abeb3ce417de1d1b, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a1d2e6c30d026e945bf484b5e8d31bef, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 082943b0ecb04db43a98fe24221a56d6, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 04671ea6f82f9d949938c862bb99e384, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ff0a1e7e51e067e4e85671d0b04cdf4f, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f68eb3294bbd5374abeb3ce417de1d1b, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a1d2e6c30d026e945bf484b5e8d31bef, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a1d2e6c30d026e945bf484b5e8d31bef, type: 2}
+    - target: {fileID: 1577927061303319278, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
+      propertyPath: 'allWaves.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 09f40581e0525ba47ae8bf5ef468df8f, type: 2}
     - target: {fileID: 2700406239276104600, guid: 3b90684fbf65b40408a193e46a73b9a0, type: 3}
       propertyPath: m_Name
       value: Level Manager
@@ -3334,6 +3492,78 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: upgradePool.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e2c21c42efecbaf4e828b86e22793102, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b6c860cc1d5b66e49acb1d0c183b6d69, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 07e97e4f1f721564d926a31a964995b5, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9018aeab833b3bb4c9f97a59651262da, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 67f3b191b14622c4ca0aef1d613ce1b7, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7201cdcaa3fb92a4680fe4ab363759d3, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9702abc2de448904c809d04798a45897, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 12f4efe603772a54999a1ad56251ccc2, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 19dab9369bc10d34c91a2fd169a2d837, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 304642469ba8fa348bc7e8efe56348f2, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d93878f974ec2448add3c380255934e, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[11]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e5edce700752ab04fb86bb36e90c2460, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[12]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 033c37f9c8845854aacc4ca39963f5af, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[13]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c39afb597b5e4844fa651b9533cf96e6, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[14]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 00ed6a21ccd9d3f4fba631560e20e1bb, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[15]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a83df6203dbd634789e81d2b754a1e5, type: 2}
+    - target: {fileID: 7294377847777010205, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
+      propertyPath: 'upgradePool.Array.data[16]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 552b9e2197ff1fa47b9e4df3365cab53, type: 2}
     - target: {fileID: 9050156008360397094, guid: bfbe84dc836c6b040b4f632db9aef4ef, type: 3}
       propertyPath: m_Name
       value: Upgrade System
@@ -3404,6 +3634,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 68050357d2ec5474097099bfd12ccdf2, type: 3}
     - target: {fileID: 7364679819916574246, guid: 3c31777b254d9c24592891ae00d1f22e, type: 3}
+      propertyPath: levelUp
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d72f15d94530ba4ba49b3c81d8f8912, type: 3}
+    - target: {fileID: 7364679819916574246, guid: 3c31777b254d9c24592891ae00d1f22e, type: 3}
       propertyPath: enemyHit
       value: 
       objectReference: {fileID: 8300000, guid: c7ad0cc64eb1d36409a0d6e95b308bb1, type: 3}
@@ -3419,6 +3653,10 @@ PrefabInstance:
       propertyPath: cooldownClip
       value: 
       objectReference: {fileID: 8300000, guid: e3876c18643456b44bc7f87a6a4dc313, type: 3}
+    - target: {fileID: 7364679819916574246, guid: 3c31777b254d9c24592891ae00d1f22e, type: 3}
+      propertyPath: gameLoseClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f602e3a9320e0bb47b34ee5a274dd6d5, type: 3}
     - target: {fileID: 7364679819916574246, guid: 3c31777b254d9c24592891ae00d1f22e, type: 3}
       propertyPath: castLightning
       value: 
@@ -4139,3 +4377,4 @@ SceneRoots:
   - {fileID: 464145602}
   - {fileID: 42488337}
   - {fileID: 652926408}
+  - {fileID: 2043503485}

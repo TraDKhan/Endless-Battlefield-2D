@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Weapon_AttackRange
   m_EditorClassIdentifier: 
   upgradeName: Attack Range
-  icon: {fileID: -3164809056393425246, guid: 988d16f0b1a8c7d4eb74ae1f00516a16, type: 3}
+  icon: {fileID: 21300000, guid: 563ea1a2e3eb644309f0edac6127a445, type: 3}
   upgradeType: 1
-  description: Weapon Upgrade
+  description: Increase the weapon's range.
   statType: 3
   valuePerLevel: 5

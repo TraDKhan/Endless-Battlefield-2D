@@ -62,6 +62,9 @@ public class UIStatus : MonoBehaviour
         if (TimeController.Instance != null)
             TimeController.Instance.OnTimeChanged += UpdateTime;
 
+        if(CurrencyManager.Instance != null)
+            CurrencyManager.Instance.OnCoinsChanged += UpdateCoin;
+
         coinValue = CurrencyManager.Instance.GetCoins();
         coinText.text = coinValue.ToString();
 
@@ -109,5 +112,11 @@ public class UIStatus : MonoBehaviour
         if (TimeController.Instance == null) return;
 
         timeText.text = TimeController.Instance.GetTimeString();
+    }
+
+    private void UpdateCoin(int value)
+    {
+        coinValue = value;
+        coinText.text = coinValue.ToString();
     }
 }

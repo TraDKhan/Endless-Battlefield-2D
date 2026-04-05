@@ -36,12 +36,18 @@ public class GameManager : MonoBehaviour
     public void Handle_GameWin()
     {
         Debug.Log("Game Win!");
+
+        AudioManager.Instance.PlayGameWin();
+        int currentLevel = SelectedLevelRuntime.SelectedLevelIndex;
+        LevelProgress.UnlockNextLevel(currentLevel);
+
         GameWin?.Invoke(_EnemyKilled, _Time);
     }
 
     public void Handle_GameLose()
     {
         Debug.Log("Game Lose!");
+        AudioManager.Instance.PlayGameLose();
         GameLose?.Invoke(_EnemyKilled, _Time);
     }
 
@@ -63,7 +69,23 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("HomeScene");
     }
 
-    public void Handle_NextLevel() { }
+    public void Handle_NextLevel()
+    {
+        int currentLevel = SelectedLevelRuntime.SelectedLevelIndex;
+        int nextLevel = currentLevel + 1;
+
+        // nếu vượt quá level đã có → quay về Home hoặc loop
+        if (!LevelProgress.IsUnlocked(nextLevel))
+        {
+            Debug.Log("No more levels!");
+            SceneManager.LoadScene("HomeScene");
+            return;
+        }
+
+        SelectedLevelRuntime.SelectedLevelIndex = nextLevel;
+        ResetData();
+        SceneManager.LoadScene("GameScene");
+    }
 
     private void ResetData()
     {

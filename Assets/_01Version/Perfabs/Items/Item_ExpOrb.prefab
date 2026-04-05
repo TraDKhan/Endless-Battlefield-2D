@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnetSpeed: 25
-  expAmount: 1
+  expAmount: 2
 --- !u!58 &4322534847753652137
 CircleCollider2D:
   m_ObjectHideFlags: 0

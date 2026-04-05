@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Weapon_CooldownAttack
   m_EditorClassIdentifier: 
   upgradeName: Cooldown
-  icon: {fileID: 21300000, guid: f5e66a012d130ae438659882bdbcbf64, type: 3}
+  icon: {fileID: 21300000, guid: a82f696b5c4aa43bc8dd675f4366b08f, type: 3}
   upgradeType: 1
-  description: Weapon Upgrade
+  description: Increase the weapon's rate of fire.
   statType: 2
   valuePerLevel: 2

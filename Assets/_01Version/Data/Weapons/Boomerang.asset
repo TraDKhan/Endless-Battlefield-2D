@@ -15,9 +15,9 @@ MonoBehaviour:
   weaponName: Boomerang
   baseStats:
   - statType: 0
-    value: 1
+    value: 150
   - statType: 1
-    value: 2
+    value: 0.5
   - statType: 2
     value: 3
   - statType: 3

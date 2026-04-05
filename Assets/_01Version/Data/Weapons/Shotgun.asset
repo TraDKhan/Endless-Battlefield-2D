@@ -15,9 +15,9 @@ MonoBehaviour:
   weaponName: Shotgun
   baseStats:
   - statType: 0
-    value: 1
+    value: 100
   - statType: 1
-    value: 2
+    value: 0.5
   - statType: 2
     value: 3
   - statType: 3

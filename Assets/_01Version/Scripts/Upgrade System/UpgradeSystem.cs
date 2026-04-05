@@ -68,7 +68,7 @@ public class UpgradeSystem : MonoBehaviour
     {
         if (isChoosingUpgrade || pendingLevelUps <= 0)
             return;
-
+        AudioManager.Instance.PlayLevelUp();
         pendingLevelUps--;
         isChoosingUpgrade = true;
 

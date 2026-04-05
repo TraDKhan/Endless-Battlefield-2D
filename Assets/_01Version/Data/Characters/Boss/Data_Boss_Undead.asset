@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Data_Boss_Undead
   m_EditorClassIdentifier: 
   enemyType: 0
-  maxHealth: 1000
+  maxHealth: 3000
   moveSpeed: 5.44
-  damage: 10
+  damage: 75
   attackCooldown: 3.22
   projectileMode: 0
   projectileSpeed: 3

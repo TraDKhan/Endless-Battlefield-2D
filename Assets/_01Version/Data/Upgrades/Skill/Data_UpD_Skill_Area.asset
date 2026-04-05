@@ -25,9 +25,9 @@ MonoBehaviour:
     - statType: 2
       value: 2
     - statType: 3
-      value: 2
+      value: 1
     - statType: 6
-      value: 2
+      value: 1
     - statType: 1
       value: 0.5
   - baseStats:
@@ -36,6 +36,6 @@ MonoBehaviour:
     - statType: 2
       value: 1
     - statType: 3
-      value: 4
+      value: 3
     - statType: 6
       value: 5

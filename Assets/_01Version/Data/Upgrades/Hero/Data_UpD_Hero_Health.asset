@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Hero_Health
   m_EditorClassIdentifier: 
   upgradeName: Health
-  icon: {fileID: 21300000, guid: 9bf2a25defba8417baf7208f5013181c, type: 3}
+  icon: {fileID: 21300000, guid: aa7f656dd7608425cb1839b29677594a, type: 3}
   upgradeType: 0
-  description: Player Stats Ugrade
+  description: Increase the character's health points.
   statType: 0
   valuePerLevel: 100

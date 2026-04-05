@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Data_UpD_Hero_MoveSpeed
   m_EditorClassIdentifier: 
   upgradeName: Move Speed
-  icon: {fileID: 21300000, guid: a72fdddaf98acc240b8e0c64b39c78c5, type: 3}
+  icon: {fileID: 21300000, guid: 3e71de93796504f4a917426bd629fbe3, type: 3}
   upgradeType: 0
-  description: Player Stats Ugrade
-  statType: 3
-  valuePerLevel: 100
-  modType: 0
+  description: Increase the character's movement speed.
+  statType: 2
+  valuePerLevel: 1
