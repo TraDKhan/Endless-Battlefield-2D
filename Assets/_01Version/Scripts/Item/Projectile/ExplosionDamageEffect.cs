@@ -18,6 +18,7 @@ public class ExplosionDamageEffect : IProjectileEffect
     {
         projectile.StartCoroutine(ExplodeAfterDelay(projectile));
     }
+
     private IEnumerator ExplodeAfterDelay(ProjectileCore projectile)
     {
         yield return new WaitForSeconds(delay);

@@ -14,6 +14,7 @@ public abstract class WeaponBase : MonoBehaviour
     [SerializeField] protected bool rotateToFireDirection = true;
     [SerializeField] protected float rotationOffset = 0f;
     [SerializeField] protected bool flipSpriteByDirection = true;
+    [SerializeField] protected float rotationSpeed = 0.25f;
 
     protected SpriteRenderer spriteRenderer;
     protected WeaponAnimationController animationController;
@@ -45,18 +46,28 @@ public abstract class WeaponBase : MonoBehaviour
     {
         if (stats == null) return;
 
-        if (!CanFire()) return;
-
+        //to do: tôi ưu bằng cách scan theo interval
         Transform target = FindNearestEnemy();
-        if (target == null) return;
+        if (target != null)
+        {
+            Vector2 direction = (target.position - transform.position ).normalized;
+            RotateToDirection(direction);
 
-        lastFireTime = Time.time;
-
-        if (animationController != null)
-            animationController.PlayFire();
-
+            // 2. Chỉ thực hiện logic bắn nếu đủ điều kiện
+            if (CanFire())
+            {
+                lastFireTime = Time.time;
+                if (animationController != null)
+                    animationController.PlayFire();
+                else
+                    OnFireLogic();
+            }
+        }
         else
-            OnFireLogic();
+        {
+            // Tùy chọn: Trở về góc mặc định nếu không có quái
+            RotateToDirection(Vector2.right);
+        }
     }
 
     public void OnFireAnimationEvent()
@@ -97,10 +108,23 @@ public abstract class WeaponBase : MonoBehaviour
         if (!rotateToFireDirection || dir == Vector2.zero) return;
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + rotationOffset;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // Cách 1: Snap tức thì (Hiện tại của bạn)
+        //transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // Cách 2: Xoay mượt (Khuyên dùng để giống game xịn hơn)
+         Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.RotateTowards(
+   transform.rotation,
+   targetRotation,
+   720f * Time.deltaTime // tốc độ cao để gần instant
+);
 
         if (flipSpriteByDirection && spriteRenderer != null)
+        {
+            // Brotato flip Y khi súng hướng sang trái để tránh bị ngược súng
             spriteRenderer.flipY = dir.x < 0;
+        }
     }
 
     protected WeaponContext CreateWeaponContext()
