@@ -190,18 +190,6 @@ public class EnemySpawnerController : MonoBehaviour
         return list;
     }
 
-    IEnumerator SpawnGroupsRandomized(List<EnemyGroupData> groupList)
-    {
-        foreach (var group in groupList)
-        {
-            yield return WaitForSpawnSlot();
-
-            yield return StartCoroutine(SpawnGroupRoutine(group));
-
-            yield return new WaitForSeconds(spawnInterval);
-        }
-    }
-
     IEnumerator SpawnGroupRoutine(EnemyGroupData group)
     {
         Vector2 center = GetSpawnPositionAroundPlayer();
@@ -268,8 +256,7 @@ public class EnemySpawnerController : MonoBehaviour
 
     void SpawnEnemy(GameObject prefab, Vector2 position)
     {
-        EnemyController enemy =
-            ObjectPoolManager.Instance.Spawn<EnemyController>(prefab);
+        EnemyController enemy = ObjectPoolManager.Instance.Spawn<EnemyController>(prefab);
 
         if (enemy == null)
         {

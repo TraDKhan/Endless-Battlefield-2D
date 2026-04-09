@@ -6,7 +6,8 @@ public class EnemyAnimationController : MonoBehaviour
     [SerializeField] private Animator animator;
 
     static readonly int IsMoving = Animator.StringToHash("IsMoving");
-    static readonly int IsDead = Animator.StringToHash("IsDead");
+    static readonly int IsDead = Animator.StringToHash("IsDeath");
+    static readonly int Hit = Animator.StringToHash("Hit");
 
     static readonly int Attack = Animator.StringToHash("Attack");
     static readonly int AttackUp = Animator.StringToHash("AttackUp");
@@ -15,10 +16,12 @@ public class EnemyAnimationController : MonoBehaviour
     static readonly int Skill1 = Animator.StringToHash("Skill1");
     static readonly int Skill2 = Animator.StringToHash("Skill2");
     static readonly int BTeleportSkill = Animator.StringToHash("BTeleportSkill");
+
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
+
     // ===== BASE ===== \\
     public void SetMoving(bool value)
     {
@@ -27,7 +30,6 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void SetDead(bool value)
     {
-        Debug.Log("Anim Dead = " + value);
         animator.SetBool(IsDead, value);
     }
 
@@ -35,6 +37,12 @@ public class EnemyAnimationController : MonoBehaviour
     {
         animator.ResetTrigger(Attack);
         animator.SetTrigger(Attack);
+    }
+
+    public void PlayHit()
+    {
+        animator.ResetTrigger(Hit);
+        animator.SetTrigger(Hit);
     }
 
     // ===== MEELE ===== \\

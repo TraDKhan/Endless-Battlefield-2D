@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1707560548245421876}
   - component: {fileID: 1170594864792889700}
   - component: {fileID: 6276990991670777284}
-  - component: {fileID: 3083608799134669481}
   - component: {fileID: 5749165749463579841}
+  - component: {fileID: 2772733924097897318}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -38,6 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1707560548245421876
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -56,6 +57,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -77,9 +80,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -97830157
-  m_SortingLayer: 5
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 1833679519
+  m_SortingLayer: 8
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -549683185, guid: 0bac999b72f623c4d9f141979c257ef2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -89,7 +94,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1170594864792889700
 Animator:
@@ -149,19 +153,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.083333336
---- !u!114 &3083608799134669481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565544100716240067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87173be1bec5de64ca27c2016c93dc46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLifetime: 3
 --- !u!114 &5749165749463579841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,4 +165,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1565544100716240067}
+  poolKey: Bomb
+--- !u!114 &2772733924097897318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565544100716240067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cba66a542b5b4e4da0387b760aade38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EProjectile_Bomb
+  maxLifetime: 5
+  moveMode: 1
+  animator: {fileID: 1170594864792889700}
+  explosionDelay: 0.5
+  explosionRadius: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256

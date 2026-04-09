@@ -6,6 +6,8 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
     private int maxHealth;
     private int currentHealth;
     private bool isDead;
+    private EnemyContext enemyContext;
+    private BossContext bossContext;
 
     public bool IsDead => isDead;
     public int MaxHealth => maxHealth;
@@ -14,10 +16,15 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
     public event Action OnDeath;
     public event Action<int, int> OnHealthChanged; 
 
-    public void Init(int maxHP)
+    public void Init(int maxHP, EnemyContext ectx = null, BossContext bctx = null)
     {
         maxHealth = maxHP;
         ResetHealth();
+
+        Debug.Log(ectx);
+        Debug.Log(bctx);
+        enemyContext = ectx;
+        bossContext = bctx;
     }
 
     public void ResetHealth()
@@ -33,6 +40,12 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
 
         //phát audio
         AudioManager.Instance?.PlayEnemyHit();
+
+        if (enemyContext != null)
+            enemyContext.Anim?.PlayHit();
+
+        if (bossContext != null)
+            bossContext.Anim?.PlayHit();
 
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0);
@@ -55,6 +68,12 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         isDead = true;
         Debug.Log($"{gameObject.name} DIE");
         OnDeath?.Invoke();
+
+        if (enemyContext != null)
+            enemyContext.Anim?.SetDead(true);
+
+        if (bossContext != null)
+            bossContext.Anim?.SetDead(true);
 
         GameManager.Instance?.AddEnemyKill();
     }

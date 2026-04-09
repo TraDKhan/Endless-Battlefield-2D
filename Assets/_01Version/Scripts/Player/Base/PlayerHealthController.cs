@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour, IDamageable
@@ -152,6 +153,26 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
         );
     }
 
+    #endregion
+
+    #region Poison
+
+    public void ApplyPoison(int damage, float duration, float tickInterval)
+    {
+        StartCoroutine(PoisonCoroutine(damage, duration, tickInterval));
+    }
+
+    private IEnumerator PoisonCoroutine(int damage, float duration, float tick)
+    {
+        float time = 0;
+
+        while (time < duration)
+        {
+            TakeDamage(damage);
+            yield return new WaitForSeconds(tick);
+            time += tick;
+        }
+    }
     #endregion
 
     [ContextMenu("Die")]

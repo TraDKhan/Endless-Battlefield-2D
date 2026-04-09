@@ -81,6 +81,7 @@ public class EnemyMovement : MonoBehaviour
         scale.x = Mathf.Sign(xDir) * Mathf.Abs(scale.x);
         transform.localScale = scale;
     }
+
     public void Stop()
     {
         rb.linearVelocity = Vector2.zero;

@@ -24,6 +24,8 @@ public class BossController : MonoBehaviour
     public bool IsCastingSkill { get; private set; }
     public event Action<BossController> OnBossDead;
 
+    private BossContext context;
+
     void Awake()
     {
         phaseController = GetComponent<BossPhaseController>();
@@ -31,12 +33,15 @@ public class BossController : MonoBehaviour
         anim = GetComponent<EnemyAnimationController>();
         health = GetComponent<EnemyHealthController>();
 
+        context = new BossContext();
+        context.boss = this;
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Start()
     {
-        health.Init(stats.maxHealth);
+        health.Init(stats.maxHealth, null, context);
         health.OnDeath += HandleDeath;
 
         BossUIManager.Instance.RegisterBoss(this);
@@ -59,6 +64,7 @@ public class BossController : MonoBehaviour
         if (health != null)
             health.OnDeath -= HandleDeath;
     }
+
     void HandleDeath()
     {
         OnBossDead?.Invoke(this);
@@ -67,6 +73,7 @@ public class BossController : MonoBehaviour
 
         Destroy(gameObject);
     }
+
     void HandleMovement()
     {
         float distance = Vector2.Distance(transform.position, player.position);

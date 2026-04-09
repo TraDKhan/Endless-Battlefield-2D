@@ -14,7 +14,6 @@ public class GameResultController : MonoBehaviour
         //to do: logic truoc sau
         if (GameManager.Instance != null)
         {
-            Debug.Log("Subscribing to GameManager events");
             GameManager.Instance.GameWin += OnGameWin;
             GameManager.Instance.GameLose += OnGameLose;
         }
@@ -24,7 +23,6 @@ public class GameResultController : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            Debug.Log("Unsubscribing from GameManager events");
             GameManager.Instance.GameWin -= OnGameWin;
             GameManager.Instance.GameLose -= OnGameLose;
         }

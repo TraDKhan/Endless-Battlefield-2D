@@ -1,28 +1,29 @@
 ﻿using UnityEngine;
 
-public class ProjectileCore : MonoBehaviour, IPoolable
+public abstract class ProjectileCore : MonoBehaviour, IPoolable
 {
     public PoolIdentity Identity { get; set; }
 
     [Header("Lifetime")]
-    [SerializeField] private float maxLifetime = 5f;
+    [SerializeField] protected float maxLifetime = 5f;
+    [SerializeField] protected ProjectileMode moveMode = ProjectileMode.Direction;
 
     private float lifetimeTimer;
+    protected Vector2 direction;
+    protected Vector2 targetPosition;
 
-    private Vector2 moveDirection;
-    private Vector2 targetPosition;
-    private float speed;
-
-    private int damage;
-    private bool reachedTarget;
-
-    private ProjectileMode moveMode;
-    private IProjectileEffect projectileEffect;
+    protected float speed;
+    protected int damage;
+    protected bool reachedTarget;
+    protected bool isProcessingHit;
 
     public void OnSpawn()
     {
         lifetimeTimer = 0f;
         reachedTarget = false;
+        isProcessingHit = false;
+
+        direction = Vector2.zero;
     }
 
     public void OnDespawn() { }
@@ -30,36 +31,24 @@ public class ProjectileCore : MonoBehaviour, IPoolable
     // ============================
     // INIT
     // ============================
-    public void InitializeDirection(
-        Vector2 direction,
-        int baseDamage,
-        float moveSpeed,
-        IProjectileEffect effect
-    )
-    {
-        moveMode = ProjectileMode.Direction;
-        moveDirection = direction.normalized;
-        damage = baseDamage;
-        speed = moveSpeed;
-        projectileEffect = effect;
-
-        RotateTowards(moveDirection);
-    }
-
-    public void InitializeTargetPosition(
+    public virtual void Init(
+        Vector2 dir,
         Vector2 targetPos,
-        int baseDamage,
-        float moveSpeed,
-        IProjectileEffect effect
+        int dmg,
+        float moveSpeed
     )
     {
-        moveMode = ProjectileMode.Position;
-        targetPosition = targetPos;
-        damage = baseDamage;
+        direction = dir.normalized;
+        damage = dmg;
         speed = moveSpeed;
-        projectileEffect = effect;
+        targetPosition = targetPos;
 
-        RotateTowards(targetPosition - (Vector2)transform.position);
+        if (moveMode == ProjectileMode.Direction)
+            RotateTowards(direction);
+
+        //if (moveMode == ProjectileMode.Position)
+        //    RotateTowards(targetPosition - (Vector2)transform.position);
+
     }
 
     private void Update()
@@ -68,13 +57,13 @@ public class ProjectileCore : MonoBehaviour, IPoolable
         HandleLifetime();
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         if (reachedTarget) return;
 
         if (moveMode == ProjectileMode.Direction)
         {
-            transform.position += (Vector3)(moveDirection * speed * Time.deltaTime);
+            transform.position += (Vector3)(direction * speed * Time.deltaTime);
         }
         else
         {
@@ -87,26 +76,29 @@ public class ProjectileCore : MonoBehaviour, IPoolable
             if (Vector2.Distance(transform.position, targetPosition) <= 0.05f)
             {
                 reachedTarget = true;
-                projectileEffect?.Apply(this, null);
             }
         }
     }
 
+    protected virtual void OnTriggerEnter2D(Collider2D other)
+    {
+        if (isProcessingHit) return;
+
+        if (other.CompareTag("Player"))
+        {
+            isProcessingHit = true;
+            OnHit(other);
+        }
+    }
+
+    protected abstract void OnHit(Collider2D target);
+
     private void HandleLifetime()
     {
         lifetimeTimer += Time.deltaTime;
+
         if (lifetimeTimer >= maxLifetime)
-            Despawn();
-    }
-
-    // ============================
-    // PUBLIC API
-    // ============================
-    public int Damage => damage;
-
-    public void Despawn()
-    {
-        ObjectPoolManager.Instance.Despawn(this);
+            OnLifetimeExpired();
     }
 
     private void RotateTowards(Vector2 dir)
@@ -115,12 +107,13 @@ public class ProjectileCore : MonoBehaviour, IPoolable
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnLifetimeExpired()
     {
-        if (!other.CompareTag("Player")) return;
-        projectileEffect?.Apply(this, other);
-
-        if(moveMode == ProjectileMode.Direction)
         Despawn();
+    }
+
+    protected void Despawn()
+    {
+        ObjectPoolManager.Instance.Despawn(this);
     }
 }

@@ -21,7 +21,6 @@ public class EnemyController : MonoBehaviour, IPoolable
     private Rigidbody2D rb;
 
     public Transform target;
-    public LayerMask targetLayer;
 
     #region State Machine
     private EnemyContext context;
@@ -45,8 +44,6 @@ public class EnemyController : MonoBehaviour, IPoolable
 
         rb.gravityScale = 0;
         rb.bodyType = RigidbodyType2D.Dynamic;
-
-        //target = GameObject.FindGameObjectWithTag("Player")?.transform;
 
         context = new EnemyContext(this);
 
@@ -79,7 +76,7 @@ public class EnemyController : MonoBehaviour, IPoolable
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
         Debug.Log($"Enemy spawned with target: {target?.name}");
 
-        health.Init(stats.maxHealth);
+        health.Init(stats.maxHealth, context);
         rb.linearVelocity = Vector2.zero;
 
         currentState = null;
@@ -126,6 +123,7 @@ public class EnemyController : MonoBehaviour, IPoolable
         }
         Debug.Log($"Enemy state changed to: {id}");
     }
+
     void ChangeState(IEnemyState newState)
     {
         if (currentState == newState) return;
@@ -202,5 +200,10 @@ public class EnemyController : MonoBehaviour, IPoolable
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, stats.personalSpace);
+    }
+
+    private void Start()
+    {
+        OnSpawn();
     }
 }
