@@ -33,11 +33,9 @@ public class HeroSpawner : MonoBehaviour
             return;
         }
 
-        // Gán follow và lookAt để camera theo dõi hero
         vcam.Follow = hero.transform;
         vcam.LookAt = hero.transform;
 
-        // 🔥 TÌM BOUNDING SHAPE THEO TAG
         GameObject boundObj = GameObject.FindGameObjectWithTag("BoundingShape");
 
         if (boundObj == null)
@@ -46,7 +44,6 @@ public class HeroSpawner : MonoBehaviour
             return;
         }
 
-        // Lấy collider (ưu tiên Composite Collider)
         Collider2D col = boundObj.GetComponent<Collider2D>();
 
         if (col == null)
@@ -55,7 +52,6 @@ public class HeroSpawner : MonoBehaviour
             return;
         }
 
-        // 🔥 LẤY CONFINDER 2D
         var confiner = vcam.GetComponent<CinemachineConfiner2D>();
 
         if (confiner == null)
@@ -64,10 +60,7 @@ public class HeroSpawner : MonoBehaviour
             return;
         }
 
-        // GÁN BOUNDING SHAPE
         confiner.BoundingShape2D = col;
-
-        // 🔥 QUAN TRỌNG: Refresh lại cache
         confiner.InvalidateBoundingShapeCache();
     }
 }

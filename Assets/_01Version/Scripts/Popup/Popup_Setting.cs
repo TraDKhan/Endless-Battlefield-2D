@@ -3,8 +3,9 @@ using UnityEngine;
 
 namespace Assets._01Version.Scripts.Popup
 {
-    public class PopupAdventureMode : BasePopup
+    public class Popup_Setting : BasePopup
     {
+
         protected override void Awake()
         {
             base.Awake();

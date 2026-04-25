@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35e8257525411a42a8594fbb14d0e74, type: 3}
   m_Name: Level 6
   m_EditorClassIdentifier: 
-  levelIndex: 5
-  icon: {fileID: -1397328096, guid: f662c1f293639ad4a99ae8a3cb2e512f, type: 3}
-  isUnlocked: 0
-  gameplaySceneName: GameScene
+  levelIndex: 6
+  difficulty: 0
+  targetScore: 0
+  rewards: []
+  levelIcon: {fileID: 0}

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b35e8257525411a42a8594fbb14d0e74, type: 3}
-  m_Name: Level 2
-  m_EditorClassIdentifier: 
-  levelIndex: 2
+  m_Name: LevelData
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelIndex: 0
   difficulty: 0
   targetScore: 0
   rewards: []
