@@ -8,7 +8,6 @@ public class HeroSpawner : MonoBehaviour
 
     void Start()
     {
-        // Kiểm tra dữ liệu player
         var playerData = GameData.Instance.selectedPlayer;
         if (playerData == null)
         {
