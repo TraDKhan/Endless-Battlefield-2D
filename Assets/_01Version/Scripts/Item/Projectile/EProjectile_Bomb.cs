@@ -32,7 +32,7 @@ public class EProjectile_Bomb : ProjectileCore
 
         foreach (var hit in hits)
         {
-            PlayerHealthController player = hit.GetComponent<PlayerHealthController>();
+            PlayerHealth player = hit.GetComponent<PlayerHealth>();
             if (player != null)
             {
                 player.TakeDamage(damage);

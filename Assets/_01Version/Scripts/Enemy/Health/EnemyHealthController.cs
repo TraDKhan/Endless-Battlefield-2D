@@ -38,7 +38,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
     {
         if (isDead || damage <= 0) return;
 
-        //phát audio
         AudioManager.Instance?.PlayEnemyHit();
 
         if (enemyContext != null)
@@ -66,7 +65,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         if (isDead) return;
 
         isDead = true;
-        Debug.Log($"{gameObject.name} DIE");
         OnDeath?.Invoke();
 
         if (enemyContext != null)

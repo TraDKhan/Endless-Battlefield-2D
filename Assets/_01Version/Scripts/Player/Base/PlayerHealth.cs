@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerHealthController : MonoBehaviour, IDamageable
+public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public int CurrentHealth { get; private set; }
     public int MaxHealth { get; private set; }
@@ -60,6 +60,7 @@ public class PlayerHealthController : MonoBehaviour, IDamageable
 
     public void TakeDamage(int rawDamage, bool isCrit = false)
     {
+        Debug.Log($"Player takes {rawDamage} damage (Crit: {isCrit})");
         if (rawDamage <= 0 || IsDead) return;
 
         int finalDamage = CalculateFinalDamage(rawDamage);

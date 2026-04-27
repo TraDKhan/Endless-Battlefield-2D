@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputController : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     [Header("Mobile Joystick")]
     public Joystick joystick;    // Tham chiếu joystick trên UI

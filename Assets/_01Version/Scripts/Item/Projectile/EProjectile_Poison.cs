@@ -8,7 +8,7 @@ public class EProjectile_Poison : ProjectileCore
 
     protected override void OnHit(Collider2D target)
     {
-        PlayerHealthController player = target.GetComponent<PlayerHealthController>();
+        PlayerHealth player = target.GetComponent<PlayerHealth>();
         if (player != null)
         {
             player.ApplyPoison(damage, poisonDuration, tickInterval);

@@ -5,7 +5,7 @@ public class EProjectile_Arrow : ProjectileCore
 {
     protected override void OnHit(Collider2D target)
     {
-        PlayerHealthController player = target.GetComponent<PlayerHealthController>();
+        PlayerHealth player = target.GetComponent<PlayerHealth>();
         if (player != null)
         {
             player.TakeDamage(damage);

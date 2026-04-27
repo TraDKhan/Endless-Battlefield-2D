@@ -1,70 +1,43 @@
 fileFormatVersion: 2
-guid: b5bb323b3d298d2458146462856e27c3
+guid: 32b702b94f2e6844daf596c95c9b2e40
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7047504977431989356
-    second: Glock -reload_0
+      213: 836099689508501412
+    second: Glock-casing_0
   - first:
-      213: 8015022671043647031
-    second: Glock -reload_1
+      213: 4730285374999988282
+    second: Glock-casing_1
   - first:
-      213: -8389357458134304176
-    second: Glock -reload_2
+      213: -760312399111471497
+    second: Glock-casing_2
   - first:
-      213: -2960944527097307969
-    second: Glock -reload_3
+      213: 3817052491712652609
+    second: Glock-casing_3
   - first:
-      213: -9045798016564547690
-    second: Glock -reload_4
+      213: 2275710029461767616
+    second: Glock-casing_4
   - first:
-      213: -5011063978600622472
-    second: Glock -reload_5
+      213: -1206361516277747847
+    second: Glock-casing_5
   - first:
-      213: -8763224258431226342
-    second: Glock -reload_6
+      213: 6278896444233999331
+    second: Glock-casing_6
   - first:
-      213: -2127544906745687133
-    second: Glock -reload_7
+      213: 6062058966329499146
+    second: Glock-casing_7
   - first:
-      213: -5219563993253388622
-    second: Glock -reload_8
+      213: 1674013306796997421
+    second: Glock-casing_8
   - first:
-      213: -8702483614086321715
-    second: Glock -reload_9
+      213: -6090357270077403209
+    second: Glock-casing_9
   - first:
-      213: -7231365807379994706
-    second: Glock -reload_10
+      213: -4335782608774953099
+    second: Glock-casing_10
   - first:
-      213: 3296972236332999417
-    second: Glock -reload_11
-  - first:
-      213: 1664161465836163787
-    second: Glock -reload_12
-  - first:
-      213: 8143553271453966372
-    second: Glock -reload_13
-  - first:
-      213: -6344334607418432877
-    second: Glock -reload_14
-  - first:
-      213: -1838574235522797262
-    second: Glock -reload_15
-  - first:
-      213: 6097940659088901298
-    second: Glock -reload_16
-  - first:
-      213: -5749018418119064424
-    second: Glock -reload_17
-  - first:
-      213: 6154714193316981344
-    second: Glock -reload_18
-  - first:
-      213: -4291478416254406023
-    second: Glock -reload_19
-  - first:
-      213: -1421387442320725072
-    second: Glock -reload_20
+      213: 6277007930044413583
+    second: Glock-casing_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -169,11 +142,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Glock -reload_0
+      name: Glock-casing_0
       rect:
         serializedVersion: 2
         x: 0
@@ -188,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4937e53ff8b323e90800000000000000
-      internalID: -7047504977431989356
+      spriteID: 4a7f7fddc3c6a9b00800000000000000
+      internalID: 836099689508501412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_1
+      name: Glock-casing_1
       rect:
         serializedVersion: 2
         x: 64
@@ -210,14 +196,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 736524667a41b3f60800000000000000
-      internalID: 8015022671043647031
+      spriteID: a3889178c7955a140800000000000000
+      internalID: 4730285374999988282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_2
+      name: Glock-casing_2
       rect:
         serializedVersion: 2
         x: 128
@@ -232,14 +218,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05a712e27d3039b80800000000000000
-      internalID: -8389357458134304176
+      spriteID: 77eb2acb6e3d275f0800000000000000
+      internalID: -760312399111471497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_3
+      name: Glock-casing_3
       rect:
         serializedVersion: 2
         x: 192
@@ -254,14 +240,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fbc5abee3ac98e6d0800000000000000
-      internalID: -2960944527097307969
+      spriteID: 1456d818405e8f430800000000000000
+      internalID: 3817052491712652609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_4
+      name: Glock-casing_4
       rect:
         serializedVersion: 2
         x: 256
@@ -276,14 +262,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 69facb071aed67280800000000000000
-      internalID: -9045798016564547690
+      spriteID: 0c5ccdde632f49f10800000000000000
+      internalID: 2275710029461767616
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_5
+      name: Glock-casing_5
       rect:
         serializedVersion: 2
         x: 320
@@ -298,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87611c87cdf157ab0800000000000000
-      internalID: -5011063978600622472
+      spriteID: 97f209fa794224fe0800000000000000
+      internalID: -1206361516277747847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_6
+      name: Glock-casing_6
       rect:
         serializedVersion: 2
         x: 384
@@ -320,14 +306,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a1eee1d67f5c26680800000000000000
-      internalID: -8763224258431226342
+      spriteID: 3e3e70c8c0f132750800000000000000
+      internalID: 6278896444233999331
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_7
+      name: Glock-casing_7
       rect:
         serializedVersion: 2
         x: 448
@@ -342,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3a35bb5fd217972e0800000000000000
-      internalID: -2127544906745687133
+      spriteID: a0e9a8ff282c02450800000000000000
+      internalID: 6062058966329499146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_8
+      name: Glock-casing_8
       rect:
         serializedVersion: 2
         x: 512
@@ -364,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2be56bbd3326097b0800000000000000
-      internalID: -5219563993253388622
+      spriteID: d2b79e4bb3a4b3710800000000000000
+      internalID: 1674013306796997421
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_9
+      name: Glock-casing_9
       rect:
         serializedVersion: 2
         x: 576
@@ -386,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dc92abeb2419a3780800000000000000
-      internalID: -8702483614086321715
+      spriteID: 7bf81d9b454ba7ba0800000000000000
+      internalID: -6090357270077403209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_10
+      name: Glock-casing_10
       rect:
         serializedVersion: 2
         x: 640
@@ -408,14 +394,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ea7a5329c1705ab90800000000000000
-      internalID: -7231365807379994706
+      spriteID: 57707a470b434d3c0800000000000000
+      internalID: -4335782608774953099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock -reload_11
+      name: Glock-casing_11
       rect:
         serializedVersion: 2
         x: 704
@@ -430,96 +416,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f224f4e7c231cd20800000000000000
-      internalID: 3296972236332999417
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock -reload_12
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bc2de0c390a481710800000000000000
-      internalID: 1664161465836163787
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock -reload_13
-      rect:
-        serializedVersion: 2
-        x: 832
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 420eb72dd86b30170800000000000000
-      internalID: 8143553271453966372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock -reload_14
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3926b9cc94564f7a0800000000000000
-      internalID: -6344334607418432877
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock -reload_15
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2317a7659721c76e0800000000000000
-      internalID: -1838574235522797262
+      spriteID: f867b9294796c1750800000000000000
+      internalID: 6277007930044413583
       vertices: []
       indices: 
       edges: []
@@ -528,7 +426,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 97b6106fc9467e64ba47b23e06bb9e30
+    spriteID: a20fc24a68fdee84f906bac719c41591
     internalID: 0
     vertices: []
     indices: 
@@ -538,22 +436,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Glock -reload_0: -7047504977431989356
-      Glock -reload_1: 8015022671043647031
-      Glock -reload_10: -7231365807379994706
-      Glock -reload_11: 3296972236332999417
-      Glock -reload_12: 1664161465836163787
-      Glock -reload_13: 8143553271453966372
-      Glock -reload_14: -6344334607418432877
-      Glock -reload_15: -1838574235522797262
-      Glock -reload_2: -8389357458134304176
-      Glock -reload_3: -2960944527097307969
-      Glock -reload_4: -9045798016564547690
-      Glock -reload_5: -5011063978600622472
-      Glock -reload_6: -8763224258431226342
-      Glock -reload_7: -2127544906745687133
-      Glock -reload_8: -5219563993253388622
-      Glock -reload_9: -8702483614086321715
+      Glock-casing_0: 836099689508501412
+      Glock-casing_1: 4730285374999988282
+      Glock-casing_10: -4335782608774953099
+      Glock-casing_11: 6277007930044413583
+      Glock-casing_2: -760312399111471497
+      Glock-casing_3: 3817052491712652609
+      Glock-casing_4: 2275710029461767616
+      Glock-casing_5: -1206361516277747847
+      Glock-casing_6: 6278896444233999331
+      Glock-casing_7: 6062058966329499146
+      Glock-casing_8: 1674013306796997421
+      Glock-casing_9: -6090357270077403209
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

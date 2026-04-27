@@ -1,70 +1,43 @@
 fileFormatVersion: 2
-guid: ea74682bf97eb6647be452c1d0610188
+guid: cb7a88e27ef598e47a13dbfff39087a5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7612839375768950272
-    second: Glock-empty_0
+      213: -797563610083524527
+    second: Glock-shoot-casing-flash_0
   - first:
-      213: -8646231476802131498
-    second: Glock-empty_1
+      213: 3254111646977818832
+    second: Glock-shoot-casing-flash_1
   - first:
-      213: 219654234678816339
-    second: Glock-empty_2
+      213: -3523936066144842690
+    second: Glock-shoot-casing-flash_2
   - first:
-      213: 4356423952754546082
-    second: Glock-empty_3
+      213: -8837106563476033046
+    second: Glock-shoot-casing-flash_3
   - first:
-      213: 8517626534888475706
-    second: Glock-empty_4
+      213: 3551396946262782811
+    second: Glock-shoot-casing-flash_4
   - first:
-      213: 1203939910556814321
-    second: Glock-empty_5
+      213: -7923998653649355878
+    second: Glock-shoot-casing-flash_5
   - first:
-      213: -624048362002659813
-    second: Glock-empty_6
+      213: 8858352975558516634
+    second: Glock-shoot-casing-flash_6
   - first:
-      213: -8079116090095802420
-    second: Glock-empty_7
+      213: 6352353878513579070
+    second: Glock-shoot-casing-flash_7
   - first:
-      213: -8794415952258116691
-    second: Glock-empty_8
+      213: 8134010774611156270
+    second: Glock-shoot-casing-flash_8
   - first:
-      213: 1260587875554196401
-    second: Glock-empty_9
+      213: -2780647688489919060
+    second: Glock-shoot-casing-flash_9
   - first:
-      213: -3301643936563727632
-    second: Glock-empty_10
+      213: 8049820327055081129
+    second: Glock-shoot-casing-flash_10
   - first:
-      213: 7159203355231746020
-    second: Glock-empty_11
-  - first:
-      213: 5924580341617200881
-    second: Glock-empty_12
-  - first:
-      213: 2127352813268672533
-    second: Glock-empty_13
-  - first:
-      213: -405266888490248672
-    second: Glock-empty_14
-  - first:
-      213: 5769405238464333802
-    second: Glock-empty_15
-  - first:
-      213: 1547639731201518347
-    second: Glock-empty_16
-  - first:
-      213: 7014511617672067537
-    second: Glock-empty_17
-  - first:
-      213: 3460872852125342369
-    second: Glock-empty_18
-  - first:
-      213: 1617850495794805542
-    second: Glock-empty_19
-  - first:
-      213: -3890207862047003075
-    second: Glock-empty_20
+      213: -6086485031997544712
+    second: Glock-shoot-casing-flash_11
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -169,11 +142,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Glock-empty_0
+      name: Glock-shoot-casing-flash_0
       rect:
         serializedVersion: 2
         x: 0
@@ -188,14 +174,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00a6f2b1ce2c95690800000000000000
-      internalID: -7612839375768950272
+      spriteID: 150813f4f1c7ee4f0800000000000000
+      internalID: -797563610083524527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_1
+      name: Glock-shoot-casing-flash_1
       rect:
         serializedVersion: 2
         x: 64
@@ -210,14 +196,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6d96863184a620880800000000000000
-      internalID: -8646231476802131498
+      spriteID: 0d003994d4de82d20800000000000000
+      internalID: 3254111646977818832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_2
+      name: Glock-shoot-casing-flash_2
       rect:
         serializedVersion: 2
         x: 128
@@ -232,14 +218,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 35ee077dc5e5c0300800000000000000
-      internalID: 219654234678816339
+      spriteID: e3ccf3681d6781fc0800000000000000
+      internalID: -3523936066144842690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_3
+      name: Glock-shoot-casing-flash_3
       rect:
         serializedVersion: 2
         x: 192
@@ -254,14 +240,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2a510f2f080257c30800000000000000
-      internalID: 4356423952754546082
+      spriteID: ae1fcb9c66a4c5580800000000000000
+      internalID: -8837106563476033046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_4
+      name: Glock-shoot-casing-flash_4
       rect:
         serializedVersion: 2
         x: 256
@@ -276,14 +262,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a3c08758430b43670800000000000000
-      internalID: 8517626534888475706
+      spriteID: b53766ed4b8194130800000000000000
+      internalID: 3551396946262782811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_5
+      name: Glock-shoot-casing-flash_5
       rect:
         serializedVersion: 2
         x: 320
@@ -298,14 +284,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1fb87ab48f045b010800000000000000
-      internalID: 1203939910556814321
+      spriteID: a9b7e88253d480290800000000000000
+      internalID: -7923998653649355878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_6
+      name: Glock-shoot-casing-flash_6
       rect:
         serializedVersion: 2
         x: 384
@@ -320,14 +306,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b16ca24325fe657f0800000000000000
-      internalID: -624048362002659813
+      spriteID: a9f903309113fea70800000000000000
+      internalID: 8858352975558516634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_7
+      name: Glock-shoot-casing-flash_7
       rect:
         serializedVersion: 2
         x: 448
@@ -342,14 +328,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc762b698b631ef80800000000000000
-      internalID: -8079116090095802420
+      spriteID: e3470604238182850800000000000000
+      internalID: 6352353878513579070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_8
+      name: Glock-shoot-casing-flash_8
       rect:
         serializedVersion: 2
         x: 512
@@ -364,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: da350a64945f3f580800000000000000
-      internalID: -8794415952258116691
+      spriteID: e2dd5e324bfc1e070800000000000000
+      internalID: 8134010774611156270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_9
+      name: Glock-shoot-casing-flash_9
       rect:
         serializedVersion: 2
         x: 576
@@ -386,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1bb72927ef18e7110800000000000000
-      internalID: 1260587875554196401
+      spriteID: cad1c0ae8a72969d0800000000000000
+      internalID: -2780647688489919060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_10
+      name: Glock-shoot-casing-flash_10
       rect:
         serializedVersion: 2
         x: 640
@@ -408,14 +394,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f2fb4225543e22d0800000000000000
-      internalID: -3301643936563727632
+      spriteID: 9ae36db00f4b6bf60800000000000000
+      internalID: 8049820327055081129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glock-empty_11
+      name: Glock-shoot-casing-flash_11
       rect:
         serializedVersion: 2
         x: 704
@@ -430,96 +416,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e77f5f35899a5360800000000000000
-      internalID: 7159203355231746020
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock-empty_12
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1fe0b515e66583250800000000000000
-      internalID: 5924580341617200881
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock-empty_13
-      rect:
-        serializedVersion: 2
-        x: 832
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 510aecacc10e58d10800000000000000
-      internalID: 2127352813268672533
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock-empty_14
-      rect:
-        serializedVersion: 2
-        x: 896
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0269f4089e3306af0800000000000000
-      internalID: -405266888490248672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glock-empty_15
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 0
-        width: 64
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ae7c1fb2f7b011050800000000000000
-      internalID: 5769405238464333802
+      spriteID: 8f6ed096c16788ba0800000000000000
+      internalID: -6086485031997544712
       vertices: []
       indices: 
       edges: []
@@ -528,7 +426,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0891519b9b590f94f8290775d237bae2
+    spriteID: e84ef26441e43714e95797c70a2de46c
     internalID: 0
     vertices: []
     indices: 
@@ -538,22 +436,18 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Glock-empty_0: -7612839375768950272
-      Glock-empty_1: -8646231476802131498
-      Glock-empty_10: -3301643936563727632
-      Glock-empty_11: 7159203355231746020
-      Glock-empty_12: 5924580341617200881
-      Glock-empty_13: 2127352813268672533
-      Glock-empty_14: -405266888490248672
-      Glock-empty_15: 5769405238464333802
-      Glock-empty_2: 219654234678816339
-      Glock-empty_3: 4356423952754546082
-      Glock-empty_4: 8517626534888475706
-      Glock-empty_5: 1203939910556814321
-      Glock-empty_6: -624048362002659813
-      Glock-empty_7: -8079116090095802420
-      Glock-empty_8: -8794415952258116691
-      Glock-empty_9: 1260587875554196401
+      Glock-shoot-casing-flash_0: -797563610083524527
+      Glock-shoot-casing-flash_1: 3254111646977818832
+      Glock-shoot-casing-flash_10: 8049820327055081129
+      Glock-shoot-casing-flash_11: -6086485031997544712
+      Glock-shoot-casing-flash_2: -3523936066144842690
+      Glock-shoot-casing-flash_3: -8837106563476033046
+      Glock-shoot-casing-flash_4: 3551396946262782811
+      Glock-shoot-casing-flash_5: -7923998653649355878
+      Glock-shoot-casing-flash_6: 8858352975558516634
+      Glock-shoot-casing-flash_7: 6352353878513579070
+      Glock-shoot-casing-flash_8: 8134010774611156270
+      Glock-shoot-casing-flash_9: -2780647688489919060
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

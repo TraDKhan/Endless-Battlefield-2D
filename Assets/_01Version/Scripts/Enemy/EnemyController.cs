@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(EnemyHealthController))]
+[RequireComponent(typeof(EnemyHealthController), typeof(EnemyAnimationController), typeof(EnemyMovement))]
 [RequireComponent (typeof(PoolIdentity))]
 public class EnemyController : MonoBehaviour, IPoolable
 {
@@ -174,11 +174,11 @@ public class EnemyController : MonoBehaviour, IPoolable
         var melee = GetComponent<EnemyMeleeAttack>();
         if (melee != null) melee.Init(context);
 
-        var charge = GetComponent<EnemyChargeAttack>();
-        if (charge != null) charge.Init(context);
+        //var charge = GetComponent<EnemyChargeAttack>();
+        //if (charge != null) charge.Init(context);
 
-        var contact = GetComponent<EnemyContactAttack>();
-        if (contact != null) contact.Init(context);
+        //var contact = GetComponent<EnemyContactAttack>();
+        //if (contact != null) contact.Init(context);
 
         var ranged = GetComponent<EnemyRangedAttack>();
         if (ranged != null) ranged.Init(context);

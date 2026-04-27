@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Dependencies")]
-    [SerializeField] private PlayerInputController inputController;
-    [SerializeField] private PlayerAnimationController animationController;
+    [SerializeField] private PlayerInput inputController;
+    [SerializeField] private PlayerAnimation animationController;
 
     [Header("Movement")]
     [SerializeField] private float deadZone = 0.01f;

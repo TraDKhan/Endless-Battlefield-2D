@@ -225,9 +225,6 @@ MonoBehaviour:
   movement: {fileID: 7812913546547679645}
   anim: {fileID: 75644120622320235}
   target: {fileID: 0}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &7812913546547679645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +276,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9073164138485655284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80d771aef0e72e34a91ac65764908f72, type: 3}
+  m_Script: {fileID: 11500000, guid: efc5ffe5669095c429677e7ca9f0f5f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-7350457410606783395

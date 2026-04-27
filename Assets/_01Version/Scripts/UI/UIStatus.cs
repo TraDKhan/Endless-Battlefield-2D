@@ -13,7 +13,7 @@ public class UIStatus : MonoBehaviour
 
     private int coinValue;
     private PlayerLevelSystem levelSystem;
-    private PlayerHealthController playerHealth;
+    private PlayerHealth playerHealth;
 
     //to do init từ player controller
     //private void Start()
@@ -50,7 +50,7 @@ public class UIStatus : MonoBehaviour
     //    UpdateLevel(levelSystem.CurrentLevel);
     //    UpdateHealth(playerHealth.CurrentHealth, playerHealth.MaxHealth);
     //}
-    public void Init(PlayerLevelSystem levelSystem, PlayerHealthController playerHealth)
+    public void Init(PlayerLevelSystem levelSystem, PlayerHealth playerHealth)
     {
         this.levelSystem = levelSystem;
         this.playerHealth = playerHealth;

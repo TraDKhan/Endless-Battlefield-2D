@@ -12,15 +12,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerData playerData;
 
     [Header("Controllers")]
-    [SerializeField] private PlayerMovementController movement;
-    [SerializeField] private PlayerHealthController health;
-    [SerializeField] private PlayerAnimationController anim;
+    [SerializeField] private PlayerMovement movement;
+    [SerializeField] private PlayerHealth health;
+    [SerializeField] private PlayerAnimation anim;
 
     [Header("UI Status")]
     [SerializeField] private UIStatus uiStatus;
 
-    public PlayerAnimationController Anim => anim;
-    public PlayerHealthController Health => health;
+    public PlayerAnimation Anim => anim;
+    public PlayerHealth Health => health;
 
     private bool initialized;
     public static event Action<PlayerController> OnPlayerReady;
@@ -36,9 +36,9 @@ public class PlayerController : MonoBehaviour
 
         LevelSystem = new PlayerLevelSystem();
 
-        movement ??= GetComponent<PlayerMovementController>();
-        health ??= GetComponent<PlayerHealthController>();
-        anim ??= GetComponent<PlayerAnimationController>();
+        movement ??= GetComponent<PlayerMovement>();
+        health ??= GetComponent<PlayerHealth>();
+        anim ??= GetComponent<PlayerAnimation>();
 
         InitializeStats();          //Stats trước
         InitializeControllers();    //Controller sau

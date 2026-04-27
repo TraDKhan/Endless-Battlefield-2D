@@ -50,7 +50,7 @@ public abstract class WeaponBase : MonoBehaviour
         Transform target = FindNearestEnemy();
         if (target != null)
         {
-            Vector2 direction = (target.position - transform.position ).normalized;
+            Vector2 direction = (target.position - transform.position).normalized;
             RotateToDirection(direction);
 
             // 2. Chỉ thực hiện logic bắn nếu đủ điều kiện
@@ -109,20 +109,15 @@ public abstract class WeaponBase : MonoBehaviour
 
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + rotationOffset;
 
-        // Cách 1: Snap tức thì (Hiện tại của bạn)
-        //transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        // Cách 2: Xoay mượt (Khuyên dùng để giống game xịn hơn)
-         Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
         transform.rotation = Quaternion.RotateTowards(
-   transform.rotation,
-   targetRotation,
-   720f * Time.deltaTime // tốc độ cao để gần instant
-);
+            transform.rotation,
+            targetRotation,
+            720f * Time.deltaTime
+        );
 
         if (flipSpriteByDirection && spriteRenderer != null)
         {
-            // Brotato flip Y khi súng hướng sang trái để tránh bị ngược súng
             spriteRenderer.flipY = dir.x < 0;
         }
     }

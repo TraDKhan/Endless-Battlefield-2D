@@ -527,10 +527,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol Weapon
       objectReference: {fileID: 0}
-    - target: {fileID: 5757144308714031333, guid: f8fd0406a72ffc0468f3406aee99faef, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
