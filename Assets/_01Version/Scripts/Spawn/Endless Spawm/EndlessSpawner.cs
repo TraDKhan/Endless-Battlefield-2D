@@ -41,7 +41,7 @@ public class EndlessSpawner : MonoBehaviour
         {
             time += Time.deltaTime;
 
-            float difficulty = difficultyCurve.Evaluate(time / 600f); // normalize 0→10 phút
+            float difficulty = difficultyCurve.Evaluate(time / 600f);
 
             HandleBudget(difficulty);
             HandleSpawning(difficulty);
@@ -57,8 +57,6 @@ public class EndlessSpawner : MonoBehaviour
     void HandleBudget(float difficulty)
     {
         float intensity = (float)enemiesAlive / maxEnemiesAlive;
-
-        // nếu đang quá đông → giảm spawn
         float modifier = Mathf.Lerp(1f, 0.2f, intensity);
 
         spawnBudget += baseBudgetPerSecond * difficulty * modifier * Time.deltaTime;

@@ -28,22 +28,14 @@ public class EnemySpawnerController : MonoBehaviour
 
     #region UNITY
 
-    private void OnEnable()
-    {
-        PlayerController.OnPlayerReady += SetPlayer;
-    }
-
-    private void OnDisable()
-    {
-        PlayerController.OnPlayerReady -= SetPlayer;
-    }
+    private void OnEnable() => PlayerController.OnPlayerReady += SetPlayer;
+    private void OnDisable() => PlayerController.OnPlayerReady -= SetPlayer;
 
     private void SetPlayer(PlayerController playerController)
     {
         player = playerController.transform;
         StartCoroutine(WaveLoop());
     }
-
     #endregion
 
     #region WAVE LOOP
@@ -53,7 +45,6 @@ public class EnemySpawnerController : MonoBehaviour
         for (int i = 0; i < allWaves.Length; i++)
         {
             WaveData wave = allWaves[i];
-
             waveEventChannel?.OnWavePreview?.Invoke(wave, i + 1);
             yield return WaitForWaveStart();
 
@@ -61,6 +52,7 @@ public class EnemySpawnerController : MonoBehaviour
 
             if (wave is EnemyWaveData enemyWave)
                 yield return SpawnEnemyWave(enemyWave);
+
             else if (wave is BossWaveData bossWave)
                 yield return SpawnBossWave(bossWave);
 
@@ -90,129 +82,54 @@ public class EnemySpawnerController : MonoBehaviour
 
     #endregion
 
-    #region ENEMY WAVE (FIXED)
+    #region CORE SPAWN LOGIC
 
     IEnumerator SpawnEnemyWave(EnemyWaveData wave)
     {
-        List<EnemyGroupData> groupList = null;
-
-        if (wave.isSpawnGroup && wave.groups != null && wave.groups.Length > 0)
-        {
-            groupList = BuildGroupSpawnList(wave);
-        }
-
-        yield return SpawnSingleEnemies_Mixed(wave.enemies, groupList);
-
-        // Spawn nốt group còn lại (nếu có)
-        if (groupList != null && groupList.Count > 0)
-        {
-            foreach (var group in groupList)
-            {
-                yield return WaitForSpawnSlot();
-                yield return StartCoroutine(SpawnGroupRoutine(group));
-                yield return new WaitForSeconds(spawnInterval);
-            }
-        }
-    }
-
-    #endregion
-
-    #region SINGLE ENEMY
-
-    IEnumerator SpawnSingleEnemies_Mixed(
-    EnemySpawnData[] enemies,
-    List<EnemyGroupData> groupList
-)
-    {
         List<GameObject> spawnList = new();
-
-        foreach (var data in enemies)
+        foreach (var data in wave.enemies)
         {
             for (int i = 0; i < data.count; i++)
                 spawnList.Add(data.enemyPrefab);
         }
-
         Shuffle(spawnList);
 
-        int totalSpawn = spawnList.Count;
-        int totalGroup = groupList != null ? groupList.Count : 0;
+        int remaining = spawnList.Count;
+        int index = 0;
 
-        int groupIndex = 0;
-
-        for (int i = 0; i < totalSpawn; i++)
+        while (remaining > 0)
         {
             yield return WaitForSpawnSlot();
 
-            // 🎯 PHÂN BỔ GROUP ĐỀU
-            if (groupList != null && groupIndex < totalGroup)
+            int countToSpawn = 1;
+
+            if (Random.value < wave.clusterChance)
             {
-                float progress = (float)i / totalSpawn;
-                float targetProgress = (float)groupIndex / totalGroup;
-
-                // Khi tới “vị trí nên spawn group”
-                if (progress >= targetProgress)
-                {
-                    var group = groupList[groupIndex];
-                    groupIndex++;
-
-                    yield return StartCoroutine(SpawnGroupRoutine(group));
-                    yield return new WaitForSeconds(spawnInterval);
-
-                    continue;
-                }
+                countToSpawn = Random.Range(wave.minClusterSize, wave.maxClusterSize + 1);
             }
 
-            // spawn enemy thường
-            Vector2 pos = GetSpawnPositionAroundPlayer();
-            yield return SpawnWithIndicator(spawnList[i], pos, SpawnEnemy);
+            countToSpawn = Mathf.Min(countToSpawn, remaining);
+
+            Vector2 centerPos = GetSpawnPositionAroundPlayer();
+
+            for (int i = 0; i < countToSpawn; i++)
+            {
+                GameObject prefab = spawnList[index++];
+
+                if (enemiesAlive >= maxEnemiesAlive) break;
+
+                Vector2 finalPos = (i == 0) ? centerPos : centerPos + Random.insideUnitCircle * 1.2f;
+
+                StartCoroutine(SpawnWithIndicator(prefab, finalPos, SpawnEnemy));
+
+                if (countToSpawn > 1) yield return new WaitForSeconds(0.05f);
+            }
+
+            remaining -= countToSpawn;
 
             yield return new WaitForSeconds(spawnInterval);
         }
     }
-
-    #endregion
-
-    #region GROUP SYSTEM (NEW)
-
-    List<EnemyGroupData> BuildGroupSpawnList(EnemyWaveData wave)
-    {
-        List<EnemyGroupData> list = new();
-
-        foreach (var group in wave.groups)
-        {
-            for (int i = 0; i < group.groupCount; i++)
-            {
-                list.Add(group);
-            }
-        }
-
-        Shuffle(list);
-        return list;
-    }
-
-    IEnumerator SpawnGroupRoutine(EnemyGroupData group)
-    {
-        Vector2 center = GetSpawnPositionAroundPlayer();
-
-        foreach (var enemy in group.enemies)
-        {
-            for (int i = 0; i < enemy.count; i++)
-            {
-                if (enemiesAlive >= maxEnemiesAlive)
-                    yield break;
-
-                Vector2 pos = center + Random.insideUnitCircle * group.groupRadius;
-
-                yield return SpawnWithIndicator(enemy.enemyPrefab, pos, SpawnEnemy);
-
-                yield return new WaitForSeconds(0.05f); // chống lag spike
-            }
-        }
-    }
-
-    #endregion
-
-    #region BOSS WAVE
 
     IEnumerator SpawnBossWave(BossWaveData wave)
     {
@@ -221,71 +138,41 @@ public class EnemySpawnerController : MonoBehaviour
             for (int i = 0; i < bossData.count; i++)
             {
                 yield return WaitForSpawnSlot();
-
                 Vector2 pos = GetSpawnPositionAroundPlayer();
-
-                yield return SpawnWithIndicator(
-                    bossData.bossPrefab.gameObject,
-                    pos,
-                    SpawnBoss
-                );
-
+                yield return SpawnWithIndicator(bossData.bossPrefab.gameObject, pos, SpawnBoss);
                 yield return new WaitForSeconds(spawnInterval);
             }
         }
     }
 
-    void SpawnBoss(GameObject prefab, Vector2 position)
-    {
-        BossController boss =
-            Instantiate(prefab, position, Quaternion.identity)
-            .GetComponent<BossController>();
-
-        enemiesAlive++;
-        boss.OnBossDead += HandleBossDead;
-    }
-
     #endregion
 
-    #region CORE SPAWN
-
-    IEnumerator WaitForSpawnSlot()
-    {
-        yield return new WaitUntil(() => enemiesAlive < maxEnemiesAlive);
-    }
+    #region SPAWN ACTIONS
 
     void SpawnEnemy(GameObject prefab, Vector2 position)
     {
         EnemyController enemy = ObjectPoolManager.Instance.Spawn<EnemyController>(prefab);
-
-        if (enemy == null)
-        {
-            Debug.LogError($"[Spawner] FAILED TO SPAWN ENEMY: {prefab.name}");
-            return;
-        }
+        if (enemy == null) return;
 
         enemy.transform.SetPositionAndRotation(position, Quaternion.identity);
-        enemy.transform.localScale = Vector3.one;
-
         enemiesAlive++;
         enemy.OnEnemyDead += HandleEnemyDead;
+        Debug.Log(enemiesAlive);
     }
 
-    IEnumerator SpawnWithIndicator(
-        GameObject prefab,
-        Vector2 position,
-        System.Action<GameObject, Vector2> spawnAction
-    )
+    void SpawnBoss(GameObject prefab, Vector2 position)
     {
-        SpawnIndicator indicator =
-            ObjectPoolManager.Instance.Spawn<SpawnIndicator>(
-                spawnIndicatorPrefab.gameObject
-            );
+        BossController boss = Instantiate(prefab, position, Quaternion.identity).GetComponent<BossController>();
+        enemiesAlive++;
+        boss.OnBossDead += HandleBossDead;
+    }
 
+    IEnumerator SpawnWithIndicator(GameObject prefab, Vector2 position, System.Action<GameObject, Vector2> spawnAction)
+    {
+        SpawnIndicator indicator = ObjectPoolManager.Instance.Spawn<SpawnIndicator>(spawnIndicatorPrefab.gameObject);
         bool done = false;
 
-        indicator.Play(position, () =>
-        {
+        indicator.Play(position, () => {
             spawnAction?.Invoke(prefab, position);
             done = true;
         });
@@ -293,9 +180,14 @@ public class EnemySpawnerController : MonoBehaviour
         yield return new WaitUntil(() => done);
     }
 
+    IEnumerator WaitForSpawnSlot()
+    {
+        yield return new WaitUntil(() => enemiesAlive < maxEnemiesAlive);
+    }
+
     #endregion
 
-    #region DEAD CALLBACKS
+    #region CALLBACKS & UTILS
 
     void HandleEnemyDead(EnemyController enemy)
     {
@@ -309,20 +201,11 @@ public class EnemySpawnerController : MonoBehaviour
         enemiesAlive = Mathf.Max(0, enemiesAlive - 1);
     }
 
-    #endregion
-
-    #region UTILS
-
     Vector2 GetSpawnPositionAroundPlayer()
     {
         float angle = Random.Range(0f, 360f);
         float dist = Random.Range(minSpawnRadius, maxSpawnRadius);
-
-        return (Vector2)player.position +
-               new Vector2(
-                   Mathf.Cos(angle * Mathf.Deg2Rad),
-                   Mathf.Sin(angle * Mathf.Deg2Rad)
-               ) * dist;
+        return (Vector2)player.position + new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * dist;
     }
 
     void Shuffle<T>(List<T> list)
