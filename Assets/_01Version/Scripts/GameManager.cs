@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     
     private float _Time;
 
+    private bool _isGameResult;
+
     //to do: Sau chuyển thành sruct để thay thế 2 biến int, float
     // tối ưu bắn kết quả một lần duy nhất
     public event Action<int, float> GameWin;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
         //int currentLevel = SelectedLevelRuntime.SelectedLevelIndex;
         //LevelProgress.UnlockNextLevel(currentLevel);
 
+        _isGameResult = true;
         GameWin?.Invoke(_EnemyKilled, _Time);
     }
 
@@ -48,6 +51,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Lose!");
         AudioManager.Instance.PlayGameLose();
+        _isGameResult = false;
+
         GameLose?.Invoke(_EnemyKilled, _Time);
     }
 
@@ -85,6 +90,19 @@ public class GameManager : MonoBehaviour
         //SelectedLevelRuntime.SelectedLevelIndex = nextLevel;
         ResetData();
         SceneManager.LoadScene("GameScene");
+    }
+
+    public bool GetGameResult () => _isGameResult;
+
+    public int CalculateLossGold()
+    {
+        // Công thức: Mỗi quái = X vàng (ví dụ 2) + Mỗi 10s = 1 vàng
+        int goldFromMonsters = _EnemyKilled * 2;
+        int goldFromTime = Mathf.FloorToInt(_Time / 20f);
+
+        int totalGold = goldFromMonsters + goldFromTime;
+
+        return Mathf.Clamp(totalGold, 1, 100);
     }
 
     private void ResetData()

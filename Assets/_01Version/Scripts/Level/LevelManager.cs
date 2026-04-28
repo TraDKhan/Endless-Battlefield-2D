@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
         int level = PlayerPrefs.GetInt(LEVEL_REACHED_KEY, 3);
         return Mathf.Clamp(level, 1, GetMaxLevel());
     }
+
     public int GetSelectedLevel()
     {
         int level = PlayerPrefs.GetInt(SELECTED_LEVEL_KEY, 1);
@@ -51,11 +52,9 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        // Lưu level được chọn
         PlayerPrefs.SetInt(SELECTED_LEVEL_KEY, level);
         PlayerPrefs.Save();
 
-        // Load scene gameplay
         SceneManager.LoadScene("GameScene");
     }
 
@@ -73,5 +72,29 @@ public class LevelManager : MonoBehaviour
     public LevelData GetLevelData(int level)
     {
         return database.GetLevel(level);
+    }
+
+    public void ClaimRewards(int level)
+    {
+        LevelData data = GetLevelData(level);
+        if (data == null) return;
+
+        foreach (var reward in data.rewards)
+        {
+            switch (reward.type)
+            {
+                case RewardType.Coin:
+                    // CurrencyManager.Instance.AddCoins(reward.amount);
+                    Debug.Log($"Nhận được {reward.amount} Coins");
+                    break;
+                case RewardType.Gem:
+                    // CurrencyManager.Instance.AddGems(reward.amount);
+                    Debug.Log($"Nhận được {reward.amount} Gems");
+                    break;
+                case RewardType.Energy:
+                    // EnergyManager.Instance.AddEnergy(reward.amount);
+                    break;
+            }
+        }
     }
 }

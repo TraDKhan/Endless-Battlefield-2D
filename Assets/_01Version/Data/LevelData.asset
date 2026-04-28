@@ -15,5 +15,13 @@ MonoBehaviour:
   levelIndex: 0
   difficulty: 0
   targetScore: 0
-  rewards: []
+  rewards:
+  - type: 0
+    icon: {fileID: 0}
+    backgroundIcon: {fileID: 0}
+    amount: 0
+  - type: 1
+    icon: {fileID: 0}
+    backgroundIcon: {fileID: 0}
+    amount: 0
   levelIcon: {fileID: 0}

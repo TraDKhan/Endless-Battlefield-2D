@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using Assets._01Version.Scripts.UI.Reward;
+using UnityEngine;
 
 public class GameResultController : MonoBehaviour
 {
     [SerializeField] private UIGameResults ui;
+
+    //to do: sửa lại showreawrd cho hợp lý hơn,
+    [SerializeField] private UIReward uiReward;
 
     private int killCount;
     private float time;
@@ -73,6 +77,7 @@ public class GameResultController : MonoBehaviour
 
             case UIState.Reward:
                 ui.ShowReward();
+                uiReward.ShowRewards();
                 break;
 
             case UIState.Result:

@@ -40,5 +40,8 @@ public enum RewardType
 public class RewardData
 {
     public RewardType type;
+    public Sprite icon;
+    public Sprite backgroundIcon;
+    public bool isSpecial;
     public int amount;
 }
