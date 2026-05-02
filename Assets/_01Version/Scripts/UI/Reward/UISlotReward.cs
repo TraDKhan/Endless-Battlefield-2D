@@ -19,7 +19,6 @@ namespace Assets._01Version.Scripts.UI.Reward
 
         public void Setup(Sprite icon, Sprite backgroundIcon, int amount, bool isSpecial)
         {
-            Debug.Log($"Setting up reward slot: {icon.name}, Amount: {amount}, IsSpecial: {isSpecial}");
             iconImage.sprite = icon;
             backgroundIconImage.sprite = backgroundIcon;
             specialEffect.SetActive(isSpecial);

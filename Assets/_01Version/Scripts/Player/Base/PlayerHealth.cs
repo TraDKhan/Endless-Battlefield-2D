@@ -54,13 +54,29 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         NotifyHealthChanged();
     }
 
+    // Thêm vào trong PlayerHealth.cs
+
+    public void Respawn(int healthAmount = -1)
+    {
+        deathInvoked = false; // Cho phép chết lần nữa
+
+        // Nếu không truyền máu cụ thể, hồi đầy máu
+        if (healthAmount <= 0)
+            CurrentHealth = MaxHealth;
+        else
+            CurrentHealth = Mathf.Min(healthAmount, MaxHealth);
+
+        ClampHealth();
+        NotifyHealthChanged();
+        if (TryGetComponent<PlayerMovement>(out var move)) move.enabled = true;
+        Debug.Log("Player has been respawned.");
+    }
     #endregion
 
     #region Damage / Heal
 
     public void TakeDamage(int rawDamage, bool isCrit = false)
     {
-        Debug.Log($"Player takes {rawDamage} damage (Crit: {isCrit})");
         if (rawDamage <= 0 || IsDead) return;
 
         int finalDamage = CalculateFinalDamage(rawDamage);
@@ -107,13 +123,20 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     private void Die()
     {
         if (deathInvoked) return;
-
         deathInvoked = true;
 
         OnDeath?.Invoke();
         GameManager.Instance?.Handle_GameLose();
 
         //tối ưu singleton truyền từ controller vào init để tránh gọi Instance nhiều lần
+
+            GameManager.Instance?.Handle_GameLose();
+        
+
+
+        // Tắt di chuyển để tránh việc vẫn điều khiển được khi đã chết
+        if (TryGetComponent<PlayerMovement>(out var move)) move.enabled = false;
+
         PlayerController.Instance.Anim?.PlayDeath();
     }
 

@@ -74,7 +74,6 @@ public class EnemyController : MonoBehaviour, IPoolable
         isAlive = true;
 
         target = GameObject.FindGameObjectWithTag("Player")?.transform;
-        Debug.Log($"Enemy spawned with target: {target?.name}");
 
         health.Init(stats.maxHealth, context);
         rb.linearVelocity = Vector2.zero;
@@ -121,7 +120,6 @@ public class EnemyController : MonoBehaviour, IPoolable
                 ChangeState(deadState);
                 break;
         }
-        Debug.Log($"Enemy state changed to: {id}");
     }
 
     void ChangeState(IEnemyState newState)

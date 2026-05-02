@@ -8,7 +8,6 @@ public class Item_Heart : PooledItem
 
     protected override void OnCollected()
     {
-        Debug.Log("Add coin: " + healAmount);
         PlayerController.Instance?.Health?.Heal(healAmount);
     }
 }

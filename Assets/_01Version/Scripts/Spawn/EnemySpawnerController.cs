@@ -48,8 +48,6 @@ public class EnemySpawnerController : MonoBehaviour
             waveEventChannel?.OnWavePreview?.Invoke(wave, i + 1);
             yield return WaitForWaveStart();
 
-            Debug.Log($"[Spawner] Start Wave: {wave.waveName}");
-
             if (wave is EnemyWaveData enemyWave)
                 yield return SpawnEnemyWave(enemyWave);
 
@@ -60,7 +58,6 @@ public class EnemySpawnerController : MonoBehaviour
             waveEventChannel?.OnWaveCleared?.Invoke();
         }
 
-        Debug.Log("[Spawner] All waves completed!");
         yield return new WaitForSeconds(1.5f);
         GameManager.Instance?.Handle_GameWin();
     }
@@ -157,7 +154,6 @@ public class EnemySpawnerController : MonoBehaviour
         enemy.transform.SetPositionAndRotation(position, Quaternion.identity);
         enemiesAlive++;
         enemy.OnEnemyDead += HandleEnemyDead;
-        Debug.Log(enemiesAlive);
     }
 
     void SpawnBoss(GameObject prefab, Vector2 position)

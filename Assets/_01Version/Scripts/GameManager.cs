@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     
     public void Handle_GameWin()
     {
-        Debug.Log("Game Win!");
-
         AudioManager.Instance.PlayGameWin();
         //int currentLevel = SelectedLevelRuntime.SelectedLevelIndex;
         //LevelProgress.UnlockNextLevel(currentLevel);
@@ -49,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public void Handle_GameLose()
     {
-        Debug.Log("Game Lose!");
         AudioManager.Instance.PlayGameLose();
         _isGameResult = false;
 
@@ -96,7 +93,6 @@ public class GameManager : MonoBehaviour
 
     public int CalculateLossGold()
     {
-        // Công thức: Mỗi quái = X vàng (ví dụ 2) + Mỗi 10s = 1 vàng
         int goldFromMonsters = _EnemyKilled * 2;
         int goldFromTime = Mathf.FloorToInt(_Time / 20f);
 

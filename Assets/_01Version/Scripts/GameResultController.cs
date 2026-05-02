@@ -67,12 +67,14 @@ public class GameResultController : MonoBehaviour
     private void ChangeState(UIState newState)
     {
         currentState = newState;
-        Debug.Log($"UI State: {currentState}");
+        //Debug.Log($"UI State: {currentState}");
 
         switch (currentState)
         {
             case UIState.Lose:
                 ui.ShowLose();
+                int reviveCost = RespawnManager.Instance.GetReviveCost();
+                ui.SetRevivePrice(reviveCost);
                 break;
 
             case UIState.Reward:
@@ -115,7 +117,7 @@ public class GameResultController : MonoBehaviour
     {
         if (currentState == UIState.Lose)
         {
-            Debug.Log("Lose → Reward");
+            //Debug.Log("Lose → Reward");
             ChangeState(UIState.Reward);
         }
     }
@@ -125,7 +127,7 @@ public class GameResultController : MonoBehaviour
     {
         if (currentState == UIState.Reward)
         {
-            Debug.Log("Reward → Result");
+            //Debug.Log("Reward → Result");
             ChangeState(UIState.Result);
         }
     }
@@ -134,7 +136,7 @@ public class GameResultController : MonoBehaviour
     {
         if (currentState == UIState.Reward)
         {
-            Debug.Log("Reward → Result (x2)");
+            //Debug.Log("Reward → Result (x2)");
             ChangeState(UIState.Result);
         }
     }
@@ -144,7 +146,7 @@ public class GameResultController : MonoBehaviour
     {
         if (currentState == UIState.Lose)
         {
-            Debug.Log("Dialog: Watch Ad → Revive");
+            //Debug.Log("Dialog: Watch Ad → Revive");
             ResumeGame();
             ui.HideAll();
             currentState = UIState.None;
@@ -154,10 +156,10 @@ public class GameResultController : MonoBehaviour
     //to do: Tiêu hao Gem để hồi sinh trực tiếp
     private void OnRevive()
     {
+        ResumeGame();
         if (currentState == UIState.Lose)
         {
-            Debug.Log("Revive with Gems");
-            ResumeGame();
+            //Debug.Log("Revive with Gems");
             ui.HideAll();
             currentState = UIState.None;
         }
@@ -177,7 +179,7 @@ public class GameResultController : MonoBehaviour
 
     private void OnNextLevel()
     {
-        Debug.Log("Next Level");
+        //Debug.Log("Next Level");
         ResumeGame();
         GameManager.Instance.Handle_NextLevel();
     }

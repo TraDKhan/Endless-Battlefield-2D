@@ -15,9 +15,9 @@ MonoBehaviour:
   waveName: WAVE ENEMY DEMO
   enemies:
   - enemyPrefab: {fileID: 9073164138485655284, guid: 24a1c627ccb5f00418bea4e5395c7132, type: 3}
-    count: 5
+    count: 30
   - enemyPrefab: {fileID: 3247279516341965413, guid: e52fb807d1574fa4d8ccad33c685d4ab, type: 3}
-    count: 1
+    count: 30
   clusterChance: 0.2
   minClusterSize: 2
   maxClusterSize: 5

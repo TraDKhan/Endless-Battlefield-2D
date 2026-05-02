@@ -25,7 +25,6 @@ public class GameData : MonoBehaviour
     {
         if (playerDatabase == null)
         {
-            Debug.LogError("PlayerDatabase chưa được gán!");
             return;
         }
         int id = PlayerPrefs.GetInt("SelectedPlayer", 0);

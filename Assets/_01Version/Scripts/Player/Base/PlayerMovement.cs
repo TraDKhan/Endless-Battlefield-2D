@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Initialize(PlayerController controller)
     {
-        Debug.Log("PlayerMovementController initialized");
         stats = controller.StatSystem;
 
         rb = GetComponent<Rigidbody2D>();

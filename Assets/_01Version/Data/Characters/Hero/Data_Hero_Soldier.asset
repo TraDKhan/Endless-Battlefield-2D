@@ -19,7 +19,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 0}
   baseStats:
   - statType: 0
-    value: 1
+    value: 10000
   - statType: 1
     value: 0
   - statType: 2

@@ -13,6 +13,7 @@ public class UIGameResults : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI killText;
     [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private TextMeshProUGUI respawnPrice;
 
     [Header("Buttons")]
     public Button claimButton;
@@ -67,6 +68,11 @@ public class UIGameResults : MonoBehaviour
         resultText.text = GetResultText(type);
         killText.text = $"Enemies Killed: {kill}";
         timeText.text = $"Time has survived: {FormatTime(time)}";
+    }
+
+    public void SetRevivePrice(int price)
+    {
+        respawnPrice.text = $"{price}";
     }
 
     private string GetResultText(GameResultType type)

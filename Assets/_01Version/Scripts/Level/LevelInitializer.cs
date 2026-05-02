@@ -25,10 +25,8 @@ public class LevelInitializer : MonoBehaviour
 
         if (index < 0 || index >= levelObject.Count)
         {
-            Debug.LogError($"Invalid level index: {currentLevel}");
             return;
         }
-        Debug.Log("Active " + index);
         levelObject[index].SetActive(true);
     }
 }

@@ -27,11 +27,11 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        //if (Instance != null)
+        //{
+        //    Destroy(gameObject);
+        //    return;
+        //}
         Instance = this;
 
         LevelSystem = new PlayerLevelSystem();
@@ -93,11 +93,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnEquipped(ItemInstance item)
     {
-        Debug.Log("=== BEFORE EQUIP ===");
         LogAllStats();
         if (item.Data is IStatSource<CharacterStatType> source)
             StatSystem.AddSource(source);
-        Debug.Log("=== AFTER EQUIP ===");
         LogAllStats();
     }
 
@@ -120,13 +118,32 @@ public class PlayerController : MonoBehaviour
     {
         foreach (CharacterStatType stat in System.Enum.GetValues(typeof(CharacterStatType)))
         {
-            Debug.Log($"{stat}: {StatSystem.GetStat(stat)}");
         }
     }
+
+    //gọi qua Anim
+    //to do: đang bị xung đột với respawn hồi sinh
+    //cần để thời gian delay cao hơn để tránh xung đột
     public void OnDes()
     {
-        Time.timeScale = 0f;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+    }
+
+    // Thêm vào trong PlayerController.cs
+
+    public void HandleRespawn(Vector3 respawnPosition)
+    {
+        // 1. Chuyển vị trí
+        transform.position = respawnPosition;
+
+        // 2. Reset trạng thái Health
+        health.Respawn();
+
+        // 3. Reset Animation
+        //anim?.PlayIdle(); // Giả sử bạn có hàm PlayIdle hoặc Trigger tương ứng
+
+        // 4. Kích hoạt lại các hệ thống (nếu bạn đã tắt chúng ở Die)
+        movement.enabled = true;
     }
 
     [ContextMenu("Test Add EXP")]

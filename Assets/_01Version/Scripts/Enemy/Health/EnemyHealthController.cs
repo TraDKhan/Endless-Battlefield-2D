@@ -21,8 +21,6 @@ public class EnemyHealthController : MonoBehaviour, IDamageable
         maxHealth = maxHP;
         ResetHealth();
 
-        Debug.Log(ectx);
-        Debug.Log(bctx);
         enemyContext = ectx;
         bossContext = bctx;
     }

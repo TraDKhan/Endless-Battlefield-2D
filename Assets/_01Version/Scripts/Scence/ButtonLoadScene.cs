@@ -7,7 +7,12 @@ public class ButtonLoadScene : MonoBehaviour
     {
         HeroScene,
         EquipScene,
-        ShopScene
+        ShopScene,
+        EndlessScene,
+        EndlessScene2,
+        EndlessScene3,
+        EndlessScene4,
+        EndlessScene5
     }
 
     public SceneName sceneName = SceneName.HeroScene;

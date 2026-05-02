@@ -48,7 +48,6 @@ public class LevelManager : MonoBehaviour
     {
         if (!IsUnlocked(level))
         {
-            Debug.LogWarning($"Level {level} chưa mở khóa!");
             return;
         }
 
