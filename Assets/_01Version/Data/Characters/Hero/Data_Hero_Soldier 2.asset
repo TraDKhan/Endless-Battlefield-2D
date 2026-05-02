@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Hero_Soldier 2
   m_EditorClassIdentifier: 
   id: 2
-  icon: {fileID: 21300000, guid: 962b084cef966cc4ea577b4a3ffd6db9, type: 3}
+  icon: {fileID: 2805043176163793281, guid: 6004448e97e55234ea770965cc98b55a, type: 3}
   playerName: SOLDIER
   prefab: {fileID: 7061738363453199701, guid: fb757bcf917821c4aad22a1c8dfbbd5b, type: 3}
   weaponPrefab: {fileID: 0}

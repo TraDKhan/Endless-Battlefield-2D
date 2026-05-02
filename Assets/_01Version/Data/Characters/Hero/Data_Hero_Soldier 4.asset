@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71fe1a44bdc4a974e806211917134a50, type: 3}
-  m_Name: Data_Hero_Soldier
+  m_Name: Data_Hero_Soldier 4
   m_EditorClassIdentifier: 
-  id: 0
-  icon: {fileID: -6146700129834819302, guid: 6004448e97e55234ea770965cc98b55a, type: 3}
+  id: 3
+  icon: {fileID: 8960899199633546546, guid: 6004448e97e55234ea770965cc98b55a, type: 3}
   playerName: SOLDIER
-  prefab: {fileID: 7061738363453199701, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+  prefab: {fileID: 7061738363453199701, guid: e75c159e41d81054c890e55609f5841a, type: 3}
   weaponPrefab: {fileID: 0}
   baseStats:
   - statType: 0
-    value: 10000
+    value: 2000
   - statType: 1
     value: 0
   - statType: 2

@@ -1811,7 +1811,7 @@ GameObject:
   - component: {fileID: 128841476}
   - component: {fileID: 128841475}
   m_Layer: 5
-  m_Name: Title Text
+  m_Name: Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6678,7 +6678,7 @@ GameObject:
   - component: {fileID: 455584438}
   - component: {fileID: 455584437}
   m_Layer: 5
-  m_Name: Title Text
+  m_Name: Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8944,8 +8944,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 637844259}
+  - component: {fileID: 637844260}
   m_Layer: 5
-  m_Name: Option 1 (4)
+  m_Name: Slot 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8977,6 +8978,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &637844260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637844258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4d93f33de009644b209d60f526c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._01Version.Scripts.UI.UIHeroSlot
+  _HeroNameText: {fileID: 1732506293}
+  _HeroParameterText: {fileID: 614138589}
+  _HeroImage: {fileID: 408804106}
+  _IsSelect: {fileID: 439380533}
 --- !u!1 &644719201
 GameObject:
   m_ObjectHideFlags: 0
@@ -12691,8 +12708,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957288609}
+  - component: {fileID: 957288610}
   m_Layer: 5
-  m_Name: Option 1 (2)
+  m_Name: Slot 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12724,6 +12742,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &957288610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957288608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4d93f33de009644b209d60f526c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._01Version.Scripts.UI.UIHeroSlot
+  _HeroNameText: {fileID: 1041767977}
+  _HeroParameterText: {fileID: 1241616678}
+  _HeroImage: {fileID: 1068726427}
+  _IsSelect: {fileID: 830505644}
 --- !u!1 &974940097
 GameObject:
   m_ObjectHideFlags: 0
@@ -12733,8 +12767,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 974940098}
+  - component: {fileID: 974940099}
   m_Layer: 5
-  m_Name: Option 1 (3)
+  m_Name: Slot 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12766,6 +12801,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &974940099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974940097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4d93f33de009644b209d60f526c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._01Version.Scripts.UI.UIHeroSlot
+  _HeroNameText: {fileID: 128841475}
+  _HeroParameterText: {fileID: 157864304}
+  _HeroImage: {fileID: 590605456}
+  _IsSelect: {fileID: 1600689847}
 --- !u!1 &976034506
 GameObject:
   m_ObjectHideFlags: 0
@@ -13820,7 +13871,7 @@ GameObject:
   - component: {fileID: 1041767978}
   - component: {fileID: 1041767977}
   m_Layer: 5
-  m_Name: Title Text
+  m_Name: Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14649,7 +14700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.500002, y: -77.5}
+  m_AnchoredPosition: {x: -2.5, y: -77.5}
   m_SizeDelta: {x: -44.999996, y: -205}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1080569692
@@ -21795,7 +21846,7 @@ GameObject:
   - component: {fileID: 1732506294}
   - component: {fileID: 1732506293}
   m_Layer: 5
-  m_Name: Title Text
+  m_Name: Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23622,7 +23673,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 9138555137054584332, guid: 6004448e97e55234ea770965cc98b55a, type: 3}
+  m_Sprite: {fileID: 2632276121321243838, guid: 6004448e97e55234ea770965cc98b55a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24094,6 +24145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1970277575}
   - component: {fileID: 1970277576}
+  - component: {fileID: 1970277577}
   m_Layer: 5
   m_Name: Hero Option
   m_TagString: Untagged
@@ -24142,6 +24194,30 @@ MonoBehaviour:
   scaleDuration: 0.3
   showEase: 27
   hideEase: 26
+--- !u!114 &1970277577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970277574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af523ef0cf3c341499104b327d3beb14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._01Version.Scripts.UI.UIHeroManager
+  _playerDataList:
+  - {fileID: 11400000, guid: bcab7d4d65f995148a4e75aeaefa0bea, type: 2}
+  - {fileID: 11400000, guid: 9cdb3c74ad84b6e4da228d89fb38c7cf, type: 2}
+  - {fileID: 11400000, guid: f45d8cf7842d6b7499d6a198e7b22efc, type: 2}
+  - {fileID: 11400000, guid: c16cbb77f32ffc244b5d4622d3e30d34, type: 2}
+  - {fileID: 11400000, guid: e771cd3a2601b854b983df134a69966a, type: 2}
+  _slots:
+  - {fileID: 2137099915}
+  - {fileID: 2104571935}
+  - {fileID: 957288610}
+  - {fileID: 974940099}
+  - {fileID: 637844260}
 --- !u!1 &1974483896
 GameObject:
   m_ObjectHideFlags: 0
@@ -25214,7 +25290,7 @@ GameObject:
   - component: {fileID: 2087365532}
   - component: {fileID: 2087365531}
   m_Layer: 5
-  m_Name: Title Text
+  m_Name: Name Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25699,8 +25775,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2104571934}
+  - component: {fileID: 2104571935}
   m_Layer: 5
-  m_Name: Option 1 (1)
+  m_Name: Slot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25732,6 +25809,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2104571935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104571933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4d93f33de009644b209d60f526c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._01Version.Scripts.UI.UIHeroSlot
+  _HeroNameText: {fileID: 2087365531}
+  _HeroParameterText: {fileID: 30867199}
+  _HeroImage: {fileID: 1896827195}
+  _IsSelect: {fileID: 1915795934}
 --- !u!1 &2120153151
 GameObject:
   m_ObjectHideFlags: 0
@@ -26138,8 +26231,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2137099914}
+  - component: {fileID: 2137099915}
   m_Layer: 5
-  m_Name: Option 1
+  m_Name: Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26160,10 +26254,10 @@ RectTransform:
   - {fileID: 999789159}
   - {fileID: 133978508}
   - {fileID: 1220117398}
-  - {fileID: 1877133339}
   - {fileID: 455584436}
   - {fileID: 1619927679}
   - {fileID: 1424912970}
+  - {fileID: 1877133339}
   m_Father: {fileID: 112868200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -26171,6 +26265,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2137099915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137099913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4d93f33de009644b209d60f526c8ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Assets._01Version.Scripts.UI.UIHeroSlot
+  _HeroNameText: {fileID: 455584437}
+  _HeroParameterText: {fileID: 1619927680}
+  _HeroImage: {fileID: 133978509}
+  _IsSelect: {fileID: 1877133338}
 --- !u!1 &2138071315
 GameObject:
   m_ObjectHideFlags: 0
