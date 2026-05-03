@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+[RequireComponent (typeof(PoolIdentity))]
 
 public class EProjectile_Arrow : ProjectileCore
 {

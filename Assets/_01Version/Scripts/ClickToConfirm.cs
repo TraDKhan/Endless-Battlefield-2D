@@ -8,6 +8,7 @@ public class ClickToConfirm : MonoBehaviour, IPointerClickHandler
     {
         panelConfirm.SetActive(false);
     }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         panelConfirm.SetActive(true);

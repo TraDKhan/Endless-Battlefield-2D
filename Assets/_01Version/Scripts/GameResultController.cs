@@ -131,6 +131,7 @@ public class GameResultController : MonoBehaviour
             ChangeState(UIState.Result);
         }
     }
+
     //to do: Xem quảng cáo để nhận thưởng gấp đôi
     private void OnX2Claim()
     {
