@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 970086138227184377}
   - component: {fileID: 1153524248815099207}
   - component: {fileID: 7828743593567537062}
+  - component: {fileID: 4322534847753652137}
   - component: {fileID: -8221542607057700212}
   - component: {fileID: -2563038805157877515}
-  - component: {fileID: 4322534847753652137}
   m_Layer: 7
   m_Name: Item_ExpOrb
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6698914895533268769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9234395, y: -1.575697, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117,33 +117,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-8221542607057700212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6698914895533268769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolKey: Exp Orb Item
---- !u!114 &-2563038805157877515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6698914895533268769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121f015c11ea87e479636f79e9cfa517, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  magnetSpeed: 25
-  expAmount: 2
 --- !u!58 &4322534847753652137
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -180,3 +153,30 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.08
+--- !u!114 &-8221542607057700212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698914895533268769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046fb890bca270044acd9610cb902e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolKey: Exp Orb Item
+--- !u!114 &-2563038805157877515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698914895533268769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 121f015c11ea87e479636f79e9cfa517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnetSpeed: 25
+  expAmount: 2

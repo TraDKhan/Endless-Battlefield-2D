@@ -130,11 +130,9 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
         //tối ưu singleton truyền từ controller vào init để tránh gọi Instance nhiều lần
 
-            GameManager.Instance?.Handle_GameLose();
+        GameManager.Instance?.Handle_GameLose();
         
 
-
-        // Tắt di chuyển để tránh việc vẫn điều khiển được khi đã chết
         if (TryGetComponent<PlayerMovement>(out var move)) move.enabled = false;
 
         PlayerController.Instance.Anim?.PlayDeath();

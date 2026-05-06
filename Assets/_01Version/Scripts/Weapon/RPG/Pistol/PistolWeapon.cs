@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PistolWeapon : WeaponBase
 {
@@ -11,27 +12,34 @@ public class PistolWeapon : WeaponBase
 
         RotateToDirection(direction);
         //AimWeapon(direction);
-        SpawnProjectile(direction, target);
+        StartCoroutine(SpawnProjectile(direction, target));
     }
 
-    void SpawnProjectile(Vector2 direction, Transform target)
+    IEnumerator SpawnProjectile(Vector2 direction, Transform target)
     {
-        Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(controller.Data.projectilePrefab);
-        AudioManager.Instance?.PlayShoot();
-
-        if (bullet == null)
+        int pelletCount = stats.ProjectileCount;
+        for (int i = 0; i < pelletCount; i++)
         {
-            Debug.Log("Bullet NULL");
-            return;
+            Bullet bullet = ObjectPoolManager.Instance.Spawn<Bullet>(controller.Data.projectilePrefab);
+            AudioManager.Instance?.PlayShoot();
+
+            if (bullet == null)
+            {
+                Debug.Log("Bullet NULL");
+                yield break;
+            }
+
+            bullet.transform.position = transform.position;
+
+            bullet.Init(
+                CreateWeaponContext(),
+                direction,
+                ProjectileMoveType.Homing,
+                target
+            );
+
+            yield return new WaitForSeconds(0.2f);
         }
-
-        bullet.transform.position = transform.position;
-
-        bullet.Init(
-            CreateWeaponContext(),
-            direction,
-            ProjectileMoveType.Homing,
-            target
-        );
     }
+
 }

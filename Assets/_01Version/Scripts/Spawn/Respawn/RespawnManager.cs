@@ -38,6 +38,12 @@ public class RespawnManager : MonoBehaviour
         }
     }
 
+    public void ADS_RespawnHandler()
+    {
+        Debug.Log("Player đã chọn xem quảng cáo để hồi sinh.");
+        StartCoroutine(RespawnRoutine());
+    }
+
     private IEnumerator RespawnRoutine()
     {
         yield return new WaitForSeconds(respawnDelay);

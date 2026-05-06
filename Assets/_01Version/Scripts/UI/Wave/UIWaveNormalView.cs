@@ -13,7 +13,7 @@ public class UIWaveNormalView : UIWaveView
 
     public override void Setup(WaveData wave, int index)
     {
-        titleText.text = $"{wave.waveName.ToUpper()}";
+        titleText.text = $"{wave.waveName.ToUpper()} + {index}";
         //waveNameText.text = $"Wave {index}: {wave.waveName}";
     }
 

@@ -202,9 +202,6 @@ MonoBehaviour:
   movement: {fileID: 3644685787358710637}
   anim: {fileID: 3440351174102747371}
   target: {fileID: 0}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &3644685787358710637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,15 +240,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2484597863641456937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1df1ad081777c4bab19b15cb42af59, type: 3}
+  m_Script: {fileID: 11500000, guid: efc5ffe5669095c429677e7ca9f0f5f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windUpTime: 0.4
-  dashSpeed: 10
-  dashDuration: 0.6
-  retreatDistance: 2.5
-  retreatSpeed: 4
-  retreatDuration: 0.6
 --- !u!114 &3440351174102747371
 MonoBehaviour:
   m_ObjectHideFlags: 0

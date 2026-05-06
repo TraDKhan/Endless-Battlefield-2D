@@ -49,7 +49,6 @@ public class UIPanelAnimator : MonoBehaviour
             time += Time.unscaledDeltaTime;
             float t = time / showDuration;
 
-            // Ease Out Back (bounce nhẹ)
             float scale = EaseOutBack(t);
             rect.localScale = Vector3.one * scale;
 
@@ -83,7 +82,6 @@ public class UIPanelAnimator : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // 🔥 Magic easing (rất quan trọng)
     float EaseOutBack(float t)
     {
         float c1 = 1.70158f;

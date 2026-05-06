@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 [CreateAssetMenu(menuName = "Wave/Enemy Wave")]
 public class EnemyWaveData : WaveData
@@ -6,6 +7,7 @@ public class EnemyWaveData : WaveData
     [Header("Enemy List")]
     public EnemySpawnData[] enemies;
 
+    public float spawnWaitTime = 5f;
     [Header("Cluster Settings")]
     [Range(0, 1)]
     [Tooltip("Tỉ lệ xuất hiện cụm quái (0 = luôn lẻ, 1 = luôn cụm)")]

@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour, IPoolable
 
     // ===== Config ===== \\
     [Header("Life")]
-    [SerializeField] private float lifeTime = 3f;
+
     [SerializeField] private int maxPenetration = 1;
 
     [Header("Homing")]
@@ -23,14 +23,15 @@ public class Bullet : MonoBehaviour, IPoolable
 
     private Vector2 moveDir;
     private int penetrationLeft;
-    private float lifeTimer;
+
     private float moveSpeed;
+
+    private Vector3 spawnPosition;
 
     #region POOL CALLBACKS
 
     public void OnSpawn()
     {
-        lifeTimer = 0f;
         penetrationLeft = maxPenetration;
     }
 
@@ -57,6 +58,8 @@ public class Bullet : MonoBehaviour, IPoolable
         this.moveDir = direction.normalized;
         this.moveSpeed = ctx.ProjectileSpeed;
         this.moveType = type;
+
+        spawnPosition = transform.position;
 
         homingTarget = (type == ProjectileMoveType.Homing) ? target : null;
 
@@ -98,9 +101,10 @@ public class Bullet : MonoBehaviour, IPoolable
 
     void UpdateLifeTime()
     {
-        lifeTimer += Time.deltaTime;
-        if (lifeTimer >= lifeTime)
-        {
+        float traveledDistance = Vector3.Distance(spawnPosition, transform.position);
+        Debug.Log(ctx.Range);
+
+        if (traveledDistance >= ctx.Range)         {
             Despawn();
         }
     }

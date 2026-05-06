@@ -46,6 +46,7 @@ public class EnemySpawnerController : MonoBehaviour
         {
             WaveData wave = allWaves[i];
             waveEventChannel?.OnWavePreview?.Invoke(wave, i + 1);
+
             yield return WaitForWaveStart();
 
             if (wave is EnemyWaveData enemyWave)
@@ -54,7 +55,10 @@ public class EnemySpawnerController : MonoBehaviour
             else if (wave is BossWaveData bossWave)
                 yield return SpawnBossWave(bossWave);
 
-            yield return new WaitUntil(() => enemiesAlive <= 0);
+            float waitTime = (wave is EnemyWaveData waveEnemy) ? waveEnemy.spawnWaitTime : 3f;
+            float startTime = Time.time;
+
+            yield return new WaitUntil(() => enemiesAlive <= 0 || Time.time - startTime >= waitTime);
             waveEventChannel?.OnWaveCleared?.Invoke();
         }
 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71fe1a44bdc4a974e806211917134a50, type: 3}
+  m_Name: H1_Pistol
+  m_EditorClassIdentifier: 
+  id: 0
+  icon: {fileID: -6146700129834819302, guid: 6004448e97e55234ea770965cc98b55a, type: 3}
+  playerName: The Alex
+  prefab: {fileID: 7061738363453199701, guid: 1f04d43cb4d21e1448a9500a9460cf0c, type: 3}
+  weaponPrefab: {fileID: 0}
+  baseStats:
+  - statType: 0
+    value: 21000
+  - statType: 1
+    value: 10
+  - statType: 2
+    value: 3

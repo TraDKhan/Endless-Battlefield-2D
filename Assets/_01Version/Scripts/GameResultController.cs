@@ -122,33 +122,28 @@ public class GameResultController : MonoBehaviour
         }
     }
 
-    //to do: Thiết kế logic nhận thưởng theo thời gian và chỉ số kill
     private void OnClaim()
     {
         if (currentState == UIState.Reward)
         {
-            //Debug.Log("Reward → Result");
             ChangeState(UIState.Result);
         }
     }
 
-    //to do: Xem quảng cáo để nhận thưởng gấp đôi
     private void OnX2Claim()
     {
         if (currentState == UIState.Reward)
         {
-            //Debug.Log("Reward → Result (x2)");
             ChangeState(UIState.Result);
         }
     }
 
-    //to do: Xem quảng cáo để hồi sinh
     private void OnAdsRevive()
     {
+            ResumeGame();
         if (currentState == UIState.Lose)
         {
-            //Debug.Log("Dialog: Watch Ad → Revive");
-            ResumeGame();
+            RespawnManager.Instance.ADS_RespawnHandler();
             ui.HideAll();
             currentState = UIState.None;
         }
@@ -160,7 +155,7 @@ public class GameResultController : MonoBehaviour
         ResumeGame();
         if (currentState == UIState.Lose)
         {
-            //Debug.Log("Revive with Gems");
+            RespawnManager.Instance.StartRespawnProcess();
             ui.HideAll();
             currentState = UIState.None;
         }
