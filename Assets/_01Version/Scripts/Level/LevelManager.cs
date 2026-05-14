@@ -5,7 +5,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    public LevelDatabase database;
+    [SerializeField] private LevelDatabase database;
 
     private const string LEVEL_REACHED_KEY = "LevelReached";
     private const string SELECTED_LEVEL_KEY = "SelectedLevel";
@@ -19,6 +19,7 @@ public class LevelManager : MonoBehaviour
         }
 
         Instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 

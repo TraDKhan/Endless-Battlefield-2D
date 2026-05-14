@@ -316,4 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214d0f3940365bf4fb7613b28d2b567c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropSystem
-  dropTable: {fileID: 11400000, guid: 2cdc92474cf39944d851577f01f3245c, type: 2}
+  dropTable: {fileID: 11400000, guid: 5c3f38be5db4e064aa2d18ccb003f160, type: 2}

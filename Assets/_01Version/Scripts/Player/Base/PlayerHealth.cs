@@ -85,7 +85,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         ClampHealth();
         NotifyHealthChanged();
 
-        ShowDamagePopup(finalDamage);
+        //ShowDamagePopup(finalDamage);
 
         if (IsDead)
             Die();

@@ -235,9 +235,6 @@ MonoBehaviour:
   movement: {fileID: 1300893507901111759}
   anim: {fileID: 4767796527282096652}
   target: {fileID: 0}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &1300893507901111759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,4 +316,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214d0f3940365bf4fb7613b28d2b567c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropTable: {fileID: 11400000, guid: 2cdc92474cf39944d851577f01f3245c, type: 2}
+  dropTable: {fileID: 11400000, guid: 5b9e77cf59f5d9a4c9af284602c74863, type: 2}

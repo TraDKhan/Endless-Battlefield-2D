@@ -10,16 +10,12 @@ public class EnemyWaveData : WaveData
     public float spawnWaitTime = 5f;
     [Header("Cluster Settings")]
     [Range(0, 1)]
-    [Tooltip("Tỉ lệ xuất hiện cụm quái (0 = luôn lẻ, 1 = luôn cụm)")]
     public float clusterChance = 0.2f;
 
-    [Tooltip("Số lượng quái tối thiểu trong 1 cụm")]
     public int minClusterSize = 2;
 
-    [Tooltip("Số lượng quái tối đa trong 1 cụm")]
     public int maxClusterSize = 5;
 
-    [Tooltip("Bán kính tản ra của các quái trong cụm")]
     public float clusterRadius = 0.5f;
 }
 

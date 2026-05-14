@@ -18,6 +18,7 @@ public class RespawnManager : MonoBehaviour
     {
         respawnPrice = 100;
         respawnCount = 1;
+        player = FindFirstObjectByType<PlayerController>()?.gameObject;
     }
 
     public int GetReviveCost() => respawnPrice;

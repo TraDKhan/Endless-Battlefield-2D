@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour
     public void AddEnemyKill()
     {
         _EnemyKilled++;
-        Debug.Log($"Enemy killed. Total: {_EnemyKilled}");
     }
 
     public void Handle_RestartGame()

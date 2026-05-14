@@ -166,6 +166,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -178,7 +191,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,7 +213,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -222,7 +235,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -244,7 +257,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -266,7 +279,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -288,7 +301,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -310,7 +323,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -332,7 +345,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -354,7 +367,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -376,7 +389,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -398,7 +411,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -420,7 +433,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -442,7 +455,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -464,7 +477,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -486,7 +499,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -508,7 +521,7 @@ TextureImporter:
         width: 64
         height: 25
       alignment: 9
-      pivot: {x: 0.65, y: 0.5}
+      pivot: {x: 0.25, y: 0.44}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -533,7 +546,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":4.0},"gridSpriteSize":{"x":64.0,"y":25.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.25,"y":0.4399999976158142},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       shotgun_0: 1275589539659018210
       shotgun_1: -970306773315871495
@@ -543,7 +558,6 @@ TextureImporter:
       shotgun_13: -4118054035206123870
       shotgun_14: 5630252345786138886
       shotgun_15: 5573206425880992768
-      shotgun_16: 844248808
       shotgun_2: 7945012120015683500
       shotgun_3: -4240957153366649724
       shotgun_4: 7123849009850284647

@@ -6,14 +6,21 @@ using UnityEngine;
 
 public class LevelInitializer : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> levelObject;
+    [SerializeField] private List<EnemySpawnerController> enemySpawners;
+    [SerializeField] private List<GameObject> maps;
 
     private void Awake()
     {
-        foreach (GameObject obj in levelObject)
+        foreach (EnemySpawnerController spawner in enemySpawners)
         {
-            if (obj != null)
-                obj.SetActive(false);
+            if (spawner != null)
+                spawner.gameObject.SetActive(false);
+        }
+
+        foreach (GameObject map in maps)
+        {
+            if (map != null)
+                map.SetActive(false);
         }
     }
 
@@ -23,10 +30,17 @@ public class LevelInitializer : MonoBehaviour
 
         int index = currentLevel - 1;
 
-        if (index < 0 || index >= levelObject.Count)
+        if (index < 0 || index >= enemySpawners.Count)
         {
             return;
         }
-        levelObject[index].SetActive(true);
+        RandomMap();
+        enemySpawners[index].gameObject.SetActive(true);
+    }
+
+    private void RandomMap()
+    {
+        int randomIndex = Random.Range(0, maps.Count);
+        maps[randomIndex].SetActive(true);
     }
 }

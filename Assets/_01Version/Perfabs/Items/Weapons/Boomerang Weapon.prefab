@@ -52,6 +52,7 @@ MonoBehaviour:
   rotateToFireDirection: 1
   rotationOffset: 0
   flipSpriteByDirection: 1
+  rotationSpeed: 0.25
 --- !u!114 &-4689120257845397562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +68,7 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: 1b942f291e783364cae4a9f8985f77cc, type: 2}
 --- !u!212 &7007483032961835385
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -85,6 +87,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -106,9 +110,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1042873421
-  m_SortingLayer: 7
-  m_SortingOrder: 0
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 1833679519
+  m_SortingLayer: 8
+  m_SortingOrder: 100
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 5718304784226621280, guid: 672549d6af42aa7429698c28a0bfd01c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -118,5 +124,4 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0

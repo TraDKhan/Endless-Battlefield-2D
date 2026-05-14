@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35e8257525411a42a8594fbb14d0e74, type: 3}
+  m_Name: Level_20
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  levelIndex: 20
+  rewards:
+  - type: 0
+    icon: {fileID: 21300000, guid: 609b0789b2cbf4ac7855ebf7bea37c69, type: 3}
+    backgroundIcon: {fileID: 21300000, guid: 36549254252044776a3dbf162aa51f62, type: 3}
+    isSpecial: 0
+    amount: 1050
+  - type: 1
+    icon: {fileID: 21300000, guid: 59e58bba725304950b6ab5f93897e276, type: 3}
+    backgroundIcon: {fileID: 21300000, guid: 0b1d9b606e5a748ab98dd3ebe174161b, type: 3}
+    isSpecial: 1
+    amount: 43
+  levelIcon: {fileID: 0}
